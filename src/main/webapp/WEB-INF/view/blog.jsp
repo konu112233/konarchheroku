@@ -24,9 +24,7 @@
         <link rel="stylesheet" type="text/css" href="static/styles/blog_responsive.css">
     </head>
     <body>
-
         <div class="super_container">
-
             <jsp:include page="header.jsp"></jsp:include>
 
                 <!-- Home -->

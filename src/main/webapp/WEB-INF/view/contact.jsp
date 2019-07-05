@@ -23,10 +23,9 @@
         <link rel="stylesheet" type="text/css" href="static/styles/contact.css">
         <link rel="stylesheet" type="text/css" href="static/styles/contact_responsive.css">
     </head>
+
     <body>
-
         <div class="super_container">
-
             <!-- Header -->
             <jsp:include page="header.jsp"></jsp:include>
                 <!-- Home -->

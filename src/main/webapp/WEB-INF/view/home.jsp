@@ -25,10 +25,9 @@
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
 
     </head>
+
     <body>
-
         <jsp:include page="header.jsp"></jsp:include>
-
             <!-- Home -->
             <div class="home">
                 <div class="owl-carousel owl-theme home_slider">
