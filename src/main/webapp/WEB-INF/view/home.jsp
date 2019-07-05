@@ -73,7 +73,7 @@
 
             <div class="features">
                 <div class="container">
-                    <div class="text-center" style="margin-bottom: 45px;"><h2>How Does It Works?</h2></div>
+                    <div class="text-center" style="margin-bottom: 45px;"><h2>How Does It Work?</h2></div>
                     <div class="row">
                         <!-- Icon Box -->
                         <div class="col-lg-4 icon_box_col">
@@ -89,7 +89,7 @@
                         <!-- Icon Box -->
                         <div class="col-lg-4 icon_box_col">
                             <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
-                                <div class="icon_box_icon"><img src="static/images/book.svg" class="svg" alt="https://www.flaticon.com/authors/monkik"></div>
+                                <div class="icon_box_icon"><img src="static/images/calendar.svg" class="svg" alt="https://www.flaticon.com/authors/monkik"></div>
                                 <div class="icon_box_title"><h2>Book</h2></div>
                                 <div class="icon_box_text">
                                     <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum.</p>

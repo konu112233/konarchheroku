@@ -11,7 +11,7 @@
 <!-- Header -->
 <header class="header">
     <div class="header_content d-flex flex-row align-items-center justify-content-start">
-        <div><img src="static/images/bookingpetz2.svg" class="svg"></div>
+        <div><img src="static/images/bookingpetz2.svg"></div>
         <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
             <nav class="main_nav">
                 <c:choose>
@@ -33,7 +33,7 @@
                     </c:when>
                 </c:choose>
             </nav>
-            <div class="book_button"><a href="#">Book Online</a></div>
+            <div class="book_button"><a href="#">Book Now</a></div>
             <div class="header_phone d-flex flex-row align-items-center justify-content-center">
                 <img src="static/images/phone.png" alt="">
                 <span>0183-12345678</span>
