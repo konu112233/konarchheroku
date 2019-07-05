@@ -30,24 +30,6 @@
                                 <div class="col">
                                     <div class="home_content text-center">
                                         <div class="home_title">About Us</div>
-                                        <div class="booking_form_container">
-                                            <form action="#" class="booking_form">
-                                                <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-                                                    <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                        <div><input type="text" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
-                                                        <div><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-                                                        <div><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
-                                                        <div>
-                                                            <select class="booking_input booking_input_c form-control" style="height: 54px;" required="required">
-                                                                <option>Dog</option>
-                                                                <option>Cat</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div><button class="booking_button trans_200">Find Now</button></div>
-                                                </div>
-                                            </form>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -27,4 +27,10 @@ public class Controller {
         m.addAttribute("page", "about");
         return "about";
     }
+
+    @RequestMapping(value = "/blog", method = RequestMethod.GET)
+    public String blog(Model m) {
+        m.addAttribute("page", "blog");
+        return "blog";
+    }
 }
