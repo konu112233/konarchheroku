@@ -20,7 +20,7 @@
                             <li class="active"><a href="home">Home</a></li>
                             <li><a href="about">About us</a></li>
                             <li><a href="blog">Blog</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="contact">Contact</a></li>
                         </ul>
                     </c:when>
                     <c:when test="${page.equals('about')}">
@@ -28,7 +28,7 @@
                             <li><a href="home">Home</a></li>
                             <li class="active"><a href="about">About us</a></li>
                             <li><a href="blog">Blog</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="contact">Contact</a></li>
                         </ul>
                     </c:when>
                     <c:when test="${page.equals('blog')}">
@@ -36,7 +36,15 @@
                             <li><a href="home">Home</a></li>
                             <li><a href="about">About us</a></li>
                             <li class="active"><a href="blog">Blog</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="contact">Contact</a></li>
+                        </ul>
+                    </c:when>
+                    <c:when test="${page.equals('contact')}">
+                        <ul class="d-flex flex-row align-items-start justify-content-start">
+                            <li><a href="home">Home</a></li>
+                            <li><a href="about">About us</a></li>
+                            <li><a href="blog">Blog</a></li>
+                            <li class="active"><a href="#">Contact</a></li>
                         </ul>
                     </c:when>
                 </c:choose>

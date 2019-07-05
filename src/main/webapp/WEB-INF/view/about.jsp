@@ -77,13 +77,13 @@
 
                             <div class="col-xl-6 order-xl-1 order-2">
                                 <div class="split_section_image">
-                                    <div class="background_image" style="background-image:url(static/images/milestones.jpg)"></div>
+                                    <div class="background_image" style="background-image:url(static/images/aboutusphoto1.jpg)"></div>
                                 </div>
                             </div>
 
                             <div class="col-xl-6 order-xl-2 order-1">
                                 <div class="split_section_right_content">
-                                    <div class="split_section_title"><h1>Luxury Resort</h1></div>
+                                    <div class="split_section_title"><h1>Great for your pet</h1></div>
                                     <div class="split_section_text">
                                         <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci.</p>
                                     </div>
@@ -95,7 +95,7 @@
                                         <div class="milestone d-flex flex-row align-items-start justify-content-start">
                                             <div class="milestone_content">
                                                 <div class="milestone_counter" data-end-value="45">0</div>
-                                                <div class="milestone_title">Rooms available</div>
+                                                <div class="milestone_title">Hotels available</div>
                                             </div>
                                         </div>
 
@@ -103,7 +103,7 @@
                                         <div class="milestone d-flex flex-row align-items-start justify-content-start">
                                             <div class="milestone_content">
                                                 <div class="milestone_counter" data-end-value="21" data-sign-after="K">0</div>
-                                                <div class="milestone_title">Tourists this year</div>
+                                                <div class="milestone_title">Pet this year</div>
                                             </div>
                                         </div>
 
@@ -111,7 +111,7 @@
                                         <div class="milestone d-flex flex-row align-items-start justify-content-start">
                                             <div class="milestone_content">
                                                 <div class="milestone_counter" data-end-value="2">0</div>
-                                                <div class="milestone_title">Swimming pools</div>
+                                                <div class="milestone_title">Pet pools</div>
                                             </div>
                                         </div>
 
@@ -130,7 +130,7 @@
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="split_section_left_content">
-                                    <div class="split_section_title"><h1>Wedding venue</h1></div>
+                                    <div class="split_section_title"><h1>Trust and Safety</h1></div>
                                     <div class="split_section_text">
                                         <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci.</p>
                                     </div>
@@ -151,7 +151,7 @@
                                         <div class="loader_container text-center">
                                             <div class="loader text-center" data-perc="0.8">
                                                 <div class="loader_content">
-                                                    <div class="loader_title">Tourists</div>
+                                                    <div class="loader_title">Pets</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -172,7 +172,7 @@
                             <!-- Loaders Image -->
                             <div class="col-xl-6">
                                 <div class="split_section_image split_section_left_image">
-                                    <div class="background_image" style="background-image:url(static/images/loaders.jpg)"></div>
+                                    <div class="background_image" style="background-image:url(static/images/aboutusphoto2.jpg)"></div>
                                 </div>
                             </div>
 
@@ -234,7 +234,6 @@
                 </div>
 
                 <!-- Footer -->
-
             <jsp:include page="footer.jsp"></jsp:include>
         </div>
 

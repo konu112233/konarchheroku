@@ -32,7 +32,7 @@
                 <!-- Home -->
 
                 <div class="home">
-                    <div class="background_image" style="background-image:url(static/images/booking.jpg)"></div>
+                    <div class="background_image" style="background-image:url(static/images/blogheader.jpg)"></div>
                     <div class="home_container">
                         <div class="container">
                             <div class="row">
@@ -59,11 +59,11 @@
                                     <!-- Blog Post -->
                                     <div class="blog_post">
                                         <div class="blog_post_image">
-                                            <img src="static/images/blog_1.jpg" alt="">
+                                            <img src="static/images/blogartical1.jpg" alt="">
                                             <div class="blog_post_date"><a href="#">Oct 20, 2018</a></div>
                                         </div>
                                         <div class="blog_post_content">
-                                            <div class="blog_post_title"><a href="#">Top dream destinations</a></div>
+                                            <div class="blog_post_title"><a href="#">The ultimate guide of pet-friendly places in Amsterdam</a></div>
                                             <div class="blog_post_info">
                                                 <ul class="d-flex flex-row align-items-start justify-content-start flex-wrap">
                                                     <li class="d-flex flex-row align-items-center justify-content-start">
@@ -98,11 +98,11 @@
                                     <!-- Blog Post -->
                                     <div class="blog_post">
                                         <div class="blog_post_image">
-                                            <img src="static/images/blog_2.jpg" alt="">
+                                            <img src="static/images/blogartical2.jpg" alt="">
                                             <div class="blog_post_date"><a href="#">Oct 20, 2018</a></div>
                                         </div>
                                         <div class="blog_post_content">
-                                            <div class="blog_post_title"><a href="#">How to book your stay</a></div>
+                                            <div class="blog_post_title"><a href="#">Dog's emotional life</a></div>
                                             <div class="blog_post_info">
                                                 <ul class="d-flex flex-row align-items-start justify-content-start flex-wrap">
                                                     <li class="d-flex flex-row align-items-center justify-content-start">
@@ -137,7 +137,7 @@
                                     <!-- Blog Post -->
                                     <div class="blog_post">
                                         <div class="blog_post_image">
-                                            <img src="static/images/blog_3.jpg" alt="">
+                                            <img src="static/images/blogartical3.jpg" alt="">
                                             <div class="blog_post_date"><a href="#">Oct 20, 2018</a></div>
                                         </div>
                                         <div class="blog_post_content">
@@ -174,13 +174,13 @@
                                     </div>
 
                                     <!-- Page Nav -->
-                                    <div class="page_nav">
+<!--                                    <div class="page_nav">
                                         <ul class="d-flex flex-row align-items-start justify-content-start">
                                             <li class="active"><a href="#">01.</a></li>
                                             <li><a href="#">02.</a></li>
                                             <li><a href="#">03.</a></li>
                                         </ul>
-                                    </div>
+                                    </div>-->
 
                                 </div>
                             </div>
@@ -244,10 +244,10 @@
 
                                     <!-- Special Offer -->
                                     <div class="special_offer">
-                                        <div class="background_image" style="background-image:url(static/images/special_offer.jpg)"></div>
+                                        <div class="background_image" style="background-image:url(static/images/hotel1.jpg)"></div>
                                         <div class="special_offer_container text-center">
                                             <div class="special_offer_title">Special Offer</div>
-                                            <div class="special_offer_subtitle">Family Room</div>
+                                            <div class="special_offer_subtitle">Pet Room</div>
                                             <div class="button special_offer_button"><a href="#">Book now</a></div>
                                         </div>
                                     </div>

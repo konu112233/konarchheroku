@@ -33,4 +33,10 @@ public class Controller {
         m.addAttribute("page", "blog");
         return "blog";
     }
+
+    @RequestMapping(value = "/contact", method = RequestMethod.GET)
+    public String contact(Model m) {
+        m.addAttribute("page", "contact");
+        return "contact";
+    }
 }
