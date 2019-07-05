@@ -5,6 +5,7 @@
  */
 package com.bookingpetz.controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -16,7 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class Controller {
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
-    public String login() {
+    public String home(Model m) {
+        m.addAttribute("page", "home");
         return "home";
+    }
+
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public String about(Model m) {
+        m.addAttribute("page", "about");
+        return "about";
     }
 }
