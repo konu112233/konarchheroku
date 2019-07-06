@@ -24,6 +24,12 @@
         <link rel="stylesheet" type="text/css" href="static/styles/main_styles.css">
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
 
+        <script>
+            function activatePlaceSearch() {
+                var input = document.getElementById("search_term");
+                var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+        </script>
     </head>
 
     <body>
@@ -44,7 +50,7 @@
                                                 <form action="#" class="booking_form">
                                                     <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                                         <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                            <div><input type="text" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
+                                                            <div><input type="text" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
                                                             <div><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
                                                             <div><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
                                                             <div>
@@ -323,6 +329,7 @@
         <jsp:include page="footer.jsp"></jsp:include>
     </div>
 
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&libraries=places&callback=activatePlaceSearch"></script>
     <script src="static/js/jquery-3.3.1.min.js"></script>
     <script src="static/styles/bootstrap-4.1.2/popper.js"></script>
     <script src="static/styles/bootstrap-4.1.2/bootstrap.min.js"></script>

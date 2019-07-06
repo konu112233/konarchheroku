@@ -39,5 +39,4 @@ public class Controller {
         m.addAttribute("page", "contact");
         return "contact";
     }
-    
 }
