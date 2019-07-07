@@ -39,4 +39,10 @@ public class Controller {
         m.addAttribute("page", "contact");
         return "contact";
     }
+    
+    @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
+    public String searchResult(Model m) {
+        //m.addAttribute("page", "searchResult");
+        return "searchResult";
+    }
 }

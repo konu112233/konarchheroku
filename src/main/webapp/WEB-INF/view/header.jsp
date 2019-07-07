@@ -47,13 +47,19 @@
                             <li class="active"><a href="contact">Contact</a></li>
                         </ul>
                     </c:when>
+                    <c:otherwise>
+                        <ul class="d-flex flex-row align-items-start justify-content-start">
+                            <li><a href="home">Home</a></li>
+                            <li><a href="about">About us</a></li>
+                            <li><a href="blog">Blog</a></li>
+                            <li><a href="contact">Contact</a></li>
+                        </ul>
+                    </c:otherwise>
                 </c:choose>
             </nav>
-            <div class="book_button"><a href="home">Book Now</a></div>
-            <div class="header_phone d-flex flex-row align-items-center justify-content-center">
-                <img src="static/images/phone.png" alt="">
-                <span>0183-12345678</span>
-            </div>
+            <!--<div class="book_button"><a href="home">Book Now</a></div>-->
+
+            <div class="log_button"><a href="home" style="color: white;">Sign Up & Log In</a></div>
 
             <!-- Hamburger Menu -->
             <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>

@@ -47,7 +47,7 @@
                                         <div class="home_content text-center">
                                             <div class="home_title">Find Fantastic Hotels For Your Pets</div>
                                             <div class="booking_form_container">
-                                                <form action="#" class="booking_form">
+                                                <form action="searchResult" class="booking_form">
                                                     <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                                         <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
                                                             <div><input type="text" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
