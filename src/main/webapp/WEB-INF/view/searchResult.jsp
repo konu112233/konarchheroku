@@ -38,10 +38,79 @@
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
         <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
 
+        <style>
+            #map{
+                height:400px;
+                width:100%;
+            }
+        </style>
         <script>
-            function activatePlaceSearch() {
-                var input = document.getElementById("search_term");
-                var autocomplete = new google.maps.places.Autocomplete(input);
+            var markers = [
+                {
+                    "title": 'Friends Pet Hotel',
+                    "lat": '52.379189',
+                    "lng": '4.899431',
+                    "description": 'Aksa Beach is a popular beach and a vacation spot in Aksa village at Malad, Mumbai.'
+                },
+                {
+                    "title": 'Wellness Pet Hotel',
+                    "lat": '52.200189',
+                    "lng": '5.100431',
+                    "description": 'Juhu Beach is one of favourite tourist attractions situated in Mumbai.'
+                },
+                {
+                    "title": 'Forever Pet Hotel',
+                    "lat": '52.421189',
+                    "lng": '5.500431',
+                    "description": 'Girgaum Beach commonly known as just Chaupati is one of the most famous public beaches in Mumbai.'
+                },
+                {
+                    "title": 'Kind Pet Hotel',
+                    "lat": '52.321189',
+                    "lng": '5.500431',
+                    "description": 'Jijamata Udyan is situated near Byculla station is famous as Mumbai (Bombay) Zoo.'
+                },
+                {
+                    "title": 'Vondel Pet Hotel',
+                    "lat": '52.81189',
+                    "lng": '52.31062020000004',
+                    "description": 'Sanjay Gandhi National Park is a large protected area in the northern part of Mumbai city.'
+                }
+            ];
+            window.onload = function () {
+                LoadMap();
+            }
+            function LoadMap() {
+                var mapOptions = {
+                    center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                    zoom: 8,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+                //Create and open InfoWindow.
+                var infoWindow = new google.maps.InfoWindow();
+
+                for (var i = 0; i < markers.length; i++) {
+                    var data = markers[i];
+                    var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        title: data.title
+                    });
+                    // marker.setIcon("static/images/paw_green.svg");
+
+
+                    //Attach click event to the marker.
+                    (function (marker, data) {
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                            infoWindow.setContent("<h5>" + data.title + "</h5><div style = 'width:100px;min-height:20px;font-size:10px'>" + data.description + "</div>");
+                            infoWindow.open(map, marker);
+                        });
+                    })(marker, data);
+                }
             }
         </script>
     </head>
@@ -162,8 +231,8 @@
             <div class="map-section">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="map">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107002.020096289!2d-96.80666618302782!3d33.06138629992991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c21da13c59513%3A0x62aa036489cd602b!2sPlano%2C+TX%2C+USA!5e0!3m2!1sen!2sbd!4v1558246953339!5m2!1sen!2sbd" allowfullscreen></iframe>
+                        <div id="map" class="map">
+
                         </div>
                     </div>
                 </div>
@@ -511,8 +580,7 @@
             <!-- Footer Section Begin -->
         <jsp:include page="footer.jsp"></jsp:include>
         <!-- Footer Section End -->
-
-
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&callback=initMap"></script>
         <script src="static/searchResult/js/bootstrap.min.js" type="2d2eff642c81e1cd1273f0f1-text/javascript"></script>
         <script src="static/searchResult/js/jquery.nice-select.min.js" type="2d2eff642c81e1cd1273f0f1-text/javascript"></script>
         <script src="static/searchResult/js/owl.carousel.min.js" type="2d2eff642c81e1cd1273f0f1-text/javascript"></script>
@@ -537,8 +605,9 @@
         <script src="static/js/custom.js"></script>
         <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
 
+
         <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="2d2eff642c81e1cd1273f0f1-|49" defer=""></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&libraries=places&callback=activatePlaceSearch"></script>
+        <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&libraries=places&callback=activatePlaceSearch"></script>-->
 
     </body>
 </html>
