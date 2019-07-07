@@ -23,6 +23,7 @@
         <link href="static/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="static/styles/main_styles.css">
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
+        <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
 
         <script>
             function activatePlaceSearch() {
@@ -34,6 +35,7 @@
 
     <body>
         <jsp:include page="header.jsp"></jsp:include>
+
             <!-- Home -->
             <div class="home">
                 <div class="owl-carousel owl-theme home_slider">
@@ -47,16 +49,16 @@
                                         <div class="home_content text-center">
                                             <div class="home_title">Find Fantastic Hotels For Your Pets</div>
                                             <div class="booking_form_container">
-                                                <form action="searchResult" class="booking_form">
+                                                <form action="searchResult" method="POST" class="booking_form">
                                                     <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                                         <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                            <div><input type="text" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
-                                                            <div><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-                                                            <div><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
+                                                            <div><input type="text" name="where" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
+                                                            <div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
+                                                            <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
                                                             <div>
-                                                                <select class="booking_input booking_input_c form-control" style="height: 54px;" required="required">
-                                                                    <option>Dog</option>
-                                                                    <option>Cat</option>
+                                                                <select class="booking_input booking_input_c form-control" name="petType" style="height: 54px;" required="required">
+                                                                    <option value="dog">Dog</option>
+                                                                    <option value="cat">Cat</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -223,7 +225,6 @@
                                         <div class="testimonial_image"><img src="static/images/user_3.jpg" alt=""></div>
                                         <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -331,6 +332,7 @@
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&libraries=places&callback=activatePlaceSearch"></script>
     <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
     <script src="static/styles/bootstrap-4.1.2/popper.js"></script>
     <script src="static/styles/bootstrap-4.1.2/bootstrap.min.js"></script>
     <script src="static/plugins/greensock/TweenMax.min.js"></script>
@@ -345,5 +347,6 @@
     <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
     <script src="static/plugins/colorbox/jquery.colorbox-min.js"></script>
     <script src="static/js/custom.js"></script>
+
 </body>
 </html>

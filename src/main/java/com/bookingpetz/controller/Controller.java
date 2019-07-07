@@ -5,6 +5,7 @@
  */
 package com.bookingpetz.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,10 +40,34 @@ public class Controller {
         m.addAttribute("page", "contact");
         return "contact";
     }
-    
+
+    @RequestMapping(value = "/searchResult", method = RequestMethod.POST)
+    public String searchResult(Model m, HttpServletRequest request) {
+        String petType = request.getParameter("petType");
+        String where = request.getParameter("where");
+        String checkin = request.getParameter("checkin");
+        String checkout = request.getParameter("checkout");
+
+        System.out.println(checkin + " " + checkout + " " + where + " " + petType);
+
+        return "redirect:searchResult";
+    }
+
     @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
     public String searchResult(Model m) {
         //m.addAttribute("page", "searchResult");
         return "searchResult";
+    }
+
+    @RequestMapping(value = "/property", method = RequestMethod.GET)
+    public String property(Model m) {
+        //m.addAttribute("page", "searchResult");
+        return "property";
+    }
+
+    @RequestMapping(value = "/mock", method = RequestMethod.GET)
+    public String mock(Model m) {
+        //m.addAttribute("page", "searchResult");
+        return "mock";
     }
 }

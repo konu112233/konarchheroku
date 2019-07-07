@@ -22,6 +22,7 @@
         <link href="static/plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="static/styles/blog.css">
         <link rel="stylesheet" type="text/css" href="static/styles/blog_responsive.css">
+        <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
     </head>
     <body>
         <div class="super_container">
@@ -279,5 +280,6 @@
         <script src="static/plugins/parallax-js-master/parallax.min.js"></script>
         <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
         <script src="static/js/blog.js"></script>
+        <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
     </body>
 </html>

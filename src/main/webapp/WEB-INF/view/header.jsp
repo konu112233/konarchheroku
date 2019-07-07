@@ -8,12 +8,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<!-- Header -->
-<header class="header">
-    <div class="header_content d-flex flex-row align-items-center justify-content-start">
-        <div><img src="static/images/bookingpetz2.svg"></div>
-        <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
-            <nav class="main_nav">
+<jsp:include page="loginModal.jsp"></jsp:include>
+    <!-- Header -->
+    <header class="header">
+        <div class="header_content d-flex flex-row align-items-center justify-content-start">
+            <div><img src="static/images/bookingpetz2.svg"></div>
+            <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+                <nav class="main_nav">
                 <c:choose>
                     <c:when test="${page.equals('home')}">
                         <ul class="d-flex flex-row align-items-start justify-content-start">
@@ -59,7 +60,7 @@
             </nav>
             <!--<div class="book_button"><a href="home">Book Now</a></div>-->
 
-            <div class="log_button"><a href="home" style="color: white;">Sign Up & Log In</a></div>
+            <div class="log_button"><a href="home" data-toggle="modal" data-target="#elegantModalForm" style="color: white;">Sign Up & Sign In</a></div>
 
             <!-- Hamburger Menu -->
             <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>

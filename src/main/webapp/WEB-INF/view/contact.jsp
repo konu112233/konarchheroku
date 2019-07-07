@@ -22,6 +22,7 @@
         <link href="static/plugins/jquery-datepicker/jquery-ui.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="static/styles/contact.css">
         <link rel="stylesheet" type="text/css" href="static/styles/contact_responsive.css">
+        <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -119,5 +120,6 @@
         <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc"></script>
         <script src="static/js/contact.js"></script>
+        <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
     </body>
 </html>

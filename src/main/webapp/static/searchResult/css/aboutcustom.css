@@ -704,6 +704,25 @@ input[type=number]::-webkit-outer-spin-button
     font-weight: 500 !important;
     color: #FFFFFF !important;
 }
+.booking_input_c{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    outline: none;
+}
+.booking_input_c:focus {
+    background: rgba(255,255,255,0.2);
+    color: #FFFFFF !important;
+    outline: none !important;
+}
+booking_input_c::-moz-focus-inner { 
+    border: 0; 
+}
+.booking_input_c:-ms-value {
+    background: none;
+}
 .booking_input::-moz-placeholder
 {
     font-size: 14px !important;
