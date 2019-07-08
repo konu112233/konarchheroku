@@ -61,13 +61,11 @@ public class Controller {
 
     @RequestMapping(value = "/property", method = RequestMethod.GET)
     public String property(Model m) {
-        //m.addAttribute("page", "searchResult");
         return "property";
     }
 
     @RequestMapping(value = "/mock", method = RequestMethod.GET)
     public String mock(Model m) {
-        //m.addAttribute("page", "searchResult");
         return "mock";
     }
 }
