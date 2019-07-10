@@ -68,4 +68,9 @@ public class Controller {
     public String mock(Model m) {
         return "mock";
     }
+
+    @RequestMapping(value = "/newjsp", method = RequestMethod.GET)
+    public String newjsp(Model m) {
+        return "newjsp";
+    }
 }
