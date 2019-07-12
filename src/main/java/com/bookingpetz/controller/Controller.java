@@ -69,8 +69,8 @@ public class Controller {
         return "mock";
     }
 
-    @RequestMapping(value = "/newjsp", method = RequestMethod.GET)
-    public String newjsp(Model m) {
-        return "newjsp";
+    @RequestMapping(value = "/dashboardTemplate", method = RequestMethod.GET)
+    public String dashboardTemplate(Model m) {
+        return "dashboardTemplate";
     }
 }
