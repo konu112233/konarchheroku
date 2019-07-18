@@ -6,6 +6,7 @@
 package com.bookingpetz.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,27 +19,70 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class Controller {
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
-    public String home(Model m) {
+    public String home(Model m, HttpServletRequest request) {
         m.addAttribute("page", "home");
-        return "home";
+
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("user") != null) {
+                m.addAttribute("user", session.getAttribute("user"));
+                return "home";
+            } else {
+                return "home";
+            }
+        } catch (Exception exception) {
+            return "home";
+        }
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String about(Model m) {
+    public String about(Model m, HttpServletRequest request) {
         m.addAttribute("page", "about");
-        return "about";
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("user") != null) {
+                m.addAttribute("user", "user");
+                return "about";
+            } else {
+                return "about";
+            }
+        } catch (Exception exception) {
+            return "about";
+        }
     }
 
     @RequestMapping(value = "/blog", method = RequestMethod.GET)
-    public String blog(Model m) {
+    public String blog(Model m, HttpServletRequest request) {
         m.addAttribute("page", "blog");
-        return "blog";
+
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("user") != null) {
+                m.addAttribute("user", "user");
+                return "blog";
+            } else {
+                return "blog";
+            }
+        } catch (Exception exception) {
+            return "blog";
+        }
     }
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
-    public String contact(Model m) {
+    public String contact(Model m, HttpServletRequest request) {
         m.addAttribute("page", "contact");
-        return "contact";
+
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("user") != null) {
+                m.addAttribute("user", "user");
+                return "contact";
+            } else {
+                return "contact";
+            }
+        } catch (Exception exception) {
+            return "contact";
+        }
     }
 
     @RequestMapping(value = "/searchResult", method = RequestMethod.POST)
@@ -64,13 +108,14 @@ public class Controller {
         return "property";
     }
 
+    @RequestMapping(value = "/myPets", method = RequestMethod.GET)
+    public String myPets(Model m) {
+        return "myPets";
+    }
+
     @RequestMapping(value = "/mock", method = RequestMethod.GET)
     public String mock(Model m) {
         return "mock";
     }
 
-    @RequestMapping(value = "/dashboardTemplate", method = RequestMethod.GET)
-    public String dashboardTemplate(Model m) {
-        return "dashboardTemplate";
-    }
 }

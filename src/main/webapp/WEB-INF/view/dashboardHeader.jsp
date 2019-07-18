@@ -9,7 +9,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Bookingpetz</span></a>
+            <a href="dashboardTemplate" class="site_title"><img class="mb-4" src="static/images/svg/logobookingpetz.svg" alt="" width="52" height="52"> <span style="color: #3d9756; margin-left: 10px;"> Bookingpetz</span></a>
         </div>
         <div class="clearfix"></div>
 
@@ -19,7 +19,7 @@
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>${user.name} ${user.surname}</h2>
             </div>
         </div>
 
@@ -37,17 +37,9 @@
                                 <li><a href="index3.html">Dashboard3</a></li>
                             </ul>
                         </li>
-                        <li><a><i  class="fas fa-dog fa-lg" style="margin-right: 10px;"></i>Pet Sitter<span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="form.html">General Form</a></li>
-
-                            </ul>
+                        <li><a href="#"><i  class="fas fa-dog fa-lg" style="margin-right: 10px;"></i>Pet Sitter <span class="fa fa-lock"></span></a>
                         </li>
-                        <li><a><i class="fa fa-paw  fa-lg"></i>My Pets <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="general_elements.html">General Elements</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="myPets"><i class="fa fa-paw fa-lg" ></i>My Pets</a></li>
                         <li><a><i class="fa fa-credit-card fa-lg"></i> Payments <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="tables.html">Tables</a></li>
@@ -89,19 +81,13 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="static/vendors/images/img.jpg" alt="">John Doe
+                        <img src="static/vendors/images/img.jpg" alt="">${user.name} ${user.surname}
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="javascript:;"> Profile</a></li>
-                        <li>
-                            <a href="javascript:;">
-                                <span class="badge bg-red pull-right">50%</span>
-                                <span>Settings</span>
-                            </a>
-                        </li>
+                        <li><a href="home"> Home</a></li>
                         <li><a href="javascript:;">Help</a></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                        <li><a href="logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                     </ul>
                 </li>
                 <li role="presentation" class="dropdown">

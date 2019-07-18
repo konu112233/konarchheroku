@@ -6,114 +6,146 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"><head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+        <link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+        <title>CodePen - Image Upload with preview</title>
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- Meta, title, CSS, favicons, etc. -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="static/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="static/vendors/build/css/custom.min.css" rel="stylesheet">
 
-        <title>Gentelella Alela! | </title>
-
-        <!-- Bootstrap core CSS -->
-        <link href="static/aaa/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
-        <!-- Material Design Bootstrap -->
-        <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
-
+        <!--        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">-->
         <style>
-            .form-elegant .font-small {
-                font-size: 0.8rem; }
-
-            .form-elegant .z-depth-1a {
-                -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
-                box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25); 
+            body {
+                background: whitesmoke;
+                font-family: 'Open Sans', sans-serif;
+            }
+            .container {
+                max-width: 960px;
+                margin: 30px auto;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 20px;
+                text-align: center;
+                margin: 20px 0 20px;
+            }
+            h1 small {
+                display: block;
+                font-size: 15px;
+                padding-top: 8px;
+                color: gray;
+            }
+            .avatar-upload {
+                position: relative;
+                max-width: 205px;
+                margin: 50px auto;
+            }
+            .avatar-upload .avatar-edit {
+                position: absolute;
+                right: 12px;
+                z-index: 1;
+                top: 10px;
+            }
+            .avatar-upload .avatar-edit input {
+                display: none;
+            }
+            .avatar-upload .avatar-edit input + label {
+                display: inline-block;
+                width: 34px;
+                height: 34px;
+                margin-bottom: 0;
+                border-radius: 100%;
+                background: #FFFFFF;
+                border: 1px solid transparent;
+                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+                cursor: pointer;
+                font-weight: normal;
+                transition: all 0.2s ease-in-out;
+            }
+            .avatar-upload .avatar-edit input + label:hover {
+                background: #f1f1f1;
+                border-color: #d6d6d6;
+            }
+            .avatar-upload .avatar-edit input + label:after {
+                content: "\f040";
+                font-family: 'FontAwesome';
+                color: #757575;
+                position: absolute;
+                top: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                margin: auto;
+            }
+            .avatar-upload .avatar-preview {
+                width: 192px;
+                height: 192px;
+                position: relative;
+                border-radius: 100%;
+                border: 6px solid #F8F8F8;
+                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+            }
+            .avatar-upload .avatar-preview > div {
+                width: 100%;
+                height: 100%;
+                border-radius: 100%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
             }
 
-            .form-elegant .z-depth-1-half,
-            .form-elegant .btn:hover {
-                -webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
-                box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15); 
-            }
-
-            .form-elegant .modal-header {
-                border-bottom: none; 
-            }
-
-            .modal-dialog .form-elegant .btn .fab {
-                color: #2196f3!important; 
-            }
-            .form-elegant .modal-body, .form-elegant .modal-footer {
-                font-weight: 400; 
-            }
         </style>
+        <script>
+            window.console = window.console || function (t) {};
+        </script>
+        <script>
+            if (document.location.search.match(/type=embed/gi)) {
+                window.parent.postMessage("resize", "*");
+            }
+        </script>
     </head>
-
-    <body>
-
-        <!-- Modal -->
-        <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <!--Content-->
-                <div class="modal-content form-elegant">
-                    <!--Header-->
-                    <div class="modal-header text-center">
-                        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Sign in</strong></h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!--Body-->
-                    <div class="modal-body mx-4">
-                        <!--Body-->
-                        <div class="md-form mb-5">
-                            <input type="email" id="Form-email1" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="Form-email1">Your email</label>
-                        </div>
-
-                        <div class="md-form pb-3">
-                            <input type="password" id="Form-pass1" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="Form-pass1">Your password</label>
-                            <p class="font-small blue-text d-flex justify-content-end">Forgot <a href="#" class="blue-text ml-1">
-                                    Password?</a></p>
-                        </div>
-
-                        <div class="text-center mb-3">
-                            <button type="button" class="btn blue-gradient btn-block btn-rounded z-depth-1a">Sign in</button>
-                        </div>
-                        <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in
-                            with:</p>
-
-                        <div class="row my-3 d-flex justify-content-center">
-                            <!--Facebook-->
-                            <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-facebook-f text-center"></i></button>
-                            <!--Twitter-->
-                            <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-twitter"></i></button>
-                            <!--Google +-->
-                            <button type="button" class="btn btn-white btn-rounded z-depth-1a"><i class="fab fa-google-plus-g"></i></button>
-                        </div>
-                    </div>
-                    <!--Footer-->
-                    <div class="modal-footer mx-5 pt-3 mb-1">
-                        <p class="font-small grey-text d-flex justify-content-end">Not a member? <a href="#" class="blue-text ml-1">
-                                Sign Up</a></p>
+    <body translate="no">
+        <div class="container">
+            <h1>jQuery Image Upload
+                <small>with preview</small>
+            </h1>
+            <div class="avatar-upload">
+                <div class="avatar-edit">
+                    <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+                    <label for="imageUpload"></label>
+                </div>
+                <div class="avatar-preview">
+                    <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
                     </div>
                 </div>
-                <!--/.Content-->
             </div>
         </div>
-        <!-- Modal -->
-
-        <div class="text-center">
-            <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#elegantModalForm">Launch
-                modal Login Form</a>
-        </div>
-
-        <!-- JQuery -->
-        <script src="static/aaa/js/jquery-3.4.1.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script src="static/aaa/js/bootstrap.min.js"></script>
+        <script src="static/vendors/jquery/dist/jquery.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
+        <script src="static/vendors/bootstrap/dist/js/bootstrap.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
+        <script src="static/vendors/build/js/custom.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
+        <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="53fb5546d8872ed72f1ff495-|49" defer=""></script>
+        <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
+        <script id="rendered-js">
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#imageUpload").change(function () {
+                readURL(this);
+            });
+            //# sourceURL=pen.js
+        </script>
     </body>
 </html>

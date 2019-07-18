@@ -8,13 +8,27 @@
         <property name="hibernate.connection.url">jdbc:mysql://uh9nldy9iaa2m58h:cio2fzhchmaudy5d@onnjomlc4vqc55fw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/d1sbbc7t8mzduhro</property>
         <property name="hibernate.connection.username">uh9nldy9iaa2m58h</property>
         <property name="hibernate.connection.password">cio2fzhchmaudy5d</property>
-        <property name="hibernate.connection.pool_size">30</property>
+        <property name="hibernate.connection.pool_size">10</property>
         <property name="show_sql">true</property>
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
         
-        <!--        
-        <mapping class="com.vehicletracking.domain.User" />
-        <mapping class="com.vehicletracking.domain.Vehicle" />-->
+        <property name="hibernate.c3p0.min_size">1</property>
+        <property name="hibernate.c3p0.max_size">80</property>
+        <property name="hibernate.c3p0.timeout">60</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">1000</property>
+ 
+
+        <mapping class="com.bookingpetz.domain.User" />
+        <mapping class="com.bookingpetz.domain.Contact" />
+        <!--        <mapping class="com.bookingpetz.domain.Service" />
+        <mapping class="com.bookingpetz.domain.Reservation" />
+        <mapping class="com.bookingpetz.domain.Photo" />
+        <mapping class="com.bookingpetz.domain.PetOwner" />
+        <mapping class="com.bookingpetz.domain.Pet" />
+        <mapping class="com.bookingpetz.domain.Payment" />
+        <mapping class="com.bookingpetz.domain.Hotel" />
+        <mapping class="com.bookingpetz.domain.Address" />-->
     </session-factory>
 </hibernate-configuration>

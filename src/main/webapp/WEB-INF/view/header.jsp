@@ -8,7 +8,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
-<jsp:include page="loginModal.jsp"></jsp:include>
+<jsp:include page="signinModal.jsp"></jsp:include>
+<jsp:include page="signupModal.jsp"></jsp:include>
     <!-- Header -->
     <header class="header">
         <div class="header_content d-flex flex-row align-items-center justify-content-start">
@@ -18,49 +19,133 @@
                 <c:choose>
                     <c:when test="${page.equals('home')}">
                         <ul class="d-flex flex-row align-items-start justify-content-start">
-                            <li class="active"><a href="home">Home</a></li>
-                            <li><a href="about">About us</a></li>
-                            <li><a href="blog">Blog</a></li>
-                            <li><a href="contact">Contact</a></li>
+                            <li class="active" style="margin-top: 10px;"><a href="home">Home</a></li>
+                            <li style="margin-top: 10px;"><a href="about">About us</a></li>
+                            <li style="margin-top: 10px;"><a href="blog">Blog</a></li>
+                            <li style="margin-top: 10px;"><a href="contact">Contact</a></li>
+                                <c:choose>
+                                    <c:when test="${user != null}">
+                                    <li>
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                        </a>
+                                        <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="logout">Logout</a>
+                                        </div>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li style="margin-top: 10px;"><a href="home" data-toggle="modal" data-target="#signinForm" style="color: white;">Sign Up & Sign In</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                         </ul>
                     </c:when>
                     <c:when test="${page.equals('about')}">
                         <ul class="d-flex flex-row align-items-start justify-content-start">
-                            <li><a href="home">Home</a></li>
-                            <li class="active"><a href="about">About us</a></li>
-                            <li><a href="blog">Blog</a></li>
-                            <li><a href="contact">Contact</a></li>
+                            <li style="margin-top: 10px;"><a href="home">Home</a></li>
+                            <li style="margin-top: 10px;" class="active"><a href="about">About us</a></li>
+                            <li style="margin-top: 10px;"><a href="blog">Blog</a></li>
+                            <li style="margin-top: 10px;"><a href="contact">Contact</a></li>
+                                <c:choose>
+                                    <c:when test="${user != null}">
+                                    <li>
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                        </a>
+                                        <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="logout">Logout</a>
+                                        </div>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li style="margin-top: 10px;"><a href="home" data-toggle="modal" data-target="#signinForm" style="color: white;">Sign Up & Sign In</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                         </ul>
                     </c:when>
                     <c:when test="${page.equals('blog')}">
                         <ul class="d-flex flex-row align-items-start justify-content-start">
-                            <li><a href="home">Home</a></li>
-                            <li><a href="about">About us</a></li>
-                            <li class="active"><a href="blog">Blog</a></li>
-                            <li><a href="contact">Contact</a></li>
+                            <li style="margin-top: 10px;"><a href="home">Home</a></li>
+                            <li style="margin-top: 10px;"><a href="about">About us</a></li>
+                            <li style="margin-top: 10px;" class="active"><a href="blog">Blog</a></li>
+                            <li style="margin-top: 10px;"><a href="contact">Contact</a></li>
+                                <c:choose>
+                                    <c:when test="${user != null}">
+                                    <li>
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                        </a>
+                                        <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="logout">Logout</a>
+                                        </div>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li style="margin-top: 10px;"><a href="home" data-toggle="modal" data-target="#signinForm" style="color: white;">Sign Up & Sign In</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                         </ul>
                     </c:when>
                     <c:when test="${page.equals('contact')}">
                         <ul class="d-flex flex-row align-items-start justify-content-start">
-                            <li><a href="home">Home</a></li>
-                            <li><a href="about">About us</a></li>
-                            <li><a href="blog">Blog</a></li>
-                            <li class="active"><a href="contact">Contact</a></li>
+                            <li style="margin-top: 10px;"><a href="home">Home</a></li>
+                            <li style="margin-top: 10px;"><a href="about">About us</a></li>
+                            <li style="margin-top: 10px;"><a href="blog">Blog</a></li>
+                            <li style="margin-top: 10px;" class="active"><a href="contact">Contact</a></li>
+                                <c:choose>
+                                    <c:when test="${user != null}}">
+                                    <li>
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                        </a>
+                                        <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="logout">Logout</a>
+                                        </div>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li style="margin-top: 10px;"><a href="home" data-toggle="modal" data-target="#signinForm" style="color: white;">Sign Up & Sign In</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                         </ul>
                     </c:when>
                     <c:otherwise>
                         <ul class="d-flex flex-row align-items-start justify-content-start">
-                            <li><a href="home">Home</a></li>
-                            <li><a href="about">About us</a></li>
-                            <li><a href="blog">Blog</a></li>
-                            <li><a href="contact">Contact</a></li>
+                            <li class="active" style="margin-top: 10px;"><a href="home">Home</a></li>
+                            <li style="margin-top: 10px;"><a href="about">About us</a></li>
+                            <li style="margin-top: 10px;"><a href="blog">Blog</a></li>
+                            <li style="margin-top: 10px;"><a href="contact">Contact</a></li>
+                                <c:choose>
+                                    <c:when test="${user != null}">
+                                    <li>
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                        </a>
+                                        <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="logout">Logout</a>
+                                        </div>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li style="margin-top: 10px;"><a href="home" data-toggle="modal" data-target="#signinForm" style="color: white;">Sign Up & Sign In</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                         </ul>
                     </c:otherwise>
                 </c:choose>
             </nav>
             <!--<div class="book_button"><a href="home">Book Now</a></div>-->
 
-            <div class="log_button"><a href="home" data-toggle="modal" data-target="#elegantModalForm" style="color: white;">Sign Up & Sign In</a></div>
 
             <!-- Hamburger Menu -->
             <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
@@ -82,12 +167,12 @@
             </ul>
         </nav>
     </div>
-    <div class="menu_extra">
-        <div class="book_button"><a href="#">Book Online</a></div>
-        <div class="menu_phone d-flex flex-row align-items-center justify-content-center">
-            <img src="static/images/phone-2.png" alt="">
-            <span>0183-12345678</span>
-        </div>
-    </div>
+    <!--    <div class="menu_extra">
+            <div class="book_button"><a href="#">Book Online</a></div>
+            <div class="menu_phone d-flex flex-row align-items-center justify-content-center">
+                <img src="static/images/phone-2.png" alt="">
+                <span>0183-12345678</span>
+            </div>
+        </div>-->
 </div>
 

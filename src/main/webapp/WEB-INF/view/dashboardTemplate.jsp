@@ -1,5 +1,5 @@
 <%-- 
-    Document   : newjsp
+    Document   : dashboardTemplate
     Created on : Jul 10, 2019, 4:37:09 PM
     Author     : burakzengin
 --%>
@@ -40,5 +40,5 @@
         <script src="static/vendors/bootstrap/dist/js/bootstrap.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
         <script src="static/vendors/build/js/custom.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
         <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="53fb5546d8872ed72f1ff495-|49" defer=""></script></body>
-        <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
+    <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
 </html>

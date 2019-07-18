@@ -359,6 +359,9 @@ section
 {
     color: #459756;
 }
+.dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a{
+    background-color: transparent;
+}
 .book_button
 {
     width: 152px;
