@@ -8,6 +8,7 @@ package com.bookingpetz.controller;
 import com.bookingpetz.domain.Contact;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.services.UserService;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,10 +27,9 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
-    private static final AtomicLong counter = new AtomicLong(0);
-
-    public static long getNextNumber() {
-        return counter.incrementAndGet();
+    public static int generateRandomIntIntRange(int min, int max) {
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
@@ -59,7 +59,7 @@ public class AccountController {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        int userId = (int) getNextNumber();
+        int userId = (int) generateRandomIntIntRange(0, 10000);
         User u = new User(userId, email, password, name, surname, new Contact(userId, "", "", ""));
         userService.save(u);
 

@@ -120,9 +120,6 @@
              var age=document.getElementById("petAge").value;
              var size=document.getElementById("petSize").value;*/
 
-
-
-
             name = document.getElementById("petName").value;
             breed = document.getElementById("petBreed").value;
             age = document.getElementById("petAge").value;

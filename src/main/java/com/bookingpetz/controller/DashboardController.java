@@ -34,4 +34,14 @@ public class DashboardController {
         }
     }
 
+    @RequestMapping(value = "/petsitter", method = RequestMethod.GET)
+    public String petsitter(Model m, HttpServletRequest request) {
+        return "petsitter";
+    }
+
+    @RequestMapping(value = "/calendar", method = RequestMethod.GET)
+    public String calendar(Model m, HttpServletRequest request) {
+        return "calendar";
+    }
+
 }

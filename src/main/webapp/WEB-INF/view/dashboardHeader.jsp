@@ -37,9 +37,9 @@
                                 <li><a href="index3.html">Dashboard3</a></li>
                             </ul>
                         </li>
-                        <li><a href="#"><i  class="fas fa-dog fa-lg" style="margin-right: 10px;"></i>Pet Sitter <span class="fa fa-lock"></span></a>
-                        </li>
+                        <li><a href="#"><i  class="fa fa-paw fa-lg"></i>Pet Sitter <span class="fa fa-lock"></span></a></li>
                         <li><a href="myPets"><i class="fa fa-paw fa-lg" ></i>My Pets</a></li>
+                        <li><a href="#"><i class="fa fa-hotel fa-lg" ></i>Hotel <span class="fa fa-lock"></span></a></li>
                         <li><a><i class="fa fa-credit-card fa-lg"></i> Payments <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a href="tables.html">Tables</a></li>

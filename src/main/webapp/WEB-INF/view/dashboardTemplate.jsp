@@ -7,6 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+    <headers>
+        <frame-options policy="SAMEORIGIN"/>
+    </headers>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -29,16 +32,21 @@
                     <div class="right_col" role="main">
 
                         <!-- TODO Here -->
+                        <!--                        <iframe src="https://www.w3schools.com"></iframe>
+                                                <iframe src="https://calendar.google.com/calendar/embed?src=uygulamayuklee%40gmail.com&ctz=Europe%2FAmsterdam" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>-->
+
 
                     </div>
 
-                <jsp:include page="dashboardFooter.jsp"></jsp:include>
-            </div>
+
+                </div>
+            <jsp:include page="dashboardFooter.jsp"></jsp:include>
         </div>
 
         <script src="static/vendors/jquery/dist/jquery.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
         <script src="static/vendors/bootstrap/dist/js/bootstrap.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
         <script src="static/vendors/build/js/custom.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
-        <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="53fb5546d8872ed72f1ff495-|49" defer=""></script></body>
-    <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
+        <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="53fb5546d8872ed72f1ff495-|49" defer=""></script>
+        <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
+    </body>
 </html>

@@ -10,6 +10,7 @@ import com.bookingpetz.domain.Contact;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.util.HibernateUtil;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -18,16 +19,29 @@ import org.hibernate.Transaction;
  * @author burakzengin
  */
 public class saveUser {
+    
+    private static final AtomicLong counter = new AtomicLong(0);
+    
+    public static long getNextNumber() {
+        return counter.incrementAndGet();
+    }
 
     public static void main(String[] args) {
 
-        UserDAOImpl userDAOImpl = new UserDAOImpl();
+//        UserDAOImpl userDAOImpl = new UserDAOImpl();
 //
 //        System.out.println(userDAOImpl.findByProperty("email", "brakzengin@gmail.com").get(0).getPassword());
 //
-        User u = userDAOImpl.findByProperty("email", "brakzengin@gmail.com").get(0);
+//        User u = userDAOImpl.findByProperty("email", "brakzengin@gmail.com").get(0);
+//
+//        System.out.println(u.getPassword());
 
-        System.out.println(u.getPassword());
+        for (int i = 0; i < 10; i++) {
+            
+            System.out.println(getNextNumber());
+        }
+
+    
 //
 //        Session session = null;
 //        Transaction transaction = null;
