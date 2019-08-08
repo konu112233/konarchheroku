@@ -21,20 +21,14 @@
         <link href="static/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="static/vendors/build/css/custom.min.css" rel="stylesheet">
-
-
     </head>
+
     <body class="nav-md">
         <div class="container body">
             <div class="main_container">
                 <jsp:include page="dashboardHeader.jsp"></jsp:include>
 
                     <div class="right_col" role="main">
-
-                        <!-- TODO Here -->
-                        <!--                        <iframe src="https://www.w3schools.com"></iframe>
-                                                <iframe src="https://calendar.google.com/calendar/embed?src=uygulamayuklee%40gmail.com&ctz=Europe%2FAmsterdam" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>-->
-
 
                     </div>
 

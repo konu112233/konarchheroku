@@ -6,14 +6,19 @@
 package com.bookingpetz.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -40,20 +45,29 @@ public class User implements Serializable {
     @Column(name = "surname", nullable = false, length = 45)
     private String surname;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "userId")
-    @OneToOne(cascade = CascadeType.ALL)
-    private Contact contact;
+    private List<Contact> contactList = new ArrayList<>();
 
     public User() {
     }
 
-    public User(int userId, String email, String password, String name, String surname, Contact contact) {
+    public User(int userId, String email, String password, String name, String surname) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.name = name;
         this.surname = surname;
-        this.contact = contact;
+    }
+
+    public User(int userId, String email, String password, String name, String surname, List<Contact> contactList) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.contactList = contactList;
     }
 
     public int getUserId() {
@@ -96,12 +110,12 @@ public class User implements Serializable {
         this.surname = surname;
     }
 
-    public Contact getContact() {
-        return contact;
+    public List<Contact> getContactList() {
+        return contactList;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
     }
 
 }

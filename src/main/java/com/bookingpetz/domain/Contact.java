@@ -6,11 +6,12 @@
 package com.bookingpetz.domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -24,8 +25,7 @@ import javax.persistence.UniqueConstraint;
 public class Contact implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false, length = 11)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "userId", nullable = true, length = 11)
@@ -40,14 +40,20 @@ public class Contact implements Serializable {
     @Column(name = "description", nullable = true, length = 200)
     private String description;
 
-    public Contact() {
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Address address;
 
-    public Contact(int userId, String phone, String website, String description) {
+    public Contact(int id, int userId, String phone, String website, String description, Address address) {
+        this.id = id;
         this.userId = userId;
         this.phone = phone;
         this.website = website;
         this.description = description;
+        this.address = address;
+    }
+
+    public Contact() {
     }
 
     public int getId() {
@@ -90,4 +96,11 @@ public class Contact implements Serializable {
         this.description = description;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }

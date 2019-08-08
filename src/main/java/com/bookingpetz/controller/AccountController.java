@@ -5,11 +5,13 @@
  */
 package com.bookingpetz.controller;
 
+import com.bookingpetz.domain.Address;
 import com.bookingpetz.domain.Contact;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.services.UserService;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +62,10 @@ public class AccountController {
         String password = request.getParameter("password");
 
         int userId = (int) generateRandomIntIntRange(0, 10000);
-        User u = new User(userId, email, password, name, surname, new Contact(userId, "", "", ""));
+        int contactId = (int) generateRandomIntIntRange(0, 10000);
+        List<Contact> contacts = new ArrayList<>();
+        contacts.add(new Contact(contactId, userId, "", "", "", new Address(contactId, "", "", "", "", "")));
+        User u = new User(userId, email, password, name, surname, contacts);
         userService.save(u);
 
         HttpSession session = request.getSession();

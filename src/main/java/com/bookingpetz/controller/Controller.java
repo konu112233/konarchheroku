@@ -85,24 +85,6 @@ public class Controller {
         }
     }
 
-    @RequestMapping(value = "/searchResult", method = RequestMethod.POST)
-    public String searchResult(Model m, HttpServletRequest request) {
-        String petType = request.getParameter("petType");
-        String where = request.getParameter("where");
-        String checkin = request.getParameter("checkin");
-        String checkout = request.getParameter("checkout");
-
-        System.out.println(checkin + " " + checkout + " " + where + " " + petType);
-
-        return "redirect:searchResult";
-    }
-
-    @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
-    public String searchResult(Model m) {
-        //m.addAttribute("page", "searchResult");
-        return "searchResult";
-    }
-
     @RequestMapping(value = "/property", method = RequestMethod.GET)
     public String property(Model m) {
         return "property";

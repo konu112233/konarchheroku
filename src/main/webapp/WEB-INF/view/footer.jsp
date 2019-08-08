@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col">
                     <div class=" text-center">
-                        <div><img src="static/images/logobookingpetz.svg" alt="https://www.flaticon.com/authors/monkik"></div>
+                        <div><img src="static/images/bookingpetz2.svg" alt="https://www.flaticon.com/authors/monkik"></div>
                     </div>
                 </div>
             </div>
