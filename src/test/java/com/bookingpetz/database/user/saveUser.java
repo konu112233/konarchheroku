@@ -37,10 +37,10 @@ public class saveUser {
 
     public static void main(String[] args) throws ParseException {
 
-        List<Service> list = new ArrayList<Service>();
-        list.add(new Service(2, "adsa", "asdad", "sadada", 100));
-        Hotel hotel = new Hotel(2, 2, "sada", 5, list);
-        System.out.println(hotel.toJSON());
+//        List<Service> list = new ArrayList<Service>();
+//        list.add(new Service(2, "adsa", "asdad", "sadada", 100));
+//        Hotel hotel = new Hotel(2, 2, "sada", 5, list);
+//        System.out.println(hotel.toJSON());
 
 //2019-09-19T10:00:00-07:00
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd'T'HH:mm:ss");
