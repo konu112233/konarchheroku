@@ -49,7 +49,7 @@
                                         <div class="home_content text-center">
                                             <div class="home_title">Find Fantastic Hotels For Your Pets</div>
                                             <div class="booking_form_container">
-                                                <form action="searchResult" method="POST" class="booking_form">
+                                                <form action="searchResultForm" method="POST" class="booking_form">
                                                     <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                                         <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
                                                             <div><input type="text" name="where" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
@@ -62,7 +62,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div><button class="booking_button trans_200">Find Now</button></div>
+                                                        <div><button type="submit" class="booking_button trans_200">Find Now</button></div>
                                                     </div>
                                                 </form>
                                             </div>

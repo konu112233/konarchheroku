@@ -30,7 +30,7 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-    @RequestMapping(value = "/searchResult", method = RequestMethod.POST)
+    @RequestMapping(value = "/searchResultForm", method = RequestMethod.POST)
     public String searchResult(Model m, HttpServletRequest request) throws ParseException {
         String petType = request.getParameter("petType");
         String where = request.getParameter("where");
@@ -44,7 +44,7 @@ public class SearchController {
         date = sdf.parse(checkout);
         checkout = simpleDateFormat.format(date);
 
-        System.out.println("timeMin : " + checkin + " TimeMax : " + checkout + " " + where + " " + petType);
+        System.out.println("checkin : " + checkin + " checkout : " + checkout + " where : " + where + " petType : " + petType);
 
         return "redirect:searchResult?checkin=" + checkin + "&checkout=" + checkout + "&where=" + where;
     }
