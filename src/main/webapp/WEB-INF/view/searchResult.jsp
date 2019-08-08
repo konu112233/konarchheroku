@@ -150,11 +150,9 @@
                 var autocomplete = new google.maps.places.Autocomplete(input);
             }
 
-            $(document).ready(function () {
-                $('#petType').val(${search.petType});
-            });
-
-//           
+//            $(document).ready(function () {
+//                $('#petType').val(${search.petType});
+//            });
         </script>
 
     </head>

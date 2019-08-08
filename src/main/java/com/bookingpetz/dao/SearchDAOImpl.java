@@ -31,7 +31,7 @@ public class SearchDAOImpl implements SearchDAO {
 
     @Override
     public List<Hotel> resultSearch(Search search) {
-        HttpResponse<String> response = Unirest.post("http://localhost:8084/BookingPetsREST/webapi/calendar/getCalendarEventsByDate")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/calendar/getCalendarEventsByDate")
                 .body(new Gson().toJson(search))
                 .asString();
 
