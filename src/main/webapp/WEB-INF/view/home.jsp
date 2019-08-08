@@ -52,13 +52,13 @@
                                                 <form action="searchResult" method="POST" class="booking_form">
                                                     <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                                         <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                            <div><input type="text" name="where" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
+                                                            <div><input type="text" name="location" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
                                                             <div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
                                                             <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
                                                             <div>
                                                                 <select class="booking_input booking_input_c form-control" name="petType" style="height: 54px;" required="required">
-                                                                    <option value="dog">Dog</option>
-                                                                    <option value="cat">Cat</option>
+                                                                    <option value="Dog">Dog</option>
+                                                                    <option value="Cat">Cat</option>
                                                                 </select>
                                                             </div>
                                                         </div>

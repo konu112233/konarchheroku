@@ -33,7 +33,7 @@ public class SearchController {
     @RequestMapping(value = "/searchResult", method = RequestMethod.POST)
     public String searchResult(Model m, HttpServletRequest request) throws ParseException, IOException {
         String petType = request.getParameter("petType");
-        String where = request.getParameter("where");
+        String location = request.getParameter("location");
         String checkin = request.getParameter("checkin") + "T13:00:00-01:00";
         String checkout = request.getParameter("checkout") + "T10:00:00-01:00";
 
@@ -44,11 +44,13 @@ public class SearchController {
         date = sdf.parse(checkout);
         checkout = simpleDateFormat.format(date);
 
-        System.out.println("checkin : " + checkin + " checkout : " + checkout + " where : " + where + " petType : " + petType);
+        System.out.println("checkin : " + request.getParameter("checkin") + " checkout : " + request.getParameter("checkout") + " location : " + location + " petType : " + petType);
 
         try {
-            List<Hotel> hotels = searchService.resultSearch(new Search(checkout, checkin, "Europe/Amsterdam"));
+            List<Hotel> hotels = searchService.resultSearch(new Search(checkout, checkin, "Europe/Amsterdam", petType, location));
             m.addAttribute("hotels", hotels);
+            m.addAttribute("petType", petType);
+            m.addAttribute("search", new Search(request.getParameter("checkout"), request.getParameter("checkin"), "Europe/Amsterdam", petType, location));
             return "searchResult";
         } catch (Exception e) {
             return "redirect:home?error";

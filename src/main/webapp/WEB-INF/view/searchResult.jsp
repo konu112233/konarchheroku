@@ -39,6 +39,8 @@
         <link rel="stylesheet" type="text/css" href="static/searchResult/css/aboutcustom.css">
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
         <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 
         <style>
             #map{
@@ -147,6 +149,12 @@
                 var input = document.getElementById("search_term");
                 var autocomplete = new google.maps.places.Autocomplete(input);
             }
+
+            $(document).ready(function () {
+                $('#petType').val(${search.petType});
+            });
+
+//           
         </script>
 
     </head>
@@ -167,117 +175,125 @@
                                     <form class="booking_form" action="searchResult" method="POST">
                                         <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                             <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                <div><input type="text" name="where" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
-                                                <div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-                                                <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
-                                                <div>
-                                                    <select class="booking_input booking_input_c form-control" name="petType" style="height: 54px;" required="required">
-                                                        <option value="dog">Dog</option>
-                                                        <option value="cat">Cat</option>
-                                                    </select>
-                                                </div>
+                                                <div><input type="text" name="locations" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required" value="${search.location}"></div>
+                                            <div><input id="checkin" type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="${search.timeMin}" required="required"></div>
+                                            <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" required="required" placeholder="${search.timeMax}"></div>
+                                            <div>
+                                                <select class="booking_input booking_input_c form-control" name="petType" id="petType" style="height: 54px;" required="required">
+                                                    <c:choose>
+                                                        <c:when test="${search.petType == 'Dog'}">
+                                                            <option selected value="Dog">Dog</option> 
+                                                            <option value="Cat">Cat</option>
+                                                        </c:when>    
+                                                        <c:otherwise>
+                                                            <option value="Dog">Dog</option> 
+                                                            <option selected value="Cat">Cat</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </select>
                                             </div>
-                                            <div><button type="submit" class="booking_button trans_200">Find Now</button></div>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div><button type="submit" class="booking_button trans_200">Find Now</button></div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="filter-search search-opt">
-                <div class="container ">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form class="filter-form">
-                                <div class="search-type">
-                                    <p>Pet Gender</p>
-                                    <select class="filter-property">
-                                        <option value="">Male</option>
-                                        <option value="">Female</option>
-                                    </select>
-                                </div>
-                                <div class="bedrooms">
-                                    <p>Pet Size</p>
-                                    <div class="room-filter-pagi">
-                                        <div class="bf-item">
-                                            <input type="radio" name="room" id="room-1">
-                                            <label for="room-1">S</label>
-                                        </div>
-                                        <div class="bf-item">
-                                            <input type="radio" name="room" id="room-2">
-                                            <label for="room-2">M</label>
-                                        </div>
-                                        <div class="bf-item">
-                                            <input type="radio" name="room" id="room-3">
-                                            <label for="room-3">L</label>
-                                        </div>
-                                        <div class="bf-item">
-                                            <input type="radio" name="room" id="room-4">
-                                            <label for="room-4">XL</label>
-                                        </div>
+        <div class="filter-search search-opt">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form class="filter-form">
+                            <div class="search-type">
+                                <p>Pet Gender</p>
+                                <select class="filter-property">
+                                    <option value="">Male</option>
+                                    <option value="">Female</option>
+                                </select>
+                            </div>
+                            <div class="bedrooms">
+                                <p>Pet Size</p>
+                                <div class="room-filter-pagi">
+                                    <div class="bf-item">
+                                        <input type="radio" name="room" id="room-1">
+                                        <label for="room-1">S</label>
+                                    </div>
+                                    <div class="bf-item">
+                                        <input type="radio" name="room" id="room-2">
+                                        <label for="room-2">M</label>
+                                    </div>
+                                    <div class="bf-item">
+                                        <input type="radio" name="room" id="room-3">
+                                        <label for="room-3">L</label>
+                                    </div>
+                                    <div class="bf-item">
+                                        <input type="radio" name="room" id="room-4">
+                                        <label for="room-4">XL</label>
                                     </div>
                                 </div>
-                                <div class="bathrooms">
-                                    <p>Pet Age</p>
-                                    <div class="room-filter-pagi">
-                                        <div class="bf-item">
-                                            <input type="radio" name="bathroom" id="bathroom-1">
-                                            <label for="bathroom-1">0-1</label>
-                                        </div>
-                                        <div class="bf-item">
-                                            <input type="radio" name="bathroom" id="bathroom-2">
-                                            <label for="bathroom-2">1-5</label>
-                                        </div>
-                                        <div class="bf-item">
-                                            <input type="radio" name="bathroom" id="bathroom-3">
-                                            <label for="bathroom-3">5-10</label>
-                                        </div>
+                            </div>
+                            <div class="bathrooms">
+                                <p>Pet Age</p>
+                                <div class="room-filter-pagi">
+                                    <div class="bf-item">
+                                        <input type="radio" name="bathroom" id="bathroom-1">
+                                        <label for="bathroom-1">0-1</label>
+                                    </div>
+                                    <div class="bf-item">
+                                        <input type="radio" name="bathroom" id="bathroom-2">
+                                        <label for="bathroom-2">1-5</label>
+                                    </div>
+                                    <div class="bf-item">
+                                        <input type="radio" name="bathroom" id="bathroom-3">
+                                        <label for="bathroom-3">5-10</label>
                                     </div>
                                 </div>
-                                <div class="location">
-                                    <p>Garden</p>
-                                    <select class="filter-location">
-                                        <option value="">Yes</option>
-                                        <option value="">No</option>
-                                    </select>
-                                </div>
-                                <div class="price-range">
-                                    <p>Price</p>
-                                    <div class="range-slider">
-                                        <div id="slider-range">
-                                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default slider-left">50k</span>
-                                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default slider-right">300k</span>
-                                        </div>
+                            </div>
+                            <div class="location">
+                                <p>Garden</p>
+                                <select class="filter-location">
+                                    <option value="">Yes</option>
+                                    <option value="">No</option>
+                                </select>
+                            </div>
+                            <div class="price-range">
+                                <p>Price</p>
+                                <div class="range-slider">
+                                    <div id="slider-range">
+                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default slider-left">50k</span>
+                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default slider-right">300k</span>
                                     </div>
                                 </div>
-                                <div class="search-btn">
-                                    <button type="submit"><i class="flaticon-settings-2"></i>Apply</button>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="search-btn">
+                                <button type="submit"><i class="flaticon-settings-2"></i>Apply</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="map-section">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div id="map" class="map">
+        <div class="map-section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="map" class="map">
 
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <section class="hotel-rooms spad-2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 p-45">
-                            <div class="found-items">
-                                <h4>We found <span>${fn:length(hotels)}</span> properties</h4>
+        <section class="hotel-rooms spad-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 p-45">
+                        <div class="found-items">
+                            <h4>We found <span>${fn:length(hotels)}</span> properties</h4>
                             <select class="date-select">
                                 <option value="0">Date New to Old</option>
                                 <option value="1">Old</option>
@@ -315,7 +331,7 @@
                                         <div class="room-info" style="text-align:center">
                                             <c:forEach var="h" items="${c.serviceList}">
                                                 <div class="beds pl-1 pr-1">
-                                                    <c:if test = "${h.type == 'Dog'}"> 
+                                                    <c:if test = "${h.type == 'Cat'}"> 
                                                         <p>${h.name}</br><img src="static/searchResult/img/check.png" alt=""></p>    
                                                         </c:if>
                                                 </div>

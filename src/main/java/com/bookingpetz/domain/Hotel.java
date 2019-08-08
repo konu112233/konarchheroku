@@ -41,8 +41,11 @@ public class Hotel implements Serializable {
     @Column(name = "workingHours", length = 45)
     private String workingHours;
 
-    @Column(name = "rooms", length = 3)
-    private int rooms;
+    @Column(name = "dogRoom", length = 3)
+    private int dogRoom;
+
+    @Column(name = "catRoom", length = 3)
+    private int catRoom;
 
     @Column(name = "rate")
     private float rate;
@@ -60,14 +63,15 @@ public class Hotel implements Serializable {
         this.userId = userId;
         this.certificationNumber = certificationNumber;
         this.workingHours = workingHours;
-        this.rooms = rooms;
+        this.dogRoom = rooms;
     }
 
-    public Hotel(int userId, int certificationNumber, String workingHours, int rooms, float rate, User user, List<Service> serviceList) {
+    public Hotel(int userId, int certificationNumber, String workingHours, int dogRoom, int catRoom, float rate, User user, List<Service> serviceList) {
         this.userId = userId;
         this.certificationNumber = certificationNumber;
         this.workingHours = workingHours;
-        this.rooms = rooms;
+        this.dogRoom = dogRoom;
+        this.catRoom = catRoom;
         this.user = user;
         this.serviceList = serviceList;
         this.rate = rate;
@@ -100,14 +104,6 @@ public class Hotel implements Serializable {
         this.workingHours = workingHours;
     }
 
-    public int getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(int rooms) {
-        this.rooms = rooms;
-    }
-
     public float getRate() {
         return rate;
     }
@@ -132,12 +128,29 @@ public class Hotel implements Serializable {
         this.user = user;
     }
 
+    public int getDogRoom() {
+        return dogRoom;
+    }
+
+    public void setDogRoom(int dogRoom) {
+        this.dogRoom = dogRoom;
+    }
+
+    public int getCatRoom() {
+        return catRoom;
+    }
+
+    public void setCatRoom(int catRoom) {
+        this.catRoom = catRoom;
+    }
+
     public JSONObject toJSON() {
         JSONObject jo = new JSONObject();
         jo.put("userId", userId);
         jo.put("certificationNumber", certificationNumber);
         jo.put("workingHours", workingHours);
-        jo.put("rooms", rooms);
+        jo.put("dogRoom", dogRoom);
+        jo.put("catRoom", catRoom);
         jo.put("rate", rate);
         jo.put("user", user);
         jo.put("service", serviceList);
