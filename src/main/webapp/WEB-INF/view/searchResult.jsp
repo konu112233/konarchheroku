@@ -173,7 +173,7 @@
                                     <form class="booking_form" action="searchResult" method="POST">
                                         <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                             <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                <div><input type="text" name="locations" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required" value="${search.location}"></div>
+                                                <div><input type="text" name="location" id="search_term" class="booking_input booking_input_b" value="${search.location}" required="required"></div>
                                             <div><input id="checkin" type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="${search.timeMin}" required="required"></div>
                                             <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" required="required" placeholder="${search.timeMax}"></div>
                                             <div>
