@@ -15,13 +15,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -33,8 +30,8 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-    @RequestMapping(value = "/searchResultForm", method = RequestMethod.POST)
-    public ModelAndView searchResult(Model m, HttpServletRequest request) throws ParseException, IOException {
+    @RequestMapping(value = "/searchResult", method = RequestMethod.POST)
+    public String searchResult(Model m, HttpServletRequest request) throws ParseException, IOException {
         String petType = request.getParameter("petType");
         String where = request.getParameter("where");
         String checkin = request.getParameter("checkin") + "T13:00:00-01:00";
@@ -49,12 +46,6 @@ public class SearchController {
 
         System.out.println("checkin : " + checkin + " checkout : " + checkout + " where : " + where + " petType : " + petType);
 
-        return new ModelAndView("redirect:searchResult?checkin=" + checkin + "&checkout=" + checkout + "&where=" + where);
-    }
-
-    @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
-    public String searchResult(Model m, @PathParam("checkin") String checkin, @PathParam("checkout") String checkout, @PathParam("where") String where) {
-        System.out.println("Search Result GET : " + checkin + " " + checkout + " " + where);
         try {
             List<Hotel> hotels = searchService.resultSearch(new Search(checkout, checkin, "Europe/Amsterdam"));
             m.addAttribute("hotels", hotels);
@@ -62,5 +53,6 @@ public class SearchController {
         } catch (Exception e) {
             return "redirect:home?error";
         }
+
     }
 }

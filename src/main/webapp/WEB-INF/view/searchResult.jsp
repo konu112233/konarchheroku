@@ -164,7 +164,7 @@
                             <div class="col">
                                 <div class="home_content text-center">
                                     <div class="home_title" style="margin-bottom: 30px;">Search Result</div>
-                                    <form class="booking_form" action="searchResultForm" method="POST">
+                                    <form class="booking_form" action="searchResult" method="POST">
                                         <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                             <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
                                                 <div><input type="text" name="where" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
