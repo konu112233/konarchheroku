@@ -55,6 +55,6 @@ public class SearchController {
         } catch (Exception e) {
             return "redirect:home?error";
         }
-
     }
+    
 }

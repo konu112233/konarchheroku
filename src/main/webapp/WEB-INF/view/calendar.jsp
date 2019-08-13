@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,12 +23,107 @@
         <link href="static/vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
         <link href="static/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
         <link href="static/vendors/build/css/custom.min.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
 
+            arr = new Array();
+            <c:forEach var="h" items="${resultModals}">
+            booking = new Object();
+            booking.title = '${h.customerName}';
+            booking.end = new Date(${h.endYear}, ${h.endMonth} - 1, ${h.endDay});
+            booking.start = new Date(${h.startYear}, ${h.startMonth} - 1, ${h.startDay});
+            booking.id = '${h.id}';
+            booking.allDay = true;
+            booking.customerId = '${h.customerId}';
+            arr.push(booking);
+            </c:forEach>
+
+            /* CALENDAR */
+
+            function  init_calendar() {
+
+                if (typeof ($.fn.fullCalendar) === 'undefined') {
+                    return;
+                }
+                console.log('init_calendar');
+
+                var date = new Date(),
+                        d = date.getDate(),
+                        m = date.getMonth(),
+                        y = date.getFullYear(),
+                        started,
+                        categoryClass;
+
+                var calendar = $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay,listMonth'
+                    },
+                    selectable: true,
+                    selectHelper: true,
+                    select: function (start, end, allDay) {
+                        $('#fc_create').click();
+
+                        started = start;
+                        ended = end;
+
+                        $(".antosubmit").on("click", function () {
+                            var title = $("#title").val();
+                            if (end) {
+                                ended = end;
+                            }
+                            categoryClass = $("#event_type").val();
+                            if (title) {
+                                calendar.fullCalendar('renderEvent', {
+                                    title: title,
+                                    start: started,
+                                    end: end,
+                                    allDay: allDay
+                                },
+                                        true // make the event "stick"
+                                        );
+                            }
+                            $('#title').val('');
+                            calendar.fullCalendar('unselect');
+                            $('.antoclose').click();
+                            return false;
+                        });
+                    },
+                    eventClick: function (calEvent, jsEvent, view) {
+                        $('#fc_edit').click();
+                        $('#title2').val(calEvent.title);
+                        $('#eventId').val(calEvent.id);
+
+                        categoryClass = $("#event_type").val();
+                        calendar.fullCalendar('unselect');
+                    },
+                    editable: true,
+                    events: arr
+//                    events: [{
+//                            title: 'Click for Google',
+//                            start: new Date(y, m, 28),
+//                            end: new Date(y, m, 29),
+//                            allDay: false,
+//                            url: 'http://google.com/'
+//                        }]
+                });
+            }
+            ;
+
+//            $(document).ready(function () {
+//                document.getElementById("bookings").value = book;
+//                book.forEach(function (element) {
+//                    console.log(element);
+//                });
+//            });
+        </script>
     </head>
     <body class="nav-md">
         <div class="container body">
             <div class="main_container">
                 <jsp:include page="dashboardHeader.jsp"></jsp:include>
+
                     <div class="right_col" role="main">
                         <div class="">
                             <div class="clearfix"></div>
@@ -57,13 +153,13 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title" id="myModalLabel">New Calendar Entry</h4>
                     </div>
-                    <div class="modal-body">
-                        <div id="testmodal" style="padding: 5px 20px;">
-                            <form id="antoform" class="form-horizontal calender" role="form">
+                    <form id="antoform" action="calendarInsert" method="POST" class="form-horizontal calender">
+                        <div class="modal-body">
+                            <div id="testmodal" style="padding: 5px 20px;">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Title</label>
+                                    <label class="col-sm-3 control-label">Summary</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="title" name="title">
+                                        <input type="text" class="form-control" id="summary" name="summary">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -71,10 +167,10 @@
                                     <div class="col-sm-9">
                                         <div class="btn-group" data-toggle="buttons">
                                             <label class="btn btn-default">
-                                                <input type="radio" name="options" id="Booking"> Booking
+                                                <input type="radio" name="type" id="Booking"> Booking
                                             </label>
                                             <label class="btn btn-default">
-                                                <input type="radio" name="options" id="Custom"> Custom
+                                                <input type="radio" name="type" id="Custom"> Custom
                                             </label>
                                         </div>
                                     </div>
@@ -82,20 +178,20 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Start Time</label>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control text-center" id="single_cal2" placeholder="Date" aria-describedby="inputSuccess2Status2">
+                                        <input type="text" class="form-control text-center" id="single_cal2" name="startDate" placeholder="Date" aria-describedby="inputSuccess2Status2">
                                     </div>
                                     <div class="col-sm-3">
-                                        <select class="form-control">
-                                            <option>12:00am</option>
-                                            <option>12:30am</option>
-                                            <option>1:00am</option>
-                                            <option>1:30am</option>
-                                            <option>2:00am</option>
-                                            <option>2:30am</option>
-                                            <option>3:00am</option>
-                                            <option>3:30am</option>
-                                            <option>4:00am</option>
-                                            <option>4:30am</option>
+                                        <select class="form-control" name="startTime">
+                                            <option value="12:00:00">12:00am</option>
+                                            <option value="12:30:00">12:30am</option>
+                                            <option value="01:00:00">1:00am</option>
+                                            <option value="01:30:00">1:30am</option>
+                                            <option value="02:00:00">2:00am</option>
+                                            <option value="02:30:00">2:30am</option>
+                                            <option value="03:00:00">3:00am</option>
+                                            <option value="03:30:00">3:30am</option>
+                                            <option value="04:00:00">4:00am</option>
+                                            <option value="04:30:00">4:30am</option>
                                             <option>5:00am</option>
                                             <option>5:30am</option>
                                             <option>6:00am</option>
@@ -140,20 +236,20 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">End Time</label>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control text-center" id="single_cal3" placeholder="Date" aria-describedby="inputSuccess2Status2">
+                                        <input type="text" class="form-control text-center" id="single_cal3" name="endDate" placeholder="Date" aria-describedby="inputSuccess2Status2">
                                     </div>
                                     <div class="col-sm-3">
-                                        <select class="form-control">
-                                            <option>12:00am</option>
-                                            <option>12:30am</option>
-                                            <option>1:00am</option>
-                                            <option>1:30am</option>
-                                            <option>2:00am</option>
-                                            <option>2:30am</option>
-                                            <option>3:00am</option>
-                                            <option>3:30am</option>
-                                            <option>4:00am</option>
-                                            <option>4:30am</option>
+                                        <select class="form-control" name="endTime">
+                                            <option value="12:00:00">12:00am</option>
+                                            <option value="12:30:00">12:30am</option>
+                                            <option value="01:00:00">1:00am</option>
+                                            <option value="01:30:00">1:30am</option>
+                                            <option value="02:00:00">2:00am</option>
+                                            <option value="02:30:00">2:30am</option>
+                                            <option value="03:00:00">3:00am</option>
+                                            <option value="03:30:00">3:30am</option>
+                                            <option value="04:00:00">4:00am</option>
+                                            <option value="04:30:00">4:30am</option>
                                             <option>5:00am</option>
                                             <option>5:30am</option>
                                             <option>6:00am</option>
@@ -201,13 +297,14 @@
                                         <textarea class="form-control" style="height:55px;" id="descr" name="descr"></textarea>
                                     </div>
                                 </div>
-                            </form>
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary antosubmit">Save changes</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -218,9 +315,11 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title" id="myModalLabel2">Edit Calendar Entry</h4>
                     </div>
-                    <div class="modal-body">
-                        <div id="testmodal2" style="padding: 5px 20px;">
-                            <form id="antoform2" class="form-horizontal calender" role="form">
+                    <form id="antoform2" action="removeEvent" method="POST" class="form-horizontal calender" >
+                        <input hidden name="eventId" id="eventId">
+                        <div class="modal-body">
+                            <div id="testmodal2" style="padding: 5px 20px;">
+
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Title</label>
                                     <div class="col-sm-9">
@@ -233,13 +332,14 @@
                                         <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
                                     </div>
                                 </div>
-                            </form>
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger ">Delete Event</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

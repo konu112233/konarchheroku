@@ -8,11 +8,11 @@
         <property name="hibernate.connection.url">jdbc:mysql://b70a56c48e1632:eebd2ac2@eu-cdbr-west-02.cleardb.net:3306/heroku_da1706379db7051</property>
         <property name="hibernate.connection.username">b70a56c48e1632</property>
         <property name="hibernate.connection.password">zpi4cuf9xq2ytwzj</property>
-        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.connection.pool_size">3</property>
         <property name="show_sql">true</property>
         <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
-        <property name="hibernate.connection.provider_class">com.zaxxer.hikari.hibernate.HikariConnectionProvider</property>
+        <property name="hibernate.connection.provider_class">org.hibernate.hikaricp.internal.HikariCPConnectionProvider</property>
         
         
         <!-- Drop and re-create the database schema on startup -->
@@ -20,7 +20,7 @@
         <property name="connection.release_mode">after_transaction</property>
 
         <!-- Hikari specific properties -->
-        <property name="connection.provider_class">com.zaxxer.hikari.hibernate.HikariConnectionProvider</property>
+        <!--<property name="connection.provider_class">com.zaxxer.hikari.hibernate.HikariConnectionProvider</property>-->
         <property name="hikari.dataSource.cachePrepStmts">true</property>
         <property name="hikari.dataSource.prepStmtCacheSize">250</property>
         <property name="hikari.dataSource.prepStmtCacheSqlLimit">2048</property>
@@ -39,7 +39,6 @@
         <property name="hibernate.hikari.minimumIdle">1</property>
         <property name="hibernate.hikari.maximumPoolSize">2</property>
  
-
         <mapping class="com.bookingpetz.domain.User" />
         <mapping class="com.bookingpetz.domain.Contact" />
         <mapping class="com.bookingpetz.domain.Service" />

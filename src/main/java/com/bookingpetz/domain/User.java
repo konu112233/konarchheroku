@@ -36,14 +36,17 @@ public class User implements Serializable {
     @Column(name = "email", nullable = false, length = 25)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 45)
-    private String password;
-
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
     @Column(name = "surname", nullable = false, length = 45)
     private String surname;
+
+    @Column(name = "key", nullable = false, length = 500)
+    private String key;
+
+    @Column(name = "salt", nullable = false, length = 800)
+    private String salt;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -53,21 +56,39 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int userId, String email, String password, String name, String surname) {
+    public User(int userId, String email, String name, String surname) {
         this.userId = userId;
         this.email = email;
-        this.password = password;
         this.name = name;
         this.surname = surname;
     }
 
-    public User(int userId, String email, String password, String name, String surname, List<Contact> contactList) {
+    public User(int userId, String email, String name, String surname, List<Contact> contactList) {
         this.userId = userId;
         this.email = email;
-        this.password = password;
         this.name = name;
         this.surname = surname;
         this.contactList = contactList;
+    }
+
+    public User(int userId, String email, String name, String surname, String key, String salt) {
+        this.userId = userId;
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.key = key;
+        this.salt = salt;
+    }
+
+    public User(User user) {
+        this.userId = user.getUserId();
+        this.email = user.getEmail();
+        this.name = user.getName();
+        this.surname = user.getSurname();
+    }
+
+    public User(int userId) {
+        this.userId = userId;
     }
 
     public int getUserId() {
@@ -84,14 +105,6 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {
@@ -116,6 +129,22 @@ public class User implements Serializable {
 
     public void setContactList(List<Contact> contactList) {
         this.contactList = contactList;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
 }

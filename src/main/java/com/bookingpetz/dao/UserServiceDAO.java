@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.bookingpetz.services;
+package com.bookingpetz.dao;
 
 import com.bookingpetz.domain.User;
 
@@ -11,8 +11,7 @@ import com.bookingpetz.domain.User;
  *
  * @author burakzengin
  */
-public interface UserService {
+public interface UserServiceDAO {
 
     public User getByToken(String token);
 }
-

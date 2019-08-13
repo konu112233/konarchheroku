@@ -5,7 +5,7 @@
  */
 package com.bookingpetz.services;
 
-import com.bookingpetz.dao.UserDAO;
+import com.bookingpetz.dao.UserServiceDAO;
 import com.bookingpetz.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,31 +15,13 @@ import org.springframework.stereotype.Service;
  * @author burakzengin
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserServiceDAO {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserServiceDAO userServiceDAO;
 
     @Override
-    public void save(User u) {
-        userDAO.save(u);
+    public User getByToken(String token) {
+        return userServiceDAO.getByToken(token);
     }
-
-    @Override
-    public boolean login(String email, String password) {
-        System.out.println(email + " " + password);
-        User user = userDAO.findByProperty("email", email).get(0);
-        return user.getPassword().equals(password);
-    }
-
-    @Override
-    public User findByProperty(String propName, Object propValue) {
-        return userDAO.findByProperty(propName, propValue).get(0);
-    }
-
-    @Override
-    public void delete(User u) {
-        userDAO.delete(u);
-    }
-
 }

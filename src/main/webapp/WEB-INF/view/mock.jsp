@@ -65,5 +65,6 @@
         <script src="static/vendors/moment/min/moment.min.js" type="c3000d06f3045955315705eb-text/javascript"></script>
         <script src="static/vendors/fullcalendar/dist/fullcalendar.min.js" type="c3000d06f3045955315705eb-text/javascript"></script>
         <script src="static/vendors/build/js/custom.min.js" type="c3000d06f3045955315705eb-text/javascript"></script>
-        <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/95c75768/cloudflare-static/rocket-loader.min.js" data-cf-settings="c3000d06f3045955315705eb-|49" defer=""></script></body>
+        <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/95c75768/cloudflare-static/rocket-loader.min.js" data-cf-settings="c3000d06f3045955315705eb-|49" defer=""></script>
+    </body>
 </html>

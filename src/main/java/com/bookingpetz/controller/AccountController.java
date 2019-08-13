@@ -5,17 +5,17 @@
  */
 package com.bookingpetz.controller;
 
-import com.bookingpetz.domain.Address;
-import com.bookingpetz.domain.Contact;
-import com.bookingpetz.domain.User;
-import com.bookingpetz.services.UserService;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import com.bookingpetz.dao.UserAuthDAO;
+import com.bookingpetz.dao.UserServiceDAO;
+import com.bookingpetz.domain.Session;
+import com.bookingpetz.domain.UserAuth;
+import com.bookingpetz.domain.UserToken;
+import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,26 +27,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AccountController {
 
     @Autowired
-    private UserService userService;
+    private UserAuthDAO userAuthDAO;
 
-    public static int generateRandomIntIntRange(int min, int max) {
-        Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
-    }
+    @Autowired
+    private UserServiceDAO userServiceDAO;
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public String signin(Model m, HttpServletRequest request) {
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        //System.out.println(email + " " + password);
-//        if (userService.login(username, DigestUtils.md5Hex(request.getParameter("password")))) {
-        if (userService.login(email, password)) {
+        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
+        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
+        UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
+        if (userToken.getId() != 000) {
             //SUCCESS
-            System.out.println("success");
+            System.out.println("success " + userToken.getId());
+            Session sesssionObj = new Session(userToken.getAccess_token(), userServiceDAO.getByToken(userToken.getAccess_token()));
             HttpSession session = request.getSession();
-            session.setAttribute("user", userService.findByProperty("email", email));
-            session.setMaxInactiveInterval(30);
+            session.setAttribute("user", sesssionObj);
             return "redirect:/";
         }
         //FAILED 
@@ -56,30 +53,27 @@ public class AccountController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signup(Model m, HttpServletRequest request) {
 
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
+        String name = StringUtils.capitalize(request.getParameter("name"));
+        String surname = StringUtils.capitalize(request.getParameter("surname"));
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        int userId = (int) generateRandomIntIntRange(0, 10000);
-        int contactId = (int) generateRandomIntIntRange(0, 10000);
-        List<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact(contactId, userId, "", "", "", new Address(contactId, "", "", "", "", "")));
-        User u = new User(userId, email, password, name, surname, contacts);
-        userService.save(u);
-
+//        List<Contact> contacts = new ArrayList<>();
+//        contacts.add(new Contact(contactId, userId, "", "", "", new Address(contactId, "", "", "", "", "")));
+//        User u = new User(userId, email, password, name, surname, contacts);
+//        userService.save(u);
         HttpSession session = request.getSession();
-        session.setAttribute("user", u);
-        session.setMaxInactiveInterval(30);
+        session.setAttribute("user", "asd");
         return "redirect:/";
-
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         try {
-            HttpSession session = request.getSession(false);
-            session.invalidate();
+            if (userAuthDAO.logout((Session) request.getSession().getAttribute("user"))) {
+                HttpSession session = request.getSession(false);
+                session.invalidate();
+            }
             return "redirect:/";
         } catch (Exception ex) {
             return "redirect:/";
