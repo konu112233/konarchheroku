@@ -23,7 +23,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
     @Override
     public UserToken login(UserAuth userAuth) {
 
-        HttpResponse<String> response = Unirest.post("http://localhost:8084/BookingPetsREST/webapi/auth/login")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/login")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(userAuth))
                 .asString();
@@ -37,7 +37,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public boolean logout(Session session) {
-        HttpResponse<String> response = Unirest.post("http://localhost:8084/BookingPetsREST/webapi/auth/logout")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/logout")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(session))
                 .asString();
