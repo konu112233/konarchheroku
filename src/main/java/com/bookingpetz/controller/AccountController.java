@@ -51,6 +51,24 @@ public class AccountController {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginGet(Model m, HttpServletRequest request) {
+
+        String encodeEmail = request.getParameter("email");
+        String encodePassword = request.getParameter("password");
+        UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
+        if (userToken.getId().equals("000")) {
+            //SUCCESS
+            System.out.println("success " + userToken.getId());
+            Session sesssionObj = new Session(userToken.getAccess_token(), userServiceDAO.getByToken(userToken.getAccess_token()));
+            HttpSession session = request.getSession();
+            session.setAttribute("user", sesssionObj);
+            return "redirect:/";
+        }
+        //FAILED 
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public String signup(Model m, HttpServletRequest request) {
 
@@ -59,7 +77,7 @@ public class AccountController {
         String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
         if (userAuthDAO.signUp(new User(encodeEmail, encodePassword, name, surname, ""))) {
-            return "redirect:login?email=" + request.getParameter("email") + "&password=" + request.getParameter("password");
+            return "redirect:login?email=" + encodeEmail + "&password=" + encodePassword;
         }
         return "redirect:/";
     }
