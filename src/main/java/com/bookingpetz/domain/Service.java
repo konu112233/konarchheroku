@@ -28,8 +28,8 @@ public class Service implements Serializable {
     @Column(name = "serviceId", unique = true, nullable = false, length = 11)
     private String serviceId;
 
-    @Column(name = "userId", nullable = false, length = 11)
-    private int userId;
+    @Column(name = "userId", nullable = false, length = 45)
+    private String userId;
 
     @Column(name = "name", nullable = false, length = 45)
     private String name;
@@ -43,7 +43,7 @@ public class Service implements Serializable {
     @Column(name = "basePrice", nullable = false, length = 11)
     private int basePrice;
 
-    public Service(int userId, String name, String type, String description, int basePrice) {
+    public Service(String userId, String name, String type, String description, int basePrice) {
         this.userId = userId;
         this.name = name;
         this.type = type;
@@ -62,11 +62,11 @@ public class Service implements Serializable {
         this.serviceId = serviceId;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

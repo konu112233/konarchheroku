@@ -33,7 +33,7 @@ public class Hotel implements Serializable {
 
     @Id
     @Column(name = "userId")
-    private int userId;
+    private String userId;
 
     @Column(name = "certificationNumber", length = 11)
     private int certificationNumber;
@@ -59,14 +59,14 @@ public class Hotel implements Serializable {
     @JoinColumn(name = "userId")
     private List<Service> serviceList = new ArrayList<>();
 
-    public Hotel(int userId, int certificationNumber, String workingHours, int rooms) {
+    public Hotel(String userId, int certificationNumber, String workingHours, int rooms) {
         this.userId = userId;
         this.certificationNumber = certificationNumber;
         this.workingHours = workingHours;
         this.dogRoom = rooms;
     }
 
-    public Hotel(int userId, int certificationNumber, String workingHours, int dogRoom, int catRoom, float rate, User user, List<Service> serviceList) {
+    public Hotel(String userId, int certificationNumber, String workingHours, int dogRoom, int catRoom, float rate, User user, List<Service> serviceList) {
         this.userId = userId;
         this.certificationNumber = certificationNumber;
         this.workingHours = workingHours;
@@ -80,11 +80,11 @@ public class Hotel implements Serializable {
     public Hotel() {
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

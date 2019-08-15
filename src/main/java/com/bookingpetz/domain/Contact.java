@@ -17,7 +17,7 @@ import javax.persistence.UniqueConstraint;
 
 /**
  *
- * @author burakzengin
+ * @author burakzenginx
  */
 @Entity
 @Table(name = "contact", uniqueConstraints = {
@@ -28,8 +28,8 @@ public class Contact implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "userId", nullable = true, length = 11)
-    private int userId;
+    @Column(name = "userId", nullable = true, length = 45)
+    private String userId;
 
     @Column(name = "phone", nullable = true, length = 25)
     private String phone;
@@ -44,7 +44,7 @@ public class Contact implements Serializable {
     @JoinColumn(name = "id")
     private Address address;
 
-    public Contact(int id, int userId, String phone, String website, String description, Address address) {
+    public Contact(int id, String userId, String phone, String website, String description, Address address) {
         this.id = id;
         this.userId = userId;
         this.phone = phone;
@@ -64,11 +64,11 @@ public class Contact implements Serializable {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
