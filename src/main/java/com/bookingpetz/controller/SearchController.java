@@ -48,13 +48,16 @@ public class SearchController {
 
         try {
             List<Hotel> hotels = searchService.resultSearch(new Search(checkout, checkin, "Europe/Amsterdam", petType, location));
-            m.addAttribute("hotels", hotels);
-            m.addAttribute("petType", petType);
-            m.addAttribute("search", new Search(request.getParameter("checkout"), request.getParameter("checkin"), "Europe/Amsterdam", petType, location));
-            return "searchResult";
+            if (!hotels.isEmpty()) {
+                m.addAttribute("hotels", hotels);
+                m.addAttribute("petType", petType);
+                m.addAttribute("search", new Search(request.getParameter("checkout"), request.getParameter("checkin"), "Europe/Amsterdam", petType, location));
+                return "searchResult";
+            }
+            return "redirect:home?error";
         } catch (Exception e) {
             return "redirect:home?error";
         }
     }
-    
+
 }
