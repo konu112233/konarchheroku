@@ -23,7 +23,7 @@
         <link href="static/vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
         <link href="static/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
         <link href="static/vendors/build/css/custom.min.css" rel="stylesheet">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>
 
             arr = new Array();
