@@ -11,8 +11,10 @@ import com.bookingpetz.domain.Session;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
+import java.io.IOException;
 import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -39,9 +41,9 @@ public class AccountController {
         String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
         UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
-        if (userToken.getId().equals("000")) {
+        if (!userToken.getId().equals("000")) {
             //SUCCESS
-            System.out.println("success " + userToken.getId());
+            System.out.println("Login Success " + userToken.getId());
             Session sesssionObj = new Session(userToken.getAccess_token(), userServiceDAO.getByToken(userToken.getAccess_token()));
             HttpSession session = request.getSession();
             session.setAttribute("user", sesssionObj);
@@ -57,7 +59,7 @@ public class AccountController {
         String encodeEmail = request.getParameter("email");
         String encodePassword = request.getParameter("password");
         UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
-        if (userToken.getId().equals("000")) {
+        if (!userToken.getId().equals("000")) {
             //SUCCESS
             System.out.println("success " + userToken.getId());
             Session sesssionObj = new Session(userToken.getAccess_token(), userServiceDAO.getByToken(userToken.getAccess_token()));
@@ -70,7 +72,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public String signup(Model m, HttpServletRequest request) {
+    public String signup(Model m, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String name = StringUtils.capitalize(request.getParameter("name"));
         String surname = StringUtils.capitalize(request.getParameter("surname"));

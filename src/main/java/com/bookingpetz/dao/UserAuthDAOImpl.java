@@ -29,11 +29,8 @@ public class UserAuthDAOImpl implements UserAuthDAO {
                 .body(new Gson().toJson(userAuth))
                 .asString();
 
-        System.out.println("status code : " + response.getStatus() + " body : " + response.getBody());
-        if (response.getStatus() == 200) {
-            return new Gson().fromJson(response.getBody(), UserToken.class);
-        }
-        return null;
+        System.out.println("Login Status Code : " + response.getStatus() + " Body : " + response.getBody());
+        return new Gson().fromJson(response.getBody(), UserToken.class);
     }
 
     @Override
@@ -43,7 +40,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
                 .body(new Gson().toJson(session))
                 .asString();
 
-        System.out.println("status code : " + response.getStatus() + " body : " + response.getBody());
+        System.out.println("Logout Status Code : " + response.getStatus() + " body : " + response.getBody());
         return response.getStatus() == 200;
     }
 
@@ -54,7 +51,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
                 .body(new Gson().toJson(user))
                 .asString();
 
-        System.out.println("status code : " + response.getStatus() + " body : " + response.getBody());
+        System.out.println("SignUp Status Code : " + response.getStatus() + " body : " + response.getBody());
         return response.getStatus() == 200;
     }
 
