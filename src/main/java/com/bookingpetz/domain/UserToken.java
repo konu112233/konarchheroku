@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class UserToken implements Serializable {
 
-    private int id;
+    private String id;
     private String access_token;
     private String scope;
     private String token_type;
@@ -28,7 +28,7 @@ public class UserToken implements Serializable {
         this.expires_in = expires_in;
     }
 
-    public UserToken(int id) {
+    public UserToken(String id) {
         this.id = id;
         this.scope = "";
         this.token_type = "";
@@ -39,11 +39,11 @@ public class UserToken implements Serializable {
     public UserToken() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int Id) {
+    public void setId(String Id) {
         this.id = Id;
     }
 

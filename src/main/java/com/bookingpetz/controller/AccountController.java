@@ -39,7 +39,7 @@ public class AccountController {
         String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
         UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
-        if (userToken.getId() != 000) {
+        if (userToken.getId().equals("000")) {
             //SUCCESS
             System.out.println("success " + userToken.getId());
             Session sesssionObj = new Session(userToken.getAccess_token(), userServiceDAO.getByToken(userToken.getAccess_token()));
