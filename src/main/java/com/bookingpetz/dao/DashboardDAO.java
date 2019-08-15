@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface DashboardDAO {
 
-    public List<ResultModal> getHotelCalendar(int userId);
+    public List<ResultModal> getHotelCalendar(String userId);
 
     public boolean insertEvent(Booking booking);
 

@@ -31,7 +31,7 @@ import org.springframework.stereotype.Repository;
 public class DashboardDAOImpl implements DashboardDAO {
 
     @Override
-    public List<ResultModal> getHotelCalendar(int userId) {
+    public List<ResultModal> getHotelCalendar(String userId) {
         HttpResponse<String> response = Unirest.get("https://bookingpetswebservice.herokuapp.com/webapi/calendar/getHotelCalendar/" + userId)
                 .asString();
 

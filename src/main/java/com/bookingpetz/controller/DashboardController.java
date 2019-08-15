@@ -61,7 +61,8 @@ public class DashboardController {
 //            if (session.getAttribute("user") != null) {
 //                m.addAttribute("user", session.getAttribute("user"));
 //                User user = (User) session.getAttribute("user");
-        List<ResultModal> resultModals = dashboardService.getHotelCalendar(10);
+        List<ResultModal> resultModals = dashboardService.getHotelCalendar("8");
+        System.out.println("sizeee: " + resultModals.size());
         m.addAttribute("resultModals", resultModals);
 //        System.out.println(dashboardService.insertEvent(10, new Booking()));
         return "calendar";

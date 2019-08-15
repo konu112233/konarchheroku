@@ -24,7 +24,7 @@ public class DashboardServiceImpl implements DashboardService {
     private DashboardDAO dashboardDAO;
 
     @Override
-    public List<ResultModal> getHotelCalendar(int userId) {
+    public List<ResultModal> getHotelCalendar(String userId) {
         return dashboardDAO.getHotelCalendar(userId);
     }
 
