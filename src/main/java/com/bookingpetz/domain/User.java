@@ -31,7 +31,7 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "userId")
-    private int userId;
+    private String userId;
 
     @Column(name = "email", nullable = false, length = 25)
     private String email;
@@ -42,8 +42,8 @@ public class User implements Serializable {
     @Column(name = "surname", nullable = false, length = 45)
     private String surname;
 
-    @Column(name = "key", nullable = false, length = 500)
-    private String key;
+    @Column(name = "pkey", nullable = false, length = 500)
+    private String pkey;
 
     @Column(name = "salt", nullable = false, length = 800)
     private String salt;
@@ -56,27 +56,37 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int userId, String email, String name, String surname) {
+    public User(String userId, String email, String name, String surname) {
         this.userId = userId;
         this.email = email;
         this.name = name;
         this.surname = surname;
     }
 
-    public User(int userId, String email, String name, String surname, List<Contact> contactList) {
+    public User(String email, String key, String name, String surname, String salt) {
+        this.email = email;
+        this.pkey = key;
+        this.name = name;
+        this.surname = surname;
+        this.salt = salt;
+    }
+
+    public User(String userId, String email, String name, String surname, String key, String salt, List<Contact> contactList) {
         this.userId = userId;
         this.email = email;
         this.name = name;
         this.surname = surname;
+        this.pkey = key;
+        this.salt = salt;
         this.contactList = contactList;
     }
 
-    public User(int userId, String email, String name, String surname, String key, String salt) {
+    public User(String userId, String email, String name, String surname, String key, String salt) {
         this.userId = userId;
         this.email = email;
         this.name = name;
         this.surname = surname;
-        this.key = key;
+        this.pkey = key;
         this.salt = salt;
     }
 
@@ -87,15 +97,15 @@ public class User implements Serializable {
         this.surname = user.getSurname();
     }
 
-    public User(int userId) {
+    public User(String userId) {
         this.userId = userId;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -131,12 +141,12 @@ public class User implements Serializable {
         this.contactList = contactList;
     }
 
-    public String getKey() {
-        return key;
+    public String getPkey() {
+        return pkey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setPkey(String pkey) {
+        this.pkey = pkey;
     }
 
     public String getSalt() {

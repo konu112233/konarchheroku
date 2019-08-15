@@ -21,7 +21,7 @@
             <!--Body-->
             <div class="modal-body mx-4">
                 <!--Body-->
-                <form action="signup" method="POST">
+                <form action="signUp" method="POST">
                     <div class="md-form mb-5">
                         <input placeholder="Name" type="text" name="name" class="form-control validate">
                         <label data-error="wrong" data-success="right"></label>

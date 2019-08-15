@@ -8,6 +8,7 @@ package com.bookingpetz.controller;
 import com.bookingpetz.dao.UserAuthDAO;
 import com.bookingpetz.dao.UserServiceDAO;
 import com.bookingpetz.domain.Session;
+import com.bookingpetz.domain.User;
 import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
 import java.util.Base64;
@@ -32,8 +33,8 @@ public class AccountController {
     @Autowired
     private UserServiceDAO userServiceDAO;
 
-    @RequestMapping(value = "/signin", method = RequestMethod.POST)
-    public String signin(Model m, HttpServletRequest request) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(Model m, HttpServletRequest request) {
 
         String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
@@ -50,20 +51,16 @@ public class AccountController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public String signup(Model m, HttpServletRequest request) {
 
         String name = StringUtils.capitalize(request.getParameter("name"));
         String surname = StringUtils.capitalize(request.getParameter("surname"));
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-//        List<Contact> contacts = new ArrayList<>();
-//        contacts.add(new Contact(contactId, userId, "", "", "", new Address(contactId, "", "", "", "", "")));
-//        User u = new User(userId, email, password, name, surname, contacts);
-//        userService.save(u);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", "asd");
+        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
+        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
+        if (userAuthDAO.signUp(new User(encodeEmail, encodePassword, name, surname, ""))) {
+            return "redirect:login?email=" + request.getParameter("email") + "&password=" + request.getParameter("password");
+        }
         return "redirect:/";
     }
 

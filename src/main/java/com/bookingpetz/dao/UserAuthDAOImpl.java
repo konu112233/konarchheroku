@@ -6,6 +6,7 @@
 package com.bookingpetz.dao;
 
 import com.bookingpetz.domain.Session;
+import com.bookingpetz.domain.User;
 import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
 import com.google.gson.Gson;
@@ -40,6 +41,17 @@ public class UserAuthDAOImpl implements UserAuthDAO {
         HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/logout")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(session))
+                .asString();
+
+        System.out.println("status code : " + response.getStatus() + " body : " + response.getBody());
+        return response.getStatus() == 200;
+    }
+
+    @Override
+    public boolean signUp(User user) {
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/signUp")
+                .header("Content-type", "application/json")
+                .body(new Gson().toJson(user))
                 .asString();
 
         System.out.println("status code : " + response.getStatus() + " body : " + response.getBody());

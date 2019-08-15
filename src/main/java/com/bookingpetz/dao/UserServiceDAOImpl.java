@@ -28,7 +28,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
         if (response.getStatus() == 200) {
             return new Gson().fromJson(response.getBody(), User.class);
         }
-        return new User(0);
+        return new User("000");
     }
 
 }

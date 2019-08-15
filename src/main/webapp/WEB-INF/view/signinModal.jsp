@@ -21,7 +21,7 @@
             <!--Body-->
             <div class="modal-body mx-4">
                 <!--Body-->
-                <form action="signin" method="POST">
+                <form action="login" method="POST">
                     <div class="md-form mb-5">
                         <input placeholder="Your email" type="email" name="email" id="Form-email1" class="form-control validate">
                         <label data-error="wrong" data-success="right" for="Form-email1"></label>
