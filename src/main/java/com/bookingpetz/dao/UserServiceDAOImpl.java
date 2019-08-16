@@ -21,7 +21,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
     @Override
     public User getByToken(String token) {
 
-        HttpResponse<String> response = Unirest.get("http://localhost:8084/BookingPetsREST/webapi/user/getByToken")
+        HttpResponse<String> response = Unirest.get("https://bookingpetswebservice.herokuapp.com/webapi/user/getByToken")
                 .header("Authorization", "Bearer " + token)
                 .asString();
 
