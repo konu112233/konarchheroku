@@ -283,7 +283,7 @@
                                                 <div class="col-md-4">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <img class="img-responsive img-thumbnail img-circle" id="profilePhoto" src="static/images/profil_photo_220x220.jpg" alt="Avatar" title="Change the avatar">
+                                                    <img class="img-responsive img-thumbnail img-circle" id="profilePhoto" src="static/images/profil_photo_220x220.jpeg" alt="Avatar" title="Change the avatar">
                                                     <br>
                                                     <br>
                                                     <div class="row"  >

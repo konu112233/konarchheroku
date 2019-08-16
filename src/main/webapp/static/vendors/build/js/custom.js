@@ -1307,13 +1307,13 @@ function init_cropper() {
                     if (result) {
 
 
-//                        // Bootstrap's Modal
-//                        $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+                        // Bootstrap's Modal
+                        $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
 
-                        alert(result.toDataURL());
-//                        if (!$download.hasClass('disabled')) {
-//                            $download.attr('href', result.toDataURL());
-//                        }
+//                        alert(result.toDataURL());
+                        if (!$download.hasClass('disabled')) {
+                            $download.attr('href', result.toDataURL());
+                        }
                     }
 
                     break;
