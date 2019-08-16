@@ -33,14 +33,14 @@ public class DashboardController {
     @Autowired
     private DashboardService dashboardService;
 
-    @RequestMapping(value = "/dashboardTemplate", method = RequestMethod.GET)
-    public String dashboardTemplate(Model m, HttpServletRequest request) {
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(Model m, HttpServletRequest request) {
 
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("user") != null) {
                 m.addAttribute("user", session.getAttribute("user"));
-                return "dashboardTemplate";
+                return "profile";
             } else {
                 return "redirect:/";
             }
@@ -84,9 +84,9 @@ public class DashboardController {
         return "previewHotel";
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(Model m, HttpServletRequest request) {
-        return "profile";
+    @RequestMapping(value = "/dashboardTemplate", method = RequestMethod.GET)
+    public String dashboardTemplate(Model m, HttpServletRequest request) {
+        return "dashboardTemplate";
     }
 
     @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
