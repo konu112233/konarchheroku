@@ -9,7 +9,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="dashboardTemplate" class="site_title"><img class="mb-4" src="static/images/svg/logobookingpetz.svg" alt="" width="52" height="52"> <span style="color: #3d9756; margin-left: 10px;"> Bookingpetz</span></a>
+            <a href="profile" class="site_title"><img class="mb-4" src="static/images/svg/logobookingpetz.svg" alt="" width="52" height="52"> <span style="color: #3d9756; margin-left: 10px;"> Bookingpetz</span></a>
         </div>
         <div class="clearfix"></div>
 

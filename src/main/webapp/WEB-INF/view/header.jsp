@@ -30,7 +30,7 @@
                                             <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <a class="dropdown-item" href="profile">Dashboard</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="logout">Logout</a>
                                         </div>
@@ -55,7 +55,7 @@
                                             <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <a class="dropdown-item" href="profile">Dashboard</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="logout">Logout</a>
                                         </div>
@@ -80,7 +80,7 @@
                                             <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <a class="dropdown-item" href="profile">Dashboard</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="logout">Logout</a>
                                         </div>
@@ -105,7 +105,7 @@
                                             <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <a class="dropdown-item" href="profile">Dashboard</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="logout">Logout</a>
                                         </div>
@@ -130,7 +130,7 @@
                                             <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="dashboardTemplate">Dashboard</a>
+                                            <a class="dropdown-item" href="profile">Dashboard</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="logout">Logout</a>
                                         </div>
