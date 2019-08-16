@@ -49,9 +49,59 @@ public class DashboardController {
         }
     }
 
+    @RequestMapping(value = "/petSitterApply", method = RequestMethod.GET)
+    public String petSitterApply(Model m, HttpServletRequest request) {
+        return "petSitterApply";
+    }
+
     @RequestMapping(value = "/petsitter", method = RequestMethod.GET)
     public String petsitter(Model m, HttpServletRequest request) {
         return "petsitter";
+    }
+
+    @RequestMapping(value = "/petsitterProfile", method = RequestMethod.GET)
+    public String petsitterProfile(Model m, HttpServletRequest request) {
+        return "petsitterProfile";
+    }
+
+    @RequestMapping(value = "/myPets", method = RequestMethod.GET)
+    public String myPets(Model m, HttpServletRequest request) {
+        return "myPets";
+    }
+
+    @RequestMapping(value = "/hotelOwnerApply", method = RequestMethod.GET)
+    public String hotelOwnerApply(Model m, HttpServletRequest request) {
+        return "hotelOwnerApply";
+    }
+
+    @RequestMapping(value = "/myHotel", method = RequestMethod.GET)
+    public String myHotel(Model m, HttpServletRequest request) {
+        return "myHotel";
+    }
+
+    @RequestMapping(value = "/previewHotel", method = RequestMethod.GET)
+    public String previewHotel(Model m, HttpServletRequest request) {
+        return "previewHotel";
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(Model m, HttpServletRequest request) {
+        return "profile";
+    }
+
+    @RequestMapping(value = "/editProfile", method = RequestMethod.GET)
+    public String editProfile(Model m, HttpServletRequest request) {
+        return "editProfile";
+    }
+
+    @RequestMapping(value = "/bookings", method = RequestMethod.GET)
+    public String bookings(Model m, HttpServletRequest request) {
+        return "bookings";
+    }
+
+    @RequestMapping(value = "/hotelBookings", method = RequestMethod.GET)
+    public String hotelBookings(Model m, HttpServletRequest request) {
+        return "hotelBookings";
     }
 
     @RequestMapping(value = "/calendar", method = RequestMethod.GET)

@@ -831,12 +831,16 @@ html .ui-button.ui-state-disabled:active {
     width: auto;
 }
 
-.property-img .owl-nav button[type=button] {
+.property-img .owl-nav {
+    color: black;
+}
+
+.property-img .owl-nav button[type=button] {    
     position: absolute;
-    left: -23px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    /*left: -23px;*/
+    bottom: 50%;
+    /*-webkit-transform: translateY(-50%);
+    transform: translateY(-50%);*/
     background: #8AD144;
     width: 44px;
     height: 44px;
@@ -850,7 +854,43 @@ html .ui-button.ui-state-disabled:active {
 
 .property-img.owl-carousel .owl-nav button.owl-next {
     left: auto;
-    right: -23px;
+    right: -3px;
+}
+
+.property-reviews .owl-carousel .test_slider_item {
+    display: inline-block;
+    width: 100%;
+}
+
+.property-reviews .owl-carousel .owl-nav button[type=button] {
+    /*position: absolute;*/
+    /*left: -23px;*/
+    bottom: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: #fff;
+    width: 44px;
+    height: 44px;
+    display: inline-block;
+    line-height: 44px;
+    border-radius: 50%;
+    color: #000;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.property-reviews.owl-carousel .owl-nav button.owl-next {
+    left: auto;
+    right: -3px;
+}
+
+.property-reviews #all-reviews-button {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.property-reviews #all-reviews {
+    display: none;
 }
 
 .popular-room-features.single-property {
@@ -925,13 +965,15 @@ html .ui-button.ui-state-disabled:active {
 
 .property-description,
 .property-features,
-.location-map {
+.location-map,
+.property-reviews {
     margin-bottom: 28px;
 }
 
 .property-description h4,
 .property-features h4,
-.location-map h4 {
+.location-map h4,
+.property-reviews h4 {
     color: #30304e;
     font-size: 18px;
     font-weight: 500;
@@ -940,7 +982,8 @@ html .ui-button.ui-state-disabled:active {
 
 .property-description p,
 .property-features p,
-.location-map p {
+.location-map p,
+.property-reviews p {
     color: #6f6f8a;
     font-size: 14px;
     font-weight: 300;
@@ -949,7 +992,8 @@ html .ui-button.ui-state-disabled:active {
 
 .property-description iframe,
 .property-features iframe,
-.location-map iframe {
+.location-map iframe,
+.property-reviews iframe {
     width: 100%;
     height: 355px;
     border: 0;

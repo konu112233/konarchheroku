@@ -90,11 +90,6 @@ public class Controller {
         return "property";
     }
 
-    @RequestMapping(value = "/myPets", method = RequestMethod.GET)
-    public String myPets(Model m) {
-        return "myPets";
-    }
-
     @RequestMapping(value = "/mock", method = RequestMethod.GET)
     public String mock(Model m) {
         return "mock";

@@ -355,6 +355,7 @@
         <script src="static/vendors/build/js/custom.js" type="02baebf0fafcd1e832ab36b0-text/javascript"></script>
         <script src="static/vendors/fullcalendar/dist/fullcalendar.min.js" type="c3000d06f3045955315705eb-text/javascript"></script>
         <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/95c75768/cloudflare-static/rocket-loader.min.js" data-cf-settings="02baebf0fafcd1e832ab36b0-|49" defer=""></script>
+        <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
     </body>
 </html>
 

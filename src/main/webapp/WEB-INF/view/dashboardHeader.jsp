@@ -30,46 +30,16 @@
                 <div class="menu_section">
                     <h3>General</h3>
                     <ul class="nav side-menu">
-                        <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="index.html">Dashboard</a></li>
-                                <li><a href="index2.html">Dashboard2</a></li>
-                                <li><a href="index3.html">Dashboard3</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i  class="fa fa-paw fa-lg"></i>Pet Sitter <span class="fa fa-lock"></span></a></li>
-                        <li><a href="myPets"><i class="fa fa-paw fa-lg" ></i>My Pets</a></li>
-                        <li><a href="#"><i class="fa fa-hotel fa-lg" ></i>Hotel <span class="fa fa-lock"></span></a></li>
-                        <li><a><i class="fa fa-credit-card fa-lg"></i> Payments <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="tables.html">Tables</a></li>
-                            </ul>
-                        </li>
-                        <li><a><i class="fa fa-bar-chart-o"></i> Sign In and Security <span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li><a href="chartjs.html">Chart JS</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="profile"><i class="fa fa-user"></i> Profile </a></li>
+                        <li><a href="calendar"><i class="fa fa-calendar fa-lg" ></i>Calendar </a></li>
+                        <li><a href="myPets"><i class="fas fa-cat fa-lg" style="margin-right: 10px;"></i>My Pets </a></li>
+                        <li><a href="petSitterApply"><i  class="fa fa-paw fa-lg"></i>Pet Sitter <span class="fa fa-lock"></span></a></li>
+                        <li><a href="hotelOwnerApply"><i class="fa fa-hotel fa-lg" ></i>Hotel Owner <span class="fa fa-lock"></span></a></li>
+                        <li><a href="hotelBookings"><i class="fa fa-credit-card fa-lg" ></i>Bookings </a></li>
                     </ul>
                 </div>
             </div>
         </div>
-
-        <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-            </a>
-        </div>
-
     </div>
 </div>
 <div class="top_nav">

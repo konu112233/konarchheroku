@@ -1,34 +1,36 @@
 'use strict';
-
+function showAllReviews() {
+    document.getElementById("all-reviews").style.display = 'block';
+}
 (function ($) {
-    
+
     /*------------------
-        Slick Nav
-    --------------------*/
+     Slick Nav
+     --------------------*/
     $(".main-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
     });
 
     /*------------------
-        Preloader
-    --------------------*/
+     Preloader
+     --------------------*/
     $(window).on('load', function () {
         $(".loader").fadeOut();
         $("#preloder").delay(400).fadeOut("slow");
     });
 
     /*------------------
-        Background Set
-    --------------------*/
+     Background Set
+     --------------------*/
     $('.set-bg').each(function () {
         var bg = $(this).data('setbg');
         $(this).css('background-image', 'url(' + bg + ')');
     });
 
     /*------------------
-        Nice Select
-    --------------------*/
+     Nice Select
+     --------------------*/
     $(document).ready(function () {
         $('.filter-location').niceSelect();
     });
@@ -42,8 +44,8 @@
     });
 
     /*------------------
-        Carousel Slider
-    --------------------*/
+     Carousel Slider
+     --------------------*/
     $('.slider-active').owlCarousel({
         items: 1,
         dots: false,
@@ -53,8 +55,8 @@
     });
 
     /*--------------------------------
-        Property Image Carousel Slider
-    -----------------------------------*/
+     Property Image Carousel Slider
+     -----------------------------------*/
     $('.property-img').owlCarousel({
         items: 1,
         dots: false,
@@ -63,9 +65,23 @@
         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
     });
 
+    $('.test_slider_vertical').owlCarousel({
+        items: 1,
+        dots: false,
+        nav: true,
+        loop: false,
+        smartSpeed: 1200,
+        mouseDrag: false,
+        touchDrag: false,
+        pullDrag: false,
+        rewind: true,
+        autoplay: true,
+        autoplayHoverPause: true
+    });
+
     /*--------------------------------
-        Price Slider
-    -----------------------------------*/
+     Price Slider
+     -----------------------------------*/
     $("#slider-range").slider({
         range: true,
         min: 50,
