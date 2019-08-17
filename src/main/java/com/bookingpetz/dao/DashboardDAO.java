@@ -7,6 +7,7 @@ package com.bookingpetz.dao;
 
 import com.bookingpetz.domain.Booking;
 import com.bookingpetz.domain.Event;
+import com.bookingpetz.domain.Hotel;
 import com.bookingpetz.domain.ResultModal;
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface DashboardDAO {
     public boolean insertEvent(Booking booking);
 
     public boolean removeEvent(Event event);
+
+    public boolean registerHotel(Hotel hotel);
 }

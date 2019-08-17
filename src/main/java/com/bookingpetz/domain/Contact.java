@@ -40,16 +40,32 @@ public class Contact implements Serializable {
     @Column(name = "description", nullable = true, length = 200)
     private String description;
 
+    @Column(name = "bookingEmail", nullable = true, length = 45)
+    private String bookingEmail;
+
+    @Column(name = "managerEmail", nullable = true, length = 45)
+    private String managerEmail;
+
+    @Column(name = "contactName", nullable = true, length = 45)
+    private String contactName;
+
+    @Column(name = "directions", nullable = true, length = 45)
+    private String directions;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private Address address;
 
-    public Contact(int id, String userId, String phone, String website, String description, Address address) {
+    public Contact(int id, String userId, String phone, String website, String description, String bookingEmail, String managerEmail, String contactName, String directions, Address address) {
         this.id = id;
         this.userId = userId;
         this.phone = phone;
         this.website = website;
         this.description = description;
+        this.bookingEmail = bookingEmail;
+        this.managerEmail = managerEmail;
+        this.contactName = contactName;
+        this.directions = directions;
         this.address = address;
     }
 
@@ -102,5 +118,37 @@ public class Contact implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String getBookingEmail() {
+        return bookingEmail;
+    }
+
+    public void setBookingEmail(String bookingEmail) {
+        this.bookingEmail = bookingEmail;
+    }
+
+    public String getManagerEmail() {
+        return managerEmail;
+    }
+
+    public void setManagerEmail(String managerEmail) {
+        this.managerEmail = managerEmail;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getDirections() {
+        return directions;
+    }
+
+    public void setDirections(String directions) {
+        this.directions = directions;
     }
 }

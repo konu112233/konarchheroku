@@ -6,6 +6,25 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<script>
+
+    $(document).ready(function () {
+        $("#signupButton").on('click', function () {
+            var email = $("#email").val();
+            $.get('checkUsername', {email: email}, function (response) {
+                console.log(response);
+                if (response === "SUCCESS") {
+                    $('#signupForm').modal('hide');
+                    $('#signupEmail').modal('show');
+                } else {
+                    console.log("failed");
+                }
+            });
+        });
+    });
+
+</script>
 <!-- Modal -->
 <div class="modal fade" id="signupForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -21,17 +40,17 @@
             <!--Body-->
             <div class="modal-body mx-4">
                 <!--Body-->
-                <form action="signUp" method="POST">
+                <form >
                     <div class="md-form mb-5">
-                        <input placeholder="Name" type="text" name="name" class="form-control validate">
+                        <input placeholder="Name" type="text" name="name" required class="form-control validate">
+                        <label data-error="wrong" data-success="false"></label>
+                    </div>
+                    <div class="md-form mb-5">
+                        <input placeholder="Surname" type="text" name="surname" required class="form-control validate">
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="md-form mb-5">
-                        <input placeholder="Surname" type="text" name="surname" class="form-control validate">
-                        <label data-error="wrong" data-success="right"></label>
-                    </div>
-                    <div class="md-form mb-5">
-                        <input placeholder="Your email" type="email" name="email" class="form-control validate">
+                        <input placeholder="Your email" type="email" id="email" name="email" class="form-control validate">
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="md-form mb-5">
@@ -43,7 +62,7 @@
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="text-center mb-3">
-                        <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign up</button>
+                        <button type="button" name="signupButton" id="signupButton" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign up</button>
                     </div>
                     <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign up
                         with:</p>
@@ -61,7 +80,7 @@
             </div>
             <!--Footer-->
             <div class="modal-footer mx-5 pt-3 mb-1">
-                <p class="font-small grey-text d-flex justify-content-end">Do you already have an account? <a href="home" data-dismiss="modal" data-toggle="modal" data-target="#signinForm" class="modelClose blue-text ml-1">
+                <p class="font-small grey-text d-flex justify-content-end">Do you already have an account? <a href="home" data-dismiss="modal" data-toggle="modal" data-target="#signupEmail" class="modelClose blue-text ml-1">
                         Sign In</a></p>
             </div>
         </div>

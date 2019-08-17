@@ -8,9 +8,11 @@ package com.bookingpetz.controller;
 import com.bookingpetz.domain.Booking;
 import com.bookingpetz.domain.End;
 import com.bookingpetz.domain.Event;
+import com.bookingpetz.domain.Hotel;
 import com.bookingpetz.domain.ResultModal;
 import com.bookingpetz.domain.Start;
 import com.bookingpetz.services.DashboardService;
+import com.google.gson.Gson;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -72,6 +74,15 @@ public class DashboardController {
     @RequestMapping(value = "/hotelOwnerApply", method = RequestMethod.GET)
     public String hotelOwnerApply(Model m, HttpServletRequest request) {
         return "hotelOwnerApply";
+    }
+
+    @RequestMapping(value = "/hotelOwnerApply", method = RequestMethod.POST)
+    public String hotelOwnerApplyPost(Model m, HttpServletRequest request) {
+        Hotel hotel = new Gson().fromJson(request.getParameter("hotel"), Hotel.class);
+        if (dashboardService.registerHotel(hotel)) {
+            return "hotelOwnerApply";
+        }
+        return "profile?Error";
     }
 
     @RequestMapping(value = "/myHotel", method = RequestMethod.GET)

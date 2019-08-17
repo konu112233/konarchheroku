@@ -14,5 +14,5 @@ import com.bookingpetz.domain.User;
 public interface UserService {
 
     public User getByToken(String token);
-}
 
+}

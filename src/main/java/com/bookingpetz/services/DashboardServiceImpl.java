@@ -8,6 +8,7 @@ package com.bookingpetz.services;
 import com.bookingpetz.dao.DashboardDAO;
 import com.bookingpetz.domain.Booking;
 import com.bookingpetz.domain.Event;
+import com.bookingpetz.domain.Hotel;
 import com.bookingpetz.domain.ResultModal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,11 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public boolean removeEvent(Event event) {
         return dashboardDAO.removeEvent(event);
+    }
+
+    @Override
+    public boolean registerHotel(Hotel hotel) {
+        return dashboardDAO.registerHotel(hotel);
     }
 
 }

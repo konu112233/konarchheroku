@@ -79,8 +79,10 @@ public class AccountController {
         String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
         if (userAuthDAO.signUp(new User(encodeEmail, encodePassword, name, surname, ""))) {
+            //SUCCESS
             return "redirect:login?email=" + encodeEmail + "&password=" + encodePassword;
         }
+        //FAILED
         return "redirect:/";
     }
 
@@ -95,5 +97,21 @@ public class AccountController {
         } catch (Exception ex) {
             return "redirect:/";
         }
+    }
+
+    @RequestMapping(value = "/checkUsername", method = RequestMethod.GET)
+    public void checkUsername(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        String result = "FAILED";
+        try {
+            if (userAuthDAO.checkUsername(request.getParameter("email"))) {
+                result = "SUCCESS";
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+            result = "FAILED";
+        }
+        response.getWriter().write(result);
     }
 }

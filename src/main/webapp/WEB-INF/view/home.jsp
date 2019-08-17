@@ -24,6 +24,7 @@
         <link rel="stylesheet" type="text/css" href="static/styles/main_styles.css">
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
         <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <script>
             function activatePlaceSearch() {

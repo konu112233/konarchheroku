@@ -22,4 +22,6 @@ public interface UserAuthDAO {
 
     public boolean signUp(User user);
 
+    public boolean checkUsername(String param);
+
 }

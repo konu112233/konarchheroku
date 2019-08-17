@@ -679,20 +679,6 @@
                                                             </div>
                                                             <form class="form-horizontal form-label-left">
                                                                 <div class="item form-group">
-                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="property-name">Property Name <span class="required">*</span>
-                                                                    </label>
-                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input id="property-name" class="form-control col-md-7 col-xs-12" data-validate-length-range="5" data-validate-words="2" name="property-name" placeholder="PawZone Hotel etc" required="required" type="text">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item form-group">
-                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-capasity">Pet Capacity of Property <span class="required">*</span>
-                                                                    </label>
-                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input id="pet-capasity" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" data-validate-words="1" name="pet-capasity" placeholder="200 etc" required="required" type="number">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item form-group">
                                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Adress <span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">

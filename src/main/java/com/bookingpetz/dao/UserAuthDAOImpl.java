@@ -10,8 +10,10 @@ import com.bookingpetz.domain.User;
 import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
 import com.google.gson.Gson;
+import java.util.Base64;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,7 +26,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
     @Override
     public UserToken login(UserAuth userAuth) {
 
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/login")
+        HttpResponse<String> response = Unirest.post("http://localhost:8084/BookingPetsREST/webapi/auth/login")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(userAuth))
                 .asString();
@@ -35,7 +37,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public boolean logout(Session session) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/logout")
+        HttpResponse<String> response = Unirest.post("http://localhost:8084/BookingPetsREST/webapi/auth/logout")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(session))
                 .asString();
@@ -46,13 +48,30 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public boolean signUp(User user) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/signUp")
+        HttpResponse<String> response = Unirest.post("http://localhost:8084/BookingPetsREST/webapi/auth/signUp")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(user))
                 .asString();
 
         System.out.println("SignUp Status Code : " + response.getStatus() + " body : " + response.getBody());
         return response.getStatus() == 200;
+    }
+
+    @Override
+    public boolean checkUsername(String email) {
+        String encodeEmail = Base64.getEncoder().encodeToString(email.getBytes());
+        JSONObject jsono = new JSONObject();
+        jsono.put("email", encodeEmail);
+        HttpResponse<String> response = Unirest.post("http://localhost:8084/BookingPetsREST/webapi/auth/checkUsername")
+                .header("Content-type", "application/json")
+                .body(jsono.toJSONString())
+                .asString();
+
+        System.out.println("CheckUsername Status Code : " + response.getStatus() + " body : " + response.getBody());
+        if (response.getStatus() == 200) {
+            return response.getBody().equals("\"SUCCESS\"");
+        }
+        return false;
     }
 
 }
