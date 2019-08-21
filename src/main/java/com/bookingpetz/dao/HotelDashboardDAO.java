@@ -5,13 +5,16 @@
  */
 package com.bookingpetz.dao;
 
-import com.bookingpetz.domain.Session;
+import com.bookingpetz.domain.Status;
+import com.bookingpetz.domain.User;
 
 /**
  *
  * @author burakzengin
  */
-public interface UserServiceDAO {
+public interface HotelDashboardDAO {
 
-    public Session getByToken(String token);
+    public boolean registerHotel(User user);
+
+    public Status checkStatus(String token);
 }

@@ -7,7 +7,6 @@ package com.bookingpetz.domain;
 
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -16,7 +15,6 @@ import javax.persistence.UniqueConstraint;
  *
  * @author burakzengin
  */
-@Entity
 @Table(name = "address", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"id"})})
 public class Address implements Serializable {
@@ -25,29 +23,29 @@ public class Address implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "aptNo", nullable = false, length = 25)
+    @Column(name = "aptNo", nullable = true, length = 45)
     private String aptNo;
 
-    @Column(name = "street", nullable = false, length = 25)
+    @Column(name = "street", nullable = true, length = 45)
     private String street;
 
-    @Column(name = "state", nullable = false, length = 25)
-    private String state;
+    @Column(name = "city", nullable = true, length = 45)
+    private String city;
 
-    @Column(name = "zipcode", nullable = false, length = 25)
+    @Column(name = "zipcode", nullable = true, length = 45)
     private String zipcode;
 
-    @Column(name = "country", nullable = false, length = 25)
+    @Column(name = "country", nullable = true, length = 45)
     private String country;
 
     public Address() {
     }
 
-    public Address(int id, String aptNo, String street, String state, String zipcode, String country) {
+    public Address(int id, String aptNo, String street, String city, String zipcode, String country) {
         this.id = id;
         this.aptNo = aptNo;
         this.street = street;
-        this.state = state;
+        this.city = city;
         this.zipcode = zipcode;
         this.country = country;
     }
@@ -76,12 +74,12 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-    public String getState() {
-        return state;
+    public String getCity() {
+        return city;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getZipcode() {

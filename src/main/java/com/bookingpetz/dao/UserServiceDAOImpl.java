@@ -5,9 +5,10 @@
  */
 package com.bookingpetz.dao;
 
-import com.bookingpetz.domain.User;
+import com.bookingpetz.domain.Session;
 import com.google.gson.Gson;
 import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import org.springframework.stereotype.Repository;
 
@@ -19,16 +20,15 @@ import org.springframework.stereotype.Repository;
 public class UserServiceDAOImpl implements UserServiceDAO {
 
     @Override
-    public User getByToken(String token) {
+    public Session getByToken(String token) {
 
-        HttpResponse<String> response = Unirest.get("http://localhost:8084/BookingPetsREST/webapi/user/getByToken")
+        HttpResponse<JsonNode> response = Unirest.get("https://bookingpetswebservice.herokuapp.com/webapi/user/getByToken")
                 .header("Authorization", "Bearer " + token)
-                .asString();
-
+                .asJson();
         if (response.getStatus() == 200) {
-            return new Gson().fromJson(response.getBody(), User.class);
+            return new Gson().fromJson(response.getBody().toString(), Session.class);
         }
-        return new User("000");
+        return new Session("000");
     }
 
 }

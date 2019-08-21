@@ -45,12 +45,14 @@ public class AccountController {
             //SUCCESS
             System.out.println("Login Success " + userToken.getId());
             Session sesssionObj = new Session(userToken.getAccess_token(), userServiceDAO.getByToken(userToken.getAccess_token()));
+            System.out.println("Session : " + sesssionObj.getName() + " " + sesssionObj.getToken());
             HttpSession session = request.getSession();
             session.setAttribute("user", sesssionObj);
             return "redirect:/";
         }
         //FAILED 
         return "redirect:/";
+
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -78,7 +80,7 @@ public class AccountController {
         String surname = StringUtils.capitalize(request.getParameter("surname"));
         String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
-        if (userAuthDAO.signUp(new User(encodeEmail, encodePassword, name, surname, ""))) {
+        if (userAuthDAO.signUp(new User(encodeEmail, name, surname, encodePassword, "false"))) {
             //SUCCESS
             return "redirect:login?email=" + encodeEmail + "&password=" + encodePassword;
         }
@@ -114,4 +116,30 @@ public class AccountController {
         }
         response.getWriter().write(result);
     }
+
+    @RequestMapping(value = "/sendConfirmationMail", method = RequestMethod.POST)
+    public String sendConfirmationMail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String name = StringUtils.capitalize(request.getParameter("name"));
+        String surname = StringUtils.capitalize(request.getParameter("surname"));
+        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
+        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
+        if (userAuthDAO.confirmationMail(new User(encodeEmail, name, surname, encodePassword, "false"))) {
+            //SUCCESS
+            return "redirect:/home?result=success";
+        }
+        //FAILED
+        System.out.println("Fail sendConfirmation");
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/verifymail", method = RequestMethod.GET)
+    public String verifymail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String key = request.getParameter("verificationKey");
+        System.out.println(key);
+        if (userAuthDAO.verifyMail(key)) {
+            return "redirect:/home?verify=success";
+        }
+        return "redirect:/home?verify=failed";
+    }
 }
+

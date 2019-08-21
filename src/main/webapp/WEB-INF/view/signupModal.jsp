@@ -1,5 +1,5 @@
 <%-- 
-    Document   : signUpModel
+    Document   : signupModel
     Created on : Jul 17, 2019, 12:14:23 PM
     Author     : burakzengin
 --%>
@@ -10,18 +10,18 @@
 <script>
 
     $(document).ready(function () {
-        $("#signupButton").on('click', function () {
-            var email = $("#email").val();
-            $.get('checkUsername', {email: email}, function (response) {
-                console.log(response);
-                if (response === "SUCCESS") {
-                    $('#signupForm').modal('hide');
-                    $('#signupEmail').modal('show');
-                } else {
-                    console.log("failed");
-                }
-            });
-        });
+//        $("#signupButton").on('click', function () {
+//            var email = $("#email").val();
+//            $.get('checkUsername', {email: email}, function (response) {
+//                console.log(response);
+//                if (response === "SUCCESS") {
+//                    $('#signupForm').modal('hide');
+//                    $('#signupEmail').modal('show');
+//                } else {
+//                    console.log("failed");
+//                }
+//            });
+//        });
     });
 
 </script>
@@ -40,7 +40,7 @@
             <!--Body-->
             <div class="modal-body mx-4">
                 <!--Body-->
-                <form >
+                <form action="sendConfirmationMail" method="POST">
                     <div class="md-form mb-5">
                         <input placeholder="Name" type="text" name="name" required class="form-control validate">
                         <label data-error="wrong" data-success="false"></label>
@@ -62,7 +62,7 @@
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="text-center mb-3">
-                        <button type="button" name="signupButton" id="signupButton" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign up</button>
+                        <button type="submit" name="signupButton" id="signupButton" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign up</button>
                     </div>
                     <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign up
                         with:</p>

@@ -5,14 +5,16 @@
  */
 package com.bookingpetz.services;
 
-import com.bookingpetz.domain.Session;
+import com.bookingpetz.domain.Status;
+import com.bookingpetz.domain.User;
 
 /**
  *
  * @author burakzengin
  */
-public interface UserService {
+public interface HotelDashboardService {
 
-    public Session getByToken(String token);
+    public boolean registerHotel(User user);
 
+    public Status checkStatus(String token);
 }

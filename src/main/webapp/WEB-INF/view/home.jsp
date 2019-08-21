@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,6 +32,21 @@
                 var input = document.getElementById("search_term");
                 var autocomplete = new google.maps.places.Autocomplete(input);
             }
+            $(document).ready(function () {
+            <c:choose>
+                <c:when test="${result.equals('success')}">
+                $('#signupEmail').modal('show');
+                </c:when>
+                <c:when test="${verify.equals('success')}">
+                $('#signupVerifymail').modal('show');
+                </c:when>
+                <c:when test="${verify.equals('failed')}">
+                $('#signupVerifymailFailed').modal('show');
+                </c:when>
+            </c:choose>
+            });
+
+
         </script>
     </head>
 

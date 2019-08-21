@@ -8,11 +8,8 @@ package com.bookingpetz.controller;
 import com.bookingpetz.domain.Booking;
 import com.bookingpetz.domain.End;
 import com.bookingpetz.domain.Event;
-import com.bookingpetz.domain.Hotel;
 import com.bookingpetz.domain.ResultModal;
 import com.bookingpetz.domain.Start;
-import com.bookingpetz.services.DashboardService;
-import com.google.gson.Gson;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import com.bookingpetz.services.CalendarService;
 
 /**
  *
@@ -33,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class DashboardController {
 
     @Autowired
-    private DashboardService dashboardService;
+    private CalendarService calendarService;
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(Model m, HttpServletRequest request) {
@@ -71,30 +69,6 @@ public class DashboardController {
         return "myPets";
     }
 
-    @RequestMapping(value = "/hotelOwnerApply", method = RequestMethod.GET)
-    public String hotelOwnerApply(Model m, HttpServletRequest request) {
-        return "hotelOwnerApply";
-    }
-
-    @RequestMapping(value = "/hotelOwnerApply", method = RequestMethod.POST)
-    public String hotelOwnerApplyPost(Model m, HttpServletRequest request) {
-        Hotel hotel = new Gson().fromJson(request.getParameter("hotel"), Hotel.class);
-        if (dashboardService.registerHotel(hotel)) {
-            return "hotelOwnerApply";
-        }
-        return "profile?Error";
-    }
-
-    @RequestMapping(value = "/myHotel", method = RequestMethod.GET)
-    public String myHotel(Model m, HttpServletRequest request) {
-        return "myHotel";
-    }
-
-    @RequestMapping(value = "/previewHotel", method = RequestMethod.GET)
-    public String previewHotel(Model m, HttpServletRequest request) {
-        return "previewHotel";
-    }
-
     @RequestMapping(value = "/dashboardTemplate", method = RequestMethod.GET)
     public String dashboardTemplate(Model m, HttpServletRequest request) {
         return "dashboardTemplate";
@@ -122,7 +96,7 @@ public class DashboardController {
 //            if (session.getAttribute("user") != null) {
 //                m.addAttribute("user", session.getAttribute("user"));
 //                User user = (User) session.getAttribute("user");
-        List<ResultModal> resultModals = dashboardService.getHotelCalendar("8");
+        List<ResultModal> resultModals = calendarService.getHotelCalendar("9");
         System.out.println("sizeee: " + resultModals.size());
         m.addAttribute("resultModals", resultModals);
 //        System.out.println(dashboardService.insertEvent(10, new Booking()));
@@ -153,14 +127,14 @@ public class DashboardController {
         endDate = simpleDateFormat.format(date);
 
         Booking booking = new Booking(new End(endDate, "Europe/Amsterdam"), new Start(startDate, "Europe/Amsterdam"), userId, type, descr);
-        boolean result = dashboardService.insertEvent(booking);
+        boolean result = calendarService.insertEvent(booking);
         return "redirect:calendar?" + result;
     }
 
     @RequestMapping(value = "/removeEvent", method = RequestMethod.POST)
     public String removeEvent(Model m, HttpServletRequest request) throws ParseException {
         String eventId = request.getParameter("eventId");
-        boolean result = dashboardService.removeEvent(new Event(eventId));
+        boolean result = calendarService.removeEvent(new Event(eventId));
         return "redirect:calendar?" + result;
     }
 

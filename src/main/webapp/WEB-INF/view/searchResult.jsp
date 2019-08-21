@@ -314,10 +314,10 @@
                                 <div class="room-text">
                                     <div class="room-details">
                                         <div class="room-title">
-                                            <h5>${c.user.name} ${c.user.surname}</h5>
+                                            <h5>${c.userId}</h5>
                                             <a href="#">
                                                 <i class="flaticon-placeholder"></i>
-                                                <span>${c.user.contactList[0].address.zipcode}, ${c.user.contactList[0].address.state}</span>
+                                                <span>Lorem ipsum</span>
                                             </a>
                                             <a href="#" class="large-width">
                                                 <i class="flaticon-cursor"></i>
@@ -329,7 +329,7 @@
                                         <div class="room-info" style="text-align:center">
                                             <c:forEach var="h" items="${c.serviceList}">
                                                 <div class="beds pl-1 pr-1">
-                                                    <c:if test = "${h.type == 'Cat'}"> 
+                                                    <c:if test = "${h.type == 'Dog'}"> 
                                                         <p>${h.name}</br><img src="static/searchResult/img/check.png" alt=""></p>    
                                                         </c:if>
                                                 </div>
@@ -337,13 +337,13 @@
                                         </div>
                                     </div>
                                     <div class="room-explaination">
-                                        <span>${c.user.contactList[0].description}</span>
+                                        <span></span>
                                     </div>
                                     <br>
                                     <div class="room-price">
                                         <p>Per Day</p>
                                         <c:forEach var="h" items="${c.serviceList}">
-                                            <c:if test = "${h.name == 'Boarding' && h.type == 'Dog'}">   
+                                            <c:if test = "${h.name == 'Dog Boarding' && h.type == 'Dog'}">   
                                                 <span>$${h.basePrice}</span>
                                             </c:if>
                                         </c:forEach>

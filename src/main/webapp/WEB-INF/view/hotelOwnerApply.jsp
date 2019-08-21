@@ -14,34 +14,24 @@
         <link href="static/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome -->
         <link href="static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-
         <!-- NProgress -->
         <link href="static/vendors/nprogress/nprogress.css" rel="stylesheet">
-
         <!-- Custom Theme Style -->
         <link href="static/vendors/build/css/custom.min.css" rel="stylesheet">
-
         <!-- Switchery -->
         <link href="static/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
-
         <!-- iCheck -->
         <link href="static/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
         <!-- FullCalendar -->
         <link href="static/vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
         <link href="static/vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
-
         <!-- sLİDE -->
         <link rel="stylesheet" href="static/vendors/responsive-slides/responsiveslides.css">
         <link rel="stylesheet" href="static/vendors/responsive-slides/demo.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
         <script src="static/vendors/responsive-slides/responsiveslides.min.js"></script>
-
         <!-- cropper -->
-
         <link href="static/vendors/cropper/dist/cropper.min.css" rel="stylesheet">
-
-
     </head>
     <style>
 
@@ -63,30 +53,18 @@
 
     </style>
     <script>
-
-
-
-
-
-
         var services = [];
         var images = [];
-
         function chosenService(serviceId) {
             if (services.includes(serviceId)) {
                 const index = services.indexOf(serviceId);
                 services[index] = 0;
-
-
                 var serviceIdClone = serviceId;
                 document.getElementById(serviceIdClone).style.display = "none";
                 //      document.getElementById(serviceIdClone).disabled= "true";
 
             } else
                 services.push(serviceId);
-
-
-
             for (i = 0; i < services.length; i++) {
 
                 var serviceIdClone = services[i];
@@ -103,21 +81,17 @@
         }
 
         //Services
-
         function selectedService(serviceId) {
 
             document.getElementById(serviceId).style.display = "block";
             document.getElementById(serviceId + "a").disabled = "false";
             document.getElementById(serviceIdClone + "a").addAttribute("checked", "true");
             $(serviceIdClone + "a").attr("checked", "checked");
-
-
         }
 
         function display() {
             var x = $("#s1").is(":checked");
             alert("checked");
-
         }
 
         window.load = function start() {
@@ -134,43 +108,9 @@
             console.log("Clicked, new value = " + cb.checked);
         }
 
-
         /////Image Partt////////////////////////////
         //Slider script
         $(function () {
-
-
-            // Slideshow 1
-            //            $("#slider1").responsiveSlides({
-            //                maxwidth: 800,
-            //                speed: 800
-            //            });
-            //            // Slideshow 2
-            //            $("#slider2").responsiveSlides({
-            //                auto: false,
-            //                pager: true,
-            //                speed: 300,
-            //                maxwidth: 540
-            //            });
-            // Slideshow 3
-            //            $("#slider3").responsiveSlides({
-            //                manualControls: '#slider3-pager',
-            //                maxwidth: 540
-            //            });
-            //            // Slideshow 4
-            //            $("#slider4").responsiveSlides({
-            //                auto: false,
-            //                pager: false,
-            //                nav: true,
-            //                speed: 500,
-            //                namespace: "callbacks",
-            //                before: function () {
-            //                    $('.events').append("<li>before event fired.</li>");
-            //                },
-            //                after: function () {
-            //                    $('.events').append("<li>after event fired.</li>");
-            //                }
-            //            });
             $(".rslides").responsiveSlides({
                 auto: false, // Boolean: Animate automatically, true or false
                 speed: 500, // Integer: Speed of the transition, in milliseconds
@@ -190,7 +130,6 @@
                 after: function () {}     // Function: After callback
             });
         });
-
         $(function () {
 
 
@@ -202,8 +141,6 @@
                     $('#cropper').css("display", "block");
                     $('#imgContainer').css("display", "block");
                 }
-
-
             });
             $('#imgThumb-0').load(function () {
                 console.log("oldu mu");
@@ -213,10 +150,6 @@
                     $('#noImage').css("display", "none");
                     $('#yesImage').css("display", "block");
                 }
-
-
-
-
             });
             // Get the modal
             var modal = document.getElementById("cropper");
@@ -391,18 +324,14 @@
         s10 = 1;
         s11 = 1;
         s12 = 1;
-
         function checkact1() {
             o1 = document.getElementById('cact1');
-
             if (o1.value == 'Y') {
                 s1++;
                 if (s1 % 2 == 0)
                     $('#tboxact1').prop('disabled', false);
-
                 else
                     $('#tboxact1').prop('disabled', true);
-
             }
 
         }
@@ -530,6 +459,122 @@
 
 
     </script>
+    <script>
+
+        var services = [];
+        function next() {
+            var aptNo = document.getElementById('aptNo').value;
+            var street = document.getElementById('street').value;
+            var city = document.getElementById('city').value;
+            var country = document.getElementById('country').value;
+            var zipCode = document.getElementById('zipcode').value;
+
+            var contactName = document.getElementById('contactName').value;
+            var managerEmail = document.getElementById('managerEmail').value;
+            var bookingEmail = document.getElementById('bookingEmail').value;
+            var website = document.getElementById('website').value;
+            var phone = document.getElementById('phone').value;
+            var description = document.getElementById('description').value;
+            var directions = document.getElementById('directions').value;
+
+            console.log("Property :" + aptNo + street + city + country + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
+
+            for (var i = 1; i < 13; i++) {
+                var serviceId = "#cact" + i;
+                var nameId = "#service" + i;
+                var priceId = "#tboxact" + i;
+                var name = $(nameId).text();
+                var basePrice = $(priceId).prop('value');
+
+                if ($(priceId).prop('disabled') == false) {
+                    services.push({
+                        "type": "Dog",
+                        "description": "Please add description",
+                        "name": name,
+                        "basePrice": basePrice
+                    });
+                }
+            }
+            console.log("name:" + services[0].name + " prices" + services[0].basePrice);
+
+            var data2 = JSON.stringify({
+                "userId": "${user.token}",
+                "contactList": [
+                    {
+                        "userId": "-",
+                        "phone": phone,
+                        "website": website,
+                        "description": description,
+                        "bookingEmail": bookingEmail,
+                        "managerEmail": managerEmail,
+                        "contactName": description,
+                        "directions": directions,
+                        "address": {
+                            "aptNo": aptNo,
+                            "street": street,
+                            "city": city,
+                            "zipcode": zipCode,
+                            "country": country
+                        }
+                    }
+                ],
+                "hotel": {
+                    "workingHours": "9-6",
+                    "dogRoom": 4,
+                    "catRoom": 5,
+                    "rate": 0.0,
+                    "status": "Pending",
+                    "serviceList": services
+                }
+            });
+//            var hotel = {
+//                "userId": "${user.token}",
+//                "workingHours": "9-6",
+//                "dogRoom": 10,
+
+//            var data = JSON.stringify({
+//                "userId": "${user.token}",
+//                "workingHours": "9-6",
+//                "dogRoom": 10,
+//                "catRoom": 5,
+//                "rate": 0.0,
+//                "serviceList": services,
+//                "user": {
+//                    "userId": "${user.token}",
+//                    "email": "${user.email}",
+//                    "name": "${user.name}",
+//                    "surname": "${user.surname}",
+//                    "pkey": "",
+//                    "salt": "",
+//                    "enable": "",
+//                    "contactList": [
+//                        {
+//                            "id": "",
+//                            "userId": "",
+//                            "contactName": contactName,
+//                            "managerEmail": '' + managerEmail + '',
+//                            "bookingEmail": '' + bookingEmail + '',
+//                            "website": website,
+//                            "phone": phone,
+//                            "description": description,
+//                            "directions": directions,
+//                            "address": {
+//                                "id": "",
+//                                "aptNo": aptNo,
+//                                "street": street,
+//                                "state": state,
+//                                "country": country,
+//                                "zipCode": zipCode
+//                            }
+//                        }
+//                    ]
+//                }
+//            });
+//            alert(JSON.stringify(hotel));
+            $('#result').val(data2);
+            $("#register").submit();
+        }
+    </script>
     <style>
         .container1 {
             display: block;
@@ -615,22 +660,17 @@
         <div class="container body">
             <div class="main_container">
                 <jsp:include page="dashboardHeader.jsp"></jsp:include>
-
                     <div class="right_col" role="main">
-
                         <div class="">
-
                             <div class="clearfix"></div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="x_panel">
                                         <div class="x_title">
                                             <h3><strong>Become our Partner</strong> <small></small></h3>
-
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="x_content">
-                                            <p>This is a basic form wizard example that inherits the colors from the selected scheme.</p>
                                             <div id="wizard" class="form_wizard wizard_horizontal">
                                                 <ul class="wizard_steps">
                                                     <li>
@@ -638,7 +678,6 @@
                                                             <span class="step_no">1</span>
                                                             <span class="step_descr">
                                                                 Property & Contact Details<br />
-                                                                <!--         <small>Create your pet sitter account</small>  --> 
                                                             </span>
                                                         </a>
                                                     </li>
@@ -647,7 +686,6 @@
                                                             <span class="step_no">2</span>
                                                             <span class="step_descr">
                                                                 Property Information<br />
-                                                                <!--        <small>My personal details</small>  --> 
                                                             </span>
                                                         </a>
                                                     </li>
@@ -656,7 +694,6 @@
                                                             <span class="step_no">3</span>
                                                             <span class="step_descr">
                                                                 Property Services <br />
-                                                                <!--            <small>My services</small>  --> 
                                                             </span>
                                                         </a>
                                                     </li>
@@ -665,7 +702,6 @@
                                                             <span class="step_no">4</span>
                                                             <span class="step_descr">
                                                                 Preview & Save<br />
-                                                                <!--             <small>Home details</small>  --> 
                                                             </span>
                                                         </a>
                                                     </li>
@@ -679,31 +715,38 @@
                                                             </div>
                                                             <form class="form-horizontal form-label-left">
                                                                 <div class="item form-group">
-                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Adress <span class="required">*</span>
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="aptNo">Property No<span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input id="address" class="form-control col-md-7 col-xs-12" data-validate-length-range="8" data-validate-words="2" name="address" placeholder="1054GA Amsterdam etc" required="required" type="text">
+                                                                        <input value="3A" id="aptNo" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" data-validate-words="1" name="aptNo" placeholder="3A" required="required" type="text">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
-                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pet-capasity">Post code <span class="required">*</span>
+                                                                    <label  class="control-label col-md-3 col-sm-3 col-xs-12" for="street">Street <span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input id="post-code" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" data-validate-words="1" name="post-code" placeholder="1054 etc" required="required" type="number">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="item form-group">
-                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="country">Country <span class="required">*</span>
-                                                                    </label>
-                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input id="country" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" data-validate-words="1" name="country" placeholder="Netherlands etc" required="required" type="text">
+                                                                        <input value="Zanpad" id="street" class="form-control col-md-7 col-xs-12" data-validate-length-range="8" data-validate-words="2" name="street" placeholder="Zanpad" required="required" type="text">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
                                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">City <span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input id="country" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" data-validate-words="1" name="country" placeholder="Amsterdam etc" required="required" type="text">
+                                                                        <input value="Amsterdam" id="city" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" data-validate-words="1" name="city" placeholder="Amsterdam" required="required" type="text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item form-group">
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="country">Country <span class="required">*</span>
+                                                                    </label>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <input value="Netherlands" id="country" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" data-validate-words="1" name="country" placeholder="Netherlands" required="required" type="text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item form-group">
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="zipcode">Zipcode <span class="required">*</span>
+                                                                    </label>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <input value="1054" id="zipcode" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" data-validate-words="1" name="zipcode" placeholder="1054" required="required" type="text">
                                                                     </div>
                                                                 </div>
 
@@ -714,41 +757,40 @@
                                                             </div>
                                                             <form class="form-horizontal form-label-left">
                                                                 <div class="item form-group">
-                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact-name">Contact Name <span class="required">*</span>
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contactName">Contact Name <span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input  id="contact-name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="contact-name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
+                                                                        <input value="Burak Zengin" id="contactName" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="contactName" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
-                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"> Manager Email Adress <span class=""></span>
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"> Manager Email Address <span class=""></span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input id="email"  class="form-control col-md-7 col-xs-12">
+                                                                        <input value="brakzengin@gmail.com" id="managerEmail"  class="form-control col-md-7 col-xs-12">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
-                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="booking-email">Booking Email Address <span class="required">*</span>
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bookingEmail">Booking Email Address <span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input type="booking-email" id="email" name="booking-email" required="required" class="form-control col-md-7 col-xs-12">
+                                                                        <input value="brakzengin@gmail.com" type="text" id="bookingEmail" name="bookingEmail" required="required" class="form-control col-md-7 col-xs-12">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
                                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" >Website URL <span class="required"></span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input type="url" id="website" name="website"  placeholder="www.website.com" class="form-control col-md-7 col-xs-12">
+                                                                        <input value="www.google.com" type="text" id="website" name="website"  placeholder="www.website.com" class="form-control col-md-7 col-xs-12">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
-                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Telephone <span class="required">*</span>
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">Phone <span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input type="tel" id="telephone" name="phone" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                                                                        <input value="507 475 77 70" type="text" id="phone" name="phone" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
                                                                     </div>
                                                                 </div>
-
                                                             </form>
 
                                                         </div>
@@ -811,8 +853,6 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header"><span class="close">&times;</span></div>
                                                                     <div class="modal-body">
-
-
                                                                         <div class="row">
                                                                             <div id="imgContainer" class="img-container" style="display:none;">
                                                                                 <img id="image"  alt="Picture">
@@ -960,14 +1000,14 @@
                                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Description<span class="required">*</span>
                                                                 </label>
                                                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                                                    <textarea class="form-control" rows="3" placeholder="First impressions are everything. A good description will let the guests know what to expect when they stay. Provide details on how your property differs from others, what it offers your customers and how unique it is. This description will appear on the main property page."></textarea>
+                                                                    <textarea value="Hey there" class="form-control" name="description" id="description" rows="3" placeholder="First impressions are everything. A good description will let the guests know what to expect when they stay. Provide details on how your property differs from others, what it offers your customers and how unique it is. This description will appear on the main property page."></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Directions<span class="required">*</span>
                                                                 </label>
                                                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                                                    <textarea class="form-control" rows="3" placeholder="Tell your customers how to get to your property from the bus station, train station, airport, city centre etc. Remember they may never have been to your city before."></textarea>
+                                                                    <textarea value="Hey there" id="directions" name="directions" class="form-control" rows="3" placeholder="Tell your customers how to get to your property from the bus station, train station, airport, city centre etc. Remember they may never have been to your city before."></textarea>
                                                                 </div>
                                                             </div>
                                                             <br>
@@ -988,7 +1028,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact1" id="cact1" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact1()" >
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px">Dog Boarding </i>
+                                                                        <i id="service1" style="margin-left: 20px">Dog Boarding</i>
                                                                     </label>
 
                                                                 </div>
@@ -1009,7 +1049,7 @@
 
                                                                         <input  name="cact2" id="cact2" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact2()" >
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px">Dog Washing </i>
+                                                                        <i id="service2" style="margin-left: 20px">Dog Washing</i>
 
                                                                     </label>
                                                                 </div>
@@ -1029,7 +1069,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact3" id="cact3" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact3()" >                                                                      
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px">Dog Groomming and Trimming</i>
+                                                                        <i id="service3" style="margin-left: 20px">Dog Groomming and Trimming</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
@@ -1049,7 +1089,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact4" id="cact4" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact4()" >                                                                      
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px"> Dog Medication</i>
+                                                                        <i id="service4" style="margin-left: 20px">Dog Medication</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
@@ -1067,7 +1107,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact5" id="cact5" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact5()" >                                                                       
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px"> Dog Day Care</i>
+                                                                        <i id="service5" style="margin-left: 20px">Dog Day Care</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
@@ -1085,7 +1125,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact6" id="cact6" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact6()" >                                                            
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px"> Dog Nail Clipping</i>
+                                                                        <i id="service6" style="margin-left: 20px">Dog Nail Clipping</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1103,7 +1143,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact7" id="cact7" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact7()" >                                                                     
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px"> Cat Boarding </i>
+                                                                        <i id="service7" style="margin-left: 20px">Cat Boarding</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1122,7 +1162,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact8" id="cact8" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact8()" >                                                                  
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px">Cat Washing </i>
+                                                                        <i id="service8" style="margin-left: 20px">Cat Washing</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1140,7 +1180,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact9" id="cact9" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact9()" >                                                                      
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px">Cat Groomming and Trimming </i>
+                                                                        <i id="service9" style="margin-left: 20px">Cat Groomming and Trimming</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1158,7 +1198,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact10" id="cact10" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact10()" >                                                                    
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px">Cat Medication </i>
+                                                                        <i id="service10" style="margin-left: 20px">Cat Medication</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1176,7 +1216,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact11" id="cact11" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact11()" >                                                                   
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px">Cat Day Care </i>
+                                                                        <i id="service11" style="margin-left: 20px">Cat Day Care</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1194,7 +1234,7 @@
                                                                     <label  class="container1">
                                                                         <input  name="cact12" id="cact12" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact12()" >                                                                      
                                                                         <span class="checkmark"></span>
-                                                                        <i style="margin-left: 20px">Cat Nail Clipping </i>
+                                                                        <i id="service12" style="margin-left: 20px">Cat Nail Clipping</i>
                                                                     </label>
                                                                 </div>
                                                                 <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
@@ -1251,7 +1291,7 @@
 
                                                                         <label class="col-md-1">
                                                                             <div class="container1" style="position: relative;">
-                                                                                <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="Y" onclick="checkactss()" >                                                                      
+                                                                                <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="Y" onclick="" >                                                                      
                                                                                 <span class="checkmark"></span>
                                                                             </div> <br>Sun</br>
                                                                         </label>
@@ -1316,6 +1356,9 @@
                                                     <div>Please review your details in the preview below. If you are happy with the result, click the "Submit My Signup" button. You will be able to make changes to text after your Signup has been confirmed.
                                                     </div> 
                                                 </div>
+                                                <form id="register" action="registerHotel" method="POST">
+                                                    <input hidden id="result" name="result" value="">
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

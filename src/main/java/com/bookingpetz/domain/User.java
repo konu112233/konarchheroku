@@ -10,21 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 /**
  *
  * @author burakzengin
  */
-@Entity
 @Table(name = "user", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"userId"})})
 public class User implements Serializable {
@@ -48,57 +44,63 @@ public class User implements Serializable {
     @Column(name = "salt", nullable = false, length = 800)
     private String salt;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @Column(name = "enable", nullable = false, length = 45)
+    private String enable;
+
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private List<Contact> contactList = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId")
+    private Hotel hotel;
 
     public User() {
     }
 
-    public User(String userId, String email, String name, String surname) {
+    public User(String userId) {
+        this.userId = userId;
+    }
+
+    public User(String email, String name, String surname, String pkey, String enable) {
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.pkey = pkey;
+        this.enable = enable;
+    }
+
+    public User(String userId, String email, String name, String surname, String pkey, String salt, String enable) {
         this.userId = userId;
         this.email = email;
         this.name = name;
         this.surname = surname;
-    }
-
-    public User(String email, String key, String name, String surname, String salt) {
-        this.email = email;
-        this.pkey = key;
-        this.name = name;
-        this.surname = surname;
+        this.pkey = pkey;
         this.salt = salt;
+        this.enable = enable;
     }
 
-    public User(String userId, String email, String name, String surname, String key, String salt, List<Contact> contactList) {
+    public User(String userId, String email, String name, String surname, String pkey, String salt, String enable, List<Contact> contactList) {
         this.userId = userId;
         this.email = email;
         this.name = name;
         this.surname = surname;
-        this.pkey = key;
+        this.pkey = pkey;
         this.salt = salt;
+        this.enable = enable;
         this.contactList = contactList;
     }
 
-    public User(String userId, String email, String name, String surname, String key, String salt) {
+    public User(String userId, String email, String name, String surname, String pkey, String salt, String enable, List<Contact> contactList, Hotel hotel) {
         this.userId = userId;
         this.email = email;
         this.name = name;
         this.surname = surname;
-        this.pkey = key;
+        this.pkey = pkey;
         this.salt = salt;
-    }
-
-    public User(User user) {
-        this.userId = user.getUserId();
-        this.email = user.getEmail();
-        this.name = user.getName();
-        this.surname = user.getSurname();
-    }
-
-    public User(String userId) {
-        this.userId = userId;
+        this.enable = enable;
+        this.contactList = contactList;
+        this.hotel = hotel;
     }
 
     public String getUserId() {
@@ -155,6 +157,22 @@ public class User implements Serializable {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+
+    public String getEnable() {
+        return enable;
+    }
+
+    public void setEnable(String enable) {
+        this.enable = enable;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
 }

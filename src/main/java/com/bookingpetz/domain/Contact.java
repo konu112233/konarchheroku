@@ -8,7 +8,6 @@ package com.bookingpetz.domain;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -19,7 +18,6 @@ import javax.persistence.UniqueConstraint;
  *
  * @author burakzenginx
  */
-@Entity
 @Table(name = "contact", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"id"})})
 public class Contact implements Serializable {
@@ -28,7 +26,7 @@ public class Contact implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "userId", nullable = true, length = 45)
+    @Column(name = "userId", nullable = true, length = 100)
     private String userId;
 
     @Column(name = "phone", nullable = true, length = 25)
@@ -56,6 +54,9 @@ public class Contact implements Serializable {
     @JoinColumn(name = "id")
     private Address address;
 
+    public Contact() {
+    }
+
     public Contact(int id, String userId, String phone, String website, String description, String bookingEmail, String managerEmail, String contactName, String directions, Address address) {
         this.id = id;
         this.userId = userId;
@@ -67,9 +68,6 @@ public class Contact implements Serializable {
         this.contactName = contactName;
         this.directions = directions;
         this.address = address;
-    }
-
-    public Contact() {
     }
 
     public int getId() {

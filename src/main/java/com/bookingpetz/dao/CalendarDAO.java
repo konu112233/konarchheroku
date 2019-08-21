@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.bookingpetz.services;
+package com.bookingpetz.dao;
 
 import com.bookingpetz.domain.Booking;
 import com.bookingpetz.domain.Event;
-import com.bookingpetz.domain.Hotel;
 import com.bookingpetz.domain.ResultModal;
 import java.util.List;
 
@@ -15,13 +14,11 @@ import java.util.List;
  *
  * @author burakzengin
  */
-public interface DashboardService {
+public interface CalendarDAO {
 
     public List<ResultModal> getHotelCalendar(String userId);
 
     public boolean insertEvent(Booking booking);
 
     public boolean removeEvent(Event event);
-
-    public boolean registerHotel(Hotel hotel);
 }

@@ -21,7 +21,8 @@ public class Controller {
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String home(Model m, HttpServletRequest request) {
         m.addAttribute("page", "home");
-
+        m.addAttribute("result", request.getParameter("result"));
+        m.addAttribute("verify", request.getParameter("verify"));
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("user") != null) {

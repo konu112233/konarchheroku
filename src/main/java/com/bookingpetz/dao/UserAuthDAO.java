@@ -24,4 +24,8 @@ public interface UserAuthDAO {
 
     public boolean checkUsername(String param);
 
+    public boolean confirmationMail(User user);
+
+    public boolean verifyMail(String key);
+
 }

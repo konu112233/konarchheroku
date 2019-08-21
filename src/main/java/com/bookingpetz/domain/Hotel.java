@@ -10,23 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.json.simple.JSONObject;
 
 /**
  *
  * @author burakzengin
  */
-@Entity
 @Table(name = "hotel", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"userId"})})
 public class Hotel implements Serializable {
@@ -35,49 +29,32 @@ public class Hotel implements Serializable {
     @Column(name = "userId")
     private String userId;
 
-    @Column(name = "certificationNumber", length = 11)
-    private int certificationNumber;
-
-    @Column(name = "workingHours", length = 45)
+    @Column(name = "workingHours", nullable = true, length = 45)
     private String workingHours;
 
-    @Column(name = "dogRoom", length = 3)
-    private int dogRoom;
+    @Column(name = "capacity", nullable = true, length = 15)
+    private int capacity;
 
-    @Column(name = "catRoom", length = 3)
-    private int catRoom;
+    @Column(name = "rate", nullable = true)
+    private double rate;
 
-    @Column(name = "rate")
-    private float rate;
+    @Column(name = "status", nullable = true, length = 25)
+    private String status;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    private User user;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private List<Service> serviceList = new ArrayList<>();
 
-    public Hotel(String userId, int certificationNumber, String workingHours, int rooms) {
-        this.userId = userId;
-        this.certificationNumber = certificationNumber;
-        this.workingHours = workingHours;
-        this.dogRoom = rooms;
+    public Hotel() {
     }
 
-    public Hotel(String userId, int certificationNumber, String workingHours, int dogRoom, int catRoom, float rate, User user, List<Service> serviceList) {
+    public Hotel(String userId, String workingHours, int capacity, double rate, String status, List<Service> serviceList) {
         this.userId = userId;
-        this.certificationNumber = certificationNumber;
         this.workingHours = workingHours;
-        this.dogRoom = dogRoom;
-        this.catRoom = catRoom;
-        this.user = user;
+        this.capacity = capacity;
         this.serviceList = serviceList;
         this.rate = rate;
-    }
-
-    public Hotel() {
+        this.status = status;
     }
 
     public String getUserId() {
@@ -88,14 +65,6 @@ public class Hotel implements Serializable {
         this.userId = userId;
     }
 
-    public int getCertificationNumber() {
-        return certificationNumber;
-    }
-
-    public void setCertificationNumber(int certificationNumber) {
-        this.certificationNumber = certificationNumber;
-    }
-
     public String getWorkingHours() {
         return workingHours;
     }
@@ -104,11 +73,11 @@ public class Hotel implements Serializable {
         this.workingHours = workingHours;
     }
 
-    public float getRate() {
+    public double getRate() {
         return rate;
     }
 
-    public void setRate(float rate) {
+    public void setRate(double rate) {
         this.rate = rate;
     }
 
@@ -120,41 +89,30 @@ public class Hotel implements Serializable {
         this.serviceList = serviceList;
     }
 
-    public User getUser() {
-        return user;
+    public String getStatus() {
+        return status;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getDogRoom() {
-        return dogRoom;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setDogRoom(int dogRoom) {
-        this.dogRoom = dogRoom;
-    }
-
-    public int getCatRoom() {
-        return catRoom;
-    }
-
-    public void setCatRoom(int catRoom) {
-        this.catRoom = catRoom;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public JSONObject toJSON() {
         JSONObject jo = new JSONObject();
         jo.put("userId", userId);
-        jo.put("certificationNumber", certificationNumber);
         jo.put("workingHours", workingHours);
-        jo.put("dogRoom", dogRoom);
-        jo.put("catRoom", catRoom);
+        jo.put("capacity", capacity);
         jo.put("rate", rate);
-        jo.put("user", user);
+        jo.put("status", status);
         jo.put("service", serviceList);
         return jo;
     }
-
 }

@@ -23,11 +23,15 @@ public class Session {
         this.surname = surname;
     }
 
-    public Session(String token, User user) {
+    public Session(String token, Session session) {
         this.token = token;
-        this.email = user.getEmail();
-        this.name = user.getName();
-        this.surname = user.getSurname();
+        this.email = session.getEmail();
+        this.name = session.getName();
+        this.surname = session.getSurname();
+    }
+
+    public Session(String token) {
+        this.token = token;
     }
 
     public String getToken() {

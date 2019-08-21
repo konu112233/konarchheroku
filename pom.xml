@@ -29,22 +29,8 @@
             <version>5.1.5.RELEASE</version>
             <type>jar</type>
         </dependency>
-         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.2.14.Final</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>3.3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-hikaricp</artifactId>
-            <version>5.2.10.Final</version>
-        </dependency>
+
+
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
@@ -80,12 +66,6 @@
             <version>1.4</version>
             <type>jar</type>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.16</version>
-        </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
@@ -120,7 +100,6 @@
             <artifactId>unirest-java</artifactId>
             <version>2.3.10</version>
         </dependency>
-
     </dependencies>
 
     <build>

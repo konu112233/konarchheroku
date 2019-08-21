@@ -5,43 +5,36 @@
  */
 package com.bookingpetz.services;
 
-import com.bookingpetz.dao.DashboardDAO;
 import com.bookingpetz.domain.Booking;
 import com.bookingpetz.domain.Event;
-import com.bookingpetz.domain.Hotel;
 import com.bookingpetz.domain.ResultModal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.bookingpetz.dao.CalendarDAO;
 
 /**
  *
  * @author burakzengin
  */
 @Service
-public class DashboardServiceImpl implements DashboardService {
+public class CalendarServiceImpl implements CalendarService {
 
     @Autowired
-    private DashboardDAO dashboardDAO;
+    private CalendarDAO calendarDAO;
 
     @Override
     public List<ResultModal> getHotelCalendar(String userId) {
-        return dashboardDAO.getHotelCalendar(userId);
+        return calendarDAO.getHotelCalendar(userId);
     }
 
     @Override
     public boolean insertEvent(Booking booking) {
-        return dashboardDAO.insertEvent(booking);
+        return calendarDAO.insertEvent(booking);
     }
 
     @Override
     public boolean removeEvent(Event event) {
-        return dashboardDAO.removeEvent(event);
+        return calendarDAO.removeEvent(event);
     }
-
-    @Override
-    public boolean registerHotel(Hotel hotel) {
-        return dashboardDAO.registerHotel(hotel);
-    }
-
 }
