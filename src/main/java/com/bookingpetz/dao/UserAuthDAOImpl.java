@@ -47,7 +47,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public boolean signUp(User user) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/signUp")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/signUp")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(user))
                 .asString();
@@ -61,7 +61,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
         String encodeEmail = Base64.getEncoder().encodeToString(email.getBytes());
         JSONObject jsono = new JSONObject();
         jsono.put("email", encodeEmail);
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/checkUsername")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/checkUsername")
                 .header("Content-type", "application/json")
                 .body(jsono.toJSONString())
                 .asString();
@@ -75,7 +75,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public boolean confirmationMail(User user) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/confirmationMail")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/confirmationMail")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(user))
                 .asString();
@@ -93,7 +93,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
         JSONObject jsono = new JSONObject();
         jsono.put("verificationKey", key);
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/verifymail")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/verifymail")
                 .header("Content-type", "application/json")
                 .body(jsono.toJSONString())
                 .asString();
