@@ -31,9 +31,6 @@ public class AccountController {
     @Autowired
     private UserAuthDAO userAuthDAO;
 
-    @Autowired
-    private UserServiceDAO userServiceDAO;
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model m, HttpServletRequest request) {
 
