@@ -32,7 +32,7 @@ public class HotelDashboardController {
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("user") != null) {
-
+                m.addAttribute("token", session.getAttribute("token"));
                 System.out.println(request.getParameter("result"));
                 User user = new Gson().fromJson(request.getParameter("result"), User.class);
                 System.out.println("body : " + new Gson().toJson(user));
@@ -61,7 +61,7 @@ public class HotelDashboardController {
                 if (status.equals("Pending")) {
                     return "redirect:hotelOwnerStatus";
                 } else if (status.equals("No")) {
-                    return "hotelOwnerApplyFirst";
+                    return "redirect:hotelOwnerApplyFirst";
                 }
                 return "hotelOwnerApply";
             } else {
@@ -85,6 +85,23 @@ public class HotelDashboardController {
 
     @RequestMapping(value = "/hotelOwnerStatus", method = RequestMethod.GET)
     public String hotelOwnerStatus(Model m, HttpServletRequest request) {
-        return "hotelOwnerStatus";
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("user") != null) {
+                m.addAttribute("user", session.getAttribute("user"));
+                m.addAttribute("token", session.getAttribute("token"));
+                return "hotelOwnerStatus";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception exception) {
+            return "redirect:/";
+        }
+
+    }
+
+    @RequestMapping(value = "/hotelOwnerApplyFirst", method = RequestMethod.GET)
+    public String hotelOwnerApplyFirst(Model m, HttpServletRequest request) {
+        return "hotelOwnerApplyFirst";
     }
 }
