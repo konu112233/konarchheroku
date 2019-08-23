@@ -57,7 +57,6 @@ public class HotelDashboardController {
                 String token = session.getAttribute("token").toString();
                 m.addAttribute("user", session.getAttribute("user"));
                 m.addAttribute("token", session.getAttribute("token"));
-//                System.out.println("token : " + token);
                 String status = hotelDashboardService.checkStatus(token).getStatus();
                 if (status.equals("Pending")) {
                     return "redirect:hotelOwnerStatus";
