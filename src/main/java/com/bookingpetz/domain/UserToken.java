@@ -13,38 +13,25 @@ import java.io.Serializable;
  */
 public class UserToken implements Serializable {
 
-    private String id;
     private String access_token;
     private String scope;
     private String token_type;
-    private String refresh_token;
     private int expires_in;
+    private User user;
 
-    public UserToken(String access_token, String scope, String token_type, String refresh_token, int expires_in) {
+    public UserToken(String access_token, String scope, String token_type, int expires_in, User user) {
         this.access_token = access_token;
         this.scope = scope;
         this.token_type = token_type;
-        this.refresh_token = refresh_token;
         this.expires_in = expires_in;
-    }
-
-    public UserToken(String id) {
-        this.id = id;
-        this.scope = "";
-        this.token_type = "";
-        this.refresh_token = "";
-        this.expires_in = 0;
+        this.user = user;
     }
 
     public UserToken() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String Id) {
-        this.id = Id;
+        this.scope = "";
+        this.token_type = "";
+        this.expires_in = 0;
+        this.user = new User("000");
     }
 
     public String getAccess_token() {
@@ -71,23 +58,20 @@ public class UserToken implements Serializable {
         this.token_type = token_type;
     }
 
-    public String getRefresh_token() {
-        if (refresh_token.contains("/")) {
-            refresh_token = refresh_token.replace("/", "%2F");
-        }
-        return refresh_token;
-    }
-
-    public void setRefresh_token(String refresh_token) {
-        this.refresh_token = refresh_token;
-    }
-
     public int getExpires_in() {
         return expires_in;
     }
 
     public void setExpires_in(int expires_in) {
         this.expires_in = expires_in;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

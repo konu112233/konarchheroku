@@ -5,7 +5,6 @@
  */
 package com.bookingpetz.dao;
 
-import com.bookingpetz.domain.Session;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
@@ -18,7 +17,7 @@ public interface UserAuthDAO {
 
     public UserToken login(UserAuth userAuth);
 
-    public boolean logout(Session session);
+    public boolean logout(String token);
 
     public boolean signUp(User user);
 

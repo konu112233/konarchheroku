@@ -20,8 +20,10 @@ public class ResultModal {
     private int startDay;
     private String customerId;
     private String customerName;
+    private String summary;
+    private String descr;
 
-    public ResultModal(String eventId, int endYear, int endMonth, int endDay, int startYear, int startMonth, int startDay, String customerId, String customerName) {
+    public ResultModal(String eventId, int endYear, int endMonth, int endDay, int startYear, int startMonth, int startDay, String customerId, String customerName, String summary, String descr) {
         this.id = eventId;
         this.endYear = endYear;
         this.endMonth = endMonth;
@@ -31,6 +33,8 @@ public class ResultModal {
         this.startDay = startDay;
         this.customerId = customerId;
         this.customerName = customerName;
+        this.summary = summary;
+        this.descr = descr;
     }
 
     public ResultModal() {
@@ -106,6 +110,22 @@ public class ResultModal {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getDescr() {
+        return descr;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
     }
 
 }

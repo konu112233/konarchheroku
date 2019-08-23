@@ -5,7 +5,6 @@
  */
 package com.bookingpetz.dao;
 
-import com.bookingpetz.domain.Session;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
@@ -26,7 +25,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
     @Override
     public UserToken login(UserAuth userAuth) {
 
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/login")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/login")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(userAuth))
                 .asString();
@@ -36,10 +35,10 @@ public class UserAuthDAOImpl implements UserAuthDAO {
     }
 
     @Override
-    public boolean logout(Session session) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/logout")
+    public boolean logout(String token) {
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/logout")
                 .header("Content-type", "application/json")
-                .body(new Gson().toJson(session))
+                .body(new Gson().toJson(token))
                 .asString();
 
         System.out.println("Logout Status Code : " + response.getStatus() + " body : " + response.getBody());

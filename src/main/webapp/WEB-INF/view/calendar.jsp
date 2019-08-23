@@ -35,6 +35,7 @@
             booking.id = '${h.id}';
             booking.allDay = true;
             booking.customerId = '${h.customerId}';
+            booking.descr = '${h.descr}';
             arr.push(booking);
             </c:forEach>
 
@@ -93,6 +94,7 @@
                     eventClick: function (calEvent, jsEvent, view) {
                         $('#fc_edit').click();
                         $('#title2').val(calEvent.title);
+                        $('#descr2').val(calEvent.descr);
                         $('#eventId').val(calEvent.id);
 
                         categoryClass = $("#event_type").val();
@@ -141,7 +143,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 <jsp:include page="dashboardFooter.jsp"></jsp:include>
             </div>
@@ -160,19 +161,6 @@
                                     <label class="col-sm-3 control-label">Summary</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="summary" name="summary">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Event</label>
-                                    <div class="col-sm-9">
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input type="radio" name="type" id="Booking"> Booking
-                                            </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio" name="type" id="Custom"> Custom
-                                            </label>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -329,7 +317,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Description</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
+                                        <textarea class="form-control" style="height:55px;" id="descr2" name="descr2"></textarea>
                                     </div>
                                 </div>
 

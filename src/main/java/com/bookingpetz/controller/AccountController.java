@@ -7,7 +7,6 @@ package com.bookingpetz.controller;
 
 import com.bookingpetz.dao.UserAuthDAO;
 import com.bookingpetz.dao.UserServiceDAO;
-import com.bookingpetz.domain.Session;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
@@ -41,32 +40,14 @@ public class AccountController {
         String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
         UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
-        if (!userToken.getId().equals("000")) {
+        if (!userToken.getUser().getUserId().equals("000")) {
             //SUCCESS
-            System.out.println("Login Success " + userToken.getId());
-            Session sesssionObj = new Session(userToken.getAccess_token(), userServiceDAO.getByToken(userToken.getAccess_token()));
-            System.out.println("Session : " + sesssionObj.getName() + " " + sesssionObj.getToken());
+            System.out.println("Login Success " + userToken.getUser().getUserId());
+            String token = userToken.getAccess_token();
             HttpSession session = request.getSession();
-            session.setAttribute("user", sesssionObj);
-            return "redirect:/";
-        }
-        //FAILED 
-        return "redirect:/";
-
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginGet(Model m, HttpServletRequest request) {
-
-        String encodeEmail = request.getParameter("email");
-        String encodePassword = request.getParameter("password");
-        UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
-        if (!userToken.getId().equals("000")) {
-            //SUCCESS
-            System.out.println("success " + userToken.getId());
-            Session sesssionObj = new Session(userToken.getAccess_token(), userServiceDAO.getByToken(userToken.getAccess_token()));
-            HttpSession session = request.getSession();
-            session.setAttribute("user", sesssionObj);
+            session.setAttribute("token", token);
+            session.setAttribute("user", userToken.getUser());
+            System.out.println("Email : " + userToken.getUser().getEmail());
             return "redirect:/";
         }
         //FAILED 
@@ -91,7 +72,7 @@ public class AccountController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         try {
-            if (userAuthDAO.logout((Session) request.getSession().getAttribute("user"))) {
+            if (userAuthDAO.logout(request.getSession().getAttribute("token").toString())) {
                 HttpSession session = request.getSession(false);
                 session.invalidate();
             }
@@ -142,4 +123,3 @@ public class AccountController {
         return "redirect:/home?verify=failed";
     }
 }
-

@@ -5,13 +5,11 @@
  */
 package com.bookingpetz.dao;
 
-import com.bookingpetz.domain.Session;
-
 /**
  *
  * @author burakzengin
  */
 public interface UserServiceDAO {
 
-    public Session getByToken(String token);
+    public String getByToken(String token);
 }

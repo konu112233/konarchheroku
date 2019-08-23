@@ -25,7 +25,8 @@ public class Controller {
         m.addAttribute("verify", request.getParameter("verify"));
         try {
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
+            if (session.getAttribute("token") != null) {
+                m.addAttribute("token", session.getAttribute("token"));
                 m.addAttribute("user", session.getAttribute("user"));
                 return "home";
             } else {

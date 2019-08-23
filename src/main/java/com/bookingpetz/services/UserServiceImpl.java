@@ -6,7 +6,6 @@
 package com.bookingpetz.services;
 
 import com.bookingpetz.dao.UserServiceDAO;
-import com.bookingpetz.domain.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,7 @@ public class UserServiceImpl implements UserServiceDAO {
     private UserServiceDAO userServiceDAO;
 
     @Override
-    public Session getByToken(String token) {
+    public String getByToken(String token) {
         return userServiceDAO.getByToken(token);
     }
 }

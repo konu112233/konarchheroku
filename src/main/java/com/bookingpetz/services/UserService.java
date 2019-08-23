@@ -5,14 +5,12 @@
  */
 package com.bookingpetz.services;
 
-import com.bookingpetz.domain.Session;
-
 /**
  *
  * @author burakzengin
  */
 public interface UserService {
 
-    public Session getByToken(String token);
+    public String getByToken(String token);
 
 }

@@ -5,7 +5,6 @@
  */
 package com.bookingpetz.controller;
 
-import com.bookingpetz.domain.Session;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.services.HotelDashboardService;
 import com.google.gson.Gson;
@@ -55,9 +54,11 @@ public class HotelDashboardController {
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("user") != null) {
-                Session sessiona = (Session) session.getAttribute("user");
+                String token = session.getAttribute("token").toString();
                 m.addAttribute("user", session.getAttribute("user"));
-                String status = hotelDashboardService.checkStatus(sessiona.getToken()).getStatus();
+                m.addAttribute("token", session.getAttribute("token"));
+//                System.out.println("token : " + token);
+                String status = hotelDashboardService.checkStatus(token).getStatus();
                 if (status.equals("Pending")) {
                     return "redirect:hotelOwnerStatus";
                 } else if (status.equals("No")) {
@@ -88,5 +89,3 @@ public class HotelDashboardController {
         return "hotelOwnerStatus";
     }
 }
-
-
