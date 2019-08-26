@@ -29,12 +29,12 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public boolean insertEvent(Booking booking) {
-        return calendarDAO.insertEvent(booking);
+    public boolean insertEvent(String token, Booking booking) {
+        return calendarDAO.insertEvent(token, booking);
     }
 
     @Override
-    public boolean removeEvent(Event event) {
-        return calendarDAO.removeEvent(event);
+    public boolean removeEvent(String token, Event event) {
+        return calendarDAO.removeEvent(token, event);
     }
 }

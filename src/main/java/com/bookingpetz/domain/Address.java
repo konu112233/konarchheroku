@@ -38,16 +38,20 @@ public class Address implements Serializable {
     @Column(name = "country", nullable = true, length = 45)
     private String country;
 
+    @Column(name = "propertyName", nullable = true, length = 100)
+    private String propertyName;
+
     public Address() {
     }
 
-    public Address(int id, String aptNo, String street, String city, String zipcode, String country) {
+    public Address(int id, String aptNo, String street, String city, String zipcode, String country, String propertyName) {
         this.id = id;
         this.aptNo = aptNo;
         this.street = street;
         this.city = city;
         this.zipcode = zipcode;
         this.country = country;
+        this.propertyName = propertyName;
     }
 
     public int getId() {
@@ -96,6 +100,14 @@ public class Address implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
     }
 
 }

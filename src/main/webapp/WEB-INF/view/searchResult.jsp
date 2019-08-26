@@ -52,103 +52,112 @@
             }
         </style>
         <script>
-            var markers = [
-                {
-                    "title": 'Friends Pet Hotel',
-                    "lat": '52.379189',
-                    "lng": '4.899431',
-                    "description": 'Aksa Beach is a popular beach and a vacation spot in Aksa village at Malad, Mumbai.',
-                    "contact_person": 'Andrew johnson',
-                    "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
-                    "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
-                    "address": "   CG Roosweg 19 2871MB",
-                    "rate": "4,5"
-                },
-                {
-                    "title": 'Wellness Pet Hotel',
-                    "lat": '52.200189',
-                    "lng": '5.100431',
-                    "description": 'Juhu Beach is one of favourite tourist attractions situated in Mumbai.',
-                    "contact_person": 'Smith johnson',
-                    "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
-                    "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
-                    "address": "   CG Roosweg 19 2871MB",
-                    "rate": "4,7"
-                },
-                {
-                    "title": 'Forever Forever Pet Hotel',
-                    "lat": '52.421189',
-                    "lng": '5.500431',
-                    "description": 'Girgaum Beach commonly known as just Chaupati is one of the most famous public beaches in Mumbai.',
-                    "contact_person": 'Rocky johnson',
-                    "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
-                    "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
-                    "address": "   CG Roosweg 19 2871 MB",
-                    "rate": "5,0"
-                },
-                {
-                    "title": 'Kind Pet Hotel',
-                    "lat": '52.321189',
-                    "lng": '5.500431',
-                    "description": 'Jijamata Udyan is situated near Byculla station is famous as Mumbai (Bombay) Zoo.',
-                    "contact_person": 'saniya johnson',
-                    "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
-                    "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
-                    "address": "   CG Roosweg 19 2871 MB",
-                    "rate": "4,3"
-                },
-                {
-                    "title": 'Vondel Pet Hotel',
-                    "lat": '52.81189',
-                    "lng": '52.31062020000004',
-                    "description": 'Sanjay Gandhi National Park is a large protected area in the northern part of Mumbai city.',
-                    "contact_person": 'Olga johnson',
-                    "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
-                    "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
-                    "address": "   CG Roosweg 19 2871 MB",
-                    "rate": "4,8"
+
+            map = new Array();
+            <c:forEach var="c" items="${hotels}">
+            hotel = new Object();
+            hotel.title = '${c.propertyName}';
+            hotel.description = '${c.description}';
+            hotel.contact_person = '${c.contactName}';
+            hotel.address = '${c.city}, ${c.street}, ${c.aptNo}, ${c.zipcode}';
+                hotel.rate = '${c.rate}';
+                map.push(hotel);
+            </c:forEach>
+                var markers = [
+                    {
+                        "title": '${c}',
+                        "lat": '52.379189',
+                        "lng": '4.899431',
+                        "description": 'Aksa Beach is a popular beach and a vacation spot in Aksa village at Malad, Mumbai.',
+                        "contact_person": 'Andrew johnson',
+                        "address": "   CG Roosweg 19 2871MB",
+                        "rate": "4,5"
+                    },
+                    {
+                        "title": 'Wellness Pet Hotel',
+                        "lat": '52.200189',
+                        "lng": '5.100431',
+                        "description": 'Juhu Beach is one of favourite tourist attractions situated in Mumbai.',
+                        "contact_person": 'Smith johnson',
+                        "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
+                        "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
+                        "address": "   CG Roosweg 19 2871MB",
+                        "rate": "4,7"
+                    },
+                    {
+                        "title": 'Forever Forever Pet Hotel',
+                        "lat": '52.421189',
+                        "lng": '5.500431',
+                        "description": 'Girgaum Beach commonly known as just Chaupati is one of the most famous public beaches in Mumbai.',
+                        "contact_person": 'Rocky johnson',
+                        "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
+                        "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
+                        "address": "   CG Roosweg 19 2871 MB",
+                        "rate": "5,0"
+                    },
+                    {
+                        "title": 'Kind Pet Hotel',
+                        "lat": '52.321189',
+                        "lng": '5.500431',
+                        "description": 'Jijamata Udyan is situated near Byculla station is famous as Mumbai (Bombay) Zoo.',
+                        "contact_person": 'saniya johnson',
+                        "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
+                        "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
+                        "address": "   CG Roosweg 19 2871 MB",
+                        "rate": "4,3"
+                    },
+                    {
+                        "title": 'Vondel Pet Hotel',
+                        "lat": '52.81189',
+                        "lng": '52.31062020000004',
+                        "description": 'Sanjay Gandhi National Park is a large protected area in the northern part of Mumbai city.',
+                        "contact_person": 'Olga johnson',
+                        "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
+                        "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
+                        "address": "   CG Roosweg 19 2871 MB",
+                        "rate": "4,8"
+                    }
+                ];
+                window.onload = function () {
+                    LoadMap();
                 }
-            ];
-            window.onload = function () {
-                LoadMap();
-            }
-            function LoadMap() {
-                var mapOptions = {
-                    center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
-                    zoom: 8,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                function LoadMap() {
+                    var mapOptions = {
+                        center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                        zoom: 8,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-                //Create and open InfoWindow.
-                var infoWindow = new google.maps.InfoWindow();
+                    //Create and open InfoWindow.
+                    var infoWindow = new google.maps.InfoWindow();
 
-                for (var i = 0; i < markers.length; i++) {
-                    var data = markers[i];
-                    var myLatlng = new google.maps.LatLng(data.lat, data.lng);
-                    var marker = new google.maps.Marker({
-                        position: myLatlng,
-                        map: map,
-                        title: data.title,
-                        rate: data.rate
-                    });
-                    // marker.setIcon("static/images/paw_green.svg");
-
-
-                    //Attach click event to the marker.
-                    (function (marker, data) {
-                        google.maps.event.addListener(marker, "click", function (e) {
-                            //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-                            infoWindow.setContent("<div style='width:320px;min-height:100px;'> <img src='https://q-cf.bstatic.com/images/hotel/max1280x900/155/15538911.jpg' style='height:95px;width:auto; float:left;'> <span style='padding:15px;color:#459756;font-size:15px;'><strong>" + data.title + "</strong> <span> <button style='border:none;border-radius: 6px; margin-left: 3px;background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 12px; cursor: pointer; color: white;'> <strong>" + data.rate + "</strong> </button> </span> </span> <p> <span style='padding:15px;font-size:10px;'> <i class='fa fa-home' style='padding-right: 3px;'></i>" + data.address + " </span> <br> <div class='row'> <div class='col-md-6'> </div> <div class='col-md-2'> <span style='color:#459756;font-size:18px;'> 555&euro;</span> </div> </div> </p> </div>");
-                            infoWindow.open(map, marker);
+                    for (var i = 0; i < markers.length; i++) {
+                        var data = markers[i];
+                        var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                        var marker = new google.maps.Marker({
+                            position: myLatlng,
+                            map: map,
+                            title: data.title,
+                            rate: data.rate
                         });
-                    })(marker, data);
+                        // marker.setIcon("static/images/paw_green.svg");
+
+
+                        //Attach click event to the marker.
+                        (function (marker, data) {
+                            google.maps.event.addListener(marker, "click", function (e) {
+                                //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                                infoWindow.setContent("<div style='width:320px;min-height:100px;'> <img src='https://q-cf.bstatic.com/images/hotel/max1280x900/155/15538911.jpg' style='height:95px;width:auto; float:left;'> <span style='padding:15px;color:#459756;font-size:15px;'><strong>" + data.title + "</strong> <span> <button style='border:none;border-radius: 6px; margin-left: 3px;background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 12px; cursor: pointer; color: white;'> <strong>" + data.rate + "</strong> </button> </span> </span> <p> <span style='padding:15px;font-size:10px;'> <i class='fa fa-home' style='padding-right: 3px;'></i>" + data.address + " </span> <br> <div class='row'> <div class='col-md-6'> </div> <div class='col-md-2'> <span style='color:#459756;font-size:18px;'> 555&euro;</span> </div> </div> </p> </div>");
+                                infoWindow.open(map, marker);
+                            });
+                        })(marker, data);
+                    }
                 }
-            }
-            function activatePlaceSearch() {
-                var input = document.getElementById("search_term");
-                var autocomplete = new google.maps.places.Autocomplete(input);
-            }
+                function activatePlaceSearch() {
+                    var input = document.getElementById("search_term");
+                    var autocomplete = new google.maps.places.Autocomplete(input);
+                }
 
 //            $(document).ready(function () {
 //                $('#petType').val(${search.petType});
@@ -170,14 +179,14 @@
                             <div class="col">
                                 <div class="home_content text-center">
                                     <div class="home_title" style="margin-bottom: 30px;">Search Result</div>
-                                    <form class="booking_form" action="searchResult" method="POST">
+                                    <form action="searchResult" method="GET" class="booking_form">
                                         <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                             <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                <div><input type="text" name="location" id="search_term" class="booking_input booking_input_b" value="${search.location}" required="required"></div>
-                                            <div><input id="checkin" type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="${search.timeMin}" required="required"></div>
-                                            <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" required="required" placeholder="${search.timeMax}"></div>
-                                            <div>
-                                                <select class="booking_input booking_input_c form-control" name="petType" id="petType" style="height: 54px;" required="required">
+                                                <div><input type="text" name="location" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
+                                                <div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
+                                                <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
+                                                <div>
+                                                    <select class="booking_input booking_input_c form-control" name="petType" style="height: 54px;" required="required">
                                                     <c:choose>
                                                         <c:when test="${search.petType == 'Dog'}">
                                                             <option selected value="Dog">Dog</option> 
@@ -314,10 +323,10 @@
                                 <div class="room-text">
                                     <div class="room-details">
                                         <div class="room-title">
-                                            <h5>${c.userId}</h5>
+                                            <h5>${c.propertyName}</h5>
                                             <a href="#">
                                                 <i class="flaticon-placeholder"></i>
-                                                <span>Lorem ipsum</span>
+                                                <span>${c.city}, ${c.street}, ${c.aptNo}, ${c.zipcode}</span>
                                             </a>
                                             <a href="#" class="large-width">
                                                 <i class="flaticon-cursor"></i>
@@ -329,27 +338,33 @@
                                         <div class="room-info" style="text-align:center">
                                             <c:forEach var="h" items="${c.serviceList}">
                                                 <div class="beds pl-1 pr-1">
-                                                    <c:if test = "${h.type == 'Dog'}"> 
-                                                        <p>${h.name}</br><img src="static/searchResult/img/check.png" alt=""></p>    
-                                                        </c:if>
+                                                    <p>${h.name}</br><img src="static/searchResult/img/check.png" alt=""></p>    
                                                 </div>
                                             </c:forEach>
                                         </div>
                                     </div>
                                     <div class="room-explaination">
-                                        <span></span>
+                                        <span>${c.description}</span>
                                     </div>
                                     <br>
                                     <div class="room-price">
                                         <p>Per Day</p>
-                                        <c:forEach var="h" items="${c.serviceList}">
-                                            <c:if test = "${h.name == 'Dog Boarding' && h.type == 'Dog'}">   
-                                                <span>$${h.basePrice}</span>
-                                            </c:if>
-                                        </c:forEach>
-
+                                        <c:if test="${search.petType eq 'Dog'}">   
+                                            <c:forEach var="h" items="${c.serviceList}">
+                                                <c:if test="${h.name eq 'Dog Boarding'}">   
+                                                    <span>$${h.basePrice}</span>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${search.petType eq 'Cat'}">   
+                                            <c:forEach var="h" items="${c.serviceList}">
+                                                <c:if test="${h.name eq 'Cat Boarding'}">   
+                                                    <span>$${h.basePrice}</span>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:if>
                                     </div>
-                                    <a href="property" class="site-btn btn-line" style="margin-top: 7px;">View Property</a>
+                                    <a href="property?${c.hotelId}" class="site-btn btn-line" style="margin-top: 7px;">View Property</a>
                                 </div>
                             </div>
                         </div>

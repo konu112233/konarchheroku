@@ -10,7 +10,6 @@ import com.bookingpetz.domain.End;
 import com.bookingpetz.domain.Event;
 import com.bookingpetz.domain.ResultModal;
 import com.bookingpetz.domain.Start;
-import com.bookingpetz.domain.User;
 import com.bookingpetz.services.CalendarService;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,12 +37,9 @@ public class CalendarController {
     public String calendar(Model m, HttpServletRequest request) {
         try {
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
-                m.addAttribute("user", session.getAttribute("user"));
-                m.addAttribute("token", session.getAttribute("token"));
-                User user = (User) session.getAttribute("user");
-                List<ResultModal> resultModals = calendarService.getHotelCalendar(user.getUserId());
-//                System.out.println("sizeee: " + resultModals.size());
+            if (session.getAttribute("token") != null) {
+                String token = (String) session.getAttribute("token");
+                List<ResultModal> resultModals = calendarService.getHotelCalendar(token);
                 m.addAttribute("resultModals", resultModals);
                 return "calendar";
             } else {
@@ -58,13 +54,12 @@ public class CalendarController {
     public String insertEvent(Model m, HttpServletRequest request) throws ParseException {
         try {
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
-                m.addAttribute("user", session.getAttribute("user"));
-                User user = (User) session.getAttribute("user");
+            if (session.getAttribute("token") != null) {
+                String token = (String) session.getAttribute("token");
 
                 String type = "Custom";
                 String summary = request.getParameter("summary") + " = " + request.getParameter("descr");
-                String descr = user.getUserId();
+                String descr = "";//userId
 
                 String endTime = request.getParameter("endTime");
                 String startTime = request.getParameter("startTime");
@@ -79,20 +74,26 @@ public class CalendarController {
                 endDate = simpleDateFormat.format(date);
 
                 Booking booking = new Booking(new End(endDate, "Europe/Amsterdam"), new Start(startDate, "Europe/Amsterdam"), summary, type, descr);
-                boolean result = calendarService.insertEvent(booking);
+                boolean result = calendarService.insertEvent(token, booking);
                 return "redirect:calendar?" + result;
             } else {
                 return "redirect:/";
             }
-        } catch (Exception exception) {
-            return "redirect:/";
+        } catch (ParseException exception) {
+            return "redirect:/" + exception.fillInStackTrace().toString();
         }
     }
 
     @RequestMapping(value = "/removeEvent", method = RequestMethod.POST)
     public String removeEvent(Model m, HttpServletRequest request) throws ParseException {
-        String eventId = request.getParameter("eventId");
-        boolean result = calendarService.removeEvent(new Event(eventId));
-        return "redirect:calendar?" + result;
+        HttpSession session = request.getSession(false);
+        if (session.getAttribute("token") != null) {
+            String token = (String) session.getAttribute("token");
+            String eventId = request.getParameter("eventId");
+            boolean result = calendarService.removeEvent(token, new Event(eventId));
+            return "redirect:calendar?" + result;
+        } else {
+            return "redirect:/";
+        }
     }
 }

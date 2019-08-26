@@ -23,6 +23,7 @@ public class Controller {
         m.addAttribute("page", "home");
         m.addAttribute("result", request.getParameter("result"));
         m.addAttribute("verify", request.getParameter("verify"));
+        m.addAttribute("resultPassword", request.getParameter("resultPassword"));
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
@@ -49,14 +50,13 @@ public class Controller {
                 return "about";
             }
         } catch (Exception exception) {
-            return "about";
+            return "redirect:/";
         }
     }
 
     @RequestMapping(value = "/blog", method = RequestMethod.GET)
     public String blog(Model m, HttpServletRequest request) {
         m.addAttribute("page", "blog");
-
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("user") != null) {
@@ -66,14 +66,13 @@ public class Controller {
                 return "blog";
             }
         } catch (Exception exception) {
-            return "blog";
+            return "redirect:/";
         }
     }
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contact(Model m, HttpServletRequest request) {
         m.addAttribute("page", "contact");
-
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("user") != null) {
@@ -83,7 +82,7 @@ public class Controller {
                 return "contact";
             }
         } catch (Exception exception) {
-            return "contact";
+            return "redirect:/";
         }
     }
 
@@ -96,5 +95,4 @@ public class Controller {
     public String mock(Model m) {
         return "mock";
     }
-
 }

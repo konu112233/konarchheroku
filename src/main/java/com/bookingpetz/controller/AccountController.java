@@ -6,7 +6,6 @@
 package com.bookingpetz.controller;
 
 import com.bookingpetz.dao.UserAuthDAO;
-import com.bookingpetz.dao.UserServiceDAO;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
@@ -106,7 +105,6 @@ public class AccountController {
             return "redirect:/home?result=success";
         }
         //FAILED
-        System.out.println("Fail sendConfirmation");
         return "redirect:/";
     }
 
@@ -118,5 +116,40 @@ public class AccountController {
             return "redirect:/home?verify=success";
         }
         return "redirect:/home?verify=failed";
+    }
+
+    @RequestMapping(value = "/resetPasswordSendMail", method = RequestMethod.POST)
+    public String resetPasswordSendMail(HttpServletRequest request) {
+        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
+        if (userAuthDAO.resetPasswordSendMail(encodeEmail)) {
+            //SUCCESS
+            return "redirect:/home?resultPassword=success";
+        }
+        //FAILED
+        return "redirect:/home?resultPassword=failed";
+    }
+
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
+    public String resetPassword(Model m, HttpServletRequest request) throws IOException {
+        String decodeCode = new String(Base64.getDecoder().decode(request.getParameter("object")));
+        System.out.println("decode " + decodeCode);
+        if (userAuthDAO.checkCode(decodeCode)) {
+            m.addAttribute("resetPassword", "success");
+            m.addAttribute("object", request.getParameter("object"));
+            return "resetPassword";
+        }
+        System.out.println("false");
+        return "redirect:/home?resultPassword=failed";
+    }
+
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+    public String resetPasswordPost(Model m, HttpServletRequest request) throws IOException {
+        String code = request.getParameter("object");
+        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
+        if (userAuthDAO.updatePassword(code, encodePassword)) {
+            return "redirect:/home?resultPassword=done";
+        } else {
+            return "redirect:/home?resultPassword=failed";
+        }
     }
 }

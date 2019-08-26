@@ -27,16 +27,108 @@ public class HotelDashboardController {
     @Autowired
     private HotelDashboardService hotelDashboardService;
 
+    @RequestMapping(value = "/hotelOwner", method = RequestMethod.GET)
+    public String hotelOwner(Model m, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                String token = (String) session.getAttribute("token");
+                String status = hotelDashboardService.checkStatus(token).getStatus();
+                switch (status) {
+                    case "OK":
+                        return "redirect:myHotel";
+                    case "Pending":
+                        return "redirect:hotelOwnerStatus";
+                    case "NOT":
+                        return "redirect:hotelOwnerApplyFirst";
+                    default:
+                        return "redirect:/";
+                }
+            } else {
+                return "redirect:/?token";
+            }
+        } catch (Exception exception) {
+            return "redirect:/?" + exception;
+        }
+    }
+
+    @RequestMapping(value = "/myHotel", method = RequestMethod.GET)
+    public String myHotel(Model m, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                return "myHotel";
+            } else {
+                return "redirect:/?token";
+            }
+        } catch (Exception exception) {
+            return "redirect:/?" + exception;
+        }
+    }
+
+    @RequestMapping(value = "/hotelOwnerStatus", method = RequestMethod.GET)
+    public String hotelOwnerStatus(Model m, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                return "hotelOwnerStatus";
+            } else {
+                return "redirect:/?token";
+            }
+        } catch (Exception exception) {
+            return "redirect:/" + exception;
+        }
+    }
+
+    @RequestMapping(value = "/hotelOwnerApplyFirst", method = RequestMethod.GET)
+    public String hotelOwnerApplyFirst(Model m, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                return "hotelOwnerApplyFirst";
+            } else {
+                return "redirect:/?token";
+            }
+        } catch (Exception exception) {
+            return "redirect:/?" + exception;
+        }
+    }
+
+    @RequestMapping(value = "/hotelOwnerApply", method = RequestMethod.GET)
+    public String hotelOwnerApply(Model m, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                return "hotelOwnerApply";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception exception) {
+            return "redirect:/" + exception;
+        }
+    }
+
+    @RequestMapping(value = "/previewHotel", method = RequestMethod.GET)
+    public String previewHotel(Model m, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                return "previewHotel";
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception exception) {
+            return "redirect:/" + exception;
+        }
+    }
+
     @RequestMapping(value = "/registerHotel", method = RequestMethod.POST)
     public String registerHotel(Model m, HttpServletRequest request) throws IOException {
         try {
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
-                m.addAttribute("token", session.getAttribute("token"));
-                System.out.println(request.getParameter("result"));
+            if (session.getAttribute("token") != null) {
                 User user = new Gson().fromJson(request.getParameter("result"), User.class);
                 System.out.println("body : " + new Gson().toJson(user));
-                System.out.println("user userId : " + user.getUserId());
                 if (hotelDashboardService.registerHotel(user)) {
                     return "redirect:hotelOwnerStatus";
                 }
@@ -45,63 +137,8 @@ public class HotelDashboardController {
                 return "redirect:/";
             }
         } catch (JsonSyntaxException exception) {
-            return "redirect:/" + exception.fillInStackTrace().toString();
+            return "redirect:/" + exception;
         }
     }
 
-    @RequestMapping(value = "/hotelOwnerApply", method = RequestMethod.GET)
-    public String hotelOwnerApply(Model m, HttpServletRequest request) {
-        try {
-            HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
-                String token = session.getAttribute("token").toString();
-                m.addAttribute("user", session.getAttribute("user"));
-                m.addAttribute("token", session.getAttribute("token"));
-                String status = hotelDashboardService.checkStatus(token).getStatus();
-                if (status.equals("Pending")) {
-                    return "redirect:hotelOwnerStatus";
-                } else if (status.equals("No")) {
-                    return "redirect:hotelOwnerApplyFirst";
-                }
-                return "hotelOwnerApply";
-            } else {
-                return "redirect:/";
-            }
-        } catch (Exception exception) {
-            return "redirect:/";
-        }
-
-    }
-
-    @RequestMapping(value = "/myHotel", method = RequestMethod.GET)
-    public String myHotel(Model m, HttpServletRequest request) {
-        return "myHotel";
-    }
-
-    @RequestMapping(value = "/previewHotel", method = RequestMethod.GET)
-    public String previewHotel(Model m, HttpServletRequest request) {
-        return "previewHotel";
-    }
-
-    @RequestMapping(value = "/hotelOwnerStatus", method = RequestMethod.GET)
-    public String hotelOwnerStatus(Model m, HttpServletRequest request) {
-        try {
-            HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
-                m.addAttribute("user", session.getAttribute("user"));
-                m.addAttribute("token", session.getAttribute("token"));
-                return "hotelOwnerStatus";
-            } else {
-                return "redirect:/";
-            }
-        } catch (Exception exception) {
-            return "redirect:/";
-        }
-
-    }
-
-    @RequestMapping(value = "/hotelOwnerApplyFirst", method = RequestMethod.GET)
-    public String hotelOwnerApplyFirst(Model m, HttpServletRequest request) {
-        return "hotelOwnerApplyFirst";
-    }
 }

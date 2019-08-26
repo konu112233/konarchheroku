@@ -18,8 +18,8 @@ public interface CalendarService {
 
     public List<ResultModal> getHotelCalendar(String userId);
 
-    public boolean insertEvent(Booking booking);
+    public boolean insertEvent(String token, Booking booking);
 
-    public boolean removeEvent(Event event);
+    public boolean removeEvent(String token, Event event);
 
 }

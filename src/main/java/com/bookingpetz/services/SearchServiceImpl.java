@@ -6,8 +6,8 @@
 package com.bookingpetz.services;
 
 import com.bookingpetz.dao.SearchDAO;
-import com.bookingpetz.domain.Hotel;
 import com.bookingpetz.domain.Search;
+import com.bookingpetz.domain.SearchResult;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class SearchServiceImpl implements SearchService {
     private SearchDAO searchDAO;
 
     @Override
-    public List<Hotel> resultSearch(Search search) {
+    public List<SearchResult> resultSearch(Search search) {
         return searchDAO.resultSearch(search);
     }
 

@@ -27,4 +27,10 @@ public interface UserAuthDAO {
 
     public boolean verifyMail(String key);
 
+    public boolean resetPasswordSendMail(String email);
+
+    public boolean checkCode(String code);
+
+    public boolean updatePassword(String code, String password);
+
 }

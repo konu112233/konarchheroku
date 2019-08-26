@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -47,7 +48,10 @@ public class User implements Serializable {
     @Column(name = "enable", nullable = false, length = 45)
     private String enable;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "partner", nullable = false, length = 45)
+    private String partner;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
     private List<Contact> contactList = new ArrayList<>();
 
@@ -91,7 +95,7 @@ public class User implements Serializable {
         this.contactList = contactList;
     }
 
-    public User(String userId, String email, String name, String surname, String pkey, String salt, String enable, List<Contact> contactList, Hotel hotel) {
+    public User(String userId, String email, String name, String surname, String pkey, String salt, String enable, List<Contact> contactList, Hotel hotel, String partner) {
         this.userId = userId;
         this.email = email;
         this.name = name;
@@ -101,6 +105,7 @@ public class User implements Serializable {
         this.enable = enable;
         this.contactList = contactList;
         this.hotel = hotel;
+        this.partner = partner;
     }
 
     public String getUserId() {
@@ -173,6 +178,14 @@ public class User implements Serializable {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    public String getPartner() {
+        return partner;
+    }
+
+    public void setPartner(String partner) {
+        this.partner = partner;
     }
 
 }

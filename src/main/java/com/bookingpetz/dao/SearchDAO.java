@@ -5,8 +5,8 @@
  */
 package com.bookingpetz.dao;
 
-import com.bookingpetz.domain.Hotel;
 import com.bookingpetz.domain.Search;
+import com.bookingpetz.domain.SearchResult;
 import java.util.List;
 
 /**
@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface SearchDAO {
 
-    public List<Hotel> resultSearch(Search search);
+    public List<SearchResult> resultSearch(Search search);
 }

@@ -13,6 +13,10 @@
 <jsp:include page="signupEmail.jsp"></jsp:include>
 <jsp:include page="signupVerifymail.jsp"></jsp:include>
 <jsp:include page="signupVerifymailFailed.jsp"></jsp:include>
+<jsp:include page="resetPasswordEmailModal.jsp"></jsp:include>
+<jsp:include page="resetPasswordSendMailOK.jsp"></jsp:include>
+<jsp:include page="resetPasswordSendMailFailed.jsp"></jsp:include>
+<jsp:include page="resetPasswordSuccess.jsp"></jsp:include>
     <!-- Header -->
     <header class="header">
         <div class="header_content d-flex flex-row align-items-center justify-content-start">

@@ -34,7 +34,7 @@
                         <li><a href="calendar"><i class="fa fa-calendar fa-lg" ></i>Calendar </a></li>
                         <li><a href="myPets"><i class="fas fa-cat fa-lg" style="margin-right: 10px;"></i>My Pets </a></li>
                         <li><a href="petSitterApply"><i  class="fa fa-paw fa-lg"></i>Pet Sitter <span class="fa fa-lock"></span></a></li>
-                        <li><a href="hotelOwnerApply"><i class="fa fa-hotel fa-lg" ></i>Hotel Owner <span class="fa fa-lock"></span></a></li>
+                        <li><a href="hotelOwner"><i class="fa fa-hotel fa-lg" ></i>Hotel Owner <span class="fa fa-lock"></span></a></li>
                         <li><a href="hotelBookings"><i class="fa fa-credit-card fa-lg" ></i>Bookings </a></li>
                     </ul>
                 </div>

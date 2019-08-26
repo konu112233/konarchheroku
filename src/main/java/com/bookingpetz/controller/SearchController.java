@@ -5,8 +5,8 @@
  */
 package com.bookingpetz.controller;
 
-import com.bookingpetz.domain.Hotel;
 import com.bookingpetz.domain.Search;
+import com.bookingpetz.domain.SearchResult;
 import com.bookingpetz.services.SearchService;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -30,7 +30,7 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-    @RequestMapping(value = "/searchResult", method = RequestMethod.POST)
+    @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
     public String searchResult(Model m, HttpServletRequest request) throws ParseException, IOException {
         String petType = request.getParameter("petType");
         String location = request.getParameter("location");
@@ -47,7 +47,7 @@ public class SearchController {
         System.out.println("checkin : " + request.getParameter("checkin") + " checkout : " + request.getParameter("checkout") + " location : " + location + " petType : " + petType);
 
         try {
-            List<Hotel> hotels = searchService.resultSearch(new Search(checkout, checkin, "Europe/Amsterdam", petType, location));
+            List<SearchResult> hotels = searchService.resultSearch(new Search(checkout, checkin, "Europe/Amsterdam", petType, location));
             if (!hotels.isEmpty()) {
                 m.addAttribute("hotels", hotels);
                 m.addAttribute("petType", petType);

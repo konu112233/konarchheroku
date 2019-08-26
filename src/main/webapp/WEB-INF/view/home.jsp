@@ -43,10 +43,17 @@
                 <c:when test="${verify.equals('failed')}">
                 $('#signupVerifymailFailed').modal('show');
                 </c:when>
+                <c:when test="${resultPassword.equals('success')}">
+                $('#resetPasswordSendMailOK').modal('show');
+                </c:when>
+                <c:when test="${resultPassword.equals('failed')}">
+                $('#resetPasswordSendMailFailed').modal('show');
+                </c:when>
+                <c:when test="${resultPassword.equals('done')}">
+                $('#resetPasswordSuccess').modal('show');
+                </c:when>
             </c:choose>
             });
-
-
         </script>
     </head>
 
@@ -66,7 +73,7 @@
                                         <div class="home_content text-center">
                                             <div class="home_title">Find Fantastic Hotels For Your Pets</div>
                                             <div class="booking_form_container">
-                                                <form action="searchResult" method="POST" class="booking_form">
+                                                <form action="searchResult" method="GET" class="booking_form">
                                                     <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                                         <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
                                                             <div><input type="text" name="location" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>

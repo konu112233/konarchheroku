@@ -31,9 +31,10 @@ import org.springframework.stereotype.Repository;
 public class CalendarDAOImpl implements CalendarDAO {
 
     @Override
-    public List<ResultModal> getHotelCalendar(String userId) {
-        HttpResponse<String> response = Unirest.get("https://bookingpetswebservice.herokuapp.com/webapi/calendar/getHotelCalendar/" + userId)
-                .asString();
+    public List<ResultModal> getHotelCalendar(String token) {
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/getHotelCalendar")
+                .header("Authorization", "Bearer " + token)
+                .asJson();
 
         System.out.println("status code : " + response.getStatus() + " body : " + response.getBody());
         List<ResultModal> resultModals = new ArrayList<>();
@@ -41,7 +42,7 @@ public class CalendarDAOImpl implements CalendarDAO {
             JSONParser parser = new JSONParser();
             JSONArray jsonarray = null;
             try {
-                jsonarray = (JSONArray) parser.parse(response.getBody());
+                jsonarray = (JSONArray) parser.parse(response.getBody().toString());
             } catch (ParseException ex) {
                 Logger.getLogger(SearchDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -60,10 +61,11 @@ public class CalendarDAOImpl implements CalendarDAO {
     }
 
     @Override
-    public boolean insertEvent(Booking booking) {
+    public boolean insertEvent(String token, Booking booking) {
 
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/calendar/insertEvent")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/insertEvent")
                 .header("Content-type", "application/json")
+                .header("Authorization", "Bearer " + token)
                 .body(new Gson().toJson(booking))
                 .asJson();
 
@@ -71,10 +73,11 @@ public class CalendarDAOImpl implements CalendarDAO {
     }
 
     @Override
-    public boolean removeEvent(Event event) {
+    public boolean removeEvent(String token, Event event) {
 
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/calendar/removeEvent")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/removeEvent")
                 .header("Content-type", "application/json")
+                .header("Authorization", "Bearer " + token)
                 .body(new Gson().toJson(event))
                 .asJson();
 

@@ -131,8 +131,6 @@
             });
         });
         $(function () {
-
-
             // display if image has a src
             $('#image').load(function () {
                 var imageObj = $(this);
@@ -468,6 +466,7 @@
             var city = document.getElementById('city').value;
             var country = document.getElementById('country').value;
             var zipCode = document.getElementById('zipcode').value;
+            var propertyName = document.getElementById('propertyName').value;
 
             var contactName = document.getElementById('contactName').value;
             var managerEmail = document.getElementById('managerEmail').value;
@@ -498,7 +497,7 @@
             console.log("name:" + services[0].name + " prices" + services[0].basePrice);
 
             var data2 = JSON.stringify({
-                "userId": "${user.token}",
+                "userId": "${token}",
                 "contactList": [
                     {
                         "userId": "-",
@@ -514,63 +513,20 @@
                             "street": street,
                             "city": city,
                             "zipcode": zipCode,
-                            "country": country
+                            "country": country,
+                            "propertyName": propertyName
                         }
                     }
                 ],
                 "hotel": {
                     "workingHours": "9-6",
-                    "dogRoom": 4,
-                    "catRoom": 5,
+                    "capacity": 4,
                     "rate": 0.0,
                     "status": "Pending",
                     "serviceList": services
                 }
             });
-//            var hotel = {
-//                "userId": "${user.token}",
-//                "workingHours": "9-6",
-//                "dogRoom": 10,
 
-//            var data = JSON.stringify({
-//                "userId": "${user.token}",
-//                "workingHours": "9-6",
-//                "dogRoom": 10,
-//                "catRoom": 5,
-//                "rate": 0.0,
-//                "serviceList": services,
-//                "user": {
-//                    "userId": "${user.token}",
-//                    "email": "${user.email}",
-//                    "name": "${user.name}",
-//                    "surname": "${user.surname}",
-//                    "pkey": "",
-//                    "salt": "",
-//                    "enable": "",
-//                    "contactList": [
-//                        {
-//                            "id": "",
-//                            "userId": "",
-//                            "contactName": contactName,
-//                            "managerEmail": '' + managerEmail + '',
-//                            "bookingEmail": '' + bookingEmail + '',
-//                            "website": website,
-//                            "phone": phone,
-//                            "description": description,
-//                            "directions": directions,
-//                            "address": {
-//                                "id": "",
-//                                "aptNo": aptNo,
-//                                "street": street,
-//                                "state": state,
-//                                "country": country,
-//                                "zipCode": zipCode
-//                            }
-//                        }
-//                    ]
-//                }
-//            });
-//            alert(JSON.stringify(hotel));
             $('#result').val(data2);
             $("#register").submit();
         }
@@ -714,6 +670,13 @@
                                                                 <div class="clearfix"></div>
                                                             </div>
                                                             <form class="form-horizontal form-label-left">
+                                                                <div class="item form-group">
+                                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="propertyName">Property Name<span class="required">*</span>
+                                                                    </label>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <input value="Bookingpetz Hotel" id="propertyName" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" data-validate-words="1" name="propertyName" placeholder="Dog Hotel" required="required" type="text">
+                                                                    </div>
+                                                                </div>
                                                                 <div class="item form-group">
                                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="aptNo">Property No<span class="required">*</span>
                                                                     </label>

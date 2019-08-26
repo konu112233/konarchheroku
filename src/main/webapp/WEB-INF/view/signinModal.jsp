@@ -30,7 +30,7 @@
                     <div class="md-form pb-3">
                         <input placeholder="Your Password" type="password" name="password" id="Form-pass1" class="form-control validate">
                         <label data-error="wrong" data-success="right" for="Form-pass1" ></label>
-                        <p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text ml-1">Forgot Password?</a></p>
+                        <p class="font-small blue-text d-flex justify-content-end"><a href="home" data-dismiss="modal" data-toggle="modal" data-target="#resetPasswordEmailForm" class="modelClose blue-text ml-1">Forgot Password?</a></p>
                     </div>
 
                     <div class="text-center mb-3">

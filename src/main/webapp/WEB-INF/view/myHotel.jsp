@@ -26,7 +26,7 @@
         <!-- iCheck -->
         <link href="static/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
-        <!-- sL�DE -->
+        <!-- SLIDE -->
         <link rel="stylesheet" href="static/vendors/responsive-slides/responsiveslides.css">
         <link rel="stylesheet" href="static/vendors/responsive-slides/demo.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -1173,9 +1173,9 @@
                                     </div>
                                 </div>
                             </div>
-                        <jsp:include page="dashboardFooter.jsp"></jsp:include>
+                        </div>
                     </div>
-                </div>
+                <jsp:include page="dashboardFooter.jsp"></jsp:include>
 
                 <!-- Geodate-->
                 <script src="//geodata.solutions/includes/countrystatecity.js"></script>
