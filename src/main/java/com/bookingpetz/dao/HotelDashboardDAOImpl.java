@@ -23,7 +23,7 @@ public class HotelDashboardDAOImpl implements HotelDashboardDAO {
     @Override
     public boolean registerHotel(User user, String token) {
 
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpets.herokuapp.com/webapi/gateway/auth/registerHotel")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/registerHotel")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + token)
                 .body(new Gson().toJson(user))
@@ -35,7 +35,7 @@ public class HotelDashboardDAOImpl implements HotelDashboardDAO {
     @Override
     public Status checkStatus(String token) {
 
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpets.herokuapp.com/webapi/gateway/auth/status")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/status")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + token)
                 .asJson();
