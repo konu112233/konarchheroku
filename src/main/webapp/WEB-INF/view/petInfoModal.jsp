@@ -143,7 +143,7 @@
 
 
                     <div class="text-center mb-3">
-                        <button type="button" data-dismiss="modal" data-toggle="modal"  data-target="#signupVerifymail" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Next</button>
+                        <button type="button" data-dismiss="modal" data-toggle="modal"  data-target="#verifyMail" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Next</button>
                         <button type="button" data-dismiss="modal" data-toggle="modal"  data-target="#signupForBookingForm" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="opacity:0.6 ;font-weight: 500; border-radius: 20px;">Previous</button>
 
                     </div>

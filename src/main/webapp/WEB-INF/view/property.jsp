@@ -566,9 +566,7 @@
 
                                         <!--signupForBookingForm-->
                                         <a href="" class="site-btn list-btn" data-toggle="modal" data-target="#signupForBookingForm">Book Now!</a>
-
                                         <div class="x_content">
-
                                             <!-- modals -->
                                             <!-- Large modal -->
 
