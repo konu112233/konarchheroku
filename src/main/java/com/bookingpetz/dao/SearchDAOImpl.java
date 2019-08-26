@@ -26,7 +26,7 @@ public class SearchDAOImpl implements SearchDAO {
 
     @Override
     public List<SearchResult> resultSearch(Search search) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/calendar/searchResult")
+        HttpResponse<String> response = Unirest.post("https://bookingpets.herokuapp.com/webapi/calendar/searchResult")
                 .body(new Gson().toJson(search))
                 .asString();
 
@@ -39,12 +39,12 @@ public class SearchDAOImpl implements SearchDAO {
         }
         return searchResults;
     }
-
-    @Override
+ 
+   @Override
     public SearchResult getProperty(String code) {
         JSONObject jsono = new JSONObject();
         jsono.put("object", code);
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/hotel/getProperty")
+        HttpResponse<String> response = Unirest.post("https://bookingpets.herokuapp.com/webapi/hotel/getProperty")
                 .header("Content-type", "application/json")
                 .body(jsono.toJSONString())
                 .asString();
