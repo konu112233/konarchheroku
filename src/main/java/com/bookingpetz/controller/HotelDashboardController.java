@@ -56,7 +56,7 @@ public class HotelDashboardController {
                 String token = (String) session.getAttribute("token");
 
                 Status status = hotelDashboardService.checkStatus(token);
-                if (status.getPartner().equals("true")) {
+                if (status.getPartner().equals("hotel")) {
                     switch (status.getStatus()) {
                         case "OK":
                             return "redirect:myHotel";
