@@ -16,4 +16,6 @@ import java.util.List;
 public interface SearchDAO {
 
     public List<SearchResult> resultSearch(Search search);
+
+    public SearchResult getProperty(String code);
 }

@@ -22,8 +22,8 @@ public class HotelDashboardServiceImpl implements HotelDashboardService {
     private HotelDashboardDAO hotelDashboardDAO;
 
     @Override
-    public boolean registerHotel(User user) {
-        return hotelDashboardDAO.registerHotel(user);
+    public boolean registerHotel(User user, String token) {
+        return hotelDashboardDAO.registerHotel(user, token);
     }
 
     @Override

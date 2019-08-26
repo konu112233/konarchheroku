@@ -27,4 +27,9 @@ public class SearchServiceImpl implements SearchService {
         return searchDAO.resultSearch(search);
     }
 
+    @Override
+    public SearchResult getProperty(String code) {
+        return searchDAO.getProperty(code);
+    }
+
 }

@@ -86,11 +86,6 @@ public class Controller {
         }
     }
 
-    @RequestMapping(value = "/property", method = RequestMethod.GET)
-    public String property(Model m) {
-        return "property";
-    }
-
     @RequestMapping(value = "/mock", method = RequestMethod.GET)
     public String mock(Model m) {
         return "mock";

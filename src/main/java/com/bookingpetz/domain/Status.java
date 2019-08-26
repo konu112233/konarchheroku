@@ -11,10 +11,12 @@ package com.bookingpetz.domain;
  */
 public class Status {
 
+    private String partner;
     private String status;
 
-    public Status(String status) {
+    public Status(String status, String partner) {
         this.status = status;
+        this.partner = partner;
     }
 
     public String getStatus() {
@@ -25,4 +27,11 @@ public class Status {
         this.status = status;
     }
 
+    public String getPartner() {
+        return partner;
+    }
+
+    public void setPartner(String partner) {
+        this.partner = partner;
+    }
 }

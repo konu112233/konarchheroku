@@ -5,6 +5,7 @@
  */
 package com.bookingpetz.controller;
 
+import com.bookingpetz.domain.Status;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.services.HotelDashboardService;
 import com.google.gson.Gson;
@@ -27,22 +28,47 @@ public class HotelDashboardController {
     @Autowired
     private HotelDashboardService hotelDashboardService;
 
+    @RequestMapping(value = "/registerHotel", method = RequestMethod.POST)
+    public String registerHotel(Model m, HttpServletRequest request) throws IOException {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+
+                User user = new Gson().fromJson(request.getParameter("result"), User.class);
+                System.out.println("body : " + new Gson().toJson(user));
+                if (hotelDashboardService.registerHotel(user, session.getAttribute("token").toString())) {
+                    return "redirect:hotelOwnerStatus";
+                }
+                return "redirect:hotelOwnerApply";
+            } else {
+                return "redirect:/";
+            }
+        } catch (JsonSyntaxException exception) {
+            return "redirect:/" + exception;
+        }
+    }
+
     @RequestMapping(value = "/hotelOwner", method = RequestMethod.GET)
     public String hotelOwner(Model m, HttpServletRequest request) {
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
                 String token = (String) session.getAttribute("token");
-                String status = hotelDashboardService.checkStatus(token).getStatus();
-                switch (status) {
-                    case "OK":
-                        return "redirect:myHotel";
-                    case "Pending":
-                        return "redirect:hotelOwnerStatus";
-                    case "NOT":
-                        return "redirect:hotelOwnerApplyFirst";
-                    default:
-                        return "redirect:/";
+
+                Status status = hotelDashboardService.checkStatus(token);
+                if (status.getPartner().equals("true")) {
+                    switch (status.getStatus()) {
+                        case "OK":
+                            return "redirect:myHotel";
+                        case "Pending":
+                            return "redirect:hotelOwnerStatus";
+                        case "NOT":
+                            return "redirect:hotelOwnerApplyFirst";
+                        default:
+                            return "redirect:/";
+                    }
+                } else {
+                    return "redirect:hotelOwnerApplyFirst";
                 }
             } else {
                 return "redirect:/?token";
@@ -121,24 +147,4 @@ public class HotelDashboardController {
             return "redirect:/" + exception;
         }
     }
-
-    @RequestMapping(value = "/registerHotel", method = RequestMethod.POST)
-    public String registerHotel(Model m, HttpServletRequest request) throws IOException {
-        try {
-            HttpSession session = request.getSession(false);
-            if (session.getAttribute("token") != null) {
-                User user = new Gson().fromJson(request.getParameter("result"), User.class);
-                System.out.println("body : " + new Gson().toJson(user));
-                if (hotelDashboardService.registerHotel(user)) {
-                    return "redirect:hotelOwnerStatus";
-                }
-                return "redirect:hotelOwnerApply";
-            } else {
-                return "redirect:/";
-            }
-        } catch (JsonSyntaxException exception) {
-            return "redirect:/" + exception;
-        }
-    }
-
 }

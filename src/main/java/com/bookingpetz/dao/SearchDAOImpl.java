@@ -14,6 +14,7 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -35,6 +36,23 @@ public class SearchDAOImpl implements SearchDAO {
             Type listType = new TypeToken<ArrayList<SearchResult>>() {
             }.getType();
             searchResults = new Gson().fromJson(response.getBody(), listType);
+        }
+        return searchResults;
+    }
+
+    @Override
+    public SearchResult getProperty(String code) {
+        JSONObject jsono = new JSONObject();
+        jsono.put("object", code);
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/hotel/getProperty")
+                .header("Content-type", "application/json")
+                .body(jsono.toJSONString())
+                .asString();
+
+        System.out.println("status code : " + response.getStatus() + " body : " + response.getBody());
+        SearchResult searchResults = new SearchResult();
+        if (response.getStatus() == 200) {
+            searchResults = new Gson().fromJson(response.getBody(), SearchResult.class);
         }
         return searchResults;
     }

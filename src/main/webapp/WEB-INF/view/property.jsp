@@ -182,14 +182,8 @@
             checkout.min = checkin;
 
         }
-
-
-
         function next() {
-
             $('#petInfpForm').show();
-
-
         }
 
     </script>
@@ -227,209 +221,137 @@
                     <div class="row spad-p">
                         <div class="col-lg-12">
                             <div class="property-title">
-                                <h3>Country Style House with beautiful garden and terrace</h3>
-                                <a href="#"><i class="fa flaticon-placeholder"></i> London, 76 Guild Street, EC3P 3WF</a>
-                            </div>
-                            <div class="property-price">
-                                <p>Per Day</p>
-                                <span>$45</span>
-                            </div>
+                                <h3>${hotel.propertyName}</h3>
+                            <a href="#"><i class="fa flaticon-placeholder"></i>${hotel.city}, ${hotel.street}, ${hotel.aptNo}, ${hotel.country}</a>
+                        </div>
+                        <div class="property-price">
+                            <p>Per Day</p>
+                            <span>$45</span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="property-img owl-carousel">
-                                <div class="single-img">
-                                    <img src="static/searchResult/img/single-property/1.jpg" alt="">
-                                </div>
-                                <div class="single-img">
-                                    <img src="static/searchResult/img/single-property/2.jpg" alt="">
-                                </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="property-img owl-carousel">
+                            <div class="single-img">
+                                <img src="static/searchResult/img/single-property/1.jpg" alt="">
+                            </div>
+                            <div class="single-img">
+                                <img src="static/searchResult/img/single-property/2.jpg" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Single Property End -->
-            <!-- Single Property Deatails Section Begin -->
-            <section class="property-details">
-                <div class="container">
-                    <div class="row sp-40 spt-40">
-                        <div class="col-lg-8">
-                            <div class="p-ins">
-                                <div class="row details-top">
-                                    <div class="col-lg-12">
-                                        <div class="t-details">
-                                            <div class="register-id">
-                                                <p>Registered ID: <span>0D05426FF1</span></p>
+        </div>
+        <!-- Single Property End -->
+        <!-- Single Property Deatails Section Begin -->
+        <section class="property-details">
+            <div class="container">
+                <div class="row sp-40 spt-40">
+                    <div class="col-lg-8">
+                        <div class="p-ins">
+                            <div class="row details-top">
+                                <div class="col-lg-12">
+                                    <div class="t-details">
+                                        <div class="popular-room-features single-property">
+                                            <div class="size">
+                                                <p>Rate</p>
+                                                <i class="flaticon-bath"></i>
+                                                <span>${hotel.rate}/5</span>
                                             </div>
-                                            <div class="popular-room-features single-property">
-                                                <div class="size">
-                                                    <p>Rate</p>
-                                                    <img src="static/searchResult/img/star.svg" alt="">
-                                                    <i class="flaticon-bath"></i>
-                                                    <span>5/5</span>
-                                                </div>
-                                                <div class="beds">
-                                                    <p>Capacity</p>
-                                                    <img src="static/searchResult/img/paw.svg" alt="">
-                                                    <span>18/12</span>
-                                                </div>
-                                                <!--<div class="baths">
-                                                    <p>Bath</p>
-                                                    <img src="static/searchResult/img/bath.svg" alt="">
-                                                    <span>2</span>
-                                                </div>
-                                                <div class="garage">
-                                                    <p>Garden</p>
-                                                    <img src="static/searchResult/img/hencee.svg" alt="">
-                                                    <span>1</span>
-                                                </div>-->
+                                            <div class="beds">
+                                                <p>Capacity</p>
+                                                <span>${hotel.capacity} Left</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="property-description">
-                                            <h4>Description</h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in justo
-                                                elementum,fermentum justo ac, rutrum erat. Aenean ut malesuada diam. Proin
-                                                bibendum
-                                                sapien sodales, convallis dolor facilisis, ultricies nisl. Sed malesuada nibh
-                                                sed
-                                                velit ultricies, id varius lacus feugiat. Aenean vestibulum, nisl eget accumsan
-                                                aliquam, magna diam convallis risus, in tristique metus sem eu tortor. Cras leo
-                                                libero, fermentum quis aliquam et, tincidunt at dolor. </p>
-                                        </div>
-                                        <div class="property-features">
-                                            <div class="col-md-12 col-sm-6 col-xs-12">
-                                                <div class="x_panel">
-                                                    <div class="x_title">
-                                                        <h3>Services & Prices</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="property-description">
+                                        <h4>Description</h4>
+                                        <p>${hotel.description}</p>
+                                    </div>
+                                    <div class="property-features">
+                                        <div class="col-md-12 col-sm-6 col-xs-12">
+                                            <div class="x_panel">
+                                                <div class="x_title">
+                                                    <h3>Services & Prices</h3>
 
-                                                        <div class="clearfix"></div>
-                                                    </div>
-                                                    <div class="x_content">
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="x_content">
 
-                                                        <table class="table table-responsive-lg table-striped">
-                                                            <thead>
-                                                                <tr>
+                                                    <table class="table table-responsive-lg table-striped">
+                                                        <thead>
+                                                            <tr>
 
-                                                                    <th><i class="fas fa-dog fa-2x"></i></th>
-                                                                    <th>Price</th>
-                                                                    <th><i class="fas fa-cat fa-2x"></i></th>
-                                                                    <th>Price</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Boarding</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>
-                                                                            45</span></td>
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Daycare</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                                <th><i class="fas fa-dog fa-2x"></i></th>
+                                                                <th>Price</th>
+                                                                <th><i class="fas fa-cat fa-2x"></i></th>
+                                                                <th>Price</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Boarding</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>
+                                                                        45</span></td>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Daycare</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Daycare</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Daycare</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Washing</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Washing</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></i> Dog Nail Clipping</td>
+                                                                <td></td>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Nail Clipping</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Grooming & Trimming</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                                <td>Cat Grooming & Trimming</td>
+                                                                <td><i class=""</i> <span></span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Medication</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Medication</span></td>
+                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
 
-                                                                </tr>
-                                                                <tr>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
 
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Daycare</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Daycare</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-
-                                                                </tr>
-                                                                <tr>
-
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Washing</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Washing</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-
-                                                                </tr>
-
-                                                                <tr>
-
-                                                                    <td></i> Dog Nail Clipping</td>
-                                                                    <td></td>
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Nail Clipping</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-
-                                                                </tr>
-                                                                <tr>
-
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Grooming & Trimming</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                                    <td>Cat Grooming & Trimming</td>
-                                                                    <td><i class=""</i> <span></span></td>
-
-                                                                </tr>
-
-                                                                <tr>
-
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Medication</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Medication</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="location-map">
-                                            <h4>Location</h4>
-                                            <iframe id="location" style="margin-bottom: 28px;" src="https://www.google.com/maps?q=Bernard kochstraat 21B &output=embed" allowfullscreen></iframe>
-                                        </div>
-                                        <div class="property-reviews">
-                                            <h4>Reviews</h4>
-                                            <div class="container">
-                                                <div class="row show-hide-reviews">
-                                                    <div class="col">
-                                                        <div class="testimonials_slider_container">
-                                                            <div class="owl-carousel owl-theme test_slider_vertical">
-                                                                <div  class="test_slider_item text-center">
-                                                                    <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                                                    <div class="testimonial_title"><a href="#">Perfect Stay</a></div>
-                                                                    <div class="testimonial_text">
-                                                                        <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                                                    </div>
-                                                                    <div class="testimonial_image"><img src="static/images/user_1.jpg" alt=""></div>
-                                                                    <div class="testimonial_author"><a href="#">Samantha Smith</a>, Greece</div>
-                                                                </div>
-                                                                <div  class="test_slider_item text-center">
-                                                                    <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                                                    <div class="testimonial_title"><a href="#">Nice place</a></div>
-                                                                    <div class="testimonial_text">
-                                                                        <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                                                    </div>
-                                                                    <div class="testimonial_image"><img src="static/images/user_2.jpg" alt=""></div>
-                                                                    <div class="testimonial_author"><a href="#">Michael Doe</a>, Italy</div>
-                                                                </div>
-                                                                <div  class="test_slider_item text-center">
-                                                                    <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                                                    <div class="testimonial_title"><a href="#">We loved it</a></div>
-                                                                    <div class="testimonial_text">
-                                                                        <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                                                    </div>
-                                                                    <div class="testimonial_image"><img src="static/images/user_3.jpg" alt=""></div>
-                                                                    <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <p id="more-reviews-button" onclick="$('.show-hide-reviews').toggle();
-                                                                $('#more-reviews-button').toggle();
-                                                                $('#less-reviews-button').toggle();">Show more reviews</p>
-
-                                                        <div class="show-hide-reviews" id="all-reviews">
-                                                            <div  class="text-center">
+                                    </div>
+                                    <div class="location-map">
+                                        <h4>Location</h4>
+                                        <iframe id="location" style="margin-bottom: 28px;" src="https://www.google.com/maps?q=Bernard kochstraat 21B &output=embed" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="property-reviews">
+                                        <h4>Reviews</h4>
+                                        <div class="container">
+                                            <div class="row show-hide-reviews">
+                                                <div class="col">
+                                                    <div class="testimonials_slider_container">
+                                                        <div class="owl-carousel owl-theme test_slider_vertical">
+                                                            <div  class="test_slider_item text-center">
                                                                 <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
                                                                 <div class="testimonial_title"><a href="#">Perfect Stay</a></div>
                                                                 <div class="testimonial_text">
@@ -438,8 +360,7 @@
                                                                 <div class="testimonial_image"><img src="static/images/user_1.jpg" alt=""></div>
                                                                 <div class="testimonial_author"><a href="#">Samantha Smith</a>, Greece</div>
                                                             </div>
-                                                            <hr>
-                                                            <div  class="text-center">
+                                                            <div  class="test_slider_item text-center">
                                                                 <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
                                                                 <div class="testimonial_title"><a href="#">Nice place</a></div>
                                                                 <div class="testimonial_text">
@@ -448,8 +369,7 @@
                                                                 <div class="testimonial_image"><img src="static/images/user_2.jpg" alt=""></div>
                                                                 <div class="testimonial_author"><a href="#">Michael Doe</a>, Italy</div>
                                                             </div>
-                                                            <hr>
-                                                            <div  class="text-center">
+                                                            <div  class="test_slider_item text-center">
                                                                 <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
                                                                 <div class="testimonial_title"><a href="#">We loved it</a></div>
                                                                 <div class="testimonial_text">
@@ -458,358 +378,334 @@
                                                                 <div class="testimonial_image"><img src="static/images/user_3.jpg" alt=""></div>
                                                                 <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
                                                             </div>
-                                                            <hr>
-                                                            <div  class="text-center">
-                                                                <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                                                <div class="testimonial_title"><a href="#">Fantastic</a></div>
-                                                                <div class="testimonial_text">
-                                                                    <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                                                </div>
-                                                                <div class="testimonial_image"><img src="static/images/user_2.jpg" alt=""></div>
-                                                                <div class="testimonial_author"><a href="#">Michael J. Doe</a>, Italy</div>
-                                                            </div>
                                                         </div>
-                                                        <br>
-                                                        <p id="less-reviews-button" onclick="$('.show-hide-reviews').toggle();
-                                                                $('#more-reviews-button').toggle();
-                                                                $('#less-reviews-button').toggle();">Show less reviews</p>
-
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="row pb-30">
-                                <div class="col-lg-12">
-                                    <div class="contact-service">
-                                        <img src="static/searchResult/img/single-property/small.png" alt="">
-                                        <p>Listed by</p>
-                                        <h5>Oliver G Harris</h5>
-                                        <table>
-                                            <tr>
-                                                <td>Office : <span>1-139-954-3228</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mobile : <span>1-517-328-7751</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fax : <span>1-458-284-9871</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>WhatsApp : <span>1-812-117-2663</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Email : <span>oliver@homes.com</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-
-                                                </td>
-                                            </tr>
-
-
-                                        </table>
-                                        <div class="row">
-                                            <div class="col align-self-start room-price">
-                                                <p>Per Day</p>
-                                                <span>$<span id="roomPrice">45</span></span>
-                                            </div>
-                                            <div class="col align-self-end stars">
-                                                <p>Rate</p>
-                                                <span>5/5</span>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p>Dates</p>
                                             <div class="row">
-                                                <span class="col-6">Check in</span>
-                                                <input type="date" onchange="getDiff()" id="checkin" name="checkin" class="col-5 align-self-end" placeholder="Check in" required="required">
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <span class="col-6">Check out</span>
-                                                <input type="date" onchange="getDiff();
-                                                        minOut()" id="checkout" name="checkout" class="col-5 align-self-end" placeholder="Check out" required="required">
-                                            </div>
-                                            <br>
-                                        </div>
-                                        <div>
-                                            <p>Pet</p>
-                                            <div class="row justify-content-md-center">
-                                                <form class="col-md-auto">
-                                                    <select id="bookPet" name="bookPet">
-                                                        <option value="pet1">Pet 1</option>
-                                                        <option value="pet2">Pet 2</option>
-                                                        <option value="pet3">Pet 3</option>
-                                                    </select>
-                                                </form>
-                                            </div>
-                                            <br>
-                                        </div>
-                                        <div>
-                                            <table>
-                                                <tr>
-                                                    <td id="roomNights">1 night : <span>$<span id="priceNights">45</span></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Service fee : <span>$<span id="fee">5</span></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Total without services : <span>$<span id="total">45</span></span></td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                                <div class="col">
+                                                    <p id="more-reviews-button" onclick="$('.show-hide-reviews').toggle();
+                                                            $('#more-reviews-button').toggle();
+                                                            $('#less-reviews-button').toggle();">Show more reviews</p>
 
-                                        <!--signupForBookingForm-->
-                                        <a href="" class="site-btn list-btn" data-toggle="modal" data-target="#signupForBookingForm">Book Now!</a>
-                                        <div class="x_content">
-                                            <!-- modals -->
-                                            <!-- Large modal -->
-
-                                            <div class="modal fade" id="servicesModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                                <div class="modal-dialog ">
-                                                    <div class="modal-content">
-
-
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel" style="margin-left:10px;"><strong>Booking Summary</strong></h3>
-
-                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                                                            </button>
-
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="x_panel">
-
-                                                                        <div class="x_content">
-
-                                                                            <section class="content invoice">
-                                                                                <!-- title row -->
-                                                                                <div class="row" style="margin-left: 2px" >
-                                                                                    <div class="col-md-4" >
-                                                                                        <div class="row" ><h9><small>Check-in Date</small></h9></div>
-                                                                                        <div class="row"><h7><strong>Aug 7, 2019</strong></h7></div>
-                                                                                    </div>
-                                                                                    <div class="col-md-4" >
-                                                                                        <div class="" >
-                                                                                            <div class="row"> <h9><small>Check-out Date</small></h9></div>
-                                                                                            <div class="row"> <h7><strong>Aug 9, 2019</strong></h7></div>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                                    <div class="col-md-2" >
-                                                                                        <div class="" >
-                                                                                            <div class="row"> <h9><small>Day</small></h9></div>
-                                                                                            <div class="row" style="padding-left:4px"> <h7><strong>2</strong></h7></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-2" >
-                                                                                        <div class="" >
-                                                                                            <div class="row"> <h9><small>Breed</small></h9></div>
-                                                                                            <div class="row"> <h7><strong>Dog</strong></h7></div>
-                                                                                        </div>
-                                                                                    </div>
-
-
-                                                                                </div>
-                                                                                <br>
-                                                                                <div class="row">
-                                                                                    <table class="table table-striped jambo_table bulk_action">
-                                                                                        <thead>
-                                                                                            <tr class="headings">
-
-                                                                                                <th class="column-title" style="display: table-cell;">Service</th>
-                                                                                                <th class="column-title" style="display: table-cell;">Fee</th>
-                                                                                                <th class="column-title" style="display: table-cell;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                                                                                                <th class="bulk-actions" colspan="3" style="display: none;">
-                                                                                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt">1 Records Selected</span> ) <i class="fa fa-chevron-down"></i></a>
-                                                                                                </th>
-                                                                                            </tr>
-                                                                                        </thead>
-
-                                                                                        <tbody id="tBody">
-                                                                                            <tr class="even pointer">
-
-                                                                                                <td class="font-weight-bold"><strong>Boarding</strong></td>
-                                                                                                <td  class="a-right a-right font-weight-bold ">€90</td>
-                                                                                                <td class="font-weight-bold" >(45 x 2 nights)</td>
-                                                                                            </tr>
-                                                                                            <tr id="serviceWashing" class="even pointer">
-
-                                                                                                <td  >Washing</td>
-                                                                                                <td class="a-right a-right">€10.45</td>
-                                                                                                <td >
-                                                                                                    <div id="serviceWashingBtn" >
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
-                                                                                                            <i class="fa fa-plus text-white"></i>
-                                                                                                        </a>
-
-                                                                                                    </div>
-                                                                                                    <div id="serviceWashingBtn2" style="display:none;">
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
-                                                                                                    </div>
-                                                                                                </td>
-
-                                                                                            </tr>
-
-                                                                                            <tr id="serviceMedication" class="even pointer">
-
-                                                                                                <td  >Medication</td>
-                                                                                                <td class="a-right a-right">€10.45</td>
-                                                                                                <td >
-                                                                                                    <div id="serviceMedicationBtn" >
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
-                                                                                                            <i class="fa fa-plus text-white"></i>
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                    <div id="serviceMedicationBtn2" style="display:none;">
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
-                                                                                                    </div>
-                                                                                                </td>
-
-                                                                                            </tr>
-                                                                                            <tr id="serviceNail" class="even pointer">
-
-                                                                                                <td  >Nail Clipping</td>
-                                                                                                <td class="a-right a-right">€10.45</td>
-                                                                                                <td >
-                                                                                                    <div id="serviceNailBtn" >
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
-                                                                                                            <i class="fa fa-plus text-white"></i>
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                    <div id="serviceNailBtn2" style="display:none;">
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
-                                                                                                    </div>
-                                                                                                </td>
-
-                                                                                            </tr>
-                                                                                            <tr id="serviceGroomming" class="even pointer">
-
-                                                                                                <td  >Grooming & Trimming</td>
-                                                                                                <td class="a-right a-right">€10.45</td>
-                                                                                                <td >
-                                                                                                    <div id="serviceGroommingBtn" >
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
-                                                                                                            <i class="fa fa-plus text-white"></i>
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                    <div id="serviceGroommingBtn2" style="display:none;">
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
-                                                                                                    </div>
-                                                                                                </td>
-
-                                                                                            </tr>
-
-
-                                                                                            <tr class="even pointer">
-
-                                                                                                <td class="font-weight-bold">Total</td>
-                                                                                                <td  id="serviceTotal" class="a-right a-right font-weight-bold">€90</td>
-                                                                                                <td class=""></td>
-
-                                                                                            </tr>
-
-
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    <div class="row">
-
-                                                                                    </div>
-                                                                                </div>
-
-
-
-                                                                                <div class="row">
-
-                                                                                </div>
-                                                                                <!-- /.row -->
-
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                    <div class="show-hide-reviews" id="all-reviews">
+                                                        <div  class="text-center">
+                                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                                                            <div class="testimonial_title"><a href="#">Perfect Stay</a></div>
+                                                            <div class="testimonial_text">
+                                                                <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
                                                             </div>
+                                                            <div class="testimonial_image"><img src="static/images/user_1.jpg" alt=""></div>
+                                                            <div class="testimonial_author"><a href="#">Samantha Smith</a>, Greece</div>
                                                         </div>
-                                                        <div class="modal-footer">
-
-                                                            <button type="button" class="btn  blue-gradient">Pay</button>
-
+                                                        <hr>
+                                                        <div  class="text-center">
+                                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                                                            <div class="testimonial_title"><a href="#">Nice place</a></div>
+                                                            <div class="testimonial_text">
+                                                                <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
+                                                            </div>
+                                                            <div class="testimonial_image"><img src="static/images/user_2.jpg" alt=""></div>
+                                                            <div class="testimonial_author"><a href="#">Michael Doe</a>, Italy</div>
                                                         </div>
-
+                                                        <hr>
+                                                        <div  class="text-center">
+                                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                                                            <div class="testimonial_title"><a href="#">We loved it</a></div>
+                                                            <div class="testimonial_text">
+                                                                <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
+                                                            </div>
+                                                            <div class="testimonial_image"><img src="static/images/user_3.jpg" alt=""></div>
+                                                            <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
+                                                        </div>
+                                                        <hr>
+                                                        <div  class="text-center">
+                                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                                                            <div class="testimonial_title"><a href="#">Fantastic</a></div>
+                                                            <div class="testimonial_text">
+                                                                <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
+                                                            </div>
+                                                            <div class="testimonial_image"><img src="static/images/user_2.jpg" alt=""></div>
+                                                            <div class="testimonial_author"><a href="#">Michael J. Doe</a>, Italy</div>
+                                                        </div>
                                                     </div>
+                                                    <br>
+                                                    <p id="less-reviews-button" onclick="$('.show-hide-reviews').toggle();
+                                                            $('#more-reviews-button').toggle();
+                                                            $('#less-reviews-button').toggle();">Show less reviews</p>
+
                                                 </div>
                                             </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="room-items">
-                                        <div class="room-img set-bg" data-setbg="static/searchResult/img/rooms/4.jpg">
-                                            <a href="#" class="room-content">
-                                                <i class="flaticon-heart"></i>
-                                            </a>
-                                        </div>
-                                        <div class="room-text">
-                                            <div class="room-details">
-                                                <div class="room-title">
-                                                    <h5>Country Style House with beautiful garden and terrace</h5>
-                                                    <a href="#"><i class="flaticon-placeholder"></i> <span>Location</span></a>
-                                                    <a href="#" class="large-width"><i class="flaticon-cursor"></i> <span>Show
-                                                            on Map</span></a>
-                                                </div>
-                                            </div>
-                                            <div class="room-features">
-                                                <div class="room-info">
-                                                    <div class="size">
-                                                        <p>Rate</p>
-                                                        <img src="static/searchResult/img/star.svg" alt="">
-                                                        <i class="flaticon-bath"></i>
-                                                        <span>5/5</span>
-                                                    </div>
-                                                    <div class="beds">
-                                                        <p>Capacity</p>
-                                                        <img src="static/searchResult/img/paw.svg" alt="">
-                                                        <span>18/12</span>
-                                                    </div>
-                                                    <!--<div class="baths">
-                                                        <p>Bath</p>
-                                                        <img src="static/searchResult/img/bath.svg" alt="">
-                                                        <span>2</span>
-                                                    </div>
-                                                    <div class="garage">
-                                                        <p>Garden</p>
-                                                        <img src="static/searchResult/img/hencee.svg" alt="">
-                                                        <span>1</span>
-                                                    </div>-->
-                                                </div>
-                                            </div>
-                                            <div class="room-price">
-                                                <p>Per Day</p>
-                                                <span>$45</span>
-                                            </div>
-                                            <a href="#" class="site-btn btn-line">View Property</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                        <div class="row pb-30">
+                            <div class="col-lg-12">
+                                <div class="contact-service">
+                                    <img src="static/searchResult/img/single-property/small.png" alt="">
+                                    <p>Listed by</p>
+                                    <h5>${hotel.contactName}</h5>
+                                    <table>
+                                        <tr>
+                                            <td>Office : <span>${hotel.phone}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mobile : <span>1-517-328-7751</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email : <span>${hotel.bookingEmail}</span></td>
+                                        </tr>
+
+                                    </table>
+                                    <div class="row">
+                                        <div class="col align-self-start room-price">
+                                            <p>Per Day</p>
+                                            <span>$<span id="roomPrice">45</span></span>
+                                        </div>
+                                        <div class="col align-self-end stars">
+                                            <p>Rate</p>
+                                            <span>${hotel.rate}/5</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p>Dates</p>
+                                        <div class="row">
+                                            <span class="col-6">Check in</span>
+                                            <input type="date" onchange="getDiff()" id="checkin" name="checkin" class="col-5 align-self-end" placeholder="Check in" required="required">
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <span class="col-6">Check out</span>
+                                            <input type="date" onchange="getDiff(); minOut()" id="checkout" name="checkout" class="col-5 align-self-end" placeholder="Check out" required="required">
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div>
+                                        <p>Pet</p>
+                                        <div class="row justify-content-md-center">
+                                            <form class="col-md-auto">
+                                                <select id="bookPet" name="bookPet">
+                                                    <option value="pet1">Pet 1</option>
+                                                    <option value="pet2">Pet 2</option>
+                                                    <option value="pet3">Pet 3</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td id="roomNights">1 night : <span>$<span id="priceNights">45</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Service fee : <span>$<span id="fee">5</span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total without services : <span>$<span id="total">45</span></span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <!--signupForBookingForm-->
+                                    <a href="" class="site-btn list-btn" data-toggle="modal" data-target="#signupForBookingForm">Book Now!</a>
+                                    <div class="x_content">
+                                        <!-- modals -->
+                                        <!-- Large modal -->
+
+                                        <div class="modal fade" id="servicesModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                            <div class="modal-dialog ">
+                                                <div class="modal-content">
+
+
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel" style="margin-left:10px;"><strong>Booking Summary</strong></h3>
+
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                        </button>
+
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="x_panel">
+
+                                                                    <div class="x_content">
+
+                                                                        <section class="content invoice">
+                                                                            <!-- title row -->
+                                                                            <div class="row" style="margin-left: 2px" >
+                                                                                <div class="col-md-4" >
+                                                                                    <div class="row" ><h9><small>Check-in Date</small></h9></div>
+                                                                                    <div class="row"><h7><strong>Aug 7, 2019</strong></h7></div>
+                                                                                </div>
+                                                                                <div class="col-md-4" >
+                                                                                    <div class="" >
+                                                                                        <div class="row"> <h9><small>Check-out Date</small></h9></div>
+                                                                                        <div class="row"> <h7><strong>Aug 9, 2019</strong></h7></div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="col-md-2" >
+                                                                                    <div class="" >
+                                                                                        <div class="row"> <h9><small>Day</small></h9></div>
+                                                                                        <div class="row" style="padding-left:4px"> <h7><strong>2</strong></h7></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-2" >
+                                                                                    <div class="" >
+                                                                                        <div class="row"> <h9><small>Breed</small></h9></div>
+                                                                                        <div class="row"> <h7><strong>Dog</strong></h7></div>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <table class="table table-striped jambo_table bulk_action">
+                                                                                    <thead>
+                                                                                        <tr class="headings">
+
+                                                                                            <th class="column-title" style="display: table-cell;">Service</th>
+                                                                                            <th class="column-title" style="display: table-cell;">Fee</th>
+                                                                                            <th class="column-title" style="display: table-cell;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                                                                            <th class="bulk-actions" colspan="3" style="display: none;">
+                                                                                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt">1 Records Selected</span> ) <i class="fa fa-chevron-down"></i></a>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </thead>
+
+                                                                                    <tbody id="tBody">
+                                                                                        <tr class="even pointer">
+
+                                                                                            <td class="font-weight-bold"><strong>Boarding</strong></td>
+                                                                                            <td  class="a-right a-right font-weight-bold ">€90</td>
+                                                                                            <td class="font-weight-bold" >(45 x 2 nights)</td>
+                                                                                        </tr>
+                                                                                        <tr id="serviceWashing" class="even pointer">
+
+                                                                                            <td  >Washing</td>
+                                                                                            <td class="a-right a-right">€10.45</td>
+                                                                                            <td >
+                                                                                                <div id="serviceWashingBtn" >
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
+                                                                                                        <i class="fa fa-plus text-white"></i>
+                                                                                                    </a>
+
+                                                                                                </div>
+                                                                                                <div id="serviceWashingBtn2" style="display:none;">
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
+                                                                                                </div>
+                                                                                            </td>
+
+                                                                                        </tr>
+
+                                                                                        <tr id="serviceMedication" class="even pointer">
+
+                                                                                            <td  >Medication</td>
+                                                                                            <td class="a-right a-right">€10.45</td>
+                                                                                            <td >
+                                                                                                <div id="serviceMedicationBtn" >
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
+                                                                                                        <i class="fa fa-plus text-white"></i>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                                <div id="serviceMedicationBtn2" style="display:none;">
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
+                                                                                                </div>
+                                                                                            </td>
+
+                                                                                        </tr>
+                                                                                        <tr id="serviceNail" class="even pointer">
+
+                                                                                            <td  >Nail Clipping</td>
+                                                                                            <td class="a-right a-right">€10.45</td>
+                                                                                            <td >
+                                                                                                <div id="serviceNailBtn" >
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
+                                                                                                        <i class="fa fa-plus text-white"></i>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                                <div id="serviceNailBtn2" style="display:none;">
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
+                                                                                                </div>
+                                                                                            </td>
+
+                                                                                        </tr>
+                                                                                        <tr id="serviceGroomming" class="even pointer">
+
+                                                                                            <td  >Grooming & Trimming</td>
+                                                                                            <td class="a-right a-right">€10.45</td>
+                                                                                            <td >
+                                                                                                <div id="serviceGroommingBtn" >
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
+                                                                                                        <i class="fa fa-plus text-white"></i>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                                <div id="serviceGroommingBtn2" style="display:none;">
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
+                                                                                                </div>
+                                                                                            </td>
+
+                                                                                        </tr>
+
+
+                                                                                        <tr class="even pointer">
+
+                                                                                            <td class="font-weight-bold">Total</td>
+                                                                                            <td  id="serviceTotal" class="a-right a-right font-weight-bold">€90</td>
+                                                                                            <td class=""></td>
+
+                                                                                        </tr>
+
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <div class="row">
+
+                                                                                </div>
+                                                                            </div>
+
+
+
+                                                                            <div class="row">
+
+                                                                            </div>
+                                                                            <!-- /.row -->
+
+
+                                                                        </section>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+
+                                                        <button type="button" class="btn  blue-gradient">Pay</button>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </section>
-            <!-- Single Property Deatails Section End -->
-            <!-- Footer Section Begin -->
+            </div>
+        </section>
+        <!-- Single Property Deatails Section End -->
+        <!-- Footer Section Begin -->
         <jsp:include page="footer.jsp"></jsp:include>
         <!-- Footer Section End -->
 

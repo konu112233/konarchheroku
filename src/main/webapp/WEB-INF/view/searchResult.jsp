@@ -316,7 +316,7 @@
                                 <div id="rate1" class="room-img set-bg" data-setbg="static/searchResult/img/rooms/2.jpg">
                                     <a href="#" class="room-content">
                                         <button  style='margin-bottom: 5px;border:none;border-radius: 6px; margin-left: 3px;background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 20px; cursor: pointer; color: white;'>
-                                            <strong>${c.rate}</strong>
+                                            <strong>${c.rate}/5</strong>
                                         </button>
                                     </a>
                                 </div>
@@ -364,7 +364,7 @@
                                             </c:forEach>
                                         </c:if>
                                     </div>
-                                    <a href="property?${c.hotelId}" class="site-btn btn-line" style="margin-top: 7px;">View Property</a>
+                                    <a href="property?object=${c.hotelId}" class="site-btn btn-line" style="margin-top: 7px;">View Property</a>
                                 </div>
                             </div>
                         </div>

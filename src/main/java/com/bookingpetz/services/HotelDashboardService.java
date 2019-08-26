@@ -14,7 +14,8 @@ import com.bookingpetz.domain.User;
  */
 public interface HotelDashboardService {
 
-    public boolean registerHotel(User user);
+    public boolean registerHotel(User user, String token);
 
     public Status checkStatus(String token);
+
 }

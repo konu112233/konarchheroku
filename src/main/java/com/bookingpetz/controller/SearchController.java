@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +58,17 @@ public class SearchController {
             return "redirect:home?error";
         } catch (Exception e) {
             return "redirect:home?error";
+        }
+    }
+
+    @RequestMapping(value = "/property", method = RequestMethod.GET)
+    public String property(Model m, HttpServletRequest request) {
+        try {
+            String code = request.getParameter("object");
+            m.addAttribute("hotel", searchService.getProperty(code));
+            return "property";
+        } catch (Exception e) {
+            return "redirect:/";
         }
     }
 

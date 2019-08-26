@@ -16,4 +16,6 @@ import java.util.List;
 public interface SearchService {
 
     public List<SearchResult> resultSearch(Search search);
+    
+    public SearchResult getProperty(String code);
 }

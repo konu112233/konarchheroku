@@ -21,11 +21,11 @@ import org.springframework.stereotype.Repository;
 public class HotelDashboardDAOImpl implements HotelDashboardDAO {
 
     @Override
-    public boolean registerHotel(User user) {
+    public boolean registerHotel(User user, String token) {
 
         HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/registerHotel")
                 .header("Content-type", "application/json")
-                .header("Authorization", "Bearer " + user.getUserId())
+                .header("Authorization", "Bearer " + token)
                 .body(new Gson().toJson(user))
                 .asJson();
 
@@ -43,6 +43,6 @@ public class HotelDashboardDAOImpl implements HotelDashboardDAO {
         if (response.getStatus() == 200) {
             return new Gson().fromJson(response.getBody().toString(), Status.class);
         }
-        return new Status("");
+        return new Status("false", "false");
     }
 }
