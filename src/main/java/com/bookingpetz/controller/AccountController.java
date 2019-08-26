@@ -110,7 +110,7 @@ public class AccountController {
 
     @RequestMapping(value = "/verifymail", method = RequestMethod.GET)
     public String verifymail(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String key = request.getParameter("verificationKey");
+        String key = request.getParameter("object");
         System.out.println(key);
         if (userAuthDAO.verifyMail(key)) {
             return "redirect:/home?verify=success";
