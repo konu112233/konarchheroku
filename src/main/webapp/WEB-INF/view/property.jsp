@@ -33,9 +33,11 @@
         <link href="static/plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="static/searchResult/css/aboutcustom.css">
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
-        <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
+        <!--  mdb css  -->
+        <link rel="stylesheet" href="static/aaa/css/mdb.min2.css">
     </head>
     <style>
+
         .contact-service .stars p {
             color: #8f8fa8;
             font-size: 16px;
@@ -107,6 +109,13 @@
     </style>
     <script>
 
+        window.onload = function () {
+            var addr;
+            addr = "Zandpad 3A,1054GA Amsterdam";
+
+            document.getElementById("location").src = "https://www.google.com/maps?q=" + addr + " &output=embed";
+        };
+
         var serviceTotal = 90;
 
 
@@ -176,6 +185,13 @@
 
 
 
+        function next() {
+
+            $('#petInfpForm').show();
+
+
+        }
+
     </script>
     <body>
         <!-- Page Preloder -->
@@ -184,6 +200,11 @@
         </div>
 
         <jsp:include page="header.jsp"></jsp:include>
+        <jsp:include page="signupModalForBooking.jsp"></jsp:include>
+        <jsp:include page="petInfoModal.jsp"></jsp:include>
+        <jsp:include page="verifyMail.jsp"></jsp:include>
+        <jsp:include page="verifiedmailModal.jsp"></jsp:include>
+
 
             <div class="home" >
                 <div class="background_image" style="background-image:url(static/images/searchheaderphoto.jpg)"></div>
@@ -291,7 +312,7 @@
                                                     </div>
                                                     <div class="x_content">
 
-                                                        <table class="table table-striped">
+                                                        <table class="table table-responsive-lg table-striped">
                                                             <thead>
                                                                 <tr>
 
@@ -303,28 +324,27 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-
                                                                     <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Boarding</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
-                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Boarding</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
-
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>
+                                                                            45</span></td>
+                                                                    <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Daycare</span></td>
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
 
                                                                 </tr>
                                                                 <tr>
 
                                                                     <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Daycare</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
                                                                     <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Daycare</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
 
                                                                 </tr>
                                                                 <tr>
 
                                                                     <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Washing</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
                                                                     <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Washing</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
 
                                                                 </tr>
 
@@ -333,13 +353,13 @@
                                                                     <td></i> Dog Nail Clipping</td>
                                                                     <td></td>
                                                                     <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Nail Clipping</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
 
                                                                 </tr>
                                                                 <tr>
 
                                                                     <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Grooming & Trimming</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
                                                                     <td>Cat Grooming & Trimming</td>
                                                                     <td><i class=""</i> <span></span></td>
 
@@ -348,9 +368,9 @@
                                                                 <tr>
 
                                                                     <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Medication</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
                                                                     <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Medication</span></td>
-                                                                    <td><i class="fas fa-euro-sign"</i> <span>100</span></td>
+                                                                    <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
 
                                                                 </tr>
                                                             </tbody>
@@ -362,7 +382,7 @@
                                         </div>
                                         <div class="location-map">
                                             <h4>Location</h4>
-                                            <iframe style="margin-bottom: 28px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107002.020096289!2d-96.80666618302782!3d33.06138629992991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c21da13c59513%3A0x62aa036489cd602b!2sPlano%2C+TX%2C+USA!5e0!3m2!1sen!2sbd!4v1558246953339!5m2!1sen!2sbd" allowfullscreen></iframe>
+                                            <iframe id="location" style="margin-bottom: 28px;" src="https://www.google.com/maps?q=Bernard kochstraat 21B &output=embed" allowfullscreen></iframe>
                                         </div>
                                         <div class="property-reviews">
                                             <h4>Reviews</h4>
@@ -512,7 +532,8 @@
                                             <br>
                                             <div class="row">
                                                 <span class="col-6">Check out</span>
-                                                <input type="date" onchange="getDiff();minOut()" id="checkout" name="checkout" class="col-5 align-self-end" placeholder="Check out" required="required">
+                                                <input type="date" onchange="getDiff();
+                                                        minOut()" id="checkout" name="checkout" class="col-5 align-self-end" placeholder="Check out" required="required">
                                             </div>
                                             <br>
                                         </div>
@@ -542,17 +563,23 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <a href="" class="site-btn list-btn" data-toggle="modal" data-target=".bs-example-modal-sm">Book Now!</a>
+
+                                        <!--signupForBookingForm-->
+                                        <a href="" class="site-btn list-btn" data-toggle="modal" data-target="#signupForBookingForm">Book Now!</a>
+
                                         <div class="x_content">
 
                                             <!-- modals -->
                                             <!-- Large modal -->
 
-                                            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-                                                <div class="modal-dialog modal-sm">
+                                            <div class="modal fade" id="servicesModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                <div class="modal-dialog ">
                                                     <div class="modal-content">
 
+
                                                         <div class="modal-header">
+                                                            <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel" style="margin-left:10px;"><strong>Booking Summary</strong></h3>
+
                                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                                                             </button>
 
@@ -617,13 +644,14 @@
                                                                                             </tr>
                                                                                             <tr id="serviceWashing" class="even pointer">
 
-                                                                                                <td  >Washingk</td>
+                                                                                                <td  >Washing</td>
                                                                                                 <td class="a-right a-right">€10.45</td>
                                                                                                 <td >
                                                                                                     <div id="serviceWashingBtn" >
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="site-btn list-btn btn-sm">
-                                                                                                            <i class="fa fa-plus"></i>
+                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
+                                                                                                            <i class="fa fa-plus text-white"></i>
                                                                                                         </a>
+
                                                                                                     </div>
                                                                                                     <div id="serviceWashingBtn2" style="display:none;">
                                                                                                         <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
@@ -638,8 +666,8 @@
                                                                                                 <td class="a-right a-right">€10.45</td>
                                                                                                 <td >
                                                                                                     <div id="serviceMedicationBtn" >
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="site-btn list-btn btn-sm">
-                                                                                                            <i class="fa fa-plus"></i>
+                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
+                                                                                                            <i class="fa fa-plus text-white"></i>
                                                                                                         </a>
                                                                                                     </div>
                                                                                                     <div id="serviceMedicationBtn2" style="display:none;">
@@ -654,8 +682,8 @@
                                                                                                 <td class="a-right a-right">€10.45</td>
                                                                                                 <td >
                                                                                                     <div id="serviceNailBtn" >
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="site-btn list-btn btn-sm">
-                                                                                                            <i class="fa fa-plus"></i>
+                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
+                                                                                                            <i class="fa fa-plus text-white"></i>
                                                                                                         </a>
                                                                                                     </div>
                                                                                                     <div id="serviceNailBtn2" style="display:none;">
@@ -670,8 +698,8 @@
                                                                                                 <td class="a-right a-right">€10.45</td>
                                                                                                 <td >
                                                                                                     <div id="serviceGroommingBtn" >
-                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="site-btn list-btn btn-sm">
-                                                                                                            <i class="fa fa-plus"></i>
+                                                                                                        <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
+                                                                                                            <i class="fa fa-plus text-white"></i>
                                                                                                         </a>
                                                                                                     </div>
                                                                                                     <div id="serviceGroommingBtn2" style="display:none;">
@@ -713,8 +741,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
+
+                                                            <button type="button" class="btn  blue-gradient">Pay</button>
+
                                                         </div>
 
                                                     </div>
@@ -811,6 +840,9 @@
         <script src="static/plugins/colorbox/jquery.colorbox-min.js"></script>
         <script src="static/js/custom.js"></script>
         <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
+
+        <!-- mdb script -->
+        <script type="text/javascript" src="static/aaa/js/mdb.min2.js"></script>
 
     </body>
 </html>

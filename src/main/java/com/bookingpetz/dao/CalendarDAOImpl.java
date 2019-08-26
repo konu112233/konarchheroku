@@ -32,7 +32,7 @@ public class CalendarDAOImpl implements CalendarDAO {
 
     @Override
     public List<ResultModal> getHotelCalendar(String token) {
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/auth/getHotelCalendar")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/getHotelCalendar")
                 .header("Authorization", "Bearer " + token)
                 .asJson();
 
