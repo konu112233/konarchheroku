@@ -57,10 +57,9 @@ public class CalendarController {
             if (session.getAttribute("token") != null) {
                 String token = (String) session.getAttribute("token");
 
-                String type = "Custom";
                 if (!request.getParameter("summary").trim().equals("")) {
                     String summary;
-                    if (!request.getParameter("descr").trim().equals("")) {
+                    if (request.getParameter("descr").trim().equals("")) {
                         summary = request.getParameter("summary").trim() + " = Please Add Description";
                     } else {
                         summary = request.getParameter("summary").trim() + " = " + request.getParameter("descr").trim();
@@ -78,7 +77,7 @@ public class CalendarController {
                     date = sdf.parse(endDate);
                     endDate = simpleDateFormat.format(date);
 
-                    Booking booking = new Booking(new End(endDate, "Europe/Amsterdam"), new Start(startDate, "Europe/Amsterdam"), summary, type, "");
+                    Booking booking = new Booking(new End(endDate, "Europe/Amsterdam"), new Start(startDate, "Europe/Amsterdam"), summary, "Custom", "");
                     boolean result = calendarService.insertEvent(token, booking);
                     return "redirect:calendar?" + result;
                 }
