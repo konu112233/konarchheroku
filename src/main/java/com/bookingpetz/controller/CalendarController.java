@@ -58,24 +58,31 @@ public class CalendarController {
                 String token = (String) session.getAttribute("token");
 
                 String type = "Custom";
-                String summary = request.getParameter("summary") + " = " + request.getParameter("descr");
-                String descr = "";//userId
+                if (request.getParameter("summary").trim().equals("")) {
+                    String summary;
+                    if (request.getParameter("descr").trim().equals("")) {
+                        summary = request.getParameter("summary").trim() + " = Please Add Description";
+                    } else {
+                        summary = request.getParameter("summary").trim() + " = " + request.getParameter("descr").trim();
+                    }
 
-                String endTime = request.getParameter("endTime");
-                String startTime = request.getParameter("startTime");
-                String startDate = request.getParameter("startDate") + "T" + startTime + "-01:00";
-                String endDate = request.getParameter("endDate") + "T" + endTime + "-01:00";
+                    String endTime = request.getParameter("endTime");
+                    String startTime = request.getParameter("startTime");
+                    String startDate = request.getParameter("startDate") + "T" + startTime + "-01:00";
+                    String endDate = request.getParameter("endDate") + "T" + endTime + "-01:00";
 
-                DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy'T'HH:mm:ss-HH:mm");
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss-HH:mm");
-                Date date = sdf.parse(startDate);
-                startDate = simpleDateFormat.format(date);
-                date = sdf.parse(endDate);
-                endDate = simpleDateFormat.format(date);
+                    DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy'T'HH:mm:ss-HH:mm");
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss-HH:mm");
+                    Date date = sdf.parse(startDate);
+                    startDate = simpleDateFormat.format(date);
+                    date = sdf.parse(endDate);
+                    endDate = simpleDateFormat.format(date);
 
-                Booking booking = new Booking(new End(endDate, "Europe/Amsterdam"), new Start(startDate, "Europe/Amsterdam"), summary, type, descr);
-                boolean result = calendarService.insertEvent(token, booking);
-                return "redirect:calendar?" + result;
+                    Booking booking = new Booking(new End(endDate, "Europe/Amsterdam"), new Start(startDate, "Europe/Amsterdam"), summary, type, "");
+                    boolean result = calendarService.insertEvent(token, booking);
+                    return "redirect:calendar?" + result;
+                }
+                return "redirect:calendar?summaryError";
             } else {
                 return "redirect:/";
             }

@@ -74,6 +74,14 @@ public class User implements Serializable {
         this.enable = enable;
     }
 
+    public User(User user) {
+        this.email = user.getEmail();
+        this.name = user.getName();
+        this.surname = user.getSurname();
+        this.contactList = user.getContactList();
+        this.hotel = user.getHotel();
+    }
+
     public User(String userId, String email, String name, String surname, String pkey, String salt, String enable) {
         this.userId = userId;
         this.email = email;

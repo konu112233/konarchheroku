@@ -83,6 +83,8 @@ public class HotelDashboardController {
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
+                String code = session.getAttribute("token").toString();
+                m.addAttribute("user", hotelDashboardService.getHotelInformation(code));
                 return "myHotel";
             } else {
                 return "redirect:/?token";
@@ -136,15 +138,18 @@ public class HotelDashboardController {
 
     @RequestMapping(value = "/previewHotel", method = RequestMethod.GET)
     public String previewHotel(Model m, HttpServletRequest request) {
+
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
-                return "previewHotel";
+                String code = session.getAttribute("token").toString();
+                m.addAttribute("hotel", hotelDashboardService.getMyHotelPreview(code));
+                return "property";
             } else {
-                return "redirect:/";
+                return "redirect:/?token";
             }
         } catch (Exception exception) {
-            return "redirect:/" + exception;
+            return "redirect:/?" + exception;
         }
     }
 }

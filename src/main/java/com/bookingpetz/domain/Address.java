@@ -23,6 +23,9 @@ public class Address implements Serializable {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "propertyName", nullable = true, length = 100)
+    private String propertyName;
+
     @Column(name = "aptNo", nullable = true, length = 45)
     private String aptNo;
 
@@ -32,26 +35,27 @@ public class Address implements Serializable {
     @Column(name = "city", nullable = true, length = 45)
     private String city;
 
-    @Column(name = "zipcode", nullable = true, length = 45)
-    private String zipcode;
+    @Column(name = "states", nullable = true, length = 45)
+    private String states;
 
     @Column(name = "country", nullable = true, length = 45)
     private String country;
 
-    @Column(name = "propertyName", nullable = true, length = 100)
-    private String propertyName;
+    @Column(name = "zipcode", nullable = true, length = 45)
+    private String zipcode;
 
     public Address() {
     }
 
-    public Address(int id, String aptNo, String street, String city, String zipcode, String country, String propertyName) {
+    public Address(int id, String propertyName, String aptNo, String street, String city, String states, String country, String zipcode) {
         this.id = id;
+        this.propertyName = propertyName;
         this.aptNo = aptNo;
         this.street = street;
         this.city = city;
-        this.zipcode = zipcode;
+        this.states = states;
         this.country = country;
-        this.propertyName = propertyName;
+        this.zipcode = zipcode;
     }
 
     public int getId() {
@@ -108,6 +112,14 @@ public class Address implements Serializable {
 
     public void setPropertyName(String propertyName) {
         this.propertyName = propertyName;
+    }
+
+    public String getState() {
+        return states;
+    }
+
+    public void setState(String states) {
+        this.states = states;
     }
 
 }

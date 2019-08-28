@@ -29,7 +29,7 @@ public class Contact implements Serializable {
     @Column(name = "userId", nullable = true, length = 100)
     private String userId;
 
-    @Column(name = "phone", nullable = true, length = 25)
+    @Column(name = "phone", nullable = true, length = 20)
     private String phone;
 
     @Column(name = "website", nullable = true, length = 45)

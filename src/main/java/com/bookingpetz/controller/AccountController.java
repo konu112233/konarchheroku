@@ -33,8 +33,8 @@ public class AccountController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model m, HttpServletRequest request) {
 
-        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
-        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
+        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").trim().getBytes());
+        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").trim().getBytes());
         UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
         if (!userToken.getUser().getUserId().equals("000")) {
             //SUCCESS
@@ -53,10 +53,10 @@ public class AccountController {
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public String signup(Model m, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String name = StringUtils.capitalize(request.getParameter("name"));
-        String surname = StringUtils.capitalize(request.getParameter("surname"));
-        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
-        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
+        String name = StringUtils.capitalize(request.getParameter("name").trim());
+        String surname = StringUtils.capitalize(request.getParameter("surname").trim());
+        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").trim().getBytes());
+        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").trim().getBytes());
         if (userAuthDAO.signUp(new User(encodeEmail, name, surname, encodePassword, "false"))) {
             //SUCCESS
             return "redirect:login?email=" + encodeEmail + "&password=" + encodePassword;
@@ -96,10 +96,10 @@ public class AccountController {
 
     @RequestMapping(value = "/sendConfirmationMail", method = RequestMethod.POST)
     public String sendConfirmationMail(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String name = StringUtils.capitalize(request.getParameter("name"));
-        String surname = StringUtils.capitalize(request.getParameter("surname"));
-        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
-        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
+        String name = StringUtils.capitalize(request.getParameter("name").trim());
+        String surname = StringUtils.capitalize(request.getParameter("surname").trim());
+        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").trim().getBytes());
+        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").trim().getBytes());
         if (userAuthDAO.confirmationMail(new User(encodeEmail, name, surname, encodePassword, "false"))) {
             //SUCCESS
             return "redirect:/home?result=success";
@@ -120,7 +120,7 @@ public class AccountController {
 
     @RequestMapping(value = "/resetPasswordSendMail", method = RequestMethod.POST)
     public String resetPasswordSendMail(HttpServletRequest request) {
-        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").getBytes());
+        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").trim().getBytes());
         if (userAuthDAO.resetPasswordSendMail(encodeEmail)) {
             //SUCCESS
             return "redirect:/home?resultPassword=success";
@@ -145,7 +145,7 @@ public class AccountController {
     @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
     public String resetPasswordPost(Model m, HttpServletRequest request) throws IOException {
         String code = request.getParameter("object");
-        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").getBytes());
+        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").trim().getBytes());
         if (userAuthDAO.updatePassword(code, encodePassword)) {
             return "redirect:/home?resultPassword=done";
         } else {

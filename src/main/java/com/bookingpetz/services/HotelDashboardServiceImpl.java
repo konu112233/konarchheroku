@@ -6,6 +6,7 @@
 package com.bookingpetz.services;
 
 import com.bookingpetz.dao.HotelDashboardDAO;
+import com.bookingpetz.domain.SearchResult;
 import com.bookingpetz.domain.Status;
 import com.bookingpetz.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,16 @@ public class HotelDashboardServiceImpl implements HotelDashboardService {
     @Override
     public Status checkStatus(String token) {
         return hotelDashboardDAO.checkStatus(token);
+    }
+
+    @Override
+    public SearchResult getMyHotelPreview(String code) {
+        return hotelDashboardDAO.getMyHotelPreview(code);
+    }
+
+    @Override
+    public User getHotelInformation(String code) {
+        return hotelDashboardDAO.getHotelInformation(code);
     }
 
 }

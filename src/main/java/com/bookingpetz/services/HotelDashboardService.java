@@ -5,6 +5,7 @@
  */
 package com.bookingpetz.services;
 
+import com.bookingpetz.domain.SearchResult;
 import com.bookingpetz.domain.Status;
 import com.bookingpetz.domain.User;
 
@@ -17,5 +18,9 @@ public interface HotelDashboardService {
     public boolean registerHotel(User user, String token);
 
     public Status checkStatus(String token);
+
+    public SearchResult getMyHotelPreview(String code);
+
+    public User getHotelInformation(String code);
 
 }
