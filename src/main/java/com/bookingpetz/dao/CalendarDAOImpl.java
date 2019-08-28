@@ -32,7 +32,7 @@ public class CalendarDAOImpl implements CalendarDAO {
 
     @Override
     public List<ResultModal> getHotelCalendar(String token) {
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpets.herokuapp.com/webapi/gateway/auth/getHotelCalendar")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/getHotelCalendar")
                 .header("Authorization", "Bearer " + token)
                 .asJson();
 
@@ -63,7 +63,7 @@ public class CalendarDAOImpl implements CalendarDAO {
     @Override
     public boolean insertEvent(String token, Booking booking) {
 
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpets.herokuapp.com/webapi/gateway/auth/insertEvent")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/insertEvent")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + token)
                 .body(new Gson().toJson(booking))
@@ -75,7 +75,7 @@ public class CalendarDAOImpl implements CalendarDAO {
     @Override
     public boolean removeEvent(String token, Event event) {
 
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpets.herokuapp.com/webapi/gateway/auth/removeEvent")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/removeEvent")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + token)
                 .body(new Gson().toJson(event))
