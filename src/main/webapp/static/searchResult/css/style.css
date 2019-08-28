@@ -884,12 +884,12 @@ html .ui-button.ui-state-disabled:active {
     right: -3px;
 }
 
-.property-reviews #all-reviews-button {
+.property-reviews #more-reviews-button, #less-reviews-button {
     text-align: center;
     margin-bottom: 30px;
 }
 
-.property-reviews #all-reviews {
+.property-reviews #all-reviews, #less-reviews-button {
     display: none;
 }
 
@@ -998,7 +998,6 @@ html .ui-button.ui-state-disabled:active {
     height: 355px;
     border: 0;
 }
-
 .property-features h4 {
     margin-bottom: 13px;
 }

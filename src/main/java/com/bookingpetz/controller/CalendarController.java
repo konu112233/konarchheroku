@@ -58,9 +58,9 @@ public class CalendarController {
                 String token = (String) session.getAttribute("token");
 
                 String type = "Custom";
-                if (request.getParameter("summary").trim().equals("")) {
+                if (!request.getParameter("summary").trim().equals("")) {
                     String summary;
-                    if (request.getParameter("descr").trim().equals("")) {
+                    if (!request.getParameter("descr").trim().equals("")) {
                         summary = request.getParameter("summary").trim() + " = Please Add Description";
                     } else {
                         summary = request.getParameter("summary").trim() + " = " + request.getParameter("descr").trim();

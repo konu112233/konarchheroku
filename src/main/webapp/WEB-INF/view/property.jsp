@@ -253,19 +253,6 @@
                         <div class="p-ins">
                             <div class="row details-top">
                                 <div class="col-lg-12">
-                                    <div class="t-details">
-                                        <div class="popular-room-features single-property">
-                                            <div class="size">
-                                                <p>Rate</p>
-                                                <i class="flaticon-bath"></i>
-                                                <span>${hotel.rate}/5</span>
-                                            </div>
-                                            <div class="beds">
-                                                <p>Capacity</p>
-                                                <span>${hotel.capacity} Left</span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="row">
