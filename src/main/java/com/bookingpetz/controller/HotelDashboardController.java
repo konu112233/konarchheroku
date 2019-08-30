@@ -48,6 +48,25 @@ public class HotelDashboardController {
         }
     }
 
+    @RequestMapping(value = "/updateHotel", method = RequestMethod.POST)
+    public String updateHotel(Model m, HttpServletRequest request) throws IOException {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                User user = new Gson().fromJson(request.getParameter("result"), User.class);
+                System.out.println("body : " + new Gson().toJson(user));
+                if (hotelDashboardService.updateHotel(user, session.getAttribute("token").toString())) {
+                    return "redirect:myHotel?succes";
+                }
+                return "redirect:myHotel";
+            } else {
+                return "redirect:/";
+            }
+        } catch (JsonSyntaxException exception) {
+            return "redirect:/" + exception;
+        }
+    }
+
     @RequestMapping(value = "/hotelOwner", method = RequestMethod.GET)
     public String hotelOwner(Model m, HttpServletRequest request) {
         try {
@@ -84,6 +103,7 @@ public class HotelDashboardController {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
                 String code = session.getAttribute("token").toString();
+                m.addAttribute("token", code);
                 m.addAttribute("user", hotelDashboardService.getHotelInformation(code));
                 return "myHotel";
             } else {
@@ -138,7 +158,6 @@ public class HotelDashboardController {
 
     @RequestMapping(value = "/previewHotel", method = RequestMethod.GET)
     public String previewHotel(Model m, HttpServletRequest request) {
-
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
@@ -152,4 +171,5 @@ public class HotelDashboardController {
             return "redirect:/?" + exception;
         }
     }
+
 }

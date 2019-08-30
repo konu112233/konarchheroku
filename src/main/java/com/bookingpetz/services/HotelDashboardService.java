@@ -17,6 +17,8 @@ public interface HotelDashboardService {
 
     public boolean registerHotel(User user, String token);
 
+    public boolean updateHotel(User user, String token);
+
     public Status checkStatus(String token);
 
     public SearchResult getMyHotelPreview(String code);

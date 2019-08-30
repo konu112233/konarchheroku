@@ -44,10 +44,16 @@ public class Address implements Serializable {
     @Column(name = "zipcode", nullable = true, length = 45)
     private String zipcode;
 
+    @Column(name = "lat", nullable = true, length = 45)
+    private String lat;
+
+    @Column(name = "lng", nullable = true, length = 45)
+    private String lng;
+
     public Address() {
     }
 
-    public Address(int id, String propertyName, String aptNo, String street, String city, String states, String country, String zipcode) {
+    public Address(int id, String propertyName, String aptNo, String street, String city, String states, String country, String zipcode, String lat, String lng) {
         this.id = id;
         this.propertyName = propertyName;
         this.aptNo = aptNo;
@@ -56,6 +62,8 @@ public class Address implements Serializable {
         this.states = states;
         this.country = country;
         this.zipcode = zipcode;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public int getId() {
@@ -114,12 +122,28 @@ public class Address implements Serializable {
         this.propertyName = propertyName;
     }
 
-    public String getState() {
+    public String getStates() {
         return states;
     }
 
-    public void setState(String states) {
+    public void setStates(String states) {
         this.states = states;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 
 }

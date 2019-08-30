@@ -5,12 +5,18 @@
  */
 package com.bookingpetz.services;
 
+import com.bookingpetz.domain.Pet;
+import java.util.List;
+
 /**
  *
  * @author burakzengin
  */
 public interface UserService {
 
-    public String getByToken(String token);
+    public List<Pet> getMyPets(String code);
 
+    public boolean addPet(Pet pet, String code);
+
+    public boolean removePet(String petId, String code);
 }

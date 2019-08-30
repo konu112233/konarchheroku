@@ -458,23 +458,77 @@
 
     </script>
     <script>
+        var aptNo;
+        var street;
+        var city;
+        var country;
+        var zipCode;
+        var propertyName;
+        var states;
 
+        var contactName;
+        var managerEmail;
+        var bookingEmail;
+        var website;
+        var phone;
+        var description;
+        var directions;
+
+        var capacity;
+        var startHour;
+        var endHour;
+
+        var workingHours;
+
+        var geocoder;
+        var lat, lng;
+        function initMap() {
+            // Google maps are now initialized.
+            geocoder = new google.maps.Geocoder();
+
+        }
+        function synchronizeFunction(addr, callback) {
+            var address = addr;
+            geocoder.geocode({'address': address}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    lat = results[0].geometry.location.lat();
+                    lng = results[0].geometry.location.lng();
+                    callback();
+                }
+            });
+
+        }
         var services = [];
         function next() {
-            var aptNo = document.getElementById('aptNo').value;
-            var street = document.getElementById('street').value;
-            var city = document.getElementById('city').value;
-            var country = document.getElementById('country').value;
-            var zipCode = document.getElementById('zipcode').value;
-            var propertyName = document.getElementById('propertyName').value;
+            aptNo = document.getElementById('aptNo').value;
+            street = document.getElementById('street').value;
+            city = document.getElementById('city').value;
+            country = document.getElementById('country').value;
+            zipCode = document.getElementById('zipcode').value;
+            propertyName = document.getElementById('propertyName').value;
+            states = document.getElementById('states').value;
 
-            var contactName = document.getElementById('contactName').value;
-            var managerEmail = document.getElementById('managerEmail').value;
-            var bookingEmail = document.getElementById('bookingEmail').value;
-            var website = document.getElementById('website').value;
-            var phone = document.getElementById('phone').value;
-            var description = document.getElementById('description').value;
-            var directions = document.getElementById('directions').value;
+            var longAddr = aptNo + " " + street + " " + city + " " + country + " " + +" " + zipCode;
+            synchronizeFunction(longAddr, next2);
+        }
+        function next2() {
+
+
+            contactName = document.getElementById('contactName').value;
+            managerEmail = document.getElementById('managerEmail').value;
+            bookingEmail = document.getElementById('bookingEmail').value;
+            website = document.getElementById('website').value;
+            phone = document.getElementById('phone').value;
+            description = document.getElementById('description').value;
+            directions = document.getElementById('directions').value;
+
+            capacity = document.getElementById('capacity').value;
+            startHour = document.getElementById('startHour').value;
+            endHour = document.getElementById('endHour').value;
+
+            workingHours = startHour + "-" + endHour;
+
+            //console.log("Property :" + aptNo + street + city + country + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
 
             console.log("Property :" + aptNo + street + city + country + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
 
@@ -482,7 +536,7 @@
                 var serviceId = "#cact" + i;
                 var nameId = "#service" + i;
                 var priceId = "#tboxact" + i;
-                var name = $(nameId).text();
+                var name = $(nameId).text().trim();
                 var basePrice = $(priceId).prop('value');
 
                 if ($(priceId).prop('disabled') == false) {
@@ -490,17 +544,29 @@
                         "type": "Dog",
                         "description": "Please add description",
                         "name": name,
-                        "basePrice": basePrice
+                        "basePrice": parseInt(basePrice)
                     });
                 }
             }
-            console.log("name:" + services[0].name + " prices" + services[0].basePrice);
+            //  console.log("name:" + services[0].name + " prices" + services[0].basePrice);
+            var dayList = [];
+            var workingDays = "";
+            for (i = 0; i < 7; i++) {
+                // check if days are checked
+                if ($("*[name='" + i + "']").prop("checked")) {
+                    var day = $("*[name='" + i + "']").attr('id');
+                    dayList.push(day);
+                    console.log("checked day" + $("*[name='" + i + "']").attr('id'));
+                    //merge days 
+                    workingDays += day + ",";
+                }
+            }
+            //remove last comma of days
+            workingDays = workingDays.substring(0, workingDays.length - 1);
 
             var data2 = JSON.stringify({
-                "userId": "${token}",
                 "contactList": [
                     {
-                        "userId": "-",
                         "phone": phone,
                         "website": website,
                         "description": description,
@@ -514,19 +580,23 @@
                             "city": city,
                             "zipcode": zipCode,
                             "country": country,
-                            "propertyName": propertyName
+                            "propertyName": propertyName,
+                            "states": states,
+                            "lat": lat,
+                            "lng": lng
                         }
                     }
                 ],
                 "hotel": {
-                    "workingHours": "9-6",
-                    "capacity": 4,
+                    "workingHours": workingHours,
+                    "workingDays": workingDays,
+                    "capacity": parseInt(capacity),
                     "rate": 0.0,
                     "status": "Pending",
                     "serviceList": services
                 }
             });
-
+            console.log(data2);
             $('#result').val(data2);
             $("#register").submit();
         }
@@ -538,7 +608,10 @@
             padding-left: 35px;
             margin-bottom: 12px;
             cursor: pointer;
-            font-size: 22px;
+            font-size: 15px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height:1.5;
+            font-style: normal;
             border-radius: 10px;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -610,6 +683,10 @@
             zoom: 1.5;
 
 
+        }
+
+        #stepContainer {
+            height:2000px ! important;
         }
     </style>
     <body class="nav-md">
@@ -696,6 +773,13 @@
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                                                         <input value="Amsterdam" id="city" class="form-control col-md-7 col-xs-12" data-validate-length-range="4" data-validate-words="1" name="city" placeholder="Amsterdam" required="required" type="text">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item form-group">
+                                                                    <label  class="control-label col-md-3 col-sm-3 col-xs-12" for="states">State <span class="required">*</span>
+                                                                    </label>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <input value="North Holland" id="states" class="form-control col-md-7 col-xs-12" data-validate-length-range="8" data-validate-words="2" name="states" placeholder="North Holland" required="required" type="text">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
@@ -985,229 +1069,235 @@
                                                                 <h2>Services</h2>
                                                                 <div class="clearfix"></div>
                                                             </div>
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div  class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                            <div class="x_content">
+                                                                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                                                        <li role="presentation" class="active"><a href="#tab_content1" id="dog-tab" role="tab" data-toggle="tab" aria-expanded="true">For Dogs</a>
+                                                                        </li>
+                                                                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="cat-tab" data-toggle="tab" aria-expanded="false">For Cats</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div id="myTabContent" class="tab-content">
+                                                                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="dog-tab">
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div  class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact1" id="cact1" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact1()" >
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service1" style="margin-left: 20px">Dog Boarding </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact1" name="tboxact1" type="text" class="form-control"  placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact2" id="cact2" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact2()" >
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service2" style="margin-left: 20px">Dog Washing </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact2" name="tboxact2" type="text" class="form-control"  placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact3" id="cact3" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact3()" >                                                                      
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service3" style="margin-left: 20px">Dog Groomming and Trimming</i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact3" name="tboxact3" type="text" class="form-control"  placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact4" id="cact4" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact4()" >                                                                      
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service4" style="margin-left: 20px">Dog Medication</i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact4" name="tboxact4" type="text" class="form-control" placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact5" id="cact5" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact5()" >                                                                       
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service5" style="margin-left: 20px">Dog Day Care</i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
 
-                                                                    <label  class="container1">
-                                                                        <input  name="cact1" id="cact1" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact1()" >
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service1" style="margin-left: 20px">Dog Boarding</i>
-                                                                    </label>
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact5" name="tboxact5" type="text" class="form-control" placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact6" id="cact6" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact6()" >                                                            
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service6" style="margin-left: 20px">Dog Nail Clipping</i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
 
-                                                                </div>
-                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact6" name="tboxact6" type="text" class="form-control"  placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
 
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact1" name="tboxact1" type="text" class="form-control"  placeholder="45">
+                                                                        </div>
+                                                                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="cat-tab">
+
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact7" id="cact7" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact7()" >                                                                     
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service7" style="margin-left: 20px">Cat Boarding </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
+
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact7" name="tboxact7" type="text" class="form-control"  placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact8" id="cact8" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact8()" >                                                                  
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service8" style="margin-left: 20px">Cat Washing </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
+
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact8" name="tboxact8" type="text" class="form-control"  placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact9" id="cact9" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact9()" >                                                                      
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service9" style="margin-left: 20px">Cat Groomming and Trimming </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
+
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact9" name="tboxact9" type="text" class="form-control"  placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact10" id="cact10" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact10()" >                                                                    
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service10" style="margin-left: 20px">Cat Medication </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
+
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact10" name="tboxact10" type="text" class="form-control"   placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact11" id="cact11" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact11()" >
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service11" style="margin-left: 20px">Cat Day Care </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
+
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact11" name="tboxact11" type="text" class="form-control"   placeholder="0" value="0">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
+                                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
+                                                                                    <label  class="container1">
+                                                                                        <input  name="cact12" id="cact12" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact12()" >                                                                      
+                                                                                        <span class="checkmark"></span>
+                                                                                        <i id="service12" style="margin-left: 20px">Cat Nail Clipping </i>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
+
+                                                                                    <div class="input-group">
+                                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
+                                                                                        <input disabled id="tboxact12" name="tboxact12" type="text" class="form-control"  placeholder="0" value="0"  >
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-
-                                                                        <input  name="cact2" id="cact2" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact2()" >
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service2" style="margin-left: 20px">Dog Washing</i>
-
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact2" name="tboxact2" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact3" id="cact3" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact3()" >                                                                      
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service3" style="margin-left: 20px">Dog Groomming and Trimming</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact3" name="tboxact3" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact4" id="cact4" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact4()" >                                                                      
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service4" style="margin-left: 20px">Dog Medication</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact4" name="tboxact4" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact5" id="cact5" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact5()" >                                                                       
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service5" style="margin-left: 20px">Dog Day Care</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact5" name="tboxact5" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact6" id="cact6" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact6()" >                                                            
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service6" style="margin-left: 20px">Dog Nail Clipping</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact6" name="tboxact6" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact7" id="cact7" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact7()" >                                                                     
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service7" style="margin-left: 20px">Cat Boarding</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact7" name="tboxact7" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact8" id="cact8" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact8()" >                                                                  
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service8" style="margin-left: 20px">Cat Washing</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact8" name="tboxact8" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact9" id="cact9" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact9()" >                                                                      
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service9" style="margin-left: 20px">Cat Groomming and Trimming</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact9" name="tboxact9" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact10" id="cact10" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact10()" >                                                                    
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service10" style="margin-left: 20px">Cat Medication</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact10" name="tboxact10" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact11" id="cact11" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact11()" >                                                                   
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service11" style="margin-left: 20px">Cat Day Care</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact11" name="tboxact11" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
-                                                                </div>
-                                                            </div>
-                                                            <div  class="col-md-4 col-sm-2 col-xs-0">
-                                                                <div class="checkbox col-md-6 col-sm-12 col-xs-12">
-                                                                    <label  class="container1">
-                                                                        <input  name="cact12" id="cact12" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact12()" >                                                                      
-                                                                        <span class="checkmark"></span>
-                                                                        <i id="service12" style="margin-left: 20px">Cat Nail Clipping</i>
-                                                                    </label>
-                                                                </div>
-                                                                <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
-
-                                                                    <div class="input-group">
-                                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-euro"></i></span>
-                                                                        <input disabled id="tboxact12" name="tboxact12" type="text" class="form-control"  placeholder="45">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4  col-sm-0 col-xs-0" >
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1219,110 +1309,143 @@
 
                                                         <form class="form-horizontal form-label-left">
                                                             <div class="form-group">
-                                                                <label class="control-label col-md-5 col-sm-3 col-xs-12" for="first-name">Start Hour <span class="required">*</span>
+                                                                <label class="control-label col-md-5 col-sm-3 col-xs-12" for="first-name">Capacity <span class="required">*</span>
                                                                 </label>
                                                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                                                    <select id="" name="" class="form-control">
-                                                                        <option>06:00</option>
-                                                                        <option>07:00</option>
-                                                                        <option>08:00</option>
-                                                                        <option>09:00</option>
-                                                                        <option>10:00</option>
-                                                                    </select>
+                                                                    <input type="text" id="capacity" name="capacity" value="${user.hotel.capacity}" class="form-control col-md-7 col-xs-12">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-5 col-sm-3 col-xs-12" for="first-name">Start Hour <span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-2 col-sm-6 col-xs-12">
+                                                                <select id="startHour" name="" class="form-control">
+                                                                    <option>01:00</option>
+                                                                    <option>02:00</option>
+                                                                    <option>03:00</option>
+                                                                    <option>04:00</option>
+                                                                    <option>05:00</option>
+                                                                    <option>06:00</option>
+                                                                    <option>07:00</option>
+                                                                    <option>08:00</option>
+                                                                    <option>09:00</option>
+                                                                    <option>10:00</option>
+                                                                    <option>11:00</option>
+                                                                    <option>12:00</option>
+                                                                    <option>13:00</option>
+                                                                    <option>14:00</option>
+                                                                    <option>15:00</option>
+                                                                    <option>16:00</option>
+                                                                    <option>17:00</option>
+                                                                    <option>18:00</option>
+                                                                    <option>19:00</option>
+                                                                    <option>20:00</option>
+                                                                    <option>21:00</option>
+                                                                    <option>22:00</option>
+                                                                    <option>23:00</option>
+                                                                    <option>00:00</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-5 col-sm-3 col-xs-12" for="first-name">End Hour <span class="required">*</span>
+                                                            </label>
+                                                            <div class="col-md-2 col-sm-6 col-xs-12">
+                                                                <select id="endHour" name="" class="form-control">
+                                                                    <option>01:00</option>
+                                                                    <option>02:00</option>
+                                                                    <option>03:00</option>
+                                                                    <option>04:00</option>
+                                                                    <option>05:00</option>
+                                                                    <option>06:00</option>
+                                                                    <option>07:00</option>
+                                                                    <option>08:00</option>
+                                                                    <option>09:00</option>
+                                                                    <option>10:00</option>
+                                                                    <option>11:00</option>
+                                                                    <option>12:00</option>
+                                                                    <option>13:00</option>
+                                                                    <option>14:00</option>
+                                                                    <option>15:00</option>
+                                                                    <option>16:00</option>
+                                                                    <option>17:00</option>
+                                                                    <option>18:00</option>
+                                                                    <option>19:00</option>
+                                                                    <option>20:00</option>
+                                                                    <option>21:00</option>
+                                                                    <option>22:00</option>
+                                                                    <option>23:00</option>
+                                                                    <option>00:00</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4 col-sm-12 col-xs-12 ">
+                                                            </div>
+                                                            <div  class="col-md-5 col-sm-12 col-xs-12 ">
+                                                                <div class="checkbox" >
+                                                                    <label class="col-md-1">
+                                                                        <div class="container1" style="position: relative;">
+                                                                            <input  name="0" id="Sun" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="Y" onclick="" >                                                                      
+                                                                            <span class="checkmark"></span>
+                                                                        </div> <br >Sun<br>
+                                                                    </label>
+                                                                    <label class="col-md-1">
+                                                                        <div class="container1" style="position: relative;">
+                                                                            <input  name="1" id="Mon" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked"  value="" onclick="" >                                                                      
+                                                                            <span class="checkmark"></span>
+                                                                        </div> <br>Mon<br>
+                                                                    </label>
+                                                                    <label class="col-md-1">
+                                                                        <div class="container1" style="position: relative;">
+                                                                            <input  name="2" id="Tue" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                                            <span class="checkmark"></span>
+                                                                        </div> <br>Tue<br>
+                                                                    </label>
+                                                                    <label class="col-md-1">
+                                                                        <div class="container1" style="position: relative;">
+                                                                            <input  name="3" id="Wed" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                                            <span class="checkmark"></span>
+                                                                        </div> <br>Wed<br>
+                                                                    </label>
+                                                                    <label class="col-md-1">
+                                                                        <div class="container1" style="position: relative;">
+                                                                            <input   name="4" id="Thu" style="margin-left: 0px;margin-top: 0px" type="checkbox"  checked="checked" value="" onclick="" >                                                                      
+                                                                            <span class="checkmark"></span>
+                                                                        </div> <br>Thu<br>
+                                                                    </label>
+                                                                    <label class="col-md-1">
+                                                                        <div class="container1" style="position: relative;">
+                                                                            <input name="5" id="Fri" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                                            <span class="checkmark"></span>
+                                                                        </div> <br>Fri<br>
+                                                                    </label>
+
+                                                                    <label class="col-md-1">
+                                                                        <div class="container1" style="position: relative;">
+                                                                            <input  name="6" id="Sat" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                                            <span class="checkmark"></span>
+                                                                        </div> <br>Sat<br>
+                                                                    </label>
+
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label col-md-5 col-sm-3 col-xs-12" for="first-name">End Hour <span class="required">*</span>
-                                                                </label>
-                                                                <div class="col-md-2 col-sm-6 col-xs-12">
-                                                                    <select id="" name="" class="form-control">
-                                                                        <option>06:00</option>
-                                                                        <option>07:00</option>
-                                                                        <option>08:00</option>
-                                                                        <option>09:00</option>
-                                                                        <option>10:00</option>
-                                                                    </select>
-                                                                </div>
+                                                            <div class="col-md-4 col-sm-12 col-xs-12 ">
+
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-md-4 col-sm-12 col-xs-12 ">
+                                                        </div>
 
-                                                                </div>
-                                                                <div  class="col-md-5 col-sm-12 col-xs-12 ">
-                                                                    <div class="checkbox" >
-
-
-                                                                        <label class="col-md-1">
-                                                                            <div class="container1" style="position: relative;">
-                                                                                <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="Y" onclick="" >                                                                      
-                                                                                <span class="checkmark"></span>
-                                                                            </div> <br>Sun</br>
-                                                                        </label>
-
-
-
-                                                                        <label class="col-md-1">
-                                                                            <div class="container1" style="position: relative;">
-                                                                                <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
-                                                                                <span class="checkmark"></span>
-                                                                            </div> <br>Mon</br>
-                                                                        </label>
-
-
-                                                                        <label class="col-md-1">
-                                                                            <div class="container1" style="position: relative;">
-                                                                                <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
-                                                                                <span class="checkmark"></span>
-                                                                            </div> <br>Tue</br>
-                                                                        </label>
-
-                                                                        <label class="col-md-1">
-                                                                            <div class="container1" style="position: relative;">
-                                                                                <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
-                                                                                <span class="checkmark"></span>
-                                                                            </div> <br>Wed</br>
-                                                                        </label>
-
-                                                                        <label class="col-md-1">
-                                                                            <div class="container1" style="position: relative;">
-                                                                                <input   name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox"  checked="checked" value="" onclick="" >                                                                      
-                                                                                <span class="checkmark"></span>
-                                                                            </div> <br>Thu</br>
-                                                                        </label>
-
-
-                                                                        <label class="col-md-1">
-                                                                            <div class="container1" style="position: relative;">
-                                                                                <input name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
-                                                                                <span class="checkmark"></span>
-                                                                            </div> <br>Fri</br>
-                                                                        </label>
-
-                                                                        <label class="col-md-1">
-                                                                            <div class="container1" style="position: relative;">
-                                                                                <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
-                                                                                <span class="checkmark"></span>
-                                                                            </div> <br>Sat</br>
-                                                                        </label>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 col-sm-12 col-xs-12 ">
-
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-
+                                                    </form>
                                                 </div>
-                                                <div id="step-4">
-                                                    <div>Please review your details in the preview below. If you are happy with the result, click the "Submit My Signup" button. You will be able to make changes to text after your Signup has been confirmed.
-                                                    </div> 
-                                                </div>
-                                                <form id="register" action="registerHotel" method="POST">
-                                                    <input hidden id="result" name="result" value="">
-                                                </form>
+
                                             </div>
+                                            <div id="step-4">
+                                                <div>Please review your details in the preview below. If you are happy with the result, click the "Submit My Signup" button. You will be able to make changes to text after your Signup has been confirmed.
+                                                </div> 
+                                            </div>
+                                            <form id="register" action="registerHotel" method="POST">
+                                                <input hidden id="result" name="result" value="">
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -1331,7 +1454,13 @@
                     </div>
                 </div>
             </div>
+        </div>
         <jsp:include page="dashboardFooter.jsp"></jsp:include>
+
+        <!-- geolocation -->
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjMHsDUlFE59e7axyc3sn7ifwAwW_uyP0&callback=initMap">
+        </script>
 
 
         <!-- jQuery -->

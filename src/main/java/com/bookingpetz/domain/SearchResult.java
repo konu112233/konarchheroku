@@ -31,6 +31,7 @@ public class SearchResult {
 
     int capacity;
     double rate;
+    String workingDays;
     List<Service> serviceList;
 
     public SearchResult() {
@@ -53,9 +54,10 @@ public class SearchResult {
         this.capacity = user.getHotel().getCapacity();
         this.rate = user.getHotel().getRate();
         this.serviceList = user.getHotel().getServiceList();
+        this.workingDays = user.getHotel().getWorkingDays();
     }
 
-    public SearchResult(String hotelId, String phone, String website, String description, String bookingEmail, String contactName, String directions, String aptNo, String street, String city, String country, String zipcode, String propertyName, int capacity, double rate, List<Service> serviceList) {
+    public SearchResult(String hotelId, String phone, String website, String description, String bookingEmail, String contactName, String directions, String aptNo, String street, String city, String country, String zipcode, String propertyName, int capacity, double rate, List<Service> serviceList, String workingDays) {
         this.hotelId = hotelId;
         this.phone = phone;
         this.website = website;
@@ -72,6 +74,7 @@ public class SearchResult {
         this.capacity = capacity;
         this.rate = rate;
         this.serviceList = serviceList;
+        this.workingDays = workingDays;
     }
 
     public String getHotelId() {
@@ -200,6 +203,14 @@ public class SearchResult {
 
     public void setServiceList(List<Service> serviceList) {
         this.serviceList = serviceList;
+    }
+
+    public String getWorkingDays() {
+        return workingDays;
+    }
+
+    public void setWorkingDays(String workingDays) {
+        this.workingDays = workingDays;
     }
 
 }

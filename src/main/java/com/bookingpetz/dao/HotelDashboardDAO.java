@@ -22,4 +22,7 @@ public interface HotelDashboardDAO {
     public SearchResult getMyHotelPreview(String code);
 
     public User getHotelInformation(String code);
+
+    public boolean updateHotel(User user, String token);
+
 }

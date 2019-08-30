@@ -28,6 +28,11 @@ public class HotelDashboardServiceImpl implements HotelDashboardService {
     }
 
     @Override
+    public boolean updateHotel(User user, String token) {
+        return hotelDashboardDAO.updateHotel(user, token);
+    }
+
+    @Override
     public Status checkStatus(String token) {
         return hotelDashboardDAO.checkStatus(token);
     }

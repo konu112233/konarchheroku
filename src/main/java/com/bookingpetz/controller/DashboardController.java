@@ -49,11 +49,6 @@ public class DashboardController {
         return "petsitterProfile";
     }
 
-    @RequestMapping(value = "/myPets", method = RequestMethod.GET)
-    public String myPets(Model m, HttpServletRequest request) {
-        return "myPets";
-    }
-
     @RequestMapping(value = "/dashboardTemplate", method = RequestMethod.GET)
     public String dashboardTemplate(Model m, HttpServletRequest request) {
         return "dashboardTemplate";

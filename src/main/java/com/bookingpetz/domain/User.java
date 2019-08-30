@@ -59,6 +59,10 @@ public class User implements Serializable {
     @JoinColumn(name = "userId")
     private Hotel hotel;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId")
+    private List<Pet> petList = new ArrayList<>();
+
     public User() {
     }
 
@@ -196,4 +200,11 @@ public class User implements Serializable {
         this.partner = partner;
     }
 
+    public List<Pet> getPetList() {
+        return petList;
+    }
+
+    public void setPetList(List<Pet> petList) {
+        this.petList = petList;
+    }
 }

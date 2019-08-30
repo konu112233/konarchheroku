@@ -3,7 +3,7 @@
     Created on : Jul 28, 2019, 4:37:09 PM
     Author     : omerfarukoner
 --%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +26,7 @@
         <!-- iCheck -->
         <link href="static/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
-        <!-- sL�DE -->
+        <!-- sLiDE -->
         <link rel="stylesheet" href="static/vendors/responsive-slides/responsiveslides.css">
         <link rel="stylesheet" href="static/vendors/responsive-slides/demo.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -36,10 +36,6 @@
 
     </head>
     <script>
-
-
-
-
 
         /////Image Partt////////////////////////////
         //Slider script
@@ -392,17 +388,13 @@
 
         var services = [];
         function next() {
-
-
-
-
-            var propertyName = document.getElementById('hotel_name').value;
+            var propertyName = document.getElementById('propertyName').value;
             var street = document.getElementById('street').value;
             var zipCode = document.getElementById('zipcode').value;
+            var aptNo = document.getElementById('aptNo').value;
             var city = document.getElementById('cityId').value;
             var state = document.getElementById('stateId').value;
             var country = document.getElementById('countryId').value;
-
 
             var contactName = document.getElementById('contactName').value;
             var managerEmail = document.getElementById('managerEmail').value;
@@ -412,41 +404,114 @@
             var description = document.getElementById('description').value;
             var directions = document.getElementById('directions').value;
 
-            console.log("Property :" + street + state + country + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
+            var capacity = document.getElementById('capacity').value;
+            var startHour = document.getElementById('startHour').value;
+            var endHour = document.getElementById('endHour').value;
+            var workingHours = startHour + "-" + endHour;
+
+            console.log("Property :" + capacity + workingHours + aptNo + street + state + country + city + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
 
             for (var i = 1; i < 13; i++) {
                 var serviceId = "#cact" + i;
                 var nameId = "#service" + i;
                 var priceId = "#tboxact" + i;
                 var name = $(nameId).text();
+                name = name.trim();
+
                 var basePrice = $(priceId).prop('value');
 
                 if ($(priceId).prop('disabled') == false) {
-
-//                    console.log("name " + name);
-//                    console.log("price " + basePrice);
                     services.push({
-                        "userId": "",
-                        "type": "dog",
+                        "type": name.substring(0, 3),
                         "description": "heyy there",
                         "name": name,
-                        "basePrice": basePrice
-
+                        "basePrice": parseInt(basePrice)
                     });
                 }
-
-
-
             }
-            //   console.log("namee:" + services[0].name + "/pricess" + services[0].basePrice);
+            //Check values
+            console.log("Property :" + propertyName + aptNo + street + state + country + city + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
+            //Check service object
+            console.log("service 1 object" + JSON.stringify(services[0]));
+            var dayList = [];
+            var workingDays = "";
+            for (i = 0; i < 7; i++) {
+                // check if days are checked
+                if ($("*[name='" + i + "']").prop("checked")) {
+                    var day = $("*[name='" + i + "']").attr('id');
+                    dayList.push(day);
+                    console.log("checked day" + $("*[name='" + i + "']").attr('id'));
+                    //merge days 
+                    workingDays += day + ",";
+                }
+            }
+            //remove last comma of days
+            workingDays = workingDays.substring(0, workingDays.length - 1);
+            console.log("Workingdays : " + workingDays);
+
+            var user = JSON.stringify({
+                "contactList": [
+                    {
+                        "phone": phone,
+                        "website": website,
+                        "description": description,
+                        "bookingEmail": bookingEmail,
+                        "managerEmail": managerEmail,
+                        "contactName": contactName,
+                        "directions": directions,
+                        "address": {
+                            "propertyName": propertyName,
+                            "aptNo": aptNo,
+                            "street": street,
+                            "city": city,
+                            "states": state,
+                            "country": country,
+                            "zipcode": zipCode
+                        }
+                    }
+                ],
+                "hotel": {
+                    "workingHours": workingHours,
+                    "capacity": parseInt(capacity),
+                    "workingDays": workingDays,
+                    "serviceList": services
+                }
+            });
+            console.log(user);
+            $('#result').val(user);
+            $("#register").submit();
         }
 
+        var serviceList = [];
+        var priceList = [];
+
+        $(document).ready(function () {
+        <c:forEach var="h" items="${user.hotel.serviceList}">
+            console.log("name222:" + '${h.name}');
+            serviceList.push('${h.name}');
+            console.log('${h.name}');
+            priceList.push('${h.basePrice}');
+
+        </c:forEach>
+            for (var i = 1; i < 13; i++) {
+
+                var serviceId = "#cact" + i;
+                var nameId = "#service" + i;
+                var priceId = "#tboxact" + i;
+                var name = $(nameId).text().trim();
+                if (serviceList.includes(name)) {
+                    const index = serviceList.indexOf(name);
+                    $(serviceId).trigger("click");
+                    $(priceId).val(priceList[index]);
+                }
+            }
+            // This part will be used after got days 
+            $("#Mon").prop('checked', false);
+            $("#Fri").prop('checked', false);
+
+        });
+
         window.onload = () => {
-
-
-
-
-
 
             hotel_info.addEventListener('submit', (e) => {
                 const hotel_info = document.querySelector('#hotel_info');
@@ -463,7 +528,6 @@
                 const phone = document.getElementById('phone').value;
                 const description = document.getElementById('description').value;
                 const directions = document.getElementById('directions').value;
-
 
                 console.log("contactname" + contactName);
 
@@ -628,31 +692,25 @@
                                             <input type="text" id="street" name="street" value="${user.contactList[0].address.street}" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
-                                    <div class="form-group" >
-                                        <label class="control-label  col-md-3 col-sm-3 col-xs-12" for="country">Country <span class="required">*</span>
+                                    <div class="form-group">
+                                        <label class="control-label  col-md-3 col-sm-3 col-xs-12" for="city">City <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:8px">
-                                            <select name="country" class="countries" id="countryId">
-                                                <option value="">Select Country</option>
-                                            </select>  
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="cityId" name="city" value="${user.contactList[0].address.city}" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label  col-md-3 col-sm-3 col-xs-12" for="state">State<span class="required">*</span>
                                         </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:8px">
-                                            <select name="state" class="states" id="stateId">
-                                                <option value="">Select State</option>
-                                            </select>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="stateId" name="state" value="${user.contactList[0].address.states}" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label  col-md-3 col-sm-3 col-xs-12" for="city">City <span class="required">*</span>
+                                    <div class="form-group" >
+                                        <label class="control-label  col-md-3 col-sm-3 col-xs-12" for="country">Country <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top:8px">
-                                            <select name="city" class="cities" id="cityId">
-                                                <option value="">Select City</option>
-                                            </select>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" id="countryId" name="country" value="${user.contactList[0].address.country}" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -662,51 +720,50 @@
                                             <input type="text" id="zipcode" name="zipcode" value="${user.contactList[0].address.zipcode}" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
-                                </form>
 
-                                <div class="x_title">
-                                    <h2>Contact Details</h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <form class="form-horizontal form-label-left">
-                                    <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contactName">Contact Name <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input  id="contactName" name="contactName" value="${user.contactList[0].contactName}" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="contactName" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
-                                        </div>
+
+                                    <div class="x_title">
+                                        <h2>Contact Details</h2>
+                                        <div class="clearfix"></div>
                                     </div>
-                                    <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12"> Manager Email <span class=""></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input id="managerEmail" name="managerEmail" value="${user.contactList[0].managerEmail}" class="form-control col-md-7 col-xs-12">
+                                    <form class="form-horizontal form-label-left">
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contactName">Contact Name <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input  id="contactName" name="contactName" value="${user.contactList[0].contactName}" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="contactName" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bookingEmail">Booking Email Address <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="bookingEmail" name="bookingEmail" value="${user.contactList[0].bookingEmail}" required="required" class="form-control col-md-7 col-xs-12">
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"> Manager Email <span class=""></span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input id="managerEmail" name="managerEmail" value="${user.contactList[0].managerEmail}" class="form-control col-md-7 col-xs-12">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Website URL <span class="required"></span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="website" name="website" value="${user.contactList[0].website}"  placeholder="www.website.com" class="form-control col-md-7 col-xs-12">
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bookingEmail">Booking Email Address <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="bookingEmail" name="bookingEmail" value="${user.contactList[0].bookingEmail}" required="required" class="form-control col-md-7 col-xs-12">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">Phone <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="phone" name="phone" value="${user.contactList[0].phone}" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" >Website URL <span class="required"></span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="website" name="website" value="${user.contactList[0].website}"  placeholder="www.website.com" class="form-control col-md-7 col-xs-12">
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">Phone <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="text" id="phone" name="phone" value="${user.contactList[0].phone}" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                                            </div>
+                                        </div>
+                                    </form>
                             </div>
-
                         </div>
                     </div>
                     <div id="step-2">
@@ -951,7 +1008,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact1" id="cact1" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact1()" >
                                                             <span class="checkmark"></span>
-                                                            <i id="service1" style="margin-left: 20px">Dog Boarding </i>
+                                                            <i id="service1" style="margin-left: 20px">Dog Boarding</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -968,7 +1025,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact2" id="cact2" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact2()" >
                                                             <span class="checkmark"></span>
-                                                            <i id="service2" style="margin-left: 20px">Dog Washing </i>
+                                                            <i id="service2" style="margin-left: 20px">Dog Washing</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
@@ -1002,7 +1059,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact4" id="cact4" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact4()" >                                                                      
                                                             <span class="checkmark"></span>
-                                                            <i id="service4" style="margin-left: 20px"> Dog Medication</i>
+                                                            <i id="service4" style="margin-left: 20px">Dog Medication</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
@@ -1019,7 +1076,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact5" id="cact5" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact5()" >                                                                       
                                                             <span class="checkmark"></span>
-                                                            <i id="service5" style="margin-left: 20px"> Dog Day Care</i>
+                                                            <i id="service5" style="margin-left: 20px">Dog Day Care</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
@@ -1037,7 +1094,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact6" id="cact6" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact6()" >                                                            
                                                             <span class="checkmark"></span>
-                                                            <i id="service6" style="margin-left: 20px"> Dog Nail Clipping</i>
+                                                            <i id="service6" style="margin-left: 20px">Dog Nail Clipping</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1059,7 +1116,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact7" id="cact7" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact7()" >                                                                     
                                                             <span class="checkmark"></span>
-                                                            <i id="service7" style="margin-left: 20px"> Cat Boarding </i>
+                                                            <i id="service7" style="margin-left: 20px">Cat Boarding</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1078,7 +1135,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact8" id="cact8" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact8()" >                                                                  
                                                             <span class="checkmark"></span>
-                                                            <i id="service8" style="margin-left: 20px">Cat Washing </i>
+                                                            <i id="service8" style="margin-left: 20px">Cat Washing</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1096,7 +1153,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact9" id="cact9" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact9()" >                                                                      
                                                             <span class="checkmark"></span>
-                                                            <i id="service9" style="margin-left: 20px">Cat Groomming and Trimming </i>
+                                                            <i id="service9" style="margin-left: 20px">Cat Groomming and Trimming</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1114,7 +1171,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact10" id="cact10" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact10()" >                                                                    
                                                             <span class="checkmark"></span>
-                                                            <i id="service10" style="margin-left: 20px">Cat Medication </i>
+                                                            <i id="service10" style="margin-left: 20px">Cat Medication</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1132,7 +1189,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact11" id="cact11" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact11()" >
                                                             <span class="checkmark"></span>
-                                                            <i id="service11" style="margin-left: 20px">Cat Day Care </i>
+                                                            <i id="service11" style="margin-left: 20px">Cat Day Care</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;" class="col-md-4 col-sm-12 col-xs-12" >
@@ -1150,7 +1207,7 @@
                                                         <label  class="container1">
                                                             <input  name="cact12" id="cact12" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="Y" onclick="checkact12()" >                                                                      
                                                             <span class="checkmark"></span>
-                                                            <i id="service12" style="margin-left: 20px">Cat Nail Clipping </i>
+                                                            <i id="service12" style="margin-left: 20px">Cat Nail Clipping</i>
                                                         </label>
                                                     </div>
                                                     <div style="margin-top: 10px;"  class="col-md-4 col-sm-12 col-xs-12" >
@@ -1186,12 +1243,31 @@
                                     <label class="control-label col-md-5 col-sm-3 col-xs-12" for="first-name">Start Hour <span class="required">*</span>
                                     </label>
                                     <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select id="" name="" class="form-control">
+                                        <select id="startHour" name="" class="form-control">
+                                            <option>01:00</option>
+                                            <option>02:00</option>
+                                            <option>03:00</option>
+                                            <option>04:00</option>
+                                            <option>05:00</option>
                                             <option>06:00</option>
                                             <option>07:00</option>
                                             <option>08:00</option>
                                             <option>09:00</option>
                                             <option>10:00</option>
+                                            <option>11:00</option>
+                                            <option>12:00</option>
+                                            <option>13:00</option>
+                                            <option>14:00</option>
+                                            <option>15:00</option>
+                                            <option>16:00</option>
+                                            <option>17:00</option>
+                                            <option>18:00</option>
+                                            <option>19:00</option>
+                                            <option>20:00</option>
+                                            <option>21:00</option>
+                                            <option>22:00</option>
+                                            <option>23:00</option>
+                                            <option>00:00</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1199,12 +1275,31 @@
                                     <label class="control-label col-md-5 col-sm-3 col-xs-12" for="first-name">End Hour <span class="required">*</span>
                                     </label>
                                     <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <select id="" name="" class="form-control">
+                                        <select id="endHour" name="" class="form-control">
+                                            <option>01:00</option>
+                                            <option>02:00</option>
+                                            <option>03:00</option>
+                                            <option>04:00</option>
+                                            <option>05:00</option>
                                             <option>06:00</option>
                                             <option>07:00</option>
                                             <option>08:00</option>
                                             <option>09:00</option>
                                             <option>10:00</option>
+                                            <option>11:00</option>
+                                            <option>12:00</option>
+                                            <option>13:00</option>
+                                            <option>14:00</option>
+                                            <option>15:00</option>
+                                            <option>16:00</option>
+                                            <option>17:00</option>
+                                            <option>18:00</option>
+                                            <option>19:00</option>
+                                            <option>20:00</option>
+                                            <option>21:00</option>
+                                            <option>22:00</option>
+                                            <option>23:00</option>
+                                            <option>00:00</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1215,46 +1310,46 @@
                                         <div class="checkbox" >
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="Y" onclick="" >                                                                      
+                                                    <input  name="0" id="Sun" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="Y" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
-                                                </div> <br>Sun</br>
+                                                </div> <br >Sun<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                    <input  name="1" id="Mon" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked"  value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
-                                                </div> <br>Mon</br>
+                                                </div> <br>Mon<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                    <input  name="2" id="Tue" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
-                                                </div> <br>Tue</br>
+                                                </div> <br>Tue<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                    <input  name="3" id="Wed" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
-                                                </div> <br>Wed</br>
+                                                </div> <br>Wed<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input   name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox"  checked="checked" value="" onclick="" >                                                                      
+                                                    <input   name="4" id="Thu" style="margin-left: 0px;margin-top: 0px" type="checkbox"  checked="checked" value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
-                                                </div> <br>Thu</br>
+                                                </div> <br>Thu<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                    <input name="5" id="Fri" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
-                                                </div> <br>Fri</br>
+                                                </div> <br>Fri<br>
                                             </label>
 
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="" id="" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                    <input  name="6" id="Sat" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
-                                                </div> <br>Sat</br>
+                                                </div> <br>Sat<br>
                                             </label>
 
                                         </div>
@@ -1263,13 +1358,15 @@
 
                                     </div>
                                 </div>
-                                <div style="text-align: right;">
-                                    <a onclick="next();" class="buttonNext btn btn-success">Update Information</a>          
-                                </div>
+                            </form>
+                            <div style="text-align: right;">
+                                <button type="button" onclick="next();" class="btn btn-success">Update Information</button>          
+                            </div>
+                            <form id="register" action="updateHotel" method="POST">
+                                <input hidden id="result" name="result" value="">
                             </form>
                         </div>
                     </div>
-
                 </div>
                 <jsp:include page="dashboardFooter.jsp"></jsp:include>
             </div>

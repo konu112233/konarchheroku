@@ -5,11 +5,18 @@
  */
 package com.bookingpetz.dao;
 
+import com.bookingpetz.domain.Pet;
+import java.util.List;
+
 /**
  *
  * @author burakzengin
  */
 public interface UserServiceDAO {
 
-    public String getByToken(String token);
+    public List<Pet> getMyPets(String code);
+
+    public boolean addPet(Pet pet, String code);
+
+    public boolean removePet(String petId, String code);
 }
