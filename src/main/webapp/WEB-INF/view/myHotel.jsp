@@ -449,6 +449,7 @@
             workingDays = workingDays.substring(0, workingDays.length - 1);
             console.log("Workingdays : " + workingDays);
 
+
             var user = JSON.stringify({
                 "contactList": [
                     {
@@ -505,10 +506,27 @@
                     $(priceId).val(priceList[index]);
                 }
             }
-            // This part will be used after got days 
-            $("#Mon").prop('checked', false);
-            $("#Fri").prop('checked', false);
+            // Place capacity
+            document.getElementById('capacity').value = '${user.hotel.capacity}';
 
+            // Place checked days 
+            console.log("days" + '${user.hotel.workingDays}');
+            var days = '${user.hotel.workingDays}';
+            var daysArray = days.split(',');
+            for (var i = 0; i < daysArray.length; i++) {
+                var dayId = "#" + daysArray[i];
+                console.log(i + "." + daysArray[i]);
+                $(dayId).prop('checked', 'checked');
+
+
+
+            }
+            // place working hours
+            var workHours = '${user.hotel.workingHours}';
+            var workHoursArr = workHours.split('-');
+            console.log("hours" + workHoursArr[0] + workHoursArr[1]);
+            document.getElementById('startHour').value = workHoursArr[0];
+            document.getElementById('endHour').value = workHoursArr[1];
         });
 
         window.onload = () => {
@@ -1310,44 +1328,44 @@
                                         <div class="checkbox" >
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="0" id="Sun" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="Y" onclick="" >                                                                      
+                                                    <input  name="0" id="Sun" style="margin-left: 0px;margin-top: 0px" type="checkbox"  value="Y" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
                                                 </div> <br >Sun<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="1" id="Mon" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked"  value="" onclick="" >                                                                      
+                                                    <input  name="1" id="Mon" style="margin-left: 0px;margin-top: 0px" type="checkbox"   value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
                                                 </div> <br>Mon<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="2" id="Tue" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                    <input  name="2" id="Tue" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
                                                 </div> <br>Tue<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="3" id="Wed" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                    <input  name="3" id="Wed" style="margin-left: 0px;margin-top: 0px" type="checkbox"  value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
                                                 </div> <br>Wed<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input   name="4" id="Thu" style="margin-left: 0px;margin-top: 0px" type="checkbox"  checked="checked" value="" onclick="" >                                                                      
+                                                    <input   name="4" id="Thu" style="margin-left: 0px;margin-top: 0px" type="checkbox"   value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
                                                 </div> <br>Thu<br>
                                             </label>
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input name="5" id="Fri" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                    <input name="5" id="Fri" style="margin-left: 0px;margin-top: 0px" type="checkbox" value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
                                                 </div> <br>Fri<br>
                                             </label>
 
                                             <label class="col-md-1">
                                                 <div class="container1" style="position: relative;">
-                                                    <input  name="6" id="Sat" style="margin-left: 0px;margin-top: 0px" type="checkbox" checked="checked" value="" onclick="" >                                                                      
+                                                    <input  name="6" id="Sat" style="margin-left: 0px;margin-top: 0px" type="checkbox"  value="" onclick="" >                                                                      
                                                     <span class="checkmark"></span>
                                                 </div> <br>Sat<br>
                                             </label>
