@@ -21,6 +21,8 @@ public class SearchResult {
     String bookingEmail;
     String contactName;
     String directions;
+    String lat;
+    String lng;
 
     String aptNo;
     String street;
@@ -55,6 +57,8 @@ public class SearchResult {
         this.rate = user.getHotel().getRate();
         this.serviceList = user.getHotel().getServiceList();
         this.workingDays = user.getHotel().getWorkingDays();
+        this.lat = user.getContactList().get(0).getAddress().getLat();
+        this.lng = user.getContactList().get(0).getAddress().getLng();
     }
 
     public SearchResult(String hotelId, String phone, String website, String description, String bookingEmail, String contactName, String directions, String aptNo, String street, String city, String country, String zipcode, String propertyName, int capacity, double rate, List<Service> serviceList, String workingDays) {
@@ -75,6 +79,8 @@ public class SearchResult {
         this.rate = rate;
         this.serviceList = serviceList;
         this.workingDays = workingDays;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public String getHotelId() {
@@ -213,4 +219,19 @@ public class SearchResult {
         this.workingDays = workingDays;
     }
 
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
 }

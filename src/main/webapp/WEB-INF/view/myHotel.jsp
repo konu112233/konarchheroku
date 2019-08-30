@@ -386,30 +386,80 @@
     </script>
     <script>
 
+        var aptNo;
+        var street;
+        var city;
+        var country;
+        var zipCode;
+        var propertyName;
+        var states;
+
+        var contactName;
+        var managerEmail;
+        var bookingEmail;
+        var website;
+        var phone;
+        var description;
+        var directions;
+
+        var capacity;
+        var startHour;
+        var endHour;
+
+        var workingHours;
+
+        var geocoder;
+        var lat, lng;
+        function initMap() {
+            // Google maps are now initialized.
+            geocoder = new google.maps.Geocoder();
+
+        }
+        function synchronizeFunction(addr, callback) {
+            var address = addr;
+            geocoder.geocode({'address': address}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    lat = results[0].geometry.location.lat();
+                    lng = results[0].geometry.location.lng();
+                    callback();
+                }
+            });
+
+        }
         var services = [];
         function next() {
-            var propertyName = document.getElementById('propertyName').value;
-            var street = document.getElementById('street').value;
-            var zipCode = document.getElementById('zipcode').value;
-            var aptNo = document.getElementById('aptNo').value;
-            var city = document.getElementById('cityId').value;
-            var state = document.getElementById('stateId').value;
-            var country = document.getElementById('countryId').value;
+            aptNo = document.getElementById('aptNo').value;
+            street = document.getElementById('street').value;
+            city = document.getElementById('cityId').value;
+            country = document.getElementById('countryId').value;
+            zipCode = document.getElementById('zipcode').value;
+            propertyName = document.getElementById('propertyName').value;
+            states = document.getElementById('stateId').value;
 
-            var contactName = document.getElementById('contactName').value;
-            var managerEmail = document.getElementById('managerEmail').value;
-            var bookingEmail = document.getElementById('bookingEmail').value;
-            var website = document.getElementById('website').value;
-            var phone = document.getElementById('phone').value;
-            var description = document.getElementById('description').value;
-            var directions = document.getElementById('directions').value;
+            var longAddr = aptNo + " " + street + " " + city + " " + country + " " + +" " + zipCode;
+            synchronizeFunction(longAddr, next2);
+        }
 
-            var capacity = document.getElementById('capacity').value;
-            var startHour = document.getElementById('startHour').value;
-            var endHour = document.getElementById('endHour').value;
-            var workingHours = startHour + "-" + endHour;
+        var services = [];
+        function next2() {
+            contactName = document.getElementById('contactName').value;
+            managerEmail = document.getElementById('managerEmail').value;
+            bookingEmail = document.getElementById('bookingEmail').value;
+            website = document.getElementById('website').value;
+            phone = document.getElementById('phone').value;
+            description = document.getElementById('description').value;
+            directions = document.getElementById('directions').value;
 
-            console.log("Property :" + capacity + workingHours + aptNo + street + state + country + city + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
+            capacity = document.getElementById('capacity').value;
+            startHour = document.getElementById('startHour').value;
+            endHour = document.getElementById('endHour').value;
+
+            workingHours = startHour + "-" + endHour;
+
+            console.log("Property :" + aptNo + street + city + country + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
+
+
+            //      console.log("Property :" + capacity + workingHours + aptNo + street + state + country + city + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
 
             for (var i = 1; i < 13; i++) {
                 var serviceId = "#cact" + i;
@@ -430,7 +480,7 @@
                 }
             }
             //Check values
-            console.log("Property :" + propertyName + aptNo + street + state + country + city + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
+            console.log("Property :" + propertyName + aptNo + street + states + country + city + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
             //Check service object
             console.log("service 1 object" + JSON.stringify(services[0]));
             var dayList = [];
@@ -465,9 +515,11 @@
                             "aptNo": aptNo,
                             "street": street,
                             "city": city,
-                            "states": state,
+                            "states": states,
                             "country": country,
-                            "zipcode": zipCode
+                            "zipcode": zipCode,
+                            "lat": lat,
+                            "lng": lng
                         }
                     }
                 ],
@@ -1389,6 +1441,12 @@
                 <jsp:include page="dashboardFooter.jsp"></jsp:include>
             </div>
         </div>
+
+        <!-- geolocation -->
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjMHsDUlFE59e7axyc3sn7ifwAwW_uyP0&callback=initMap">
+        </script>
+
 
         <!-- Geodate-->
         <script src="//geodata.solutions/includes/countrystatecity.js"></script>
