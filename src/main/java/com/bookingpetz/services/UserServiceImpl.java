@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService {
     public Profile getProfile(String code) {
         return userServiceDAO.getProfile(code);
     }
+
+    @Override
+    public boolean updatePet(Pet pet, String code) {
+        return userServiceDAO.updatePet(pet, code);
+    }
 }

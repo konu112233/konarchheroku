@@ -274,9 +274,12 @@
             $('#result').val(pet);
             $("#addPet").submit();
         }
+        
+        var updateId;
 
         /*EditPet*/
         function editPet(id) {
+            updateId = id;
             console.log("ff" + id);
             for (var i = 0; i < petList.length; i++) {
 
@@ -338,6 +341,7 @@
             petImg = dataURI;
             console.log(type + " " + name + " " + breed + " " + gender + " " + age + " " + microchipNo + " " + allergies + " " + underMedication + " " + eatingRoutine + " " + sleepingPlace + " " + vaccination + " " + size + " " + neutered + " " + friendly + " " + getAlongChild);
             var pet = JSON.stringify({
+                "id": updateId,
                 "name": name,
                 "petType": type,
                 "breed": breed,
@@ -355,7 +359,8 @@
                 "vaccination": vaccination
             });
             console.log("Test" + pet);
-
+            $('#resultUpdate').val(pet);
+            $("#updatePet").submit();
         }
 
         function changeButtonType() {
@@ -952,8 +957,8 @@
                                                                 </div>
                                                             </form>
                                                         </div>
-                                                        <form id="addPet" action="addPet" method="POST">
-                                                            <input hidden id="result" name="result" value="">
+                                                        <form id="updatePet" action="updatePet" method="POST">
+                                                            <input hidden id="resultUpdate" name="resultUpdate" value="">
                                                         </form>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -60,6 +60,24 @@ public class UserDashboardController {
         }
     }
 
+    @RequestMapping(value = "/updatePet", method = RequestMethod.POST)
+    public String updatePet(Model m, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                Pet pet = new Gson().fromJson(request.getParameter("resultUpdate"), Pet.class);
+                if (userService.updatePet(pet, session.getAttribute("token").toString())) {
+                    return "redirect:myPets?success";
+                }
+                return "redirect:myPets";
+            } else {
+                return "redirect:/";
+            }
+        } catch (JsonSyntaxException exception) {
+            return "redirect:/?" + exception;
+        }
+    }
+
     @RequestMapping(value = "/removePet", method = RequestMethod.POST)
     public String removePet(Model m, HttpServletRequest request) {
         try {

@@ -53,6 +53,17 @@ public class UserServiceDAOImpl implements UserServiceDAO {
     }
 
     @Override
+    public boolean updatePet(Pet pet, String code) {
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/updatePet")
+                .header("Content-type", "application/json")
+                .header("Authorization", "Bearer " + code)
+                .body(new Gson().toJson(pet))
+                .asJson();
+
+        return response.getStatus() == 200;
+    }
+
+    @Override
     public boolean removePet(String petId, String code) {
         JSONObject jsono = new JSONObject();
         jsono.put("object", petId);

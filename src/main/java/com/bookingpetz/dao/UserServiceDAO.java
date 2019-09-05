@@ -22,4 +22,6 @@ public interface UserServiceDAO {
     public boolean removePet(String petId, String code);
 
     public Profile getProfile(String code);
+
+    public boolean updatePet(Pet pet, String code);
 }
