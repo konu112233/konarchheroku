@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +36,8 @@
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
         <!--  mdb css  -->
         <link rel="stylesheet" href="static/aaa/css/mdb.min2.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <style>
 
@@ -108,83 +111,133 @@
 
     </style>
     <script>
+        $(document).ready(function () {
+
+            var serviceList = [];
+            var priceList = [];
+        <c:forEach var="c" items="${hotel.serviceList}">
+            console.log("name222:" + '${c.name}');
+            serviceList.push('${c.name}');
+            console.log('${c.basePrice}');
+            priceList.push('${c.basePrice}');
+
+        </c:forEach>
+            console.log("omer");
+            console.log("ss" + '${c.name}');
+            var tds = document.querySelectorAll('#serviceTable td');
+
+            for (var i = 0; i < 25; i++) {
+                console.log("innersfirst::" + tds[i].innerHTML);
+
+                if (serviceList.includes(tds[i].innerHTML)) {
+                    const index = serviceList.indexOf(tds[i].innerText);
+                    tds[i].innerHTML = '<img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">' + tds[i].innerText + '</span>';
+                    tds[i].className = "font-weight-bold";
+                    tds[i + 1].innerHTML = '<i class="fas fa-euro-sign"</i> <span>' + priceList[index] + '</span>';
+                    console.log("innerssecond::" + tds[i].innerText);
+                    // $(serviceId).trigger("click");
+                    // $(priceId).val(priceList[index]);
+                }
+
+                i++;
+            }
+            //document.getElementById("serviceRow1").innerHTML = "formatted_checkout";
+
+
+//            for (var i = 1; i < 13; i++) {
+//
+//                var serviceId = "#cact" + i;
+//                var nameId = "#service" + i;
+//                var priceId = "#tboxact" + i;
+//                var name = $(nameId).text().trim();
+//                if (serviceList.includes(name)) {
+//                    const index = serviceList.indexOf(name);
+//                    $(serviceId).trigger("click");
+//                    $(priceId).val(priceList[index]);
+//                }
+//            }
+        })
+
+
 
         window.onload = function () {
             var addr;
-            addr = "Zandpad 3A,1054GA Amsterdam";
-
-            document.getElementById("location").src = "https://www.google.com/maps?q=" + addr + " &output=embed";
-        };
-
-        var serviceTotal = 90;
+            addr = '${hotel.city}, ${hotel.street}, ${hotel.aptNo}, ${hotel.country}';
+                    document.getElementById("location").src = "https://www.google.com/maps?q=" + addr + " &output=embed";
 
 
-        function selectService(serviceId) {
-            var tr = document.getElementById(serviceId);
-            var tds = tr.getElementsByTagName("td");
-            var servicePrice = tds[1].innerText;
 
-            if (document.getElementById(serviceId + "Btn2").style.display === "none") {
-                servicePrice = servicePrice.replace("€", "");
-                serviceTotal += parseFloat(servicePrice);
+                };
+                var serviceTotal = 90;
+                function selectService(serviceId) {
+                    var tr = document.getElementById(serviceId);
+                    var tds = tr.getElementsByTagName("td");
+                    var servicePrice = tds[1].innerText;
+                    if (document.getElementById(serviceId + "Btn2").style.display === "none") {
+                        servicePrice = servicePrice.replace("€", "");
+                        serviceTotal += parseFloat(servicePrice);
+                        tds[0].setAttribute("class", "font-weight-bold");
+                        tds[1].setAttribute("class", "font-weight-bold");
+                        document.getElementById(serviceId + "Btn2").style.display = "block";
+                        document.getElementById(serviceId + "Btn").style.display = "none";
+                    } else {
 
-                tds[0].setAttribute("class", "font-weight-bold");
-                tds[1].setAttribute("class", "font-weight-bold");
-                document.getElementById(serviceId + "Btn2").style.display = "block";
-                document.getElementById(serviceId + "Btn").style.display = "none";
+                        servicePrice = servicePrice.replace("€", "");
+                        serviceTotal -= parseFloat(servicePrice);
+                        tds[0].setAttribute("class", "");
+                        tds[1].setAttribute("class", "");
+                        document.getElementById(serviceId + "Btn2").style.display = "none";
+                        document.getElementById(serviceId + "Btn").style.display = "block";
+                    }
+                    document.getElementById("serviceTotal").innerHTML = "<span>€" + parseFloat(serviceTotal).toFixed(2) + "</span>";
+                    //  document.getElementById("serviceTotal").innerHTML = "<span>€" + serviceTotal + "</span>";
 
-            } else {
+                }
 
-                servicePrice = servicePrice.replace("€", "");
-                serviceTotal -= parseFloat(servicePrice);
+                window.onload = selectService();
+                function getDiff() {
+                    var checkin = document.getElementById("checkin").value;
+                    var checkinDate = new Date(checkin);
+                    var checkout = document.getElementById("checkout").value;
+                    var checkoutDate = new Date(checkout);
+                    var roomPrice = 45;
+                    var roomNights = document.getElementById("roomNights");
+                    var fee = 5;
+                    var total = document.getElementById("total");
+                    var boardingService = document.getElementById("boardingService");
+                    var boardingPrice = document.getElementById("boardingPrice");
+                    if (checkin !== null && checkin !== '' && checkout !== null && checkout !== '') {
 
+                        var timeDiff = parseInt(checkoutDate.getTime() - checkinDate.getTime());
+                        var daysDiff = parseInt(timeDiff / (1000 * 3600 * 24));
+                        var roomNightsPrice = parseInt(daysDiff * roomPrice);
+                        var totalPrice = parseInt(roomNightsPrice + fee);
+                        roomNights.innerHTML = daysDiff + " nights : " + "<span>$" + roomNightsPrice + "</span>";
+                        total.innerHTML = totalPrice;
+                        serviceTotal = totalPrice;
+                        document.getElementById("serviceTotal").innerHTML = "£" + serviceTotal;
+                        document.getElementById("daysSummary").innerHTML = daysDiff;
+                        document.getElementById("breed").innerHTML = "Cat";
+                        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                        let formatted_checkin = months[checkinDate.getMonth()] + " " + checkinDate.getDate() + ", " + " " + checkinDate.getFullYear();
+                        let formatted_checkout = months[checkoutDate.getMonth()] + " " + checkoutDate.getDate() + ", " + " " + checkoutDate.getFullYear();
+                        document.getElementById("checkinSummary").innerHTML = formatted_checkin;
+                        document.getElementById("checkoutSummary").innerHTML = formatted_checkout;
+                        //   $("#checkinSummary").text("heyy");
 
-                tds[0].setAttribute("class", "");
-                tds[1].setAttribute("class", "");
-                document.getElementById(serviceId + "Btn2").style.display = "none";
-                document.getElementById(serviceId + "Btn").style.display = "block";
-            }
-            document.getElementById("serviceTotal").innerHTML = "<span>€" + parseFloat(serviceTotal).toFixed(2) + "</span>";
+                        boardingService.innerHTML = "(" + roomPrice + " x " + daysDiff + " nights)";
+                        boardingPrice.innerHTML = "£" + roomNightsPrice;
+                    }
+                }
 
-
-            //  document.getElementById("serviceTotal").innerHTML = "<span>€" + serviceTotal + "</span>";
-
-        }
-
-        window.onload = selectService();
-
-        function getDiff() {
-            var checkin = document.getElementById("checkin").value;
-            var checkinDate = new Date(checkin);
-            var checkout = document.getElementById("checkout").value;
-            var checkoutDate = new Date(checkout);
-            var roomPrice = 45;
-            var roomNights = document.getElementById("roomNights");
-            var fee = 5;
-            var total = document.getElementById("total");
-
-            if (checkin !== null && checkin !== '' && checkout !== null && checkout !== '') {
-
-                var timeDiff = parseInt(checkoutDate.getTime() - checkinDate.getTime());
-                var daysDiff = parseInt(timeDiff / (1000 * 3600 * 24));
-                var roomNightsPrice = parseInt(daysDiff * roomPrice);
-                var totalPrice = parseInt(roomNightsPrice + fee);
-
-                roomNights.innerHTML = daysDiff + " nights : " + "<span>$" + roomNightsPrice + "</span>";
-                total.innerHTML = totalPrice;
-            }
-        }
-
-        function minOut() {
-            var checkin = document.getElementById("checkin").value;
-            var checkout = document.getElementById("checkout");
-
-            checkout.min = checkin;
-
-        }
-        function next() {
-            $('#petInfpForm').show();
-        }
+                function minOut() {
+                    var checkin = document.getElementById("checkin").value;
+                    var checkout = document.getElementById("checkout");
+                    checkout.min = checkin;
+                }
+                function next() {
+                    $('#petInfpForm').show();
+                }
 
     </script>
     <body>
@@ -274,51 +327,48 @@
                                                     <table class="table table-responsive-lg table-striped">
                                                         <thead>
                                                             <tr>
-
                                                                 <th><i class="fas fa-dog fa-2x"></i></th>
                                                                 <th>Price</th>
                                                                 <th><i class="fas fa-cat fa-2x"></i></th>
                                                                 <th>Price</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Boarding</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>
-                                                                        45</span></td>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Daycare</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Daycare</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Daycare</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Washing</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Washing</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></i> Dog Nail Clipping</td>
+                                                        <tbody id="serviceTable">
+                                                            <tr id="serviceRow1">
+                                                                <td>Dog Boarding</td>
                                                                 <td></td>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Nail Clipping</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
+                                                                <td>Cat Boarding</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr id="serviceRow2">
+                                                                <td>Dog Day Care</td>
+                                                                <td></td>
+                                                                <td>Cat Day Care</td>
+                                                                <td></td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Grooming & Trimming</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                                <td>Cat Grooming & Trimming</td>
-                                                                <td><i class=""</i> <span></span></td>
+                                                                <td>Dog Washing</td>
+                                                                <td></td>
+                                                                <td>Cat Washing</td>
+                                                                <td></td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Dog Medication</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-                                                                <td class="font-weight-bold"><img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">Cat Medication</span></td>
-                                                                <td><i class="fas fa-euro-sign"</i> <span>45</span></td>
-
+                                                                <td>Dog Nail Clipping</td>
+                                                                <td></td>
+                                                                <td>Cat Nail Clipping</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Dog Groomming and Trimming</td>
+                                                                <td></td>
+                                                                <td>Cat Groomming and Trimming</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Dog Medication</td>
+                                                                <td></td>
+                                                                <td>Cat Medication</td>
+                                                                <td></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -460,14 +510,15 @@
                                     </div>
                                     <div>
                                         <p>Dates</p>
-                                        <div class="row">
+                                        <div class="row"> 
                                             <span class="col-6">Check in</span>
-                                            <input type="date" onchange="getDiff()" id="checkin" name="checkin" class="col-5 align-self-end" placeholder="Check in" required="required">
+                                            <input type="text" onchange="getDiff()" id="checkin" name="checkin" class="datepicker col-5 align-self-end" placeholder="Check in" required="required">                                       
                                         </div>
                                         <br>
                                         <div class="row">
                                             <span class="col-6">Check out</span>
-                                            <input type="date" onchange="getDiff(); minOut()" id="checkout" name="checkout" class="col-5 align-self-end" placeholder="Check out" required="required">
+                                            <input type="text" onchange="getDiff();
+                                                    minOut()" id="checkout" name="checkout" class="datepicker col-5 align-self-end" placeholder="Check out" required="required">
                                         </div>
                                         <br>
                                     </div>
@@ -498,7 +549,7 @@
                                         </table>
                                     </div>
 
-                                    <!--signupForBookingForm-->
+                                    <!--signupForBookingForm     #signupForBookingForm-->
                                     <a href="" class="site-btn list-btn" data-toggle="modal" data-target="#signupForBookingForm">Book Now!</a>
                                     <div class="x_content">
                                         <!-- modals -->
@@ -528,25 +579,26 @@
                                                                             <div class="row" style="margin-left: 2px" >
                                                                                 <div class="col-md-4" >
                                                                                     <div class="row" ><h9><small>Check-in Date</small></h9></div>
-                                                                                    <div class="row"><h7><strong>Aug 7, 2019</strong></h7></div>
+                                                                                    <div class="row" ><h7><strong id="checkinSummary"  ></strong ></h7></div>
+
                                                                                 </div>
                                                                                 <div class="col-md-4" >
                                                                                     <div class="" >
                                                                                         <div class="row"> <h9><small>Check-out Date</small></h9></div>
-                                                                                        <div class="row"> <h7><strong>Aug 9, 2019</strong></h7></div>
+                                                                                        <div class="row"> <h7><strong id="checkoutSummary"></strong></h7></div>
                                                                                     </div>
 
                                                                                 </div>
                                                                                 <div class="col-md-2" >
                                                                                     <div class="" >
                                                                                         <div class="row"> <h9><small>Day</small></h9></div>
-                                                                                        <div class="row" style="padding-left:4px"> <h7><strong>2</strong></h7></div>
+                                                                                        <div class="row" style="padding-left:4px"> <h7><strong id="daysSummary">2</strong></h7></div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-2" >
                                                                                     <div class="" >
                                                                                         <div class="row"> <h9><small>Breed</small></h9></div>
-                                                                                        <div class="row"> <h7><strong>Dog</strong></h7></div>
+                                                                                        <div class="row"> <h7><strong id="breed">Dog</strong></h7></div>
                                                                                     </div>
                                                                                 </div>
 
@@ -571,11 +623,10 @@
                                                                                         <tr class="even pointer">
 
                                                                                             <td class="font-weight-bold"><strong>Boarding</strong></td>
-                                                                                            <td  class="a-right a-right font-weight-bold ">€90</td>
-                                                                                            <td class="font-weight-bold" >(45 x 2 nights)</td>
+                                                                                            <td  class="a-right a-right font-weight-bold " id="boardingPrice">€90</td>
+                                                                                            <td class="font-weight-bold" id="boardingService">(45 x 2 nights)</td>
                                                                                         </tr>
                                                                                         <tr id="serviceWashing" class="even pointer">
-
                                                                                             <td  >Washing</td>
                                                                                             <td class="a-right a-right">€10.45</td>
                                                                                             <td >
@@ -583,17 +634,13 @@
                                                                                                     <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
                                                                                                         <i class="fa fa-plus text-white"></i>
                                                                                                     </a>
-
                                                                                                 </div>
                                                                                                 <div id="serviceWashingBtn2" style="display:none;">
                                                                                                     <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
                                                                                                 </div>
                                                                                             </td>
-
                                                                                         </tr>
-
                                                                                         <tr id="serviceMedication" class="even pointer">
-
                                                                                             <td  >Medication</td>
                                                                                             <td class="a-right a-right">€10.45</td>
                                                                                             <td >
@@ -606,10 +653,8 @@
                                                                                                     <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
                                                                                                 </div>
                                                                                             </td>
-
                                                                                         </tr>
                                                                                         <tr id="serviceNail" class="even pointer">
-
                                                                                             <td  >Nail Clipping</td>
                                                                                             <td class="a-right a-right">€10.45</td>
                                                                                             <td >
@@ -622,11 +667,9 @@
                                                                                                     <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
                                                                                                 </div>
                                                                                             </td>
-
                                                                                         </tr>
                                                                                         <tr id="serviceGroomming" class="even pointer">
-
-                                                                                            <td  >Grooming & Trimming</td>
+                                                                                            <td  >Groomming and Trimming</td>
                                                                                             <td class="a-right a-right">€10.45</td>
                                                                                             <td >
                                                                                                 <div id="serviceGroommingBtn" >
@@ -638,30 +681,14 @@
                                                                                                     <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
                                                                                                 </div>
                                                                                             </td>
-
                                                                                         </tr>
-
-
                                                                                         <tr class="even pointer">
-
                                                                                             <td class="font-weight-bold">Total</td>
                                                                                             <td  id="serviceTotal" class="a-right a-right font-weight-bold">€90</td>
                                                                                             <td class=""></td>
-
                                                                                         </tr>
-
-
                                                                                     </tbody>
                                                                                 </table>
-                                                                                <div class="row">
-
-                                                                                </div>
-                                                                            </div>
-
-
-
-                                                                            <div class="row">
-
                                                                             </div>
                                                                             <!-- /.row -->
 
@@ -724,6 +751,7 @@
 
         <!-- mdb script -->
         <script type="text/javascript" src="static/aaa/js/mdb.min2.js"></script>
+        <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
 
     </body>
 </html>

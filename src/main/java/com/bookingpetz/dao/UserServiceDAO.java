@@ -6,6 +6,7 @@
 package com.bookingpetz.dao;
 
 import com.bookingpetz.domain.Pet;
+import com.bookingpetz.domain.Profile;
 import java.util.List;
 
 /**
@@ -19,4 +20,6 @@ public interface UserServiceDAO {
     public boolean addPet(Pet pet, String code);
 
     public boolean removePet(String petId, String code);
+
+    public Profile getProfile(String code);
 }

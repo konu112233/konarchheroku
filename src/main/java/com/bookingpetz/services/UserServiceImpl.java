@@ -7,6 +7,7 @@ package com.bookingpetz.services;
 
 import com.bookingpetz.dao.UserServiceDAO;
 import com.bookingpetz.domain.Pet;
+import com.bookingpetz.domain.Profile;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean removePet(String petId, String code) {
         return userServiceDAO.removePet(petId, code);
+    }
+
+    @Override
+    public Profile getProfile(String code) {
+        return userServiceDAO.getProfile(code);
     }
 }

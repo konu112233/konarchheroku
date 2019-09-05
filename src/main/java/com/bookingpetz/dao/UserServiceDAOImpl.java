@@ -6,6 +6,7 @@
 package com.bookingpetz.dao;
 
 import com.bookingpetz.domain.Pet;
+import com.bookingpetz.domain.Profile;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -26,7 +27,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
 
     @Override
     public List<Pet> getMyPets(String code) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/getMyPets")
+        HttpResponse<String> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/getMyPets")
                 .header("Authorization", "Bearer " + code)
                 .asString();
 
@@ -42,7 +43,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
 
     @Override
     public boolean addPet(Pet pet, String code) {
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/addPet")
+        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/addPet")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + code)
                 .body(new Gson().toJson(pet))
@@ -55,13 +56,26 @@ public class UserServiceDAOImpl implements UserServiceDAO {
     public boolean removePet(String petId, String code) {
         JSONObject jsono = new JSONObject();
         jsono.put("object", petId);
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/removePet")
+        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/removePet")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + code)
                 .body(jsono.toJSONString())
                 .asJson();
 
         return response.getStatus() == 200;
+    }
+
+    @Override
+    public Profile getProfile(String code) {
+        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/getProfile")
+                .header("Content-type", "application/json")
+                .header("Authorization", "Bearer " + code)
+                .asJson();
+
+        if (response.getStatus() == 200) {
+            return new Gson().fromJson(response.getBody().toString(), Profile.class);
+        }
+        return new Profile();
     }
 
 }

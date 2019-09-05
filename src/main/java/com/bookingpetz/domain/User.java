@@ -39,6 +39,12 @@ public class User implements Serializable {
     @Column(name = "surname", nullable = false, length = 45)
     private String surname;
 
+    @Column(name = "birthday", nullable = false, length = 45)
+    private String birthday;
+
+    @Column(name = "gender", nullable = false, length = 45)
+    private String gender;
+
     @Column(name = "pkey", nullable = false, length = 500)
     private String pkey;
 
@@ -82,6 +88,8 @@ public class User implements Serializable {
         this.email = user.getEmail();
         this.name = user.getName();
         this.surname = user.getSurname();
+        this.birthday = user.getBirthday();
+        this.gender = user.getGender();
         this.contactList = user.getContactList();
         this.hotel = user.getHotel();
     }
@@ -206,5 +214,21 @@ public class User implements Serializable {
 
     public void setPetList(List<Pet> petList) {
         this.petList = petList;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

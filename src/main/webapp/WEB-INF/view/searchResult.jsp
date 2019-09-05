@@ -52,118 +52,87 @@
             }
         </style>
         <script>
-
-            map = new Array();
+            var markers = [];
             <c:forEach var="c" items="${hotels}">
-            hotel = new Object();
-            hotel.title = '${c.propertyName}';
-            hotel.description = '${c.description}';
-            hotel.contact_person = '${c.contactName}';
-            hotel.address = '${c.city}, ${c.street}, ${c.aptNo}, ${c.zipcode}';
-                hotel.rate = '${c.rate}';
-                map.push(hotel);
-            </c:forEach>
-                var markers = [
-                    {
-                        "title": '${c}',
-                        "lat": '52.379189',
-                        "lng": '4.899431',
-                        "description": 'Aksa Beach is a popular beach and a vacation spot in Aksa village at Malad, Mumbai.',
-                        "contact_person": 'Andrew johnson',
-                        "address": "   CG Roosweg 19 2871MB",
-                        "rate": "4,5"
-                    },
-                    {
-                        "title": 'Wellness Pet Hotel',
-                        "lat": '52.200189',
-                        "lng": '5.100431',
-                        "description": 'Juhu Beach is one of favourite tourist attractions situated in Mumbai.',
-                        "contact_person": 'Smith johnson',
-                        "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
-                        "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
-                        "address": "   CG Roosweg 19 2871MB",
-                        "rate": "4,7"
-                    },
-                    {
-                        "title": 'Forever Forever Pet Hotel',
-                        "lat": '52.421189',
-                        "lng": '5.500431',
-                        "description": 'Girgaum Beach commonly known as just Chaupati is one of the most famous public beaches in Mumbai.',
-                        "contact_person": 'Rocky johnson',
-                        "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
-                        "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
-                        "address": "   CG Roosweg 19 2871 MB",
-                        "rate": "5,0"
-                    },
-                    {
-                        "title": 'Kind Pet Hotel',
-                        "lat": '52.321189',
-                        "lng": '5.500431',
-                        "description": 'Jijamata Udyan is situated near Byculla station is famous as Mumbai (Bombay) Zoo.',
-                        "contact_person": 'saniya johnson',
-                        "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
-                        "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
-                        "address": "   CG Roosweg 19 2871 MB",
-                        "rate": "4,3"
-                    },
-                    {
-                        "title": 'Vondel Pet Hotel',
-                        "lat": '52.81189',
-                        "lng": '52.31062020000004',
-                        "description": 'Sanjay Gandhi National Park is a large protected area in the northern part of Mumbai city.',
-                        "contact_person": 'Olga johnson',
-                        "cat": "http://localhost/bookingpetzBKP/live/resultPages/cat.png",
-                        "dog": "http://localhost/bookingpetzBKP/live/resultPages/dog.png",
-                        "address": "   CG Roosweg 19 2871 MB",
-                        "rate": "4,8"
-                    }
-                ];
-                window.onload = function () {
-                    LoadMap();
-                }
-                function LoadMap() {
-                    var mapOptions = {
-                        center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
-                        zoom: 8,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
+
+            var hotelInfo = {
+                "hotelId": '${c.hotelId}',
+                "title": '${c.propertyName}',
+                "address": '${c.city}, ${c.street}, ${c.aptNo}, ${c.zipcode}',
+                        "lat": '${c.lat}',
+                        "lng": '${c.lng}',
+                        "rate": '${c.rate}',
+                        "basePrice": "45"
                     };
-                    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                    markers.push(hotelInfo);
 
-                    //Create and open InfoWindow.
-                    var infoWindow = new google.maps.InfoWindow();
+                    hotel = new Object();
+                    hotel.title = '${c.propertyName}';
+                    hotel.description = '${c.description}';
+                    hotel.contact_person = '${c.contactName}';
+                    hotel.address = '${c.city}, ${c.street}, ${c.aptNo}, ${c.zipcode}';
+                        hotel.rate = '${c.rate}';
 
-                    for (var i = 0; i < markers.length; i++) {
-                        var data = markers[i];
-                        var myLatlng = new google.maps.LatLng(data.lat, data.lng);
-                        var marker = new google.maps.Marker({
-                            position: myLatlng,
-                            map: map,
-                            title: data.title,
-                            rate: data.rate
-                        });
-                        // marker.setIcon("static/images/paw_green.svg");
+                        console.log("test61" + '${c.rate}' + '${c.lat}' + '${c.lng}' + "price" + '${c.serviceList[0].basePrice}');
+            </c:forEach>
+
+                        window.onload = function () {
+                            LoadMap();
+                        }
+                        function LoadMap() {
+                            var mapOptions = {
+                                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                                zoom: 12,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                            };
+                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+                            //Create and open InfoWindow.
+                            var infoWindow = new google.maps.InfoWindow();
+
+                            for (var i = 0; i < markers.length; i++) {
+                                var data = markers[i];
+                                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                                var marker = new google.maps.Marker({
+                                    hotelId: data.hotelId,
+                                    position: myLatlng,
+                                    map: map,
+                                    title: data.title,
+                                    rate: data.rate,
+                                    basePrice: data.basePrice
+                                });
+                                // marker.setIcon("static/images/paw_green.svg");
 
 
-                        //Attach click event to the marker.
-                        (function (marker, data) {
-                            google.maps.event.addListener(marker, "click", function (e) {
-                                //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-                                infoWindow.setContent("<div style='width:320px;min-height:100px;'> <img src='https://q-cf.bstatic.com/images/hotel/max1280x900/155/15538911.jpg' style='height:95px;width:auto; float:left;'> <span style='padding:15px;color:#459756;font-size:15px;'><strong>" + data.title + "</strong> <span> <button style='border:none;border-radius: 6px; margin-left: 3px;background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 12px; cursor: pointer; color: white;'> <strong>" + data.rate + "</strong> </button> </span> </span> <p> <span style='padding:15px;font-size:10px;'> <i class='fa fa-home' style='padding-right: 3px;'></i>" + data.address + " </span> <br> <div class='row'> <div class='col-md-6'> </div> <div class='col-md-2'> <span style='color:#459756;font-size:18px;'> 555&euro;</span> </div> </div> </p> </div>");
-                                infoWindow.open(map, marker);
-                            });
-                        })(marker, data);
-                    }
-                }
-                function activatePlaceSearch() {
-                    var input = document.getElementById("search_term");
-                    var autocomplete = new google.maps.places.Autocomplete(input);
-                }
+                                //Attach click event to the marker.
+                                (function (marker, data) {
+                                    google.maps.event.addListener(marker, "click", function (e) {
+                                        //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                                        //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                                        infoWindow.setContent(" <div class='col-md-7 m-0 p-0 d-inline'> <img src='https://q-cf.bstatic.com/images/hotel/max1280x900/155/15538911.jpg' style='height:95px;width:auto; float:left;'><p class='font-weight-bold d-inline ml-2' style='color:#459756; font-size:15px;'> " + data.title + "</p><button style='border:none;border-radius: 6px; margin-left: 3px;background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 12px; cursor: pointer; color: white;'> <strong>" + data.rate + "</strong></button><hr class='m-0 p-0'></div><div class='row'> <div class='col-12' style='color:#459756; font-size:14px; width:400px;'> <span class='fas fa-map-marker-alt mt-2'>" + data.address + "</span></div></div> <div class='row'> <div class='col-md-5'> <span class='fas fa-euro-sign' style='color:#459756;font-size:18px;margin-top:14px; margin-left:95px;'>" + data.basePrice + "</span></div><a href='property?object=" + data.hotelId + "' class='button' style='border:none;border-radius: 6px; margin-top:12px; margin-left:auto; background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 12px; cursor: pointer; color: white;'> View Detail </a> </div>");
+                                        infoWindow.open(map, marker);
+
+                                    });
+                                })(marker, data);
+                            }
+                        }
+                        function activatePlaceSearch() {
+                            var input = document.getElementById("search_term");
+                            var autocomplete = new google.maps.places.Autocomplete(input);
+                        }
+                        function showOnMap() {
+                            console.log("clicked");
+
+
+
+
+                            google.maps.event.trigger(markers[1], 'click');
+                        }
 
 //            $(document).ready(function () {
 //                $('#petType').val(${search.petType});
 //            });
         </script>
-
     </head>
     <body>
 
@@ -210,80 +179,7 @@
             </div>
         </div>
 
-        <div class="filter-search search-opt">
-            <div class="container ">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form class="filter-form">
-                            <div class="search-type">
-                                <p>Pet Gender</p>
-                                <select class="filter-property">
-                                    <option value="">Male</option>
-                                    <option value="">Female</option>
-                                </select>
-                            </div>
-                            <div class="bedrooms">
-                                <p>Pet Size</p>
-                                <div class="room-filter-pagi">
-                                    <div class="bf-item">
-                                        <input type="radio" name="room" id="room-1">
-                                        <label for="room-1">S</label>
-                                    </div>
-                                    <div class="bf-item">
-                                        <input type="radio" name="room" id="room-2">
-                                        <label for="room-2">M</label>
-                                    </div>
-                                    <div class="bf-item">
-                                        <input type="radio" name="room" id="room-3">
-                                        <label for="room-3">L</label>
-                                    </div>
-                                    <div class="bf-item">
-                                        <input type="radio" name="room" id="room-4">
-                                        <label for="room-4">XL</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bathrooms">
-                                <p>Pet Age</p>
-                                <div class="room-filter-pagi">
-                                    <div class="bf-item">
-                                        <input type="radio" name="bathroom" id="bathroom-1">
-                                        <label for="bathroom-1">0-1</label>
-                                    </div>
-                                    <div class="bf-item">
-                                        <input type="radio" name="bathroom" id="bathroom-2">
-                                        <label for="bathroom-2">1-5</label>
-                                    </div>
-                                    <div class="bf-item">
-                                        <input type="radio" name="bathroom" id="bathroom-3">
-                                        <label for="bathroom-3">5-10</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="location">
-                                <p>Garden</p>
-                                <select class="filter-location">
-                                    <option value="">Yes</option>
-                                    <option value="">No</option>
-                                </select>
-                            </div>
-                            <div class="price-range">
-                                <p>Price</p>
-                                <div class="range-slider">
-                                    <div id="slider-range">
-                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default slider-left">50k</span>
-                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default slider-right">300k</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="search-btn">
-                                <button type="submit"><i class="flaticon-settings-2"></i>Apply</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <div class="map-section">
             <div class="container-fluid">
@@ -328,7 +224,7 @@
                                                 <i class="flaticon-placeholder"></i>
                                                 <span>${c.city}, ${c.street}, ${c.aptNo}, ${c.zipcode}</span>
                                             </a>
-                                            <a href="#" class="large-width">
+                                            <a onclick="showOnMap()"  class="large-width">
                                                 <i class="flaticon-cursor"></i>
                                                 <span>Show on Map</span>
                                             </a>

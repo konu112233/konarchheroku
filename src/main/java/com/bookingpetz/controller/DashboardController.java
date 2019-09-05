@@ -6,7 +6,6 @@
 package com.bookingpetz.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,22 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @org.springframework.stereotype.Controller
 public class DashboardController {
-
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(Model m, HttpServletRequest request) {
-
-        try {
-            HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
-                m.addAttribute("user", session.getAttribute("user"));
-                return "profile";
-            } else {
-                return "redirect:/";
-            }
-        } catch (Exception exception) {
-            return "redirect:/";
-        }
-    }
 
     @RequestMapping(value = "/petSitterApply", method = RequestMethod.GET)
     public String petSitterApply(Model m, HttpServletRequest request) {
