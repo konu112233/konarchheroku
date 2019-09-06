@@ -15,7 +15,6 @@ public class Profile {
     String surname;
     String phone;
     String email;
-    Address address;
     String birthday;
     String gender;
 
@@ -29,7 +28,6 @@ public class Profile {
         this.email = user.getEmail();
         this.gender = user.getGender();
         this.birthday = user.getBirthday();
-        this.address = user.getContactList().get(0).getAddress();
     }
 
     public String getName() {
@@ -62,14 +60,6 @@ public class Profile {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getBirthday() {

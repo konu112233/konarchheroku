@@ -15,32 +15,61 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Bookingpetz.com</title>
 
+        <!-- Bootstrap -->
         <link href="static/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
         <link href="static/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="static/vendors/nprogress/nprogress.css" rel="stylesheet">
+        <!-- Custom Theme Style -->
         <link href="static/vendors/build/css/custom.min.css" rel="stylesheet">
+        <!-- Ajax jquery.min.js -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Cropper.js -->
+        <link href="static/vendors/cropper/dist/cropper.min.css" rel="stylesheet">
+        <!-- bootstrap-datetimepicker -->
+        <link href="static/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+
         <script>
+            var name, surname, gender, birthday, phone, email, aptNo, street, states, city, country, zipcode;
+            ;
             window.onload = () => {
-                const user_info = document.querySelector('#user_info');
-                const name = document.querySelector('#name');
-                const address = document.querySelector('#address');
-                const mail = document.querySelector('#mail');
-                const telephone = document.querySelector('#telephone');
-                const bod = document.querySelector('#bod'); //bod = BirthofDate
-                const gender = document.querySelector('#gender');
+                gender = '${user.gender}';
+                $('#gender' + gender).trigger("click");
 
-                user_info.addEventListener('submit', (e) => {
-
-                    localStorage.clear();
-                    localStorage.setItem('user', JSON.stringify({
-                        name: name.textContent.trim(),
-                        address: address.textContent.trim(),
-                        telephone: telephone.textContent.trim(),
-                        mail: mail.textContent.trim(),
-                        bod: bod.textContent.trim(),
-                        gender: gender.textContent.trim()
-                    }));
-                });
             }
+
+            function whichGender(g) {
+                gender = g;
+            }
+
+            function updateProfile() {
+                name = document.getElementById("firstname").value;
+                surname = document.getElementById("lastname").value;
+                gender = document.getElementById("gender").value;
+                birthday = document.getElementById("birthday").value;
+                phone = document.getElementById("phone").value;
+                email = document.getElementById("email").value;
+
+
+                console.log(name + surname + gender + birthday + phone + email);
+                var profile = JSON.stringify({
+
+                    "name": name,
+                    "surname": surname,
+                    "phone": phone,
+                    "email": email,
+                    "birthday": birthday,
+                    "gender": gender
+
+                });
+                console.log("Test" + profile);
+                $('#result').val(profile);
+                $("#updateProfile").submit();
+            }
+
+
         </script>
 
     </head>
@@ -63,7 +92,7 @@
                                         <div class="x_content">
 
                                             <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                                                <form action="editProfile" id="user_info">
+                                                <form  id="user_info">
                                                     <div class="profile_img">
                                                         <div id="crop-avatar">
 
@@ -72,8 +101,6 @@
                                                     </div>
                                                     <h3 id = "name">${user.name} ${user.surname}</h3>
                                                 <ul class="list-unstyled user_data">
-                                                    <li id="address"><i class="fa fa-map-marker user-profile-icon"></i> ${user.address.aptNo}, ${user.address.street}, ${user.address.city}, ${user.address.states}, ${user.address.country}, ${user.address.zipcode}
-                                                    </li>
                                                     <li id="mail">
                                                         <i class="fa fa-briefcase fa-envelope" ></i> ${user.email}
                                                     </li>
@@ -90,10 +117,217 @@
                                                         <a id="gender">${user.gender}</a>
                                                     </li>
                                                 </ul>
-                                                <button type="submit" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</button>
+                                                <button data-toggle="modal" data-target=".bs-example-modal-lg" type="button" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</button>
 
                                                 <br>
                                             </form>
+                                        </div>
+
+                                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel">Edit profile</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container cropper modal" id="cropper" width="50px ! important" style="display:none">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header"><span class="close">&times;</span></div>
+                                                                <div class="modal-body">
+
+                                                                    <div class="row">
+                                                                        <div id="imgContainer" class="img-container" style="display:none;">
+                                                                            <img id="image"  alt="Picture">
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="row" id="imgButtons" style="display:flex;justify-content: flex-end">
+                                                                        <div class="docs-buttons">
+                                                                            <div class="btn-group">
+                                                                                <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Zoom In">
+                                                                                        <span class="fa fa-search-plus"></span>
+                                                                                    </span>
+                                                                                </button>
+                                                                                <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Zoom Out">
+                                                                                        <span class="fa fa-search-minus"></span>
+                                                                                    </span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="btn-group">
+                                                                                <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Move Left">
+                                                                                        <span class="fa fa-arrow-left"></span>
+                                                                                    </span>
+                                                                                </button>
+                                                                                <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Move Right">
+                                                                                        <span class="fa fa-arrow-right"></span>
+                                                                                    </span>
+                                                                                </button>
+                                                                                <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Move Up">
+                                                                                        <span class="fa fa-arrow-up"></span>
+                                                                                    </span>
+                                                                                </button>
+                                                                                <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Move Down">
+                                                                                        <span class="fa fa-arrow-down"></span>
+                                                                                    </span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="btn-group">
+                                                                                <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Rotate Left">
+                                                                                        <span class="fa fa-rotate-left"></span>
+                                                                                    </span>
+                                                                                </button>
+                                                                                <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Rotate Right">
+                                                                                        <span class="fa fa-rotate-right"></span>
+                                                                                    </span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="btn-group">
+                                                                                <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Reset">
+                                                                                        <span class="fa fa-refresh"></span>
+                                                                                    </span>
+                                                                                </button>
+                                                                                <label  id="btnUploadClick" class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                                                                                    <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Upload image file">
+                                                                                        <span class="fa fa-upload"></span>
+                                                                                    </span>
+                                                                                </label>
+
+                                                                            </div>
+                                                                            <div class="btn-group">
+
+                                                                                <button type="button"   class="btn btn-success" data-method="getCroppedCanvas" >
+                                                                                    <span  class="docs-tooltip" data-toggle="tooltip" >
+                                                                                        Crop
+                                                                                    </span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div style="display:none"  class="col-md-3 docs-toggles">
+                                                                                <!-- <h3 class="page-header">Toggles:</h3> -->
+                                                                                <div class="btn-group btn-group-justified" data-toggle="buttons">
+
+                                                                                    <label id="btnSquare" class="btn btn-primary">
+                                                                                        <input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1">
+                                                                                        <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: 1 / 1">
+                                                                                            1:1
+                                                                                        </span>
+                                                                                    </label>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                                            <h4 class="modal-title" id="getCroppedCanvasTitle">Cropped</h4>
+                                                                                        </div>
+                                                                                        <div class="modal-body"></div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                            <a class="btn btn-primary" onclick="addImage();" id="download" href="javascript:void(0);"data-dismiss="modal" >Upload</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div><!-- /.modal -->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <form id="updateProfile" action="updateProfile" method="POST">
+                                                            <input hidden id="result" name="result" value="">
+                                                        </form>
+
+                                                        <div class="row">
+                                                            <div style="" class="col-xs-12 col-sm-12 col-md-12">
+
+                                                                <div class="col text-center">
+                                                                    <img class="img-thumbnail img-circle" id="myImg" src="static/images/user.png" alt="Avatar" title="Change the avatar">
+
+                                                                </div>
+                                                                <br>
+
+                                                                <div class="col text-center">
+                                                                    <a  class="buttonPrevious btn btn-success btn-xs" onClick="openPhotoPicker();" ><i style="margin-right: 7px" class="fa fa-upload"></i>Change Photo</a>                                                  
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                                                            <div class="form-group">
+                                                                <label  class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input disabled type="text" id="firstname"  required="required" class="form-control col-md-7 col-xs-12" value="${user.name} " >
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name <span class="required">*</span>
+                                                                </label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input disabled type="text" id="lastname" name="last-name" required="required" class="form-control col-md-7 col-xs-12" value="${user.surname}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="" class="control-label col-md-3 col-sm-3 col-xs-12">Mail</label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input disabled="" id="email" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" value="${user.email}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <div id="" class="btn-group" data-toggle="buttons" >
+                                                                        <label class="btn btn-default" data-toggle-class="btn-primary" id="genderMale" onClick="whichGender('Male')" data-toggle-passive-class="btn-default">
+                                                                            <input type="radio" name="gender"  value="Yes" > &nbsp;Male&nbsp;
+                                                                        </label>
+                                                                        <label class="btn btn-default" data-toggle-class="btn-primary"  id="genderFemale"  onClick="whichGender('Female')" data-toggle-passive-class="btn-default">
+                                                                            <input type="radio" name="gender" value="No" >Female
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" id="bod">Date Of Birth <span class="required">*</span>
+                                                                </label>
+                                                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                                                    <div class='input-group date' id='myDatepicker2'>
+                                                                        <input type='text' placeholder="Date" value="${user.birthday}" class="form-control" />
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="" class="control-label col-md-3 col-sm-3 col-xs-12">Phone</label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <input id="phone" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" value="${user.phone}">
+                                                                </div>
+                                                            </div>
+
+                                                        </form>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="button" onclick="updateProfile()" class="btn btn-primary">Save changes</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                             <div class="profile_title">
@@ -146,11 +380,55 @@
             </div>
         </div>
 
-        <script src="static/vendors/jquery/dist/jquery.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
-        <script src="static/vendors/bootstrap/dist/js/bootstrap.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
-        <script src="static/vendors/build/js/custom.min.js" type="53fb5546d8872ed72f1ff495-text/javascript"></script>
-        <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="53fb5546d8872ed72f1ff495-|49" defer=""></script>
+        <!-- jQuery -->
+        <script src="static/vendors/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="static/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- FastClick -->
+        <script src="static/vendors/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="static/vendors/nprogress/nprogress.js"></script>
+        <!-- Custom Theme Scripts -->
+        <script src="static/vendors/build/js/custom.min.js"></script>  
+        <!-- bootstrap-daterangepicker -->
+        <script src="static/vendors/moment/min/moment.min.js"></script>
+        <script src="static/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <!-- bootstrap-datetimepicker -->    
+        <script src="static/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+        <!-- Cropper -->
+        <script src="static/vendors/cropper/dist/cropper.min.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
+
+        <script>
+                                                            $('#myDatepicker').datetimepicker();
+
+                                                            $('#myDatepicker2').datetimepicker({
+                                                                format: 'DD.MM.YYYY'
+                                                            });
+
+                                                            $('#myDatepicker3').datetimepicker({
+                                                                format: 'hh:mm A'
+                                                            });
+
+                                                            $('#myDatepicker4').datetimepicker({
+                                                                ignoreReadonly: true,
+                                                                allowInputToggle: true
+                                                            });
+
+                                                            $('#datetimepicker6').datetimepicker();
+
+                                                            $('#datetimepicker7').datetimepicker({
+                                                                useCurrent: false
+                                                            });
+
+                                                            $("#datetimepicker6").on("dp.change", function (e) {
+                                                                $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                                                            });
+
+                                                            $("#datetimepicker7").on("dp.change", function (e) {
+                                                                $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                                                            });
+        </script>
     </body>
 </html>
 

@@ -5,7 +5,11 @@
  */
 package com.bookingpetz.controller;
 
+import com.bookingpetz.domain.Pet;
+import com.bookingpetz.domain.Profile;
 import com.bookingpetz.services.UserService;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +29,6 @@ public class ProfileController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(Model m, HttpServletRequest request) {
-
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
@@ -36,6 +39,24 @@ public class ProfileController {
             }
         } catch (Exception exception) {
             return "redirect:/" + exception;
+        }
+    }
+
+    @RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+    public String updateProfile(Model m, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                Profile profile = new Gson().fromJson(request.getParameter("result"), Profile.class);
+                if (userService.updateProfile(profile, session.getAttribute("token").toString())) {
+                    return "redirect:profile?success";
+                }
+                return "redirect:profile";
+            } else {
+                return "redirect:/";
+            }
+        } catch (JsonSyntaxException exception) {
+            return "redirect:/?" + exception;
         }
     }
 }

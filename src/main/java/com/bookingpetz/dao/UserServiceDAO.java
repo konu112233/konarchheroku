@@ -23,5 +23,8 @@ public interface UserServiceDAO {
 
     public Profile getProfile(String code);
 
+    public boolean updateProfile(Profile profile, String code);
+
     public boolean updatePet(Pet pet, String code);
+
 }

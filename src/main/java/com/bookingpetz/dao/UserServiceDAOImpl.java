@@ -89,4 +89,16 @@ public class UserServiceDAOImpl implements UserServiceDAO {
         return new Profile();
     }
 
+    @Override
+    public boolean updateProfile(Profile profile, String code) {
+
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/updateProfile")
+                .header("Content-type", "application/json")
+                .header("Authorization", "Bearer " + code)
+                .body(new Gson().toJson(profile))
+                .asJson();
+
+        return response.getStatus() == 200;
+    }
+
 }
