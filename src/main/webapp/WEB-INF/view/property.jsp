@@ -164,9 +164,6 @@
             var addr;
             addr = '${hotel.city}, ${hotel.street}, ${hotel.aptNo}, ${hotel.country}';
                     document.getElementById("location").src = "https://www.google.com/maps?q=" + addr + " &output=embed";
-
-
-
                 };
                 var serviceTotal = 90;
                 function selectService(serviceId) {

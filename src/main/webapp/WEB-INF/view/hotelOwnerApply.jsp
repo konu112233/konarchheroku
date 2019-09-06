@@ -572,7 +572,7 @@
                         "description": description,
                         "bookingEmail": bookingEmail,
                         "managerEmail": managerEmail,
-                        "contactName": description,
+                        "contactName": contactName,
                         "directions": directions,
                         "address": {
                             "aptNo": aptNo,
