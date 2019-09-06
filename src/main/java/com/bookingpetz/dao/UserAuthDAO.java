@@ -19,8 +19,6 @@ public interface UserAuthDAO {
 
     public boolean logout(String token);
 
-    public boolean signUp(User user);
-
     public boolean checkUsername(String param);
 
     public boolean confirmationMail(User user);
