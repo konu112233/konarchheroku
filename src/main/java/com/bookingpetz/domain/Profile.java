@@ -11,12 +11,12 @@ package com.bookingpetz.domain;
  */
 public class Profile {
 
-    String name;
-    String surname;
-    String phone;
-    String email;
-    String birthday;
-    String gender;
+    private String name;
+    private String surname;
+    private String phone;
+    private String email;
+    private String birthday;
+    private String gender;
 
     public Profile() {
     }

@@ -47,7 +47,6 @@
             function updateProfile() {
                 name = document.getElementById("firstname").value;
                 surname = document.getElementById("lastname").value;
-                gender = document.getElementById("gender").value;
                 birthday = document.getElementById("birthday").value;
                 phone = document.getElementById("phone").value;
                 email = document.getElementById("email").value;

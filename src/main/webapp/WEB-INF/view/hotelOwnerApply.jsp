@@ -730,14 +730,6 @@
                                                             </span>
                                                         </a>
                                                     </li>
-                                                    <li>
-                                                        <a href="#step-4">
-                                                            <span class="step_no">4</span>
-                                                            <span class="step_descr">
-                                                                Preview & Save<br />
-                                                            </span>
-                                                        </a>
-                                                    </li>
                                                 </ul>
                                                 <div id="step-1">
                                                     <div class="x_panel">         
@@ -765,7 +757,7 @@
                                                                     <label  class="control-label col-md-3 col-sm-3 col-xs-12" for="street">Street <span class="required">*</span>
                                                                     </label>
                                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <input value="Zanpad" id="street" class="form-control col-md-7 col-xs-12" data-validate-length-range="8" data-validate-words="2" name="street" placeholder="Zanpad" required="required" type="text">
+                                                                        <input value="Zanpad" id="street" class="form-control col-md-7 col-xs-12" data-validate-length-range="3" data-validate-words="1" name="street" placeholder="Zanpad" required="required" type="text">
                                                                     </div>
                                                                 </div>
                                                                 <div class="item form-group">
@@ -1303,7 +1295,7 @@
                                                         </div>
 
                                                         <div class="x_title">
-                                                            <h2>Working Hours</h2>
+                                                            <h2>Working Hours and Capacity</h2>
                                                             <div class="clearfix"></div>
                                                         </div>
 
@@ -1439,10 +1431,7 @@
                                                 </div>
 
                                             </div>
-                                            <div id="step-4">
-                                                <div>Please review your details in the preview below. If you are happy with the result, click the "Submit My Signup" button. You will be able to make changes to text after your Signup has been confirmed.
-                                                </div> 
-                                            </div>
+
                                             <form id="register" action="registerHotel" method="POST">
                                                 <input hidden id="result" name="result" value="">
                                             </form>
