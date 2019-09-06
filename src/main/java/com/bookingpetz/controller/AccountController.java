@@ -50,21 +50,6 @@ public class AccountController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public String signup(Model m, HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        String name = StringUtils.capitalize(request.getParameter("name").trim());
-        String surname = StringUtils.capitalize(request.getParameter("surname").trim());
-        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").trim().getBytes());
-        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").trim().getBytes());
-        if (userAuthDAO.signUp(new User(encodeEmail, name, surname, encodePassword, "false"))) {
-            //SUCCESS
-            return "redirect:login?email=" + encodeEmail + "&password=" + encodePassword;
-        }
-        //FAILED
-        return "redirect:/";
-    }
-
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         try {

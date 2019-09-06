@@ -72,7 +72,7 @@
                                                     </div>
                                                     <h3 id = "name">${user.name} ${user.surname}</h3>
                                                 <ul class="list-unstyled user_data">
-                                                    <li id="address"><i class="fa fa-map-marker user-profile-icon"></i> ${user.address}
+                                                    <li id="address"><i class="fa fa-map-marker user-profile-icon"></i> ${user.address.aptNo}, ${user.address.street}, ${user.address.city}, ${user.address.state}, ${user.address.country}, ${user.address.zipcode}
                                                     </li>
                                                     <li id="mail">
                                                         <i class="fa fa-briefcase fa-envelope" ></i> ${user.email}
