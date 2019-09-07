@@ -8,6 +8,7 @@ package com.bookingpetz.controller;
 import com.bookingpetz.domain.Search;
 import com.bookingpetz.domain.SearchResult;
 import com.bookingpetz.services.SearchService;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,26 +33,23 @@ public class SearchController {
 
     @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
     public String searchResult(Model m, HttpServletRequest request) throws ParseException, IOException {
-        String petType = request.getParameter("petType");
-        String location = request.getParameter("location");
-        String checkin = request.getParameter("checkin") + "T13:00:00-01:00";
-        String checkout = request.getParameter("checkout") + "T10:00:00-01:00";
+        Search search = new Gson().fromJson(request.getParameter("result"), Search.class);
+        search.setTimeMin(search.getTimeMin() + "T13:00:00-01:00");
+        search.setTimeMax(search.getTimeMax() + "T10:00:00-01:00");
 
         DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy'T'HH:mm:ss-HH:mm");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss-HH:mm");
-        Date date = sdf.parse(checkin);
-        checkin = simpleDateFormat.format(date);
-        date = sdf.parse(checkout);
-        checkout = simpleDateFormat.format(date);
-
-        System.out.println("checkin : " + request.getParameter("checkin") + " checkout : " + request.getParameter("checkout") + " location : " + location + " petType : " + petType);
+        Date date = sdf.parse(search.getTimeMin());
+        search.setTimeMin(simpleDateFormat.format(date));
+        date = sdf.parse(search.getTimeMax());
+        search.setTimeMax(simpleDateFormat.format(date));
 
         try {
-            List<SearchResult> hotels = searchService.resultSearch(new Search(checkout, checkin, "Europe/Amsterdam", petType, location));
+            List<SearchResult> hotels = searchService.resultSearch(new Search(search.getTimeMax(), search.getTimeMin(), "Europe/Amsterdam", search.getPetType(), search.getLocation()));
             if (!hotels.isEmpty()) {
                 m.addAttribute("hotels", hotels);
-                m.addAttribute("petType", petType);
-                m.addAttribute("search", new Search(request.getParameter("checkout"), request.getParameter("checkin"), "Europe/Amsterdam", petType, location));
+                m.addAttribute("petType", search.getPetType());
+                m.addAttribute("search", new Search(search.getTimeMax(), search.getTimeMin(), "Europe/Amsterdam", search.getPetType(), search.getLocation()));
                 return "searchResult";
             }
             return "redirect:home?error";

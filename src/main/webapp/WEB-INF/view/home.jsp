@@ -27,6 +27,8 @@
         <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
         <script>
             function activatePlaceSearch() {
                 var input = document.getElementById("search_term");
@@ -54,6 +56,39 @@
                 </c:when>
             </c:choose>
             });
+            $(function () {
+                $('input[name="daterange"]').daterangepicker({
+                    opens: 'center'
+                }, function (start, end, label) {
+                    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                });
+            });
+            var timeMax;
+            var timeMin;
+            var timeZone;
+            var petType;
+            var loc;
+            var time;
+
+            function search() {
+                time = document.getElementById("dates").value;
+                loc = document.getElementById("search_term").value;
+                console.log(loc);
+                petType = document.getElementById("petType").value;
+//               
+                time = time.split("-");
+                var search = {
+                    "timeMin": time[0].trim(),
+                    "timeMax": time[1].trim(),
+                    "timeZone": "Europe/Amsterdam",
+                    "petType": petType,
+                    "location": loc
+                };
+                console.log(JSON.stringify(search));
+                $('#result').val(JSON.stringify(search));
+                $("#searchResult").submit();
+
+            }
         </script>
     </head>
 
@@ -73,21 +108,23 @@
                                         <div class="home_content text-center">
                                             <div class="home_title">Find Fantastic Hotels For Your Pets</div>
                                             <div class="booking_form_container">
-                                                <form action="searchResult" method="GET" class="booking_form">
-                                                    <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-                                                        <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                            <div><input type="text" name="location" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
-                                                            <div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-                                                            <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
-                                                            <div>
-                                                                <select class="booking_input booking_input_c form-control" name="petType" style="height: 54px;" required="required">
-                                                                    <option value="Dog">Dog</option>
-                                                                    <option value="Cat">Cat</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div><button type="submit" class="booking_button trans_200">Find Now</button></div>
+                                                <div class="row">
+                                                    <div style="margin-top: 10px" class="col-md-4 col-sm-12 col-xs-12  "><input type="text"  name="location" id="search_term" class="booking_input " placeholder="Where ?" required="required"></div>
+                                                    <div style="margin-top: 10px" class="col-md-4 col-sm-12 col-xs-12"><input type="text" id="dates" name="daterange" class="booking_input  " placeholder="Check-in - Check-out" /></div>
+                                                    <!--                                                            <div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
+                                                                                                                <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>-->
+                                                    <div style="margin-top: 10px" class="col-md-2 col-sm-12 col-xs-12 ">
+                                                        <select class="booking_input booking_input_c form-control" id="petType" name="petType" style="height: 54px;" required="required">
+                                                            <option value="Dog">Dog</option>
+                                                            <option value="Cat">Cat</option>
+                                                        </select>
                                                     </div>
+                                                    <div style="margin-top: 10px" class="col-md-2 col-sm-12 col-xs-12">
+                                                        <button type="button" onclick="search()" class="booking_button trans_200">Find Now</button>
+                                                    </div>
+                                                </div>
+                                                <form id="searchResult" action="searchResult" method="GET">
+                                                    <input hidden id="result" name="result" value="">
                                                 </form>
                                             </div>
                                         </div>
@@ -352,25 +389,28 @@
 
             <!-- Footer -->
         <jsp:include page="footer.jsp"></jsp:include>
-    </div>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&libraries=places&callback=activatePlaceSearch"></script>
-    <script src="static/js/jquery-3.3.1.min.js"></script>
-    <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
-    <script src="static/styles/bootstrap-4.1.2/popper.js"></script>
-    <script src="static/styles/bootstrap-4.1.2/bootstrap.min.js"></script>
-    <script src="static/plugins/greensock/TweenMax.min.js"></script>
-    <script src="static/plugins/greensock/TimelineMax.min.js"></script>
-    <script src="static/plugins/scrollmagic/ScrollMagic.min.js"></script>
-    <script src="static/plugins/greensock/animation.gsap.min.js"></script>
-    <script src="static/plugins/greensock/ScrollToPlugin.min.js"></script>
-    <script src="static/plugins/OwlCarousel2-2.3.4/owl.carousel.js"></script>
-    <script src="static/plugins/easing/easing.js"></script>
-    <script src="static/plugins/progressbar/progressbar.min.js"></script>
-    <script src="static/plugins/parallax-js-master/parallax.min.js"></script>
-    <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
-    <script src="static/plugins/colorbox/jquery.colorbox-min.js"></script>
-    <script src="static/js/custom.js"></script>
 
-</body>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&libraries=places&callback=activatePlaceSearch"></script>
+        <script src="static/js/jquery-3.3.1.min.js"></script>
+        <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
+        <script src="static/styles/bootstrap-4.1.2/popper.js"></script>
+        <script src="static/styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+        <script src="static/plugins/greensock/TweenMax.min.js"></script>
+        <script src="static/plugins/greensock/TimelineMax.min.js"></script>
+        <script src="static/plugins/scrollmagic/ScrollMagic.min.js"></script>
+        <script src="static/plugins/greensock/animation.gsap.min.js"></script>
+        <script src="static/plugins/greensock/ScrollToPlugin.min.js"></script>
+        <script src="static/plugins/OwlCarousel2-2.3.4/owl.carousel.js"></script>
+        <script src="static/plugins/easing/easing.js"></script>
+        <script src="static/plugins/progressbar/progressbar.min.js"></script>
+        <script src="static/plugins/parallax-js-master/parallax.min.js"></script>
+        <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
+        <script src="static/plugins/colorbox/jquery.colorbox-min.js"></script>
+        <script src="static/js/custom.js"></script>
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    </body>
 </html>
