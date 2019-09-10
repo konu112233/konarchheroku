@@ -33,7 +33,7 @@ public class ReservationController {
             if (session.getAttribute("token") != null) {
                 Reservation reservation = new Gson().fromJson(request.getParameter("result"), Reservation.class);
                 if (reservationService.doReservation(session.getAttribute("token").toString(), reservation)) {
-                    return "redirect:home?success";
+                    return "redirect:bookings";
                 }
                 return "redirect:home?failed";
             } else {
@@ -42,5 +42,15 @@ public class ReservationController {
         } catch (JsonSyntaxException exception) {
             return "redirect:/?" + exception;
         }
+    }
+
+    @RequestMapping(value = "/bookings", method = RequestMethod.GET)
+    public String bookings(Model m, HttpServletRequest request) {
+        return "bookings";
+    }
+
+    @RequestMapping(value = "/hotelBookings", method = RequestMethod.GET)
+    public String hotelBookings(Model m, HttpServletRequest request) {
+        return "hotelBookings";
     }
 }

@@ -42,14 +42,4 @@ public class DashboardController {
         return "editProfile";
     }
 
-    @RequestMapping(value = "/bookings", method = RequestMethod.GET)
-    public String bookings(Model m, HttpServletRequest request) {
-        return "bookings";
-    }
-
-    @RequestMapping(value = "/hotelBookings", method = RequestMethod.GET)
-    public String hotelBookings(Model m, HttpServletRequest request) {
-        return "hotelBookings";
-    }
-
 }

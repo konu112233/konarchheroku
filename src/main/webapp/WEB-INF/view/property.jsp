@@ -118,7 +118,8 @@
         var dateMax;
         $(document).ready(function () {
 
-            //alert('${userInfo.name}');
+//            alert('${userInfo.name}');
+//            alert('${online}');
 
             //get data from previous page
             var dateMin = localStorage.getItem("dateMin");
