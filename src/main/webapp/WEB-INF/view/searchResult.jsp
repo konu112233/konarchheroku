@@ -40,7 +40,7 @@
         <link rel="stylesheet" type="text/css" href="static/searchResult/css/aboutcustom.css">
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
         <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 

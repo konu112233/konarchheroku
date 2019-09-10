@@ -46,11 +46,29 @@ public class ReservationController {
 
     @RequestMapping(value = "/bookings", method = RequestMethod.GET)
     public String bookings(Model m, HttpServletRequest request) {
-        return "bookings";
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                m.addAttribute("reservationList", reservationService.getReservation(session.getAttribute("token").toString()));
+                return "bookings";
+            }
+        } catch (JsonSyntaxException exception) {
+            return "redirect:/?" + exception;
+        }
+        return "redirect:/?";
     }
 
     @RequestMapping(value = "/hotelBookings", method = RequestMethod.GET)
     public String hotelBookings(Model m, HttpServletRequest request) {
-        return "hotelBookings";
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                m.addAttribute("reservationList", reservationService.getReservation(session.getAttribute("token").toString()));
+                return "hotelBookings";
+            }
+        } catch (JsonSyntaxException exception) {
+            return "redirect:/?" + exception;
+        }
+        return "redirect:/?";
     }
 }

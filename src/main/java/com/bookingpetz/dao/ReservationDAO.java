@@ -6,6 +6,7 @@
 package com.bookingpetz.dao;
 
 import com.bookingpetz.domain.Reservation;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import com.bookingpetz.domain.Reservation;
 public interface ReservationDAO {
 
     public boolean doReservation(String token, Reservation reservation);
+
+    public List<Reservation> getReservation(String token);
 }

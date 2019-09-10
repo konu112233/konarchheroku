@@ -7,6 +7,7 @@ package com.bookingpetz.services;
 
 import com.bookingpetz.dao.ReservationDAO;
 import com.bookingpetz.domain.Reservation;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,11 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public boolean doReservation(String token, Reservation reservation) {
         return reservationDAO.doReservation(token, reservation);
+    }
+
+    @Override
+    public List<Reservation> getReservation(String token) {
+        return reservationDAO.getReservation(token);
     }
 
 }

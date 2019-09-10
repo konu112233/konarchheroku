@@ -6,6 +6,7 @@
 package com.bookingpetz.services;
 
 import com.bookingpetz.domain.Reservation;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,5 @@ public interface ReservationService {
 
     public boolean doReservation(String token, Reservation reservation);
 
+    public List<Reservation> getReservation(String token);
 }
