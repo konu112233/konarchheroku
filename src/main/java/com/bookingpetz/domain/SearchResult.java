@@ -61,7 +61,7 @@ public class SearchResult {
         this.lng = user.getContactList().get(0).getAddress().getLng();
     }
 
-    public SearchResult(String hotelId, String phone, String website, String description, String bookingEmail, String contactName, String directions, String aptNo, String street, String city, String country, String zipcode, String propertyName, int capacity, double rate, List<Service> serviceList, String workingDays) {
+    public SearchResult(String hotelId, String phone, String website, String description, String bookingEmail, String contactName, String directions, String aptNo, String street, String city, String country, String zipcode, String propertyName, int capacity, double rate, List<Service> serviceList, String workingDays, String lng, String lat) {
         this.hotelId = hotelId;
         this.phone = phone;
         this.website = website;

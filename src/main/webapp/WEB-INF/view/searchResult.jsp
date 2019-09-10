@@ -5,6 +5,7 @@
 --%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="d" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,6 +42,9 @@
         <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
 
         <style>
             #map{
@@ -52,8 +56,116 @@
             }
         </style>
         <script>
+            var priceToBeSent;
+            function GetFormattedDate(date) {
+
+                var d = new Date(date),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+
+                if (month.length < 2)
+                    month = '0' + month;
+                if (day.length < 2)
+                    day = '0' + day;
+
+                return [month, day, year].join('/');
+
+
+            }
+            $(function () {
+
+
+
+
+
+
+
+                $('input[name="daterange"]').daterangepicker({
+                    opens: 'center'
+                }, function (start, end, label) {
+                    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                });
+
+                document.getElementById("search_term").value = "${search.location}";
+
+                var dateMin = "${search.timeMin}";
+                dateMin = dateMin.split("T");
+                var formattedDate = GetFormattedDate(dateMin[0]);
+                console.log("xxx" + formattedDate);
+                localStorage.setItem("dateMin", formattedDate);
+
+                var dateMax = "${search.timeMax}";
+                dateMax = dateMax.split("T");
+                var formattedDate2 = GetFormattedDate(dateMax[0]);
+                console.log("xxx" + formattedDate2);
+
+                localStorage.setItem("dateMax", formattedDate2);
+
+
+
+
+                document.getElementById("dates").value = formattedDate + " " + "-" + " " + formattedDate2;
+
+
+                //console.log("str" + dateMinFormatted);
+
+
+            });
+            var timeMax;
+            var timeMin;
+            var timeZone;
+            var petType;
+            var loc;
+            var time;
+
+            function search() {
+                time = document.getElementById("dates").value;
+                loc = document.getElementById("search_term").value;
+                console.log(loc);
+                petType = document.getElementById("petType").value;
+//               
+                time = time.split("-");
+                var search = {
+                    "timeMin": time[0].trim(),
+                    "timeMax": time[1].trim(),
+                    "timeZone": "Europe/Amsterdam",
+                    "petType": petType,
+                    "location": loc
+
+
+                };
+                console.log(JSON.stringify(search));
+                $('#result').val(JSON.stringify(search));
+                $("#searchResult").submit();
+
+
+            }
+
             var markers = [];
+            var basePrice;
+            var type = '${search.petType}';
+
+            localStorage.setItem("petType", '${search.petType}');
+            console.log("typpeeeeee" + '${search.petType}');
+
+
+
+
+
+
             <c:forEach var="c" items="${hotels}">
+
+                <d:forEach var="s" items="${c.serviceList}">
+
+            var serviceName = '${s.name}';
+            if (serviceName == type + " " + "Boarding") {
+                console.log('test1' + '${s.basePrice}');
+                basePrice = '${s.basePrice}';
+
+            }
+
+                </d:forEach>
 
             var hotelInfo = {
                 "hotelId": '${c.hotelId}',
@@ -62,8 +174,11 @@
                         "lat": '${c.lat}',
                         "lng": '${c.lng}',
                         "rate": '${c.rate}',
-                        "basePrice": "45"
-                    };
+                        "basePrice": basePrice
+
+                    }
+                    ;
+
                     markers.push(hotelInfo);
 
                     hotel = new Object();
@@ -78,6 +193,13 @@
 
                         window.onload = function () {
                             LoadMap();
+                            $(function () {
+                                $('input[name="daterange"]').daterangepicker({
+                                    opens: 'left'
+                                }, function (start, end, label) {
+                                    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                                });
+                            });
                         }
                         function LoadMap() {
                             var mapOptions = {
@@ -109,8 +231,11 @@
                                     google.maps.event.addListener(marker, "click", function (e) {
                                         //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
                                         //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-                                        infoWindow.setContent(" <div class='col-md-7 m-0 p-0 d-inline'> <img src='https://q-cf.bstatic.com/images/hotel/max1280x900/155/15538911.jpg' style='height:95px;width:auto; float:left;'><p class='font-weight-bold d-inline ml-2' style='color:#459756; font-size:15px;'> " + data.title + "</p><button style='border:none;border-radius: 6px; margin-left: 3px;background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 12px; cursor: pointer; color: white;'> <strong>" + data.rate + "</strong></button><hr class='m-0 p-0'></div><div class='row'> <div class='col-12' style='color:#459756; font-size:14px; width:400px;'> <span class='fas fa-map-marker-alt mt-2'>" + data.address + "</span></div></div> <div class='row'> <div class='col-md-5'> <span class='fas fa-euro-sign' style='color:#459756;font-size:18px;margin-top:14px; margin-left:95px;'>" + data.basePrice + "</span></div><a href='property?object=" + data.hotelId + "' class='button' style='border:none;border-radius: 6px; margin-top:12px; margin-left:auto; background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 12px; cursor: pointer; color: white;'> View Detail </a> </div>");
+                                        infoWindow.setContent(" <div > <img class='img-thumbnail' src='https://q-cf.bstatic.com/images/hotel/max1280x900/155/15538911.jpg' style='height:95px;width:auto; float:left;'> <p class='font-weight-bold d-inline ml-2' style='color:#459756; font-size:15px;'> " + data.title + " <button style='border:none;border-radius: 6px; margin-left: 3px;background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 12px; cursor: pointer; color: white;'> <strong>" + data.rate + "</strong></button> </p><hr class='m-2 p-0'> <div style='display: flex; align-items: right; justify-content: center;'> <div > <span class='fas fa-euro-sign' style='color:#459756;font-size:18px;margin-top:14px;'>" + data.basePrice + "</span></div> <a  href='property?object=" + data.hotelId + "' class='button' onclick='sendPrice(" + data.hotelId + ")'  style='margin-left:25px;border:none;border-radius: 6px; margin-top:12px;background-color: #4CAF50; padding: 5px 5px 5px 5px;font-family: arial; font-size: 12px; cursor: pointer; color: white;'> View Details </a> </div> <div > <span style='color:#459756; font-size:14px;' class='fas fa-map-marker-alt mt-2'>" + data.address + "</span> </div> </div> ");
                                         infoWindow.open(map, marker);
+                                        priceToBeSent = document.getElementById(data.hotelId).innerText;
+                                        localStorage.setItem("price", priceToBeSent);
+                                        console.log("hayr" + priceToBeSent);
 
                                     });
                                 })(marker, data);
@@ -128,10 +253,25 @@
 
                             google.maps.event.trigger(markers[1], 'click');
                         }
+                        function sendPrice(hotelId) {
+                            //  alert(document.getElementById(hotelId).innerText);
+                            console.log("iddd" + hotelId + "sss");
+                            priceToBeSent = document.getElementById(hotelId).innerText;
+                            localStorage.setItem("price", priceToBeSent);
+
+
+
+                        }
 
 //            $(document).ready(function () {
 //                $('#petType').val(${search.petType});
+//                
+//                
+//                
 //            });
+
+
+
         </script>
     </head>
     <body>
@@ -139,6 +279,8 @@
         <div id="preloder">
             <div class="loader"></div>
         </div>
+
+
         <jsp:include page="header.jsp"></jsp:include>
             <div class="home" style="z-index: 10;">
                 <div class="background_image" style="background-image:url(static/images/searchheaderphoto.jpg)"></div>
@@ -148,37 +290,47 @@
                             <div class="col">
                                 <div class="home_content text-center">
                                     <div class="home_title" style="margin-bottom: 30px;">Search Result</div>
-                                    <form action="searchResult" method="GET" class="booking_form">
-                                        <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
-                                            <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                <div><input type="text" name="location" id="search_term" class="booking_input booking_input_b" placeholder="Where ?" required="required"></div>
-                                                <div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
-                                                <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>
-                                                <div>
-                                                    <select class="booking_input booking_input_c form-control" name="petType" style="height: 54px;" required="required">
-                                                    <c:choose>
-                                                        <c:when test="${search.petType == 'Dog'}">
-                                                            <option selected value="Dog">Dog</option> 
-                                                            <option value="Cat">Cat</option>
-                                                        </c:when>    
-                                                        <c:otherwise>
-                                                            <option value="Dog">Dog</option> 
-                                                            <option selected value="Cat">Cat</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div><button type="submit" class="booking_button trans_200">Find Now</button></div>
+                                    <div class="row">
+                                        <div style="margin-top: 10px" class="col-md-4 col-sm-12 col-xs-12  "><input type="text"  name="location" id="search_term" class="booking_input " placeholder="Where ?" required="required"></div>
+                                        <div style="margin-top: 10px" class="col-md-4 col-sm-12 col-xs-12"><input type="text" id="dates" name="daterange" class="booking_input  " placeholder="Check-in - Check-out" /></div>
+                                        <!--                                                            <div><input type="text" name="checkin" class="datepicker booking_input booking_input_a booking_in" placeholder="Check in" required="required"></div>
+                                                                                                    <div><input type="text" name="checkout" class="datepicker booking_input booking_input_a booking_out" placeholder="Check out" required="required"></div>-->
+                                        <div style="margin-top: 10px" class="col-md-2 col-sm-12 col-xs-12 ">
+                                            <select class="booking_input booking_input_c form-control" id="petType" name="petType" style="height: 54px;" required="required">
+                                            <c:choose>
+                                                <c:when test="${search.petType == 'Dog'}">
+                                                    <option selected value="Dog">Dog</option> 
+                                                    <option value="Cat">Cat</option>
+                                                </c:when>    
+                                                <c:otherwise>
+                                                    <option value="Dog">Dog</option> 
+                                                    <option selected value="Cat">Cat</option>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </select>
+
+
                                     </div>
+                                    <div style="margin-top: 10px" class="col-md-2 col-sm-12 col-xs-12">
+
+                                        <button type="button" onclick="search()" class="booking_button trans_200">Find Now</button>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <form id="searchResult" action="searchResult" method="GET">
+                                    <input hidden id="result" name="result" value="">
                                 </form>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
 
 
         <div class="map-section">
@@ -248,19 +400,19 @@
                                         <c:if test="${search.petType eq 'Dog'}">   
                                             <c:forEach var="h" items="${c.serviceList}">
                                                 <c:if test="${h.name eq 'Dog Boarding'}">   
-                                                    <span>$${h.basePrice}</span>
+                                                    <span id="${c.hotelId}" >€${h.basePrice}</span>
                                                 </c:if>
                                             </c:forEach>
                                         </c:if>
                                         <c:if test="${search.petType eq 'Cat'}">   
                                             <c:forEach var="h" items="${c.serviceList}">
                                                 <c:if test="${h.name eq 'Cat Boarding'}">   
-                                                    <span>$${h.basePrice}</span>
+                                                    <span id="${c.hotelId}">€${h.basePrice}</span>
                                                 </c:if>
                                             </c:forEach>
                                         </c:if>
                                     </div>
-                                    <a href="property?object=${c.hotelId}" class="site-btn btn-line" style="margin-top: 7px;">View Property</a>
+                                    <a href="property?object=${c.hotelId}" onclick="sendPrice('${c.hotelId}')" class="site-btn btn-line" style="margin-top: 7px;">View Property</a>
                                 </div>
                             </div>
                         </div>
@@ -302,6 +454,10 @@
 
         <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/a2bd7673/cloudflare-static/rocket-loader.min.js" data-cf-settings="2d2eff642c81e1cd1273f0f1-|49" defer=""></script>
         <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&libraries=places&callback=activatePlaceSearch"></script>-->
+
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     </body>
 </html>

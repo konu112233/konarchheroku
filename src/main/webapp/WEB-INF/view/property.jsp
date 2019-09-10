@@ -111,7 +111,40 @@
 
     </style>
     <script>
+        var isSignIn = 1;
+        var type = '${search.petType}';
+        var dateMin;
+        var dateMax;
         $(document).ready(function () {
+
+
+
+            //get data from previous page
+            var dateMin = localStorage.getItem("dateMin");
+            document.getElementById("checkin").innerText = dateMin;
+            // alert(document.getElementById("checkin").innerText);
+            console.log("page2" + localStorage.getItem("price"));
+            document.getElementById("price").innerText = localStorage.getItem("price");
+            document.getElementById("roomPrice").innerText = localStorage.getItem("price");
+            document.getElementById("priceNights").innerText = localStorage.getItem("price");
+            var trimmedPrice = localStorage.getItem("price").substring(1);
+            document.getElementById("total").innerText = parseInt(trimmedPrice);
+
+            var petType = localStorage.getItem("petType");
+            console.log("petType" + petType);
+
+            // alert(localStorage.getItem("price"));
+
+            var dateMax = localStorage.getItem("dateMax");
+
+
+
+            console.log("qwert" + type);
+
+            if (isSignIn == 1) {
+                $("#bookNow").attr("data-target", "#servicesModal");
+            }
+
 
             var serviceList = [];
             var priceList = [];
@@ -122,6 +155,41 @@
             priceList.push('${c.basePrice}');
 
         </c:forEach>
+
+            if (serviceList.includes(petType + " " + "Day Care")) {
+                const index = serviceList.indexOf(petType + " " + "Day Care");
+                jQuery("#serviceDaycare").find("td:eq(1)").text("€" + priceList[index]);
+            } else {
+                $("#serviceDaycare").hide();
+
+            }
+            if (serviceList.includes(petType + " " + "Washing")) {
+                const index = serviceList.indexOf(petType + " " + "Washing");
+                jQuery("#serviceWashing").find("td:eq(1)").text("€" + priceList[index]);
+            } else {
+                $("#serviceWashing").hide();
+            }
+            console.log("hyy" + petType + " " + "Medication");
+            if (serviceList.includes(petType + " " + "Medication")) {
+                const index = serviceList.indexOf(petType + " " + "Medication");
+                jQuery("#serviceMedication").find("td:eq(1)").text("€" + priceList[index]);
+            } else {
+                $("#serviceMedication").hide();
+            }
+            if (serviceList.includes(petType + " " + "Nail Clipping")) {
+                const index = serviceList.indexOf(petType + " " + "Nail Clipping");
+                jQuery("#serviceNail").find("td:eq(1)").text("€" + priceList[index]);
+            } else {
+                $("#serviceNail").hide();
+            }
+            if (serviceList.includes(petType + " " + "Groomming and Trimming")) {
+                const index = serviceList.indexOf(petType + " " + "Groomming and Trimming");
+                jQuery("#serviceGroomming").find("td:eq(1)").text("€" + priceList[index]);
+            } else {
+                $("#serviceGroomming").hide();
+            }
+
+
             console.log("omer");
             console.log("ss" + '${c.name}');
             var tds = document.querySelectorAll('#serviceTable td');
@@ -141,6 +209,8 @@
 
                 i++;
             }
+
+
             //document.getElementById("serviceRow1").innerHTML = "formatted_checkout";
 
 
@@ -161,6 +231,11 @@
 
 
         window.onload = function () {
+
+            var x = jQuery("#serviceDaycare").find("td:eq(1)").text();
+            //jQuery("#serviceDaycare").find("td:eq(1)").text("€" + "50");
+
+
             var addr;
             addr = '${hotel.city}, ${hotel.street}, ${hotel.aptNo}, ${hotel.country}';
                     document.getElementById("location").src = "https://www.google.com/maps?q=" + addr + " &output=embed";
@@ -197,9 +272,11 @@
                     var checkinDate = new Date(checkin);
                     var checkout = document.getElementById("checkout").value;
                     var checkoutDate = new Date(checkout);
-                    var roomPrice = 45;
+
+                    var roomPrice = localStorage.getItem("price");
+                    roomPrice = roomPrice.substring(1);
                     var roomNights = document.getElementById("roomNights");
-                    var fee = 5;
+                    var fee = 0;
                     var total = document.getElementById("total");
                     var boardingService = document.getElementById("boardingService");
                     var boardingPrice = document.getElementById("boardingPrice");
@@ -208,8 +285,8 @@
                         var timeDiff = parseInt(checkoutDate.getTime() - checkinDate.getTime());
                         var daysDiff = parseInt(timeDiff / (1000 * 3600 * 24));
                         var roomNightsPrice = parseInt(daysDiff * roomPrice);
-                        var totalPrice = parseInt(roomNightsPrice + fee);
-                        roomNights.innerHTML = daysDiff + " nights : " + "<span>$" + roomNightsPrice + "</span>";
+                        var totalPrice = parseInt(roomNightsPrice);
+                        roomNights.innerHTML = daysDiff + " nights : " + "<span>€" + roomNightsPrice + "</span>";
                         total.innerHTML = totalPrice;
                         serviceTotal = totalPrice;
                         document.getElementById("serviceTotal").innerHTML = "£" + serviceTotal;
@@ -276,7 +353,7 @@
                         </div>
                         <div class="property-price">
                             <p>Per Day</p>
-                            <span>$45</span>
+                            <span id="price"></span>
                         </div>
                     </div>
                 </div>
@@ -498,7 +575,7 @@
                                     <div class="row">
                                         <div class="col align-self-start room-price">
                                             <p>Per Day</p>
-                                            <span>$<span id="roomPrice">45</span></span>
+                                            <span id="roomPrice"></span>
                                         </div>
                                         <div class="col align-self-end stars">
                                             <p>Rate</p>
@@ -509,7 +586,8 @@
                                         <p>Dates</p>
                                         <div class="row"> 
                                             <span class="col-6">Check in</span>
-                                            <input type="text" onchange="getDiff()" id="checkin" name="checkin" class="datepicker col-5 align-self-end" placeholder="Check in" required="required">                                       
+                                            <input type="text" onchange="getDiff()" id="checkin" name="checkin" class="datepicker col-5 align-self-end" placeholder="Check in" required="required">      
+
                                         </div>
                                         <br>
                                         <div class="row">
@@ -535,19 +613,17 @@
                                     <div>
                                         <table>
                                             <tr>
-                                                <td id="roomNights">1 night : <span>$<span id="priceNights">45</span></span></td>
+                                                <td id="roomNights">1 night : <span id="priceNights">45</span></td>
                                             </tr>
+
                                             <tr>
-                                                <td>Service fee : <span>$<span id="fee">5</span></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Total without services : <span>$<span id="total">45</span></span></td>
+                                                <td>Total without services :<span>€ <span id="total"></span></span></td>
                                             </tr>
                                         </table>
                                     </div>
 
                                     <!--signupForBookingForm     #signupForBookingForm-->
-                                    <a href="" class="site-btn list-btn" data-toggle="modal" data-target="#signupForBookingForm">Book Now!</a>
+                                    <a href="" id="bookNow" class="site-btn list-btn" data-toggle="modal" data-target="#signupForBookingForm">Book Now!</a>
                                     <div class="x_content">
                                         <!-- modals -->
                                         <!-- Large modal -->
@@ -574,28 +650,28 @@
                                                                         <section class="content invoice">
                                                                             <!-- title row -->
                                                                             <div class="row" style="margin-left: 2px" >
-                                                                                <div class="col-md-4" >
+                                                                                <div class="col-md-4 col-sm-6 col-xs-6" >
                                                                                     <div class="row" ><h9><small>Check-in Date</small></h9></div>
-                                                                                    <div class="row" ><h7><strong id="checkinSummary"  ></strong ></h7></div>
+                                                                                    <div class="row" ><h7><strong><strong id="checkinSummary"  ></strong ></strong></h7></div>
 
                                                                                 </div>
-                                                                                <div class="col-md-4" >
+                                                                                <div class="col-md-4 col-sm-6 col-xs-6" >
                                                                                     <div class="" >
                                                                                         <div class="row"> <h9><small>Check-out Date</small></h9></div>
-                                                                                        <div class="row"> <h7><strong id="checkoutSummary"></strong></h7></div>
+                                                                                        <div class="row"> <h7><strong><strong id="checkoutSummary"></strong></strong></h7></div>
                                                                                     </div>
 
                                                                                 </div>
-                                                                                <div class="col-md-2" >
+                                                                                <div class="col-md-2 col-sm-6 col-xs-6" >
                                                                                     <div class="" >
                                                                                         <div class="row"> <h9><small>Day</small></h9></div>
-                                                                                        <div class="row" style="padding-left:4px"> <h7><strong id="daysSummary">2</strong></h7></div>
+                                                                                        <div class="row" style="padding-left:4px"> <h7><strong><strong id="daysSummary">2</strong></strong></h7></div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-md-2" >
+                                                                                <div class="col-md-2 col-sm-6 col-xs-6" >
                                                                                     <div class="" >
                                                                                         <div class="row"> <h9><small>Breed</small></h9></div>
-                                                                                        <div class="row"> <h7><strong id="breed">Dog</strong></h7></div>
+                                                                                        <div class="row"> <h7><strong><strong id="breed">Dog</strong></strong></h7></div>
                                                                                     </div>
                                                                                 </div>
 
@@ -622,6 +698,20 @@
                                                                                             <td class="font-weight-bold"><strong>Boarding</strong></td>
                                                                                             <td  class="a-right a-right font-weight-bold " id="boardingPrice">€90</td>
                                                                                             <td class="font-weight-bold" id="boardingService">(45 x 2 nights)</td>
+                                                                                        </tr>
+                                                                                        <tr id="serviceDaycare" class="even pointer">
+                                                                                            <td  >Daycare</td>
+                                                                                            <td class="a-right a-right">€10.45</td>
+                                                                                            <td >
+                                                                                                <div id="serviceDaycareBtn" >
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)"  class="blue-gradient  btn-sm">
+                                                                                                        <i class="fa fa-plus text-white"></i>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                                <div id="serviceDaycareBtn2" style="display:none;">
+                                                                                                    <a  onclick="selectService(this.parentNode.parentNode.parentNode.id)" class="btn-danger btn-sm" style="color:#fff;"><i class="fas fa-minus"></i></a>
+                                                                                                </div>
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr id="serviceWashing" class="even pointer">
                                                                                             <td  >Washing</td>
@@ -679,6 +769,7 @@
                                                                                                 </div>
                                                                                             </td>
                                                                                         </tr>
+
                                                                                         <tr class="even pointer">
                                                                                             <td class="font-weight-bold">Total</td>
                                                                                             <td  id="serviceTotal" class="a-right a-right font-weight-bold">€90</td>

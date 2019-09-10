@@ -79,11 +79,6 @@
 
                     <div class="right_col" role="main" style="min-height: 2202px;">
                         <div class="">
-                            <div class="page-title">
-                                <div class="title_left">
-                                    <h3>User Profile</h3>
-                                </div>
-                            </div>
                             <div class="clearfix"></div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">

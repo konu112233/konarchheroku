@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,6 +64,16 @@ public class SearchController {
         try {
             String code = request.getParameter("object");
             m.addAttribute("hotel", searchService.getProperty(code));
+            try {
+                HttpSession session = request.getSession(false);
+                if (session.getAttribute("token") != null) {
+                    m.addAttribute("online", "1");
+                } else {
+                    m.addAttribute("online", "0");
+                }
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
             return "property";
         } catch (Exception e) {
             return "redirect:/";
