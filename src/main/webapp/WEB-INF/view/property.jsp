@@ -111,13 +111,14 @@
 
     </style>
     <script>
+
         var isSignIn = 1;
         var type = '${search.petType}';
         var dateMin;
         var dateMax;
         $(document).ready(function () {
 
-
+            alert('${userInfo.name}');
 
             //get data from previous page
             var dateMin = localStorage.getItem("dateMin");

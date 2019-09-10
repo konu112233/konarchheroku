@@ -73,13 +73,16 @@ public class Reservation implements Serializable {
     @Column(name = "petAge", nullable = true, length = 50)
     private String petAge;
 
+    @Column(name = "petVaccination", nullable = true, length = 20)
+    private String petVaccination;
+
     @Column(name = "status", nullable = true, length = 50)
     private String status;
 
     public Reservation() {
     }
 
-    public Reservation(String id, String checkIn, String checkOut, String service, String totalPrice, String hotelId, String hotelName, String petOwnerId, String petOwnerName, String petOwnerPhone, String petOwnerEmail, String petId, String petName, String petBreed, String petSize, String petGender, String petAge, String status) {
+    public Reservation(String id, String checkIn, String checkOut, String service, String totalPrice, String hotelId, String hotelName, String petOwnerId, String petOwnerName, String petOwnerPhone, String petOwnerEmail, String petId, String petName, String petBreed, String petSize, String petGender, String petAge, String petVaccination, String status) {
         this.id = id;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
@@ -97,6 +100,7 @@ public class Reservation implements Serializable {
         this.petSize = petSize;
         this.petGender = petGender;
         this.petAge = petAge;
+        this.petVaccination = petVaccination;
         this.status = status;
     }
 
@@ -234,6 +238,14 @@ public class Reservation implements Serializable {
 
     public void setPetAge(String petAge) {
         this.petAge = petAge;
+    }
+
+    public String getPetVaccination() {
+        return petVaccination;
+    }
+
+    public void setPetVaccination(String petVaccination) {
+        this.petVaccination = petVaccination;
     }
 
     public String getStatus() {

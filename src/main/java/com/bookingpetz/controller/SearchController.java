@@ -8,6 +8,7 @@ package com.bookingpetz.controller;
 import com.bookingpetz.domain.Search;
 import com.bookingpetz.domain.SearchResult;
 import com.bookingpetz.services.SearchService;
+import com.bookingpetz.services.UserService;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -31,6 +32,9 @@ public class SearchController {
 
     @Autowired
     private SearchService searchService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/searchResult", method = RequestMethod.GET)
     public String searchResult(Model m, HttpServletRequest request) throws ParseException, IOException {
@@ -61,23 +65,23 @@ public class SearchController {
 
     @RequestMapping(value = "/property", method = RequestMethod.GET)
     public String property(Model m, HttpServletRequest request) {
+
+        String code = request.getParameter("object");
+        m.addAttribute("hotel", searchService.getProperty(code));
         try {
-            String code = request.getParameter("object");
-            m.addAttribute("hotel", searchService.getProperty(code));
-            try {
-                HttpSession session = request.getSession(false);
-                if (session.getAttribute("token") != null) {
-                    m.addAttribute("online", "1");
-                } else {
-                    m.addAttribute("online", "0");
-                }
-            } catch (Exception exception) {
-                System.out.println(exception);
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                String token = session.getAttribute("token").toString();
+                m.addAttribute("petList", userService.getMyPets(token));
+                m.addAttribute("userInfo", userService.getProfile(token));
+                m.addAttribute("online", "1");
+            } else {
+                m.addAttribute("online", "0");
             }
-            return "property";
-        } catch (Exception e) {
-            return "redirect:/";
+        } catch (Exception exception) {
+            System.out.println(exception);
         }
+        return "property";
     }
 
 }
