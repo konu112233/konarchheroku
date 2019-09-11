@@ -18,12 +18,12 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "reservation", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"id"})})
+    @UniqueConstraint(columnNames = {"reservationId"})})
 public class Reservation implements Serializable {
 
     @Id
-    @Column(name = "id")
-    private String id;
+    @Column(name = "reservationId")
+    private int reservationId;
 
     @Column(name = "checkIn", nullable = true, length = 20)
     private String checkIn;
@@ -37,13 +37,13 @@ public class Reservation implements Serializable {
     @Column(name = "totalPrice", nullable = true, length = 10)
     private String totalPrice;
 
-    @Column(name = "hotelId", nullable = true, length = 100)
+    @Column(name = "hotelId", nullable = true, length = 200)
     private String hotelId;
 
     @Column(name = "hotelName", nullable = true, length = 50)
     private String hotelName;
 
-    @Column(name = "petOwnerId", nullable = true, length = 50)
+    @Column(name = "petOwnerId", nullable = true, length = 200)
     private String petOwnerId;
 
     @Column(name = "petOwnerName", nullable = true, length = 50)
@@ -55,7 +55,7 @@ public class Reservation implements Serializable {
     @Column(name = "petOwnerEmail", nullable = true, length = 50)
     private String petOwnerEmail;
 
-    @Column(name = "petId", nullable = true, length = 50)
+    @Column(name = "petId", nullable = true, length = 200)
     private String petId;
 
     @Column(name = "petName", nullable = true, length = 50)
@@ -82,8 +82,8 @@ public class Reservation implements Serializable {
     public Reservation() {
     }
 
-    public Reservation(String id, String checkIn, String checkOut, String service, String totalPrice, String hotelId, String hotelName, String petOwnerId, String petOwnerName, String petOwnerPhone, String petOwnerEmail, String petId, String petName, String petBreed, String petSize, String petGender, String petAge, String petVaccination, String status) {
-        this.id = id;
+    public Reservation(int reservationId, String checkIn, String checkOut, String service, String totalPrice, String hotelId, String hotelName, String petOwnerId, String petOwnerName, String petOwnerPhone, String petOwnerEmail, String petId, String petName, String petBreed, String petSize, String petGender, String petAge, String petVaccination, String status) {
+        this.reservationId = reservationId;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.service = service;
@@ -104,12 +104,12 @@ public class Reservation implements Serializable {
         this.status = status;
     }
 
-    public String getId() {
-        return id;
+    public int getId() {
+        return reservationId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int reservationId) {
+        this.reservationId = reservationId;
     }
 
     public String getCheckIn() {

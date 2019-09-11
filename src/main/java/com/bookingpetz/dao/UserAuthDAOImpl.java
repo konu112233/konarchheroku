@@ -25,7 +25,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public UserToken login(UserAuth userAuth) {
-        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/login")
+        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/login")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(userAuth))
                 .asJson();
@@ -36,7 +36,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public boolean logout(String token) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/logout")
+        HttpResponse<String> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/logout")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + token)
                 .asString();
@@ -50,7 +50,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
         String encodeEmail = Base64.getEncoder().encodeToString(email.getBytes());
         JSONObject jsono = new JSONObject();
         jsono.put("email", encodeEmail);
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/checkUsername")
+        HttpResponse<String> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/checkUsername")
                 .header("Content-type", "application/json")
                 .body(jsono.toJSONString())
                 .asString();
@@ -64,7 +64,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public boolean confirmationMail(User user) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/confirmationMail")
+        HttpResponse<String> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/confirmationMail")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(user))
                 .asString();
@@ -82,7 +82,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
         JSONObject jsono = new JSONObject();
         jsono.put("object", key);
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/verifymail")
+        HttpResponse<String> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/verifymail")
                 .header("Content-type", "application/json")
                 .body(jsono.toJSONString())
                 .asString();
@@ -99,7 +99,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
     public boolean resetPasswordSendMail(String email) {
         JSONObject jsono = new JSONObject();
         jsono.put("object", email);
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/resetPasswordSendMail")
+        HttpResponse<String> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/resetPasswordSendMail")
                 .header("Content-type", "application/json")
                 .body(jsono.toJSONString())
                 .asString();
@@ -119,7 +119,7 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public boolean updatePassword(String code, String password) {
-        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/updatePassword")
+        HttpResponse<String> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/updatePassword")
                 .header("Content-type", "application/json")
                 .body(new Gson().toJson(new UserAuth(code, password)))
                 .asString();

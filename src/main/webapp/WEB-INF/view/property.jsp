@@ -112,15 +112,37 @@
     </style>
     <script>
 
-        var isSignIn = 1;
+        var isSignIn = 0;
         var type = '${search.petType}';
         var dateMin;
         var dateMax;
+        var petList = [];
+        var chosenPet;
+        var addedServices = [];
         $(document).ready(function () {
+            var counter = 0;
+        <c:forEach var="h" items="${petList}">
+            console.log("petss" + '${h.name}');
+            document.getElementById("selectPet").innerHTML = document.getElementById("selectPet").innerHTML + '<option value="' + counter + '" >' + '${h.name}' + '</option>';
+            var petObject = {
+                "petId": '${h.id}',
+                "userId": '${h.userId}',
+                "petName": '${h.name}',
+                "petBreed": '${h.breed}',
+                "petSize": '${h.petSize}',
+                "petGender": '${h.gender}',
+                "petAge": '${h.age}',
+                "petVaccination": '${h.vaccination}',
+            };
+            petList.push(petObject);
+            counter++;
+        </c:forEach>
 
-//            alert('${userInfo.name}');
-//            alert('${online}');
-
+            chosenPet = petList[0];
+            console.log("chosenPet" + JSON.stringify(chosenPet));
+            //document.getElementById("petSelect").innerHTML = document.getElementById("petSelect").innerHTML + '<option value="1">ohhho</option>';
+            console.log("isOnline" + '${online}' + 'petList' + '${petList}');
+            isSignIn = '${online}';
             //get data from previous page
             var dateMin = localStorage.getItem("dateMin");
             document.getElementById("checkin").innerText = dateMin;
@@ -131,18 +153,12 @@
             document.getElementById("priceNights").innerText = localStorage.getItem("price");
             var trimmedPrice = localStorage.getItem("price").substring(1);
             document.getElementById("total").innerText = parseInt(trimmedPrice);
-
             var petType = localStorage.getItem("petType");
             console.log("petType" + petType);
-
             // alert(localStorage.getItem("price"));
 
             var dateMax = localStorage.getItem("dateMax");
-
-
-
             console.log("qwert" + type);
-
             if (isSignIn == 1) {
                 $("#bookNow").attr("data-target", "#servicesModal");
             }
@@ -155,7 +171,6 @@
             serviceList.push('${c.name}');
             console.log('${c.basePrice}');
             priceList.push('${c.basePrice}');
-
         </c:forEach>
 
             if (serviceList.includes(petType + " " + "Day Care")) {
@@ -163,7 +178,6 @@
                 jQuery("#serviceDaycare").find("td:eq(1)").text("€" + priceList[index]);
             } else {
                 $("#serviceDaycare").hide();
-
             }
             if (serviceList.includes(petType + " " + "Washing")) {
                 const index = serviceList.indexOf(petType + " " + "Washing");
@@ -195,10 +209,8 @@
             console.log("omer");
             console.log("ss" + '${c.name}');
             var tds = document.querySelectorAll('#serviceTable td');
-
             for (var i = 0; i < 25; i++) {
                 console.log("innersfirst::" + tds[i].innerHTML);
-
                 if (serviceList.includes(tds[i].innerHTML)) {
                     const index = serviceList.indexOf(tds[i].innerText);
                     tds[i].innerHTML = '<img src="static/searchResult/img/check.png" style="width:15px;" alt=""> <span class="ml-2">' + tds[i].innerText + '</span>';
@@ -246,7 +258,10 @@
                 function selectService(serviceId) {
                     var tr = document.getElementById(serviceId);
                     var tds = tr.getElementsByTagName("td");
+                    var serviceName = tds[0].innerText;
                     var servicePrice = tds[1].innerText;
+                    var serviceNamePrice = serviceName + ":" + servicePrice;
+                    console.log(serviceNamePrice);
                     if (document.getElementById(serviceId + "Btn2").style.display === "none") {
                         servicePrice = servicePrice.replace("€", "");
                         serviceTotal += parseFloat(servicePrice);
@@ -254,8 +269,10 @@
                         tds[1].setAttribute("class", "font-weight-bold");
                         document.getElementById(serviceId + "Btn2").style.display = "block";
                         document.getElementById(serviceId + "Btn").style.display = "none";
+                        addedServices.push(serviceNamePrice);
                     } else {
-
+                        const index = addedServices.indexOf(serviceNamePrice);
+                        addedServices[index] = "";
                         servicePrice = servicePrice.replace("€", "");
                         serviceTotal -= parseFloat(servicePrice);
                         tds[0].setAttribute("class", "");
@@ -266,6 +283,7 @@
                     document.getElementById("serviceTotal").innerHTML = "<span>€" + parseFloat(serviceTotal).toFixed(2) + "</span>";
                     //  document.getElementById("serviceTotal").innerHTML = "<span>€" + serviceTotal + "</span>";
 
+                    console.log("addedServies" + addedServices.toLocaleString());
                 }
 
                 window.onload = selectService();
@@ -274,7 +292,6 @@
                     var checkinDate = new Date(checkin);
                     var checkout = document.getElementById("checkout").value;
                     var checkoutDate = new Date(checkout);
-
                     var roomPrice = localStorage.getItem("price");
                     roomPrice = roomPrice.substring(1);
                     var roomNights = document.getElementById("roomNights");
@@ -293,7 +310,7 @@
                         serviceTotal = totalPrice;
                         document.getElementById("serviceTotal").innerHTML = "£" + serviceTotal;
                         document.getElementById("daysSummary").innerHTML = daysDiff;
-                        document.getElementById("breed").innerHTML = "Cat";
+                        document.getElementById("breed").innerHTML = "Dog";
                         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                         let formatted_checkin = months[checkinDate.getMonth()] + " " + checkinDate.getDate() + ", " + " " + checkinDate.getFullYear();
                         let formatted_checkout = months[checkoutDate.getMonth()] + " " + checkoutDate.getDate() + ", " + " " + checkoutDate.getFullYear();
@@ -314,6 +331,53 @@
                 function next() {
                     $('#petInfpForm').show();
                 }
+                function selectedPet() {
+                    $("#selectPet :selected").text(); // The text content of the selected option
+                    $("#selectPet :selected").val();
+                    var whichPet = $("#selectPet :selected").val(); // The value of the selected option
+
+                    chosenPet = petList[whichPet];
+                    console.log("chosenPETTT" + chosenPet.petName);
+                }
+
+
+                function book() {
+                    var hotelId = localStorage.getItem("hotelId");
+                    localStorage.getItem("hotelId");
+                    console.log("booking" + document.getElementById("checkin").value + " " + document.getElementById("checkout").value + " " + document.getElementById("serviceTotal").innerText + "id" + hotelId + " " + '${hotel.propertyName}');
+                    var stringServices = "";
+                    for (var i = 0; i < addedServices.length; i++) {
+
+                        stringServices += "," + addedServices[i];
+                    }
+
+                    var reservation = {
+                        "checkIn": document.getElementById("checkin").value,
+                        "checkOut": document.getElementById("checkout").value,
+                        "service": stringServices,
+                        "totalPrice": document.getElementById("serviceTotal").innerText,
+                        "hotelId": localStorage.getItem("hotelId"),
+                        "hotelName": '${hotel.propertyName}',
+                        "petOwnerId": chosenPet.userId,
+                        "petOwnerName": '${userInfo.name}',
+                        "petOwnerPhone": '${userInfo.phone}',
+                        "petOwnerEmail": '${userInfo.email}',
+                        "petId": chosenPet.petId,
+                        "petName": chosenPet.petName,
+                        "petBreed": chosenPet.petBreed,
+                        "petSize": chosenPet.petSize,
+                        "petGender": chosenPet.petGender,
+                        "petAge": chosenPet.petAge,
+                        "vaccination": chosenPet.petVaccination,
+                        "status": "current"
+                    };
+                    console.log("book" + JSON.stringify(reservation));
+                    $('#result').val(JSON.stringify(reservation));
+                    $("#pay").submit();
+                }
+
+
+
 
     </script>
     <body>
@@ -601,15 +665,10 @@
                                     </div>
                                     <div>
                                         <p>Pet</p>
-                                        <div class="row justify-content-md-center">
-                                            <form class="col-md-auto">
-                                                <select id="bookPet" name="bookPet">
-                                                    <option value="pet1">Pet 1</option>
-                                                    <option value="pet2">Pet 2</option>
-                                                    <option value="pet3">Pet 3</option>
-                                                </select>
-                                            </form>
-                                        </div>
+                                        <select onchange="selectedPet()" id="selectPet" class="browser-default custom-select">
+
+
+                                        </select>
                                         <br>
                                     </div>
                                     <div>
@@ -625,7 +684,7 @@
                                     </div>
 
                                     <!--signupForBookingForm     #signupForBookingForm-->
-                                    <a href="" id="bookNow" class="site-btn list-btn" data-toggle="modal" data-target="#signupForBookingForm">Book Now!</a>
+                                    <a href="" id="bookNow" class="site-btn list-btn" data-toggle="modal"  data-target="#signupForBookingForm">Book Now!</a>
                                     <div class="x_content">
                                         <!-- modals -->
                                         <!-- Large modal -->
@@ -791,10 +850,12 @@
                                                     </div>
                                                     <div class="modal-footer">
 
-                                                        <button type="button" class="btn  blue-gradient">Pay</button>
+                                                        <button type="button" onclick="book();" class="btn  blue-gradient">Pay</button>
 
                                                     </div>
-
+                                                    <form id="pay" action="pay" method="POST">
+                                                        <input hidden id="result" name="result" value="">
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

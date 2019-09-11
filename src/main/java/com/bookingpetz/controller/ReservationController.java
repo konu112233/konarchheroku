@@ -26,13 +26,14 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    @RequestMapping(value = "/doReservation", method = RequestMethod.POST)
+    @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public String addPet(Model m, HttpServletRequest request) {
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
+                String code = session.getAttribute("token").toString();
                 Reservation reservation = new Gson().fromJson(request.getParameter("result"), Reservation.class);
-                if (reservationService.doReservation(session.getAttribute("token").toString(), reservation)) {
+                if (reservationService.doReservation(code, reservation)) {
                     return "redirect:bookings";
                 }
                 return "redirect:home?failed";

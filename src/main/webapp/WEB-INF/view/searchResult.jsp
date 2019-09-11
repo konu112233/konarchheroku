@@ -40,7 +40,7 @@
         <link rel="stylesheet" type="text/css" href="static/searchResult/css/aboutcustom.css">
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
         <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
@@ -193,13 +193,7 @@
 
                         window.onload = function () {
                             LoadMap();
-                            $(function () {
-                                $('input[name="daterange"]').daterangepicker({
-                                    opens: 'left'
-                                }, function (start, end, label) {
-                                    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-                                });
-                            });
+
                         }
                         function LoadMap() {
                             var mapOptions = {
@@ -235,6 +229,7 @@
                                         infoWindow.open(map, marker);
                                         priceToBeSent = document.getElementById(data.hotelId).innerText;
                                         localStorage.setItem("price", priceToBeSent);
+                                        localStorage.setItem("hotelId", hotelId);
                                         console.log("hayr" + priceToBeSent);
 
                                     });
@@ -258,6 +253,7 @@
                             console.log("iddd" + hotelId + "sss");
                             priceToBeSent = document.getElementById(hotelId).innerText;
                             localStorage.setItem("price", priceToBeSent);
+                            localStorage.setItem("hotelId", hotelId);
 
 
 
