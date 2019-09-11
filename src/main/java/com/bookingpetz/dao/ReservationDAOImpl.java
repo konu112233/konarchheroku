@@ -26,7 +26,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 
     @Override
     public boolean doReservation(String token, Reservation reservation) {
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/doReservation")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/doReservation")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + token)
                 .body(new Gson().toJson(reservation))
@@ -37,7 +37,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 
     @Override
     public List<Reservation> getReservation(String token) {
-        HttpResponse<String> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/getReservation")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/getReservation")
                 .header("Authorization", "Bearer " + token)
                 .asString();
 
