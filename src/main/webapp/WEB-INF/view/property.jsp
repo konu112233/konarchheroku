@@ -38,6 +38,7 @@
         <link rel="stylesheet" href="static/aaa/css/mdb.min2.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     </head>
     <style>
 
@@ -69,10 +70,13 @@
             margin-bottom: 15px;
         }
 
-        #checkin, #checkout {
+        #checkin, #checkout,  #dates
+
+        {
             border: none;
             border-bottom: 1px solid green;
             text-align: center;
+            font-size: 18px;
         }
 
         select {
@@ -145,7 +149,10 @@
             isSignIn = '${online}';
             //get data from previous page
             var dateMin = localStorage.getItem("dateMin");
-            document.getElementById("checkin").innerText = dateMin;
+            document.getElementById("checkin").value = dateMin;
+            var dateMax = localStorage.getItem("dateMax");
+            document.getElementById("checkout").value = dateMax;
+            document.getElementById("dates").value = dateMin + dateMax;
             // alert(document.getElementById("checkin").innerText);
             console.log("page2" + localStorage.getItem("price"));
             document.getElementById("price").innerText = localStorage.getItem("price");
@@ -155,6 +162,7 @@
             document.getElementById("total").innerText = parseInt(trimmedPrice);
             var petType = localStorage.getItem("petType");
             console.log("petType" + petType);
+            getDiff();
             // alert(localStorage.getItem("price"));
 
             var dateMax = localStorage.getItem("dateMax");
@@ -246,6 +254,25 @@
 
         window.onload = function () {
 
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = mm + '/' + dd + '/' + yyyy;
+            $('input[name="daterange"]').daterangepicker({
+
+                "startDate": localStorage.getItem("dateMin"),
+                "endDate": localStorage.getItem("dateMax"),
+                opens: 'center',
+                "minDate": today
+            }, function (start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                document.getElementById("checkin").value = start.format('MM/DD/YYYY');
+                getDiff();
+                document.getElementById("checkout").value = end.format('MM/DD/YYYY');
+                getDiff();
+                minOut();
+            });
             var x = jQuery("#serviceDaycare").find("td:eq(1)").text();
             //jQuery("#serviceDaycare").find("td:eq(1)").text("€" + "50");
 
@@ -289,8 +316,10 @@
                 window.onload = selectService();
                 function getDiff() {
                     var checkin = document.getElementById("checkin").value;
+                    console.log("checkin" + checkin);
                     var checkinDate = new Date(checkin);
                     var checkout = document.getElementById("checkout").value;
+                    console.log("checkin" + checkout);
                     var checkoutDate = new Date(checkout);
                     var roomPrice = localStorage.getItem("price");
                     roomPrice = roomPrice.substring(1);
@@ -320,6 +349,7 @@
 
                         boardingService.innerHTML = "(" + roomPrice + " x " + daysDiff + " nights)";
                         boardingPrice.innerHTML = "£" + roomNightsPrice;
+                        console.log("getDiff works");
                     }
                 }
 
@@ -650,16 +680,17 @@
                                     </div>
                                     <div>
                                         <p>Dates</p>
-                                        <div class="row"> 
+                                        <br>
+                                        <input type="text" id="dates" name="daterange" class="col-10 align-self-end " placeholder="Check-in - Check-out" />
+                                        <br>
+                                        <div class="row" hidden> 
                                             <span class="col-6">Check in</span>
-                                            <input type="text" onchange="getDiff()" id="checkin" name="checkin" class="datepicker col-5 align-self-end" placeholder="Check in" required="required">      
-
+                                            <input type="text" onchange="getDiff()" id="checkin" name="checkin" class="rangepicker col-5 align-self-end" placeholder="Check in" required="required">      
                                         </div>
                                         <br>
-                                        <div class="row">
+                                        <div class="row" hidden >
                                             <span class="col-6">Check out</span>
-                                            <input type="text" onchange="getDiff();
-                                                    minOut()" id="checkout" name="checkout" class="datepicker col-5 align-self-end" placeholder="Check out" required="required">
+                                            <input type="text" onchange="getDiff(); minOut()" id="checkout" name="checkout" class="col-5 align-self-end" placeholder="Check out" required="required">
                                         </div>
                                         <br>
                                     </div>
@@ -903,6 +934,11 @@
         <!-- mdb script -->
         <script type="text/javascript" src="static/aaa/js/mdb.min2.js"></script>
         <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
+
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
 
     </body>
 </html>
