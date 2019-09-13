@@ -77,6 +77,26 @@
         }
     </style>
     <script type="text/javascript">
+
+        var type = "Dog";
+        var name = "Nameless";
+        var breed = "#";
+        var gender = "female";
+        var age = "#";
+        var vaccination;
+        var microchipNo;
+        var allergies;
+        var underMedication;
+        var eatingRoutine;
+        var sleepingPlace;
+        var neutered;
+        var friendly;
+        var getAlongChild;
+        var size = "#";
+        var petImg = "static/images/user.png";
+        var id = 0;
+
+
         var petList = new Array();
         $(document).ready(function () {
         <c:forEach var="p" items="${pets}">
@@ -204,23 +224,7 @@
             }
         }
 
-        var type = "Dog";
-        var name = "Nameless";
-        var breed = "#";
-        var gender = "female";
-        var age = "#";
-        var vaccination;
-        var microchipNo;
-        var allergies;
-        var underMedication;
-        var eatingRoutine;
-        var sleepingPlace;
-        var neutered;
-        var friendly;
-        var getAlongChild;
-        var size = "#";
-        var petImg = "static/images/user.png";
-        var id = 0;
+
         function whichGender(g) {
             gender = g;
         }
@@ -1550,7 +1554,7 @@
                                                                         <p id="pet1-size"><strong>Size (Kg) :     </strong>${p.petSize} </p>
                                                                         <p id="pet1-gender"><strong>Gender: </strong>${p.gender} </p>
                                                                         <p id="pet1-age"><strong>Age: </strong>${p.age} years </p>
-                                                                        <p id="pet1-vaccination"><strong>Vaccination: </strong>Yes</p>
+                                                                        <p id="pet1-vaccination"><strong>Vaccination: </strong>${p.vaccination}</p>
                                                                     </div>
                                                                     <div class="right col-xs-6 col-md-6 col-sm-6 right ">
                                                                         <img src="static/images/dog.jpg" alt="" class="img-circle img-responsive" />
