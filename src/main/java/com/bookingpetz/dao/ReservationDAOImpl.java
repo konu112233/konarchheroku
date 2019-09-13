@@ -43,7 +43,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 
         List<Reservation> reservationList = new ArrayList<>();
         if (response.getStatus() == 200) {
-            Type listType = new TypeToken<ArrayList<Pet>>() {
+            Type listType = new TypeToken<ArrayList<Reservation>>() {
             }.getType();
             reservationList = new Gson().fromJson(response.getBody(), listType);
             return reservationList;

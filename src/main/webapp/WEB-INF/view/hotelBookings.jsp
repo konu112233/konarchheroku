@@ -1,6 +1,5 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 
@@ -48,7 +47,12 @@
                 document.getElementById("status" + id).innerHTML = "Canceled";
                 document.getElementById("btnDelete" + id).disabled = true;
             }
-
+            $(document).ready(function () {
+                alert();
+            <c:forEach var="h" items="${reservationList}">
+                console.log('${h.checkIn}');
+            </c:forEach>
+            });
         </script>
     </head>
     <body class="nav-md">
@@ -317,6 +321,7 @@
         </div>
 
         <script>
+
             var bookings = [
                 {
                     petName: "Arthur",
