@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
@@ -35,7 +36,16 @@
                         <li><a href="myPets"><i class="fas fa-cat fa-lg" style="margin-right: 10px;"></i>My Pets </a></li>
                         <li><a href="petSitterApply"><i  class="fa fa-paw fa-lg"></i>Pet Sitter <span class="fa fa-lock"></span></a></li>
                         <li><a href="hotelOwner"><i class="fa fa-hotel fa-lg" ></i>Hotel Owner <span class="fa fa-lock"></span></a></li>
-                        <li><a href="hotelBookings"><i class="fa fa-credit-card fa-lg" ></i>Bookings </a></li>
+                        <li>
+                            <c:choose>
+                                <c:when test="${partner == 'hotel'}">
+                                    <a href="hotelBookings"><i class="fa fa-credit-card fa-lg" ></i>Bookings </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="bookings"><i class="fa fa-credit-card fa-lg" ></i>Bookings </a>
+                                </c:otherwise>
+                            </c:choose>
+                        </li>
                     </ul>
                 </div>
             </div>

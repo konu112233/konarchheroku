@@ -282,12 +282,13 @@
                     document.getElementById("location").src = "https://www.google.com/maps?q=" + addr + " &output=embed";
                 };
                 var serviceTotal = 90;
+
                 function selectService(serviceId) {
                     var tr = document.getElementById(serviceId);
                     var tds = tr.getElementsByTagName("td");
                     var serviceName = tds[0].innerText;
                     var servicePrice = tds[1].innerText;
-                    var serviceNamePrice = serviceName + ":" + servicePrice;
+                    var serviceNamePrice = serviceName + ":" + servicePrice.replace("€", "");
                     console.log(serviceNamePrice);
                     if (document.getElementById(serviceId + "Btn2").style.display === "none") {
                         servicePrice = servicePrice.replace("€", "");
@@ -372,20 +373,30 @@
 
 
                 function book() {
+
                     var hotelId = localStorage.getItem("hotelId");
+                    var totalPrice = document.getElementById("serviceTotal").innerText;
+                    totalPrice = totalPrice.replace("€", "");
                     localStorage.getItem("hotelId");
                     console.log("booking" + document.getElementById("checkin").value + " " + document.getElementById("checkout").value + " " + document.getElementById("serviceTotal").innerText + "id" + hotelId + " " + '${hotel.propertyName}');
                     var stringServices = "";
+                    var boardingPrice = document.getElementById("boardingPrice").innerHTML;
+                    boardingPrice = boardingPrice.substring(1);
+                    console.log("xx" + boardingPrice);
+
+                    addedServices.push("Boarding:" + boardingPrice + " " + document.getElementById("boardingService").innerHTML);
                     for (var i = 0; i < addedServices.length; i++) {
 
                         stringServices += "," + addedServices[i];
                     }
 
+                    stringServices = stringServices.substring(1);
+
                     var reservation = {
                         "checkIn": document.getElementById("checkin").value,
                         "checkOut": document.getElementById("checkout").value,
                         "service": stringServices,
-                        "totalPrice": document.getElementById("serviceTotal").innerText,
+                        "totalPrice": totalPrice,
                         "hotelId": localStorage.getItem("hotelId"),
                         "hotelName": '${hotel.propertyName}',
                         "petOwnerId": chosenPet.userId,
