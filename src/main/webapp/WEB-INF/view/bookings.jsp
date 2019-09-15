@@ -105,7 +105,7 @@
 
 
 
-            function viewReservation(reservationId, checkIn, checkOut, service, totalPrice, petOwnerName, petOwnerPhone, petOwnerEmail, petName, petBreed, petSize, petGender, petAge, petVaccination, hotelName) {
+            function viewReservation(reservationId, checkIn, checkOut, service, totalPrice, petOwnerName, petOwnerPhone, petOwnerEmail, petName, petBreed, petSize, petGender, petAge, petVaccination, hotelName, hotelId) {
 
                 console.log(petAge);
                 document.getElementById("serviceTable").innerHTML = "";
@@ -114,6 +114,7 @@
 
                 document.getElementById("reservationId").innerHTML = reservationId;
                 document.getElementById("hotelName").innerHTML = hotelName;
+                document.getElementById("seeHotel").href = 'property?object=' + hotelId;
 
 
                 document.getElementById("checkIn").innerHTML = checkIn;
@@ -248,12 +249,12 @@
                                                     <hr>
                                                     <div class="row">
                                                         <h3 id="hotelName">Hotel</h3>
-                                                        <span><small>Id: 202836</small></span>
+                                                        <span><small >Id: 202836</small></span>
                                                         <hr>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col text-center">
-                                                            <a href="property">See hotel details</a>
+                                                            <a href="property?object=" id="seeHotel">See hotel details</a>
                                                         </div>
                                                     </div>
 
@@ -299,7 +300,7 @@
                                                 <td class=" ">${r.status}</td>
                                                 <td class="a-right a-right ">€${r.totalPrice} </td>
                                                 <td class=" last">
-                                                    <button href="" type="button"  onclick="viewReservation('idDefault', '${r.checkIn}', '${r.checkOut}', '${r.service}', '${r.totalPrice}', '${r.petOwnerName}', '${r.petOwnerPhone}', '${r.petOwnerEmail}', '${r.petName}', '${r.petBreed}', '${r.petSize}', '${r.petGender}', '${r.petAge}', '${r.petVaccination}', '${r.hotelName}');" class="btn btn-xs btn-success" data-toggle="modal" data-target="#booking1">
+                                                    <button href="" type="button"  onclick="viewReservation('idDefault', '${r.checkIn}', '${r.checkOut}', '${r.service}', '${r.totalPrice}', '${r.petOwnerName}', '${r.petOwnerPhone}', '${r.petOwnerEmail}', '${r.petName}', '${r.petBreed}', '${r.petSize}', '${r.petGender}', '${r.petAge}', '${r.petVaccination}', '${r.hotelName}', '${r.hotelId}');" class="btn btn-xs btn-success" data-toggle="modal" data-target="#booking1">
                                                         <i  class="fa fa-external-link"> </i> View 
                                                     </button>
                                                 </td>
