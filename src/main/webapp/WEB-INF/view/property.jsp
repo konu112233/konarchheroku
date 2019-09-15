@@ -138,6 +138,7 @@
         var chosenPet;
         var addedServices = [];
         $(document).ready(function () {
+
             var counter = 0;
         <c:forEach var="h" items="${petList}">
             console.log("petss" + '${h.name}');
@@ -191,17 +192,16 @@
                     $("#selectPetButton").css("display", "block");
                 } else {
                     $("#bookNow").attr("data-target", "#petInfoForm");
-                    $('#petInfoModalButton').text("Add");
-                    $('#petInfoModalButtonPrevious').css("display", "none");
-                    $('#switchSignIn').css("display", "none");
+
+
                     console.log("chosenPet" + JSON.stringify(chosenPet));
 
                 }
             } else {
-                $("#bookNow").attr("data-target", "#signupForBookingForm");
+                $("#bookNow").attr("data-target", "#signinForm");
                 $('#petInfoModalButton').text("NEXT");
                 $("#petInfoModalButton").attr("data-target", "#");
-                $("#addPetButtonTarget").attr("data-target", "#signupForBookingForm");
+                $("#addPetButtonTarget").attr("data-target", "#signinForm");
             }
 
             var serviceList = [];
@@ -524,10 +524,6 @@
         </div>
 
         <jsp:include page="header.jsp"></jsp:include>
-        <jsp:include page="signupModalForBooking.jsp"></jsp:include>
-
-        <jsp:include page="verifyMail.jsp"></jsp:include>
-        <jsp:include page="verifiedmailModal.jsp"></jsp:include>
 
 
             <div class="home" >
@@ -1341,8 +1337,7 @@
 
 
                                                     <div class="text-center mb-3">                              <!--#verifyMail-->
-                                                        <button type="button" id="petInfoModalButton" data-dismiss="modal" data-toggle="modal"  data-target="" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;" onclick="addPet()">Next</button>
-                                                        <button type="button" id="petInfoModalButtonPrevious" data-dismiss="modal" data-toggle="modal"  data-target="#signupForBookingForm" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="opacity:0.6 ;font-weight: 500; border-radius: 20px;">Previous</button>
+                                                        <button type="button" id="petInfoModalButton" data-dismiss="modal" data-toggle="modal"  data-target="" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;" onclick="addPet()">Add</button>
 
                                                     </div>
 
@@ -1352,11 +1347,7 @@
                                                     </form>
 
                                                 </div>
-                                                <!--Footer-->
-                                                <div id="switchSignIn" class="modal-footer mx-5 pt-3 mb-1">
-                                                    <p class="font-small grey-text d-flex justify-content-end">Do you already have an account? <a href="home" data-dismiss="modal" data-toggle="modal" data-target="#signinForm" class="modelClose blue-text ml-1">
-                                                            Sign In</a></p>
-                                                </div>
+
                                             </div>
                                             <!--/.Content-->
                                         </div>

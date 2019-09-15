@@ -10,10 +10,14 @@ import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
 import com.google.gson.Gson;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -63,18 +67,29 @@ public class UserAuthDAOImpl implements UserAuthDAO {
     }
 
     @Override
-    public boolean confirmationMail(User user) {
+    public String confirmationMail(User user, String url) {
+
+        JSONObject jsono = new JSONObject();
+        jsono.put("user", new Gson().toJson(user));
+        jsono.put("pageUrl", url);
+
         HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/confirmationMail")
                 .header("Content-type", "application/json")
-                .body(new Gson().toJson(user))
+                .body(jsono.toJSONString())
                 .asString();
 
         System.out.println("ConfirmationMail Status Code : " + response.getStatus() + " body : " + response.getBody());
         if (response.getStatus() == 200) {
-            return response.getBody().equals("\"SUCCESS\"");
+            try {
+                JSONParser parser = new JSONParser();
+                JSONObject json = (JSONObject) parser.parse(response.getBody());
+                return json.get("object").toString();
+            } catch (ParseException ex) {
+                Logger.getLogger(UserAuthDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         System.out.println("ConfirmationMail failed");
-        return false;
+        return response.getBody();
     }
 
     @Override

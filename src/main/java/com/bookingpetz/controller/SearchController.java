@@ -67,6 +67,7 @@ public class SearchController {
     public String property(Model m, HttpServletRequest request) {
 
         String code = request.getParameter("object");
+        m.addAttribute("result", request.getParameter("result"));
         m.addAttribute("hotel", searchService.getProperty(code));
         try {
             HttpSession session = request.getSession(false);

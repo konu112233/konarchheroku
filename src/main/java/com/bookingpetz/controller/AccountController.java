@@ -9,11 +9,13 @@ import com.bookingpetz.dao.UserAuthDAO;
 import com.bookingpetz.domain.User;
 import com.bookingpetz.domain.UserAuth;
 import com.bookingpetz.domain.UserToken;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -33,8 +35,10 @@ public class AccountController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model m, HttpServletRequest request) {
 
-        String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").trim().getBytes());
-        String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").trim().getBytes());
+        JSONObject user = new Gson().fromJson(request.getParameter("loginInput"), JSONObject.class);
+        String encodeEmail = Base64.getEncoder().encodeToString(user.get("email").toString().trim().getBytes());
+        String encodePassword = Base64.getEncoder().encodeToString(user.get("password").toString().trim().getBytes());
+        String url = user.get("pageUrl").toString().trim();
         UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
         if (!userToken.getUser().getUserId().equals("000")) {
             //SUCCESS
@@ -45,10 +49,35 @@ public class AccountController {
             session.setAttribute("user", userToken.getUser());
             session.setAttribute("partner", userToken.getUser().getPartner());
             System.out.println("Email : " + userToken.getUser().getEmail());
-            return "redirect:/";
+            return "redirect:/" + url;
         }
         //FAILED 
-        return "redirect:/";
+        return "redirect:/" + url;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getLogin(Model m, HttpServletRequest request) {
+
+        JSONObject user = new Gson().fromJson(request.getParameter("loginInput"), JSONObject.class);
+        String encodeEmail = Base64.getEncoder().encodeToString(user.get("email").toString().trim().getBytes());
+        String encodePassword = Base64.getEncoder().encodeToString(user.get("password").toString().trim().getBytes());
+        String url = user.get("pageUrl").toString().trim();
+
+        System.out.println("Heyyy : " + encodeEmail + " " + encodePassword + " " + url);
+        UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
+        if (!userToken.getUser().getUserId().equals("000")) {
+            //SUCCESS
+            System.out.println("Login Success " + userToken.getUser().getUserId());
+            String token = userToken.getAccess_token();
+            HttpSession session = request.getSession();
+            session.setAttribute("token", token);
+            session.setAttribute("user", userToken.getUser());
+            session.setAttribute("partner", userToken.getUser().getPartner());
+            System.out.println("Email : " + userToken.getUser().getEmail());
+            return "redirect:/" + url;
+        }
+        //FAILED 
+        return "redirect:/" + url;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -86,9 +115,11 @@ public class AccountController {
         String surname = StringUtils.capitalize(request.getParameter("surname").trim());
         String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").trim().getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").trim().getBytes());
-        if (userAuthDAO.confirmationMail(new User(encodeEmail, name, surname, encodePassword, "false"))) {
+        String url = request.getParameter("pageUrl2").trim();
+        System.out.println("URll  " + url);
+        if (userAuthDAO.confirmationMail(new User(encodeEmail, name, surname, encodePassword, "false"), url).equals(url)) {
             //SUCCESS
-            return "redirect:/home?result=success";
+            return "redirect:/" + url + "&result=success";
         }
         //FAILED
         return "redirect:/";

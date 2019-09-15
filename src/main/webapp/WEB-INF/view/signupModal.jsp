@@ -9,7 +9,18 @@
 
 <script>
 
+
+
     $(document).ready(function () {
+
+        var url = window.location.href;
+        var splittedUrl = url.split("/");
+
+        var u = splittedUrl[splittedUrl.length - 1];
+
+        $('#pageUrl2').val(u);
+//        alert($('#pageUrl').val());
+
 //        $("#signupButton").on('click', function () {
 //            var email = $("#email").val();
 //            $.get('checkUsername', {email: email}, function (response) {
@@ -41,6 +52,7 @@
             <div class="modal-body mx-4">
                 <!--Body-->
                 <form action="sendConfirmationMail" method="POST">
+                    <input hidden id="pageUrl2" name="pageUrl2" value=""/>
                     <div class="md-form mb-5">
                         <input placeholder="Name" type="text" name="name" required class="form-control validate">
                         <label data-error="wrong" data-success="false"></label>
