@@ -5,8 +5,10 @@
  */
 package com.bookingpetz.controller;
 
+import com.bookingpetz.domain.Pet;
 import com.bookingpetz.domain.Reservation;
 import com.bookingpetz.services.ReservationService;
+import com.bookingpetz.services.UserService;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,9 @@ public class ReservationController {
 
     @Autowired
     private ReservationService reservationService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public String addPet(Model m, HttpServletRequest request) {
@@ -71,5 +76,24 @@ public class ReservationController {
             return "redirect:/?" + exception;
         }
         return "redirect:/?";
+    }
+
+    @RequestMapping(value = "/addPetQuick", method = RequestMethod.POST)
+    public String addPetQuick(Model m, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession(false);
+            if (session.getAttribute("token") != null) {
+                Pet pet = new Gson().fromJson(request.getParameter("addPetQuick"), Pet.class);
+                String hotelId = request.getParameter("hotelIdInput");
+                if (userService.addPet(pet, session.getAttribute("token").toString())) {
+                    return "redirect:property?object=" + hotelId;
+                }
+                return "redirect:property?object=" + hotelId;
+            } else {
+                return "redirect:/";
+            }
+        } catch (JsonSyntaxException exception) {
+            return "redirect:/?" + exception;
+        }
     }
 }
