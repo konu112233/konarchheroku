@@ -370,7 +370,13 @@
                     chosenPet = petList[whichPet];
                     console.log("chosenPETTT" + chosenPet.petName);
                 }
-
+                function dateFormat(date) {
+                    var mydate = new Date(date);
+                    var month = ["Jan", "Feb", "March", "Apr", "May", "June",
+                        "July", "Aug", "Sep", "Oct", "Novr", "Dec"][mydate.getMonth()];
+                    var str = mydate.getDate() + ' ' + month + ', ' + mydate.getFullYear();
+                    return str;
+                }
 
                 function book() {
 
@@ -393,14 +399,14 @@
                     stringServices = stringServices.substring(1);
 
                     var reservation = {
-                        "checkIn": document.getElementById("checkin").value,
-                        "checkOut": document.getElementById("checkout").value,
+                        "checkIn": dateFormat(document.getElementById("checkin").value),
+                        "checkOut": dateFormat(document.getElementById("checkout").value),
                         "service": stringServices,
                         "totalPrice": totalPrice,
                         "hotelId": localStorage.getItem("hotelId"),
                         "hotelName": '${hotel.propertyName}',
                         "petOwnerId": chosenPet.userId,
-                        "petOwnerName": '${userInfo.name}',
+                        "petOwnerName": '${userInfo.name} ${userInfo.surname}  ',
                         "petOwnerPhone": '${userInfo.phone}',
                         "petOwnerEmail": '${userInfo.email}',
                         "petId": chosenPet.petId,
@@ -701,7 +707,8 @@
                                         <br>
                                         <div class="row" hidden >
                                             <span class="col-6">Check out</span>
-                                            <input type="text" onchange="getDiff(); minOut()" id="checkout" name="checkout" class="col-5 align-self-end" placeholder="Check out" required="required">
+                                            <input type="text" onchange="getDiff();
+                                                    minOut()" id="checkout" name="checkout" class="col-5 align-self-end" placeholder="Check out" required="required">
                                         </div>
                                         <br>
                                     </div>
@@ -943,7 +950,7 @@
         <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
 
         <!-- mdb script -->
-        <script type="text/javascript" src="static/aaa/js/mdb.min2.js"></script>
+
         <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
 
 

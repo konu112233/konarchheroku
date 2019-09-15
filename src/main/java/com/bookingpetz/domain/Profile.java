@@ -17,6 +17,7 @@ public class Profile {
     private String email;
     private String birthday;
     private String gender;
+    private String partner;
 
     public Profile() {
     }
@@ -28,6 +29,7 @@ public class Profile {
         this.email = user.getEmail();
         this.gender = user.getGender();
         this.birthday = user.getBirthday();
+        this.partner = user.getPartner();
     }
 
     public String getName() {
@@ -76,6 +78,14 @@ public class Profile {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPartner() {
+        return partner;
+    }
+
+    public void setPartner(String partner) {
+        this.partner = partner;
     }
 
 }

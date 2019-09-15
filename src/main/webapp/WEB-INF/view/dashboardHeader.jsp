@@ -38,7 +38,7 @@
                         <li><a href="hotelOwner"><i class="fa fa-hotel fa-lg" ></i>Hotel Owner <span class="fa fa-lock"></span></a></li>
                         <li>
                             <c:choose>
-                                <c:when test="${partner == 'hotel'}">
+                                <c:when test="${partner.equals('hotel')}">
                                     <a href="hotelBookings"><i class="fa fa-credit-card fa-lg" ></i>Bookings </a>
                                 </c:when>
                                 <c:otherwise>

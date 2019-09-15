@@ -106,7 +106,7 @@
             function viewReservation(reservationId, checkIn, checkOut, service, totalPrice, petOwnerName, petOwnerPhone, petOwnerEmail, petName, petBreed, petSize, petGender, petAge, petVaccination) {
                 console.log(petAge);
                 var services = [];
-
+                document.getElementById("serviceTable").innerHTML = "";
 
                 document.getElementById("reservationId").innerHTML = reservationId;
 
@@ -122,10 +122,10 @@
                     var splittedServices = services[i].split(':');
                     var serviceName = splittedServices[0];
                     var servicePrice = splittedServices[1];
-                    document.getElementById("serviceTable").innerHTML = document.getElementById("serviceTable").innerHTML + '<tr><span>' + serviceName + ": €" + servicePrice + '</span></tr><br>';
+                    document.getElementById("serviceTable").innerHTML = document.getElementById("serviceTable").innerHTML + '<tr><span>' + serviceName + ": €" + servicePrice + '</span></tr>';
 
                 }
-                document.getElementById("serviceTable").innerHTML = document.getElementById("serviceTable").innerHTML + '<tr><span><strong>Total : €' + totalPrice + '</strong></span></tr><br>';
+                document.getElementById("serviceTable").innerHTML = document.getElementById("serviceTable").innerHTML + '<hr><tr><h2><span><strong>Total : €' + totalPrice + '</strong></span></h2></tr><br>';
 
                 console.log("serviceListtsa" + services.toString());
 
@@ -175,22 +175,27 @@
                                                         <hr>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-4">
-                                                            <h2>Check-in</h2>
-                                                            <span id="checkIn">May 23, 2014 11:47:56 PM</span>
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <h2>Check-in</h2>
+                                                                <h3><span id="checkIn">May 23, 2014 11:47:56 PM</span></h3>
+                                                            </div>
+                                                            <div class="row">
+                                                                <h2>Check-out</h2>
+                                                                <h3><span id="checkOut">June 5, 2014 08:17:56 PM</span></h3>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <h2>Check-out</h2>
-                                                            <span id="checkOut">June 5, 2014 08:17:56 PM</span>
-                                                        </div>
-                                                        <div class="col-md-4">
+
+                                                        <div class="col-md-6">
                                                             <h2>Price</h2>
                                                             <table id="serviceTable">
 
                                                             </table>
+
                                                         </div>
                                                     </div>
-                                                    <br>
+
+                                                    <hr>
                                                     <div style="margin-right:90px;" class="row">
                                                         <div class="wizard_horizontal">
                                                             <ul class="wizard_steps anchor">
@@ -212,18 +217,10 @@
                                                                         </span>
                                                                     </a>
                                                                 </li>
+
                                                                 <li>
-                                                                    <a class="selected" isdone="1" rel="3">
+                                                                    <a class="selected" isdone="1" rel="4">
                                                                         <span class="step_no">3</span>
-                                                                        <span class="step_descr">
-                                                                            To come<br>
-                                                                            <!--<small>Prepare your pet</small>-->
-                                                                        </span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="disabled" isdone="1" rel="4">
-                                                                        <span class="step_no">4</span>
                                                                         <span class="step_descr">
                                                                             Current<br>
                                                                             <!--<small>Your pet is in good hands</small>-->
@@ -242,7 +239,6 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-
                                                     <div class="x_panel">
                                                         <div class="x_title">
                                                             <h2>Pet owner <small>#83649</small></h2>

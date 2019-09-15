@@ -43,6 +43,7 @@ public class AccountController {
             HttpSession session = request.getSession();
             session.setAttribute("token", token);
             session.setAttribute("user", userToken.getUser());
+            session.setAttribute("partner", userToken.getUser().getPartner());
             System.out.println("Email : " + userToken.getUser().getEmail());
             return "redirect:/";
         }
