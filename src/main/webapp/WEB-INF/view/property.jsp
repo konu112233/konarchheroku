@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="d" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -138,7 +139,26 @@
         var chosenPet;
         var addedServices = [];
         $(document).ready(function () {
-
+        <d:choose>
+            <d:when test="${result.equals('success')}">
+            $('#signupEmail').modal('show');
+            </d:when>
+            <d:when test="${verify.equals('success')}">
+            $('#signupVerifymail').modal('show');
+            </d:when>
+            <d:when test="${verify.equals('failed')}">
+            $('#signupVerifymailFailed').modal('show');
+            </d:when>
+            <d:when test="${resultPassword.equals('success')}">
+            $('#resetPasswordSendMailOK').modal('show');
+            </d:when>
+            <d:when test="${resultPassword.equals('failed')}">
+            $('#resetPasswordSendMailFailed').modal('show');
+            </d:when>
+            <d:when test="${resultPassword.equals('done')}">
+            $('#resetPasswordSuccess').modal('show');
+            </d:when>
+        </d:choose>
             var counter = 0;
         <c:forEach var="h" items="${petList}">
             console.log("petss" + '${h.name}');
