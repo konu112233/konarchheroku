@@ -78,6 +78,7 @@ public class SearchController {
             } else {
                 m.addAttribute("online", "0");
             }
+            System.out.println("token var mi " + session.getAttribute("token").toString());
         } catch (Exception exception) {
             System.out.println(exception);
         }

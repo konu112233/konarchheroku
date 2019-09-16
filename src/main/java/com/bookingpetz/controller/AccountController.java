@@ -39,6 +39,9 @@ public class AccountController {
         String encodeEmail = Base64.getEncoder().encodeToString(user.get("email").toString().trim().getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(user.get("password").toString().trim().getBytes());
         String url = user.get("pageUrl").toString().trim();
+        if (url.length() <= 1) {
+            url = "home";
+        }
         UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
         if (!userToken.getUser().getUserId().equals("000")) {
             //SUCCESS

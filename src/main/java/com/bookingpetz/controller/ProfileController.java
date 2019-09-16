@@ -5,7 +5,6 @@
  */
 package com.bookingpetz.controller;
 
-import com.bookingpetz.domain.Pet;
 import com.bookingpetz.domain.Profile;
 import com.bookingpetz.services.UserService;
 import com.google.gson.Gson;
@@ -32,6 +31,7 @@ public class ProfileController {
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
+                System.out.println("tokennn : " + session.getAttribute("token").toString());
                 m.addAttribute("user", userService.getProfile(session.getAttribute("token").toString()));
                 return "profile";
             } else {
