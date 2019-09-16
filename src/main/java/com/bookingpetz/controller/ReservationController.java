@@ -83,9 +83,10 @@ public class ReservationController {
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
+                String token = session.getAttribute("token").toString();
                 Pet pet = new Gson().fromJson(request.getParameter("addPetQuick"), Pet.class);
                 String hotelId = request.getParameter("hotelIdInput");
-                if (userService.addPet(pet, session.getAttribute("token").toString())) {
+                if (userService.addPet(pet, token)) {
                     return "redirect:property?object=" + hotelId;
                 }
                 return "redirect:property?object=" + hotelId;

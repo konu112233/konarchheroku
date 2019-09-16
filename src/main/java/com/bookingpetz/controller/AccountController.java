@@ -62,6 +62,9 @@ public class AccountController {
         String encodeEmail = Base64.getEncoder().encodeToString(user.get("email").toString().trim().getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(user.get("password").toString().trim().getBytes());
         String url = user.get("pageUrl").toString().trim();
+        if (url.length() <= 1) {
+            url = "home";
+        }
 
         System.out.println("Heyyy : " + encodeEmail + " " + encodePassword + " " + url);
         UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
@@ -116,9 +119,15 @@ public class AccountController {
         String encodeEmail = Base64.getEncoder().encodeToString(request.getParameter("email").trim().getBytes());
         String encodePassword = Base64.getEncoder().encodeToString(request.getParameter("password").trim().getBytes());
         String url = request.getParameter("pageUrl2").trim();
+        if (url.length() <= 1) {
+            url = "home";
+        }
         System.out.println("URll  " + url);
         if (userAuthDAO.confirmationMail(new User(encodeEmail, name, surname, encodePassword, "false"), url).equals(url)) {
             //SUCCESS
+            if (url.equals("home")) {
+                return "redirect:/home?result=success";
+            }
             return "redirect:/" + url + "&result=success";
         }
         //FAILED
