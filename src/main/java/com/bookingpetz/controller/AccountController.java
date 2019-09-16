@@ -18,13 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
+import org.glassfish.jersey.uri.UriComponent;
 
 /**
  *
@@ -36,7 +34,7 @@ public class AccountController {
     @Autowired
     private UserAuthDAO userAuthDAO;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model m, HttpServletRequest request) {
 
         JSONObject user = new Gson().fromJson(request.getParameter("loginInput"), JSONObject.class);
@@ -65,29 +63,30 @@ public class AccountController {
     @RequestMapping(value = "/getLogin", method = RequestMethod.GET)
     public String getLogin(Model m, HttpServletRequest request) throws ServletException, IOException {
 
-        JSONObject user = new Gson().fromJson(request.getParameter("loginInput"), JSONObject.class);
-        String encodeEmail = Base64.getEncoder().encodeToString(user.get("email").toString().trim().getBytes());
-        String encodePassword = Base64.getEncoder().encodeToString(user.get("password").toString().trim().getBytes());
-        String url = user.get("pageUrl").toString().trim();
-        if (url.length() <= 1) {
-            url = "home";
-        }
-
-        System.out.println("Heyyy : " + encodeEmail + " " + encodePassword + " " + url);
-        UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
-        if (!userToken.getUser().getUserId().equals("000")) {
-            //SUCCESS
-            System.out.println("Login Success " + userToken.getUser().getUserId());
-            String token = userToken.getAccess_token();
-            HttpSession session = request.getSession(true);
-            session.setAttribute("token", token);
-            session.setAttribute("user", userToken.getUser());
-            session.setAttribute("partner", userToken.getUser().getPartner());
-            System.out.println("Email : " + userToken.getUser().getEmail());
-            return "redirect:/" + url;
-        }
-        //FAILED 
-        return "redirect:/" + url;
+//        JSONObject user = new Gson().fromJson(request.getParameter("loginInput"), JSONObject.class);
+        return "redirect:/login?loginInput=" + UriComponent.encode(request.getParameter("loginInput"), UriComponent.Type.QUERY_PARAM_SPACE_ENCODED);
+//        String encodeEmail = Base64.getEncoder().encodeToString(user.get("email").toString().trim().getBytes());
+//        String encodePassword = Base64.getEncoder().encodeToString(user.get("password").toString().trim().getBytes());
+//        String url = user.get("pageUrl").toString().trim();
+//        if (url.length() <= 1) {
+//            url = "home";
+//        }
+//
+//        System.out.println("Heyyy : " + encodeEmail + " " + encodePassword + " " + url);
+//        UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
+//        if (!userToken.getUser().getUserId().equals("000")) {
+//            //SUCCESS
+//            System.out.println("Login Success " + userToken.getUser().getUserId());
+//            String token = userToken.getAccess_token();
+//            HttpSession session = request.getSession(true);
+//            session.setAttribute("token", token);
+//            session.setAttribute("user", userToken.getUser());
+//            session.setAttribute("partner", userToken.getUser().getPartner());
+//            System.out.println("Email : " + userToken.getUser().getEmail());
+//            return "redirect:/" + url;
+//        }
+//        //FAILED 
+//        return "redirect:/" + url;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
