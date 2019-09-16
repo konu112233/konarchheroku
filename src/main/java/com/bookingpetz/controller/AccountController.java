@@ -12,15 +12,19 @@ import com.bookingpetz.domain.UserToken;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.Base64;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 /**
  *
@@ -59,7 +63,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/getLogin", method = RequestMethod.GET)
-    public String getLogin(Model m, HttpServletRequest request) {
+    public String getLogin(Model m, HttpServletRequest request) throws ServletException, IOException {
 
         JSONObject user = new Gson().fromJson(request.getParameter("loginInput"), JSONObject.class);
         String encodeEmail = Base64.getEncoder().encodeToString(user.get("email").toString().trim().getBytes());

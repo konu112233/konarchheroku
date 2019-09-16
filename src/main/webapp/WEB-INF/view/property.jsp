@@ -139,6 +139,7 @@
         var chosenPet;
         var addedServices = [];
         $(document).ready(function () {
+            alert(${user.name});
         <d:choose>
             <d:when test="${result.equals('success')}">
             $('#signupEmail').modal('show');
