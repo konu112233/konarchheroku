@@ -47,7 +47,7 @@ public class AccountController {
             //SUCCESS
             System.out.println("Login Success " + userToken.getUser().getUserId());
             String token = userToken.getAccess_token();
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(true);
             session.setAttribute("token", token);
             session.setAttribute("user", userToken.getUser());
             session.setAttribute("partner", userToken.getUser().getPartner());
@@ -75,7 +75,7 @@ public class AccountController {
             //SUCCESS
             System.out.println("Login Success " + userToken.getUser().getUserId());
             String token = userToken.getAccess_token();
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(true);
             session.setAttribute("token", token);
             session.setAttribute("user", userToken.getUser());
             session.setAttribute("partner", userToken.getUser().getPartner());

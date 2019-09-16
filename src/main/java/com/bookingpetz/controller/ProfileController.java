@@ -38,7 +38,8 @@ public class ProfileController {
                 return "redirect:/";
             }
         } catch (Exception exception) {
-            return "redirect:/" + exception;
+            System.out.println("Hata : " + exception.getMessage());
+            return "redirect:/";
         }
     }
 
@@ -56,7 +57,8 @@ public class ProfileController {
                 return "redirect:/";
             }
         } catch (JsonSyntaxException exception) {
-            return "redirect:/?" + exception;
+            System.out.println("Hata : " + exception.getMessage());
+            return "redirect:/";
         }
     }
 }
