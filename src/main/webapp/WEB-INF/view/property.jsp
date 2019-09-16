@@ -487,7 +487,7 @@
                         "petType": type,
                         "breed": breed,
                         "gender": newPetGender,
-                        "age": parseInt(age),
+                        "age": age,
                         "petSize": newPetSize,
                         "vaccination": isNewPetVaccinated,
                         "microchipNo": "-",
@@ -497,7 +497,7 @@
                         "sleepingPlace": "-",
                         "neuteredStreilized": "-",
                         "friendly": "-",
-                        "getAlongChildren": "-",
+                        "getAlongChildren": "-"
                     };
                     console.log("Test" + JSON.stringify(pet));
                     console.log("Pet added");
