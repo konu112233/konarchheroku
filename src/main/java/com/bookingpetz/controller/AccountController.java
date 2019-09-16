@@ -58,7 +58,7 @@ public class AccountController {
         return "redirect:/" + url;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/getLogin", method = RequestMethod.GET)
     public String getLogin(Model m, HttpServletRequest request) {
 
         JSONObject user = new Gson().fromJson(request.getParameter("loginInput"), JSONObject.class);
