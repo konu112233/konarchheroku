@@ -28,7 +28,7 @@
         <!-- sLİDE -->
         <link rel="stylesheet" href="static/vendors/responsive-slides/responsiveslides.css">
         <link rel="stylesheet" href="static/vendors/responsive-slides/demo.css">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
         <script src="static/vendors/responsive-slides/responsiveslides.min.js"></script>
         <!-- cropper -->
         <link href="static/vendors/cropper/dist/cropper.min.css" rel="stylesheet">
