@@ -33,7 +33,7 @@
 
         <script>
             var name, surname, gender, birthday, phone, email, aptNo, street, states, city, country, zipcode;
-            ;
+
             window.onload = () => {
                 gender = '${user.gender}';
                 $('#gender' + gender).trigger("click");
@@ -68,6 +68,84 @@
                 $("#updateProfile").submit();
             }
 
+            //Photo crop start-----------------------
+            var dataURI;
+            //Open photo picker
+            function openPhotoPicker() {
+                $('#btnSquare').trigger('click');
+                $('#modalCropper').modal('show');
+                $('#btnUploadClick').trigger('click');
+            }
+            // Modal
+            $(function () {
+                var petList = '${pets}';
+                if (petList == '[]') {
+                    console.log("pets::" + petList);
+                    //  $("#yesPet").css("display", "block");
+                    //$("#noPet").css("display", "none");
+                    $('#noPet').show();
+                    $('#yesPet').hide();
+                }
+                //Upload image 1 secs after modal opened
+                $('#getCroppedCanvasModal').on('show.bs.modal', function () {
+                    setTimeout(
+                            function () {
+                                addImage();
+                            }, 1);
+                });
+                // display if image has a src
+                $('#image').load(function () {
+                    var imageObj = $(this);
+                    if (!(imageObj.width() == 1 && imageObj.height() == 1)) {
+                        console.log('Image source changed');
+                        var image = $('#image').attr('src');
+                        $('#image').attr('src', $('#image').attr('src'));
+                    }
+                });
+
+                $("button[data-number=1]").click(function () {
+                    $('#addItemModal').modal('hide');
+                });
+            });
+            //Close modal
+            function closeModal() {
+                $('#getCroppedCanvasModal').modal('hide');
+                $('#modalCropper').modal('hide');
+            }
+            //Convert data from 64b to Blob and upload
+            function b64toBlob(dataURI) {
+                var byteString = atob(dataURI.split(',')[1]);
+                var ab = new ArrayBuffer(byteString.length);
+                var ia = new Uint8Array(ab);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                return new Blob([ab], {type: 'image/jpeg'});
+            }
+
+            // get cropped image 
+            function addImage() {
+                dataURI = document.getElementById("download").href;
+                var imgProfile = $("#myImg").attr("src", dataURI);
+                imgProfile.attr("width", "250");
+                imgProfile.attr("height", "250");
+                console.log("dataUri::" + dataURI);
+                $('#getCroppedCanvasModal').modal('hide');
+                $('#modalCropper').modal('hide');
+                //     $('#getCroppedCanvasModal').css("display", "none");
+                //   console.log("src::"+img.src);
+                //  javascript:location.reload(true)
+                //  var blob = b64toBlob(dataURI);
+                // reader.readAsDataURL(blob);
+            }
+            //Read blob and convert to b64 to put image view
+            var reader = new FileReader();
+            reader.onload = function () {
+                var b64Image = reader.result;
+                console.log("img was put to img-1" + b64Image);
+            };
+            //Photo crop end---------------------
+
 
         </script>
 
@@ -84,7 +162,18 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="x_panel">
                                         <div class="x_content">
-
+                                            <!-- cropped Canvas -->
+                                            <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+                                                <div class="modal-dialog"  id="">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body" style="display:none">
+                                                        </div>
+                                                        <div class="modal-footer" style="display:none">
+                                                            <a class="btn btn-primary" data-dismiss-modal="modal2" onclick="addImage();" id="download" href="javascript:void(0);" >Upload</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
                                                 <form  id="user_info">
                                                     <div class="profile_img">
@@ -111,13 +200,13 @@
                                                         <a id="gender">${user.gender}</a>
                                                     </li>
                                                 </ul>
-                                                <button data-toggle="modal" data-target=".bs-example-modal-lg" type="button" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</button>
+                                                <button data-toggle="modal" data-target="#editModal" type="button" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</button>
 
                                                 <br>
                                             </form>
                                         </div>
 
-                                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal fade bs-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
 
@@ -127,120 +216,7 @@
                                                         <h4 class="modal-title" id="myModalLabel">Edit profile</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="container cropper modal" id="cropper" width="50px ! important" style="display:none">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header"><span class="close">&times;</span></div>
-                                                                <div class="modal-body">
 
-                                                                    <div class="row">
-                                                                        <div id="imgContainer" class="img-container" style="display:none;">
-                                                                            <img id="image"  alt="Picture">
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="row" id="imgButtons" style="display:flex;justify-content: flex-end">
-                                                                        <div class="docs-buttons">
-                                                                            <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Zoom In">
-                                                                                        <span class="fa fa-search-plus"></span>
-                                                                                    </span>
-                                                                                </button>
-                                                                                <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Zoom Out">
-                                                                                        <span class="fa fa-search-minus"></span>
-                                                                                    </span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Move Left">
-                                                                                        <span class="fa fa-arrow-left"></span>
-                                                                                    </span>
-                                                                                </button>
-                                                                                <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Move Right">
-                                                                                        <span class="fa fa-arrow-right"></span>
-                                                                                    </span>
-                                                                                </button>
-                                                                                <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Move Up">
-                                                                                        <span class="fa fa-arrow-up"></span>
-                                                                                    </span>
-                                                                                </button>
-                                                                                <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Move Down">
-                                                                                        <span class="fa fa-arrow-down"></span>
-                                                                                    </span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Rotate Left">
-                                                                                        <span class="fa fa-rotate-left"></span>
-                                                                                    </span>
-                                                                                </button>
-                                                                                <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Rotate Right">
-                                                                                        <span class="fa fa-rotate-right"></span>
-                                                                                    </span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="btn-group">
-                                                                                <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Reset">
-                                                                                        <span class="fa fa-refresh"></span>
-                                                                                    </span>
-                                                                                </button>
-                                                                                <label  id="btnUploadClick" class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
-                                                                                    <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
-                                                                                    <span class="docs-tooltip" data-toggle="tooltip" title="Upload image file">
-                                                                                        <span class="fa fa-upload"></span>
-                                                                                    </span>
-                                                                                </label>
-
-                                                                            </div>
-                                                                            <div class="btn-group">
-
-                                                                                <button type="button"   class="btn btn-success" data-method="getCroppedCanvas" >
-                                                                                    <span  class="docs-tooltip" data-toggle="tooltip" >
-                                                                                        Crop
-                                                                                    </span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div style="display:none"  class="col-md-3 docs-toggles">
-                                                                                <!-- <h3 class="page-header">Toggles:</h3> -->
-                                                                                <div class="btn-group btn-group-justified" data-toggle="buttons">
-
-                                                                                    <label id="btnSquare" class="btn btn-primary">
-                                                                                        <input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1">
-                                                                                        <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: 1 / 1">
-                                                                                            1:1
-                                                                                        </span>
-                                                                                    </label>
-
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
-                                                                                <div class="modal-dialog">
-                                                                                    <div class="modal-content">
-                                                                                        <div class="modal-header">
-                                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                                            <h4 class="modal-title" id="getCroppedCanvasTitle">Cropped</h4>
-                                                                                        </div>
-                                                                                        <div class="modal-body"></div>
-                                                                                        <div class="modal-footer">
-                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                            <a class="btn btn-primary" onclick="addImage();" id="download" href="javascript:void(0);"data-dismiss="modal" >Upload</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div><!-- /.modal -->
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                         <form id="updateProfile" action="updateProfile" method="POST">
                                                             <input hidden id="result" name="result" value="">
                                                         </form>
@@ -322,6 +298,110 @@
 
                                                 </div>
                                             </div>
+
+                                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" id="modalCropper">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close"  onClick="closeModal()" aria-label="Close"><span aria-hidden="true" >×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="container cropper" >
+                                                                <div id="imgContainer" class="row">
+                                                                    <div  class="img-container" >
+                                                                        <img id="image" src="" alt="Picture">
+                                                                    </div>
+                                                                </div>
+                                                            </div>   
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="row" id="imgButtons" style="display:flex;justify-content: flex-end">
+                                                                <div class="docs-buttons">
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Zoom In">
+                                                                                <span class="fa fa-search-plus"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Zoom Out">
+                                                                                <span class="fa fa-search-minus"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Move Left">
+                                                                                <span class="fa fa-arrow-left"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Move Right">
+                                                                                <span class="fa fa-arrow-right"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Move Up">
+                                                                                <span class="fa fa-arrow-up"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Move Down">
+                                                                                <span class="fa fa-arrow-down"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Rotate Left">
+                                                                                <span class="fa fa-rotate-left"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Rotate Right">
+                                                                                <span class="fa fa-rotate-right"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Reset">
+                                                                                <span class="fa fa-refresh"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                        <label  id="btnUploadClick" class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                                                                            <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                                                                            <span class="docs-tooltip" data-toggle="tooltip" title="Upload image file">
+                                                                                <span class="fa fa-upload"></span>
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                        <button type="button"  class="btn btn-success" data-method="getCroppedCanvas" >
+                                                                            <span  class="docs-tooltip" data-toggle="tooltip" >
+                                                                                Crop
+                                                                            </span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div style="display:none"  class="col-md-3 docs-toggles">
+                                                                        <!-- <h3 class="page-header">Toggles:</h3> -->
+                                                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+
+                                                                            <label id="btnSquare" class="btn btn-primary">
+                                                                                <input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1">
+                                                                                <span class="docs-tooltip" data-toggle="tooltip" title="aspectRatio: 1 / 1">
+                                                                                    1:1
+                                                                                </span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                             <div class="profile_title">
@@ -394,34 +474,34 @@
         <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
 
         <script>
-                                                            $('#myDatepicker').datetimepicker();
+                                                                $('#myDatepicker').datetimepicker();
 
-                                                            $('#myDatepicker2').datetimepicker({
-                                                                format: 'DD.MM.YYYY'
-                                                            });
+                                                                $('#myDatepicker2').datetimepicker({
+                                                                    format: 'DD.MM.YYYY'
+                                                                });
 
-                                                            $('#myDatepicker3').datetimepicker({
-                                                                format: 'hh:mm A'
-                                                            });
+                                                                $('#myDatepicker3').datetimepicker({
+                                                                    format: 'hh:mm A'
+                                                                });
 
-                                                            $('#myDatepicker4').datetimepicker({
-                                                                ignoreReadonly: true,
-                                                                allowInputToggle: true
-                                                            });
+                                                                $('#myDatepicker4').datetimepicker({
+                                                                    ignoreReadonly: true,
+                                                                    allowInputToggle: true
+                                                                });
 
-                                                            $('#datetimepicker6').datetimepicker();
+                                                                $('#datetimepicker6').datetimepicker();
 
-                                                            $('#datetimepicker7').datetimepicker({
-                                                                useCurrent: false
-                                                            });
+                                                                $('#datetimepicker7').datetimepicker({
+                                                                    useCurrent: false
+                                                                });
 
-                                                            $("#datetimepicker6").on("dp.change", function (e) {
-                                                                $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-                                                            });
+                                                                $("#datetimepicker6").on("dp.change", function (e) {
+                                                                    $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                                                                });
 
-                                                            $("#datetimepicker7").on("dp.change", function (e) {
-                                                                $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-                                                            });
+                                                                $("#datetimepicker7").on("dp.change", function (e) {
+                                                                    $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                                                                });
         </script>
     </body>
 </html>

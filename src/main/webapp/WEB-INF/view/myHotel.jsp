@@ -1,6 +1,6 @@
 <%-- 
     Document   : newjsp
-    Created on : Jul 28, 2019, 4:37:09 PM
+    Created on : Jul 28, 2019, 4:32:09 PM
     Author     : omerfarukoner
 --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>

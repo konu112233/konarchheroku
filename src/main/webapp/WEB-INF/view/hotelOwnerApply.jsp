@@ -276,33 +276,34 @@
             console.log("img::::::::::::::::::::::::" + images[0]);
             console.log("dataUri::" + dataURI);
             updateImage();
+            $('#cropper').hide();
             //   console.log("src::"+img.src);
 
             //  javascript:location.reload(true)
 
 
             //  var blob = b64toBlob(dataURI);
-            // reader.readAsDataURL(blob);
+        // reader.readAsDataURL(blob);
         }
 
 
         //Read blob and conver to b64 to put image view
         var reader = new FileReader();
-        reader.onload = function () {
+            reader.onload = function () {
 
             var b64Image = reader.result;
-            console.log("img was put to img-1" + b64Image);
+        console.log("img was put to img-1" + b64Image);
         };
-        // Upload button listener
+            // Upload button listener
 
         $(function () {
-            $('#image').load(function () {
+                $('#image').load(function () {
                 var imageObj = $(this);
-                if (!(imageObj.width() == 1 && imageObj.height() == 1)) {
+                    if (!(imageObj.width() == 1 && imageObj.height() == 1)) {
                     console.log('Image source changed');
                     $('#imgContainer').css("display", "block");
-                    $('#imgButtons').css("display", "flex");
-                }
+            $('#imgButtons').css("display", "flex");
+        }
 
 
             });
@@ -321,136 +322,133 @@
         s9 = 1;
         s10 = 1;
         s11 = 1;
-        s12 = 1;
+            s12 = 1;
         function checkact1() {
             o1 = document.getElementById('cact1');
-            if (o1.value == 'Y') {
-                s1++;
+                if (o1.value == 'Y') {
+                    s1++;
                 if (s1 % 2 == 0)
                     $('#tboxact1').prop('disabled', false);
                 else
-                    $('#tboxact1').prop('disabled', true);
+        $('#tboxact1').prop('disabled', true);
             }
 
-        }
+            }
         function checkact2() {
             o2 = document.getElementById('cact2');
-            if (o2.value == 'Y') {
-                s2++;
+                if (o2.value == 'Y') {
+                    s2++;
                 if (s2 % 2 == 0)
                     $('#tboxact2').prop('disabled', false);
                 else
-                    $('#tboxact2').prop('disabled', true);
+        $('#tboxact2').prop('disabled', true);
             }
 
-        }
+            }
         function checkact3() {
             o3 = document.getElementById('cact3');
-            if (o3.value == 'Y') {
-                s3++;
+                if (o3.value == 'Y') {
+                    s3++;
                 if (s3 % 2 == 0)
                     $('#tboxact3').prop('disabled', false);
                 else
-                    $('#tboxact3').prop('disabled', true);
+        $('#tboxact3').prop('disabled', true);
             }
 
-        }
+            }
         function checkact4() {
             o4 = document.getElementById('cact4');
-            if (o4.value == 'Y') {
-                s4++;
+                if (o4.value == 'Y') {
+                    s4++;
                 if (s4 % 2 == 0)
                     $('#tboxact4').prop('disabled', false);
                 else
-                    $('#tboxact4').prop('disabled', true);
+        $('#tboxact4').prop('disabled', true);
             }
 
-        }
+            }
         function checkact5() {
             o5 = document.getElementById('cact5');
-            if (o5.value == 'Y') {
-                s5++;
+                if (o5.value == 'Y') {
+                    s5++;
                 if (s5 % 2 == 0)
                     $('#tboxact5').prop('disabled', false);
                 else
-                    $('#tboxact5').prop('disabled', true);
+        $('#tboxact5').prop('disabled', true);
             }
 
-        }
+            }
         function checkact6() {
             o6 = document.getElementById('cact6');
-            if (o6.value == 'Y') {
-                s6++;
+                if (o6.value == 'Y') {
+                    s6++;
                 if (s6 % 2 == 0)
                     $('#tboxact6').prop('disabled', false);
                 else
-                    $('#tboxact6').prop('disabled', true);
+        $('#tboxact6').prop('disabled', true);
             }
 
-        }
+            }
         function checkact7() {
             o7 = document.getElementById('cact7');
-            if (o7.value == 'Y') {
-                s7++;
+                if (o7.value == 'Y') {
+                    s7++;
                 if (s7 % 2 == 0)
                     $('#tboxact7').prop('disabled', false);
                 else
-                    $('#tboxact7').prop('disabled', true);
+        $('#tboxact7').prop('disabled', true);
             }
 
-        }
+            }
         function checkact8() {
             o8 = document.getElementById('cact8');
-            if (o8.value == 'Y') {
-                s8++;
+                if (o8.value == 'Y') {
+                    s8++;
                 if (s8 % 2 == 0)
                     $('#tboxact8').prop('disabled', false);
                 else
-                    $('#tboxact8').prop('disabled', true);
+        $('#tboxact8').prop('disabled', true);
             }
 
-        }
+            }
         function checkact9() {
             o9 = document.getElementById('cact9');
-            if (o9.value == 'Y') {
-                s9++;
+                if (o9.value == 'Y') {
+                    s9++;
                 if (s9 % 2 == 0)
                     $('#tboxact9').prop('disabled', false);
                 else
-                    $('#tboxact9').prop('disabled', true);
+        $('#tboxact9').prop('disabled', true);
             }
 
-        }
+            }
         function checkact10() {
-            o10 = document.getElementById('cact10');
-            if (o10.value == 'Y') {
+                o10 = document.getElementById('cact10');             if (o10.value == 'Y') {
                 s10++;
-                if (s10 % 2 == 0)
+                    if (s10 % 2 == 0)
                     $('#tboxact10').prop('disabled', false);
                 else
-                    $('#tboxact10').prop('disabled', true);
+        $('#tboxact10').prop('disabled', true);
             }
 
-        }
+            }
         function checkact11() {
-            o11 = document.getElementById('cact11');
-            if (o11.value == 'Y') {
+                o11 = document.getElementById('cact11');             if (o11.value == 'Y') {
                 s11++;
-                if (s11 % 2 == 0)
+                    if (s11 % 2 == 0)
                     $('#tboxact11').prop('disabled', false);
                 else
-                    $('#tboxact11').prop('disabled', true);
+        $('#tboxact11').prop('disabled', true);
             }
 
-        }
+            }
         function checkact12() {
-            o12 = document.getElementById('cact12');
-            if (o12.value == 'Y') {
+                o12 = document.getElementById('cact12');             if (o12.value == 'Y') {
                 s12++;
-                if (s12 % 2 == 0)
+                    if (s12 % 2 == 0)
                     $('#tboxact12').prop('disabled', false);
                 else
-                    $('#tboxact12').prop('disabled', true);
+        $('#tboxact12').prop('disabled', true);
             }
 
         }
@@ -473,32 +471,28 @@
         var phone;
         var description;
         var directions;
-
         var capacity;
-        var startHour;
-        var endHour;
+        var startHour;         var endHour;
 
         var workingHours;
-
         var geocoder;
-        var lat, lng;
+            var lat, lng;
         function initMap() {
             // Google maps are now initialized.
-            geocoder = new google.maps.Geocoder();
+        geocoder = new google.maps.Geocoder();
 
         }
-        function synchronizeFunction(addr, callback) {
+            function synchronizeFunction(addr, callback) {
             var address = addr;
-            geocoder.geocode({'address': address}, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
+                geocoder.geocode({'address': address}, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
                     lat = results[0].geometry.location.lat();
-                    lng = results[0].geometry.location.lng();
-                    callback();
-                }
-            });
-
+                lng = results[0].geometry.location.lng();
+            callback();
         }
-        var services = [];
+            }); 
+        }
+            var services = [];
         function next() {
             aptNo = document.getElementById('aptNo').value;
             street = document.getElementById('street').value;
@@ -506,11 +500,10 @@
             country = document.getElementById('country').value;
             zipCode = document.getElementById('zipcode').value;
             propertyName = document.getElementById('propertyName').value;
-            states = document.getElementById('states').value;
-
+            states = document.getElementById('states').value; 
             var longAddr = aptNo + " " + street + " " + city + " " + country + " " + +" " + zipCode;
-            synchronizeFunction(longAddr, next2);
-        }
+        synchronizeFunction(longAddr, next2);
+            }
         function next2() {
 
 
@@ -532,40 +525,40 @@
 
             console.log("Property :" + aptNo + street + city + country + zipCode + contactName + managerEmail + bookingEmail + website + phone + description + directions);
 
-            for (var i = 1; i < 13; i++) {
+                for (var i = 1; i < 13; i++) {
                 var serviceId = "#cact" + i;
                 var nameId = "#service" + i;
                 var priceId = "#tboxact" + i;
                 var name = $(nameId).text().trim();
                 var basePrice = $(priceId).prop('value');
 
-                if ($(priceId).prop('disabled') == false) {
-                    services.push({
+                    if ($(priceId).prop('disabled') == false) {
+                        services.push({
                         "type": "Dog",
                         "description": "Please add description",
                         "name": name,
-                        "basePrice": parseInt(basePrice)
-                    });
+                "basePrice": parseInt(basePrice)
+            });
                 }
             }
             //  console.log("name:" + services[0].name + " prices" + services[0].basePrice);
             var dayList = [];
             var workingDays = "";
-            for (i = 0; i < 7; i++) {
+                for (i = 0; i < 7; i++) {
                 // check if days are checked
-                if ($("*[name='" + i + "']").prop("checked")) {
+                    if ($("*[name='" + i + "']").prop("checked")) {
                     var day = $("*[name='" + i + "']").attr('id');
                     dayList.push(day);
                     console.log("checked day" + $("*[name='" + i + "']").attr('id'));
                     //merge days 
-                    workingDays += day + ",";
+            workingDays += day + ",";
                 }
             }
             //remove last comma of days
             workingDays = workingDays.substring(0, workingDays.length - 1);
 
-            var data2 = JSON.stringify({
-                "contactList": [
+                    var data2 = JSON.stringify({
+                        "contactList": [
                     {
                         "phone": phone,
                         "website": website,
@@ -574,7 +567,7 @@
                         "managerEmail": managerEmail,
                         "contactName": contactName,
                         "directions": directions,
-                        "address": {
+                            "address": {
                             "aptNo": aptNo,
                             "street": street,
                             "city": city,
@@ -583,22 +576,22 @@
                             "propertyName": propertyName,
                             "states": states,
                             "lat": lat,
-                            "lng": lng
-                        }
-                    }
-                ],
+                    "lng": lng
+                }
+                }
+                    ],
                 "hotel": {
                     "workingHours": workingHours,
                     "workingDays": workingDays,
                     "capacity": parseInt(capacity),
                     "rate": 0.0,
                     "status": "Pending",
-                    "serviceList": services
-                }
+            "serviceList": services
+            }
             });
             console.log(data2);
             $('#result').val(data2);
-            $("#register").submit();
+        $("#register").submit();
         }
     </script>
     <style>
@@ -681,13 +674,11 @@
         #cact1,#cact2,#cact3,#cact4,#cact5,#cact6,#cact7,#cact8,
         #cact9,#cact10,#cact11,#cact12{
             zoom: 1.5;
-
-
         }
-
         #stepContainer {
             height:2000px ! important;
         }
+
     </style>
     <body class="nav-md">
         <div class="container body">
@@ -844,7 +835,7 @@
                                                             </div> 
                                                             <br>
                                                             <br>
-                                                            <div id="noImage" style="text-align:center;">
+                                                            <div hidden id="noImage" style="text-align:center;">
                                                                 <h4 style="margin-bottom:15px;">You have no image to display</h4>
 
                                                                 <button onClick="$('#btnUploadClick').trigger('click');"  type="button" data-toggle="modal"  data-target="#modalAddPet" style="" class="btn btn-primary">
@@ -852,12 +843,12 @@
                                                             </div> 
                                                             <br>
 
-                                                            <div class="row" id="mySlider" style="display:none;">
+                                                            <div class="row" id="mySlider" style="display:block;">
                                                                 <div class="container">
                                                                     <div id="wrapper">
                                                                         <!-- Slideshow 3 -->
                                                                         <ul class="rslides" id="imgSlider">
-                                                                            <li><img id="img-0"   src="" alt=""></li>
+                                                                            <li><img id="img-0"   src="static/images/image16x9.jpg" alt=""></li>
                                                                             <li><img id="img-1"   src="" alt=""></li>
                                                                             <li><img id="img-2"   src="" alt=""></li>
                                                                             <li><img id="img-3"   src="" alt=""></li>
@@ -871,7 +862,7 @@
                                                                         </ul>
                                                                         <!-- Slideshow 3 Pager -->
                                                                         <ul id="slider3-pager">
-                                                                            <li><a href="#"><img  id="imgThumb-0"  onClick="chosenImage(this.id)" src="" alt=""></a></li>
+                                                                            <li><a href="#"><img  id="imgThumb-0" height='50' weight='50' onClick="chosenImage(this.id)" src="static/images/image16x9.jpg" alt=""></a></li>
                                                                             <li><a href="#"><img  id="imgThumb-1"  onClick="chosenImage(this.id)" src="" alt=""></a></li>
                                                                             <li><a href="#"><img  id="imgThumb-2" src="" alt=""></a></li>
                                                                             <li><a href="#"><img  id="imgThumb-3" src="" alt=""></a></li>
@@ -989,7 +980,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div id="yesImage" style="display:none;text-align: right;">
+                                                        <div id="yesImage" style="display:block;text-align: right;">
                                                             <a data-toggle="modal" data-target=".bs-example-modal-lg"  class="buttonFinish btn btn-danger" id="btnDelete">Delete Selected Photo</a>
 
                                                             <a class="buttonPrevious btn btn-primary" id="btnAddNewImage">Add New Photo</a>
