@@ -130,6 +130,8 @@
 
         var flag = 0;
         var newPetGender = "Male", newPetSize = "5-10 kg", isNewPetVaccinated = "No";
+        var hotelIdLocal = localStorage.getItem("hotelId");
+        console.log("id==========="+hotelIdLocal);
 
         var isSignIn = 0;
         var type = '${search.petType}';
@@ -432,11 +434,11 @@
 
                 function book() {
 
-                    var hotelId = localStorage.getItem("hotelId");
+                    var hotelIdLocal = localStorage.getItem("hotelId");
                     var totalPrice = document.getElementById("serviceTotal").innerText;
                     totalPrice = totalPrice.replace("€", "");
                     localStorage.getItem("hotelId");
-                    console.log("booking" + document.getElementById("checkin").value + " " + document.getElementById("checkout").value + " " + document.getElementById("serviceTotal").innerText + "id" + hotelId + " " + '${hotel.propertyName}');
+                    console.log("booking" + document.getElementById("checkin").value + " " + document.getElementById("checkout").value + " " + document.getElementById("serviceTotal").innerText + "id" + hotelIdLocal + " " + '${hotel.propertyName}');
                     var stringServices = "";
                     var boardingPrice = document.getElementById("boardingPrice").innerHTML;
                     boardingPrice = boardingPrice.substring(1);
@@ -455,7 +457,7 @@
                         "checkOut": dateFormat(document.getElementById("checkout").value),
                         "service": stringServices,
                         "totalPrice": totalPrice,
-                        "hotelId": localStorage.getItem("hotelId"),
+                        "hotelId": hotelIdLocal,
                         "hotelName": '${hotel.propertyName}',
                         "petOwnerId": chosenPet.userId,
                         "petOwnerName": '${userInfo.name} ${userInfo.surname}  ',
@@ -487,7 +489,7 @@
                         "petType": type,
                         "breed": breed,
                         "gender": newPetGender,
-                        "age": age,
+                        "age": parseInt(age),
                         "petSize": newPetSize,
                         "vaccination": isNewPetVaccinated,
                         "microchipNo": "-",
@@ -497,12 +499,13 @@
                         "sleepingPlace": "-",
                         "neuteredStreilized": "-",
                         "friendly": "-",
-                        "getAlongChildren": "-"
+                        "getAlongChildren": "-",
                     };
                     console.log("Test" + JSON.stringify(pet));
                     console.log("Pet added");
                     $('#addPetQuick').val(JSON.stringify(pet));
-                    $('#hotelIdInput').val(localStorage.getItem("hotelId"));
+                    $('#hotelIdInput').val(hotelIdLocal);
+                   
                     $("#addPet").submit();
 
                 }
