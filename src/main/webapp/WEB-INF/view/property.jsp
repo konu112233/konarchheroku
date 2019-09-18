@@ -126,7 +126,7 @@
         }
 
     </style>
-<!--    <script>
+    <script>
 
         var flag = 0;
         var newPetGender = "Male", newPetSize = "5-10 kg", isNewPetVaccinated = "No";
@@ -536,7 +536,7 @@
                 }
 
 
-    </script>-->
+    </script>
     <body>
         <!-- Page Preloder -->
         <div id="preloder">
