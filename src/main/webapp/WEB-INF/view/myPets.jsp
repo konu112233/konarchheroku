@@ -368,7 +368,7 @@
             });
             console.log("Test" + pet);
             $('#resultUpdate').val(pet);
-            $("#updatePet").submit();
+            // $("#updatePet").submit();
         }
 
         function changeButtonType() {
@@ -705,7 +705,7 @@
                                                                         <div class="item form-group">
                                                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="age">Age *</label>
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                <input type="text" id="age" name="age" required="required" class="form-control col-md-7 col-xs-12">
+                                                                                <input type="number" id="age" name="age" required="required" class="form-control col-md-7 col-xs-12">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -857,7 +857,7 @@
 
 
                                                             <br />
-
+                                                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                                                         </div>
                                                         <form id="addPet" action="addPet" method="POST">
@@ -884,7 +884,13 @@
                                                     <div class="">
                                                         <div class="x_content">
                                                             <br />
-                                                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                                                            <form id="updatePet" action="updatePet"  class="form-horizontal form-label-left" novalidate  method="POST">                                              
+                                                                <div class="form-group">
+                                                                    <div class="col-md-6 col-md-offset-3">
+                                                                        <button style="display:none" id="sendUpdate" type="submit" onclick="updatePet()" class="btn btn-success">Submit</button>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="row">
 
                                                                     <div class="col-md-2 col-xs-0 col-sm-2">
@@ -912,7 +918,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-6 col-xs-12 col-sm-6">
-                                                                        <div class="form-group">
+                                                                        <div class="item form-group">
                                                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="name">Name *</label>
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                                 <input type="text" id="name1" name="name" value="" required="required" class="form-control col-md-7 col-xs-12">
@@ -1157,10 +1163,10 @@
                                                                                 </select>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="form-group">
+                                                                        <div class="item form-group">
                                                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="age">Age *</label>
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                <input type="text" id="age1" name="age" required="required" class="form-control col-md-7 col-xs-12">
+                                                                                <input type="number" id="age1" name="age" required="required" class="form-control col-md-7 col-xs-12">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -1306,14 +1312,13 @@
                                                                     </div>
 
                                                                 </div>
+                                                                <input hidden id="resultUpdate" name="resultUpdate" value="">
                                                             </form>
                                                         </div>
-                                                        <form id="updatePet" action="updatePet" method="POST">
-                                                            <input hidden id="resultUpdate" name="resultUpdate" value="">
-                                                        </form>
+
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <button  id="addBtn" type="button" onClick="updatePet()" class="btn btn-primary"  data-dismiss="modal" >Save Changes</button>
+                                                            <button  id="addBtn" type="button" onClick="$('#sendUpdate').trigger('click');" class="btn btn-primary"  data-dismiss="" >Save Changes</button>
 
                                                         </div>
                                                     </div>
