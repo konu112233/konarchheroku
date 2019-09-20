@@ -43,15 +43,12 @@ public class Controller {
         m.addAttribute("page", "about");
         try {
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
-                m.addAttribute("user", "user");
-                return "about";
-            } else {
-                return "about";
-            }
+            m.addAttribute("token", session.getAttribute("token"));
+            m.addAttribute("user", session.getAttribute("user"));
         } catch (Exception exception) {
-            return "redirect:/";
+            return "home";
         }
+        return "about";
     }
 
     @RequestMapping(value = "/blog", method = RequestMethod.GET)
@@ -59,15 +56,12 @@ public class Controller {
         m.addAttribute("page", "blog");
         try {
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
-                m.addAttribute("user", "user");
-                return "blog";
-            } else {
-                return "blog";
-            }
+            m.addAttribute("token", session.getAttribute("token"));
+            m.addAttribute("user", session.getAttribute("user"));
         } catch (Exception exception) {
-            return "redirect:/";
+            return "home";
         }
+        return "blog";
     }
 
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
@@ -75,15 +69,12 @@ public class Controller {
         m.addAttribute("page", "contact");
         try {
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("user") != null) {
-                m.addAttribute("user", "user");
-                return "contact";
-            } else {
-                return "contact";
-            }
+            m.addAttribute("token", session.getAttribute("token"));
+            m.addAttribute("user", session.getAttribute("user"));
         } catch (Exception exception) {
-            return "redirect:/";
+            return "home";
         }
+        return "contact";
     }
 
     @RequestMapping(value = "/mock", method = RequestMethod.GET)

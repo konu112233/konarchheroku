@@ -278,7 +278,7 @@
             });
             console.log("Test" + pet);
             $('#result').val(pet);
-            $("#addPet").submit();
+            //$("#addPet").submit();
         }
 
         var updateId;
@@ -427,7 +427,12 @@
                                                     <div class="">
                                                         <div class="x_content">
                                                             <br />
-                                                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                                            <form id="addPet" class="form-horizontal form-label-left" novalidate action="addPet" method="POST">                                              
+                                                                <div class="form-group">
+                                                                    <div class="col-md-6 col-md-offset-3">
+                                                                        <button style="display:none" id="send" type="submit" onclick="addPet()" class="btn btn-success">Submit</button>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="row">
                                                                     <div class="col-md-2 col-xs-0 col-sm-2">
                                                                     </div>
@@ -449,7 +454,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-6 col-xs-12 col-sm-6">
-                                                                        <div class="form-group">
+                                                                        <div class="item form-group">
                                                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="name">Name *</label>
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                                 <input type="text" id="name" name="name" value="" required="required" class="form-control col-md-7 col-xs-12">
@@ -697,7 +702,7 @@
                                                                         </div>
 
 
-                                                                        <div class="form-group">
+                                                                        <div class="item form-group">
                                                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="age">Age *</label>
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                                 <input type="text" id="age" name="age" required="required" class="form-control col-md-7 col-xs-12">
@@ -847,14 +852,20 @@
                                                                     </div>
 
                                                                 </div>
+                                                                <input hidden id="result" name="result" value="">
                                                             </form>
+
+
+                                                            <br />
+
+
                                                         </div>
                                                         <form id="addPet" action="addPet" method="POST">
                                                             <input hidden id="result" name="result" value="">
                                                         </form>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                            <button  id="addBtn" type="button" onClick="addPet()" class="btn btn-primary"  data-dismiss="modal" >Save</button>
+                                                            <button  id="addBtn" type="button" onClick="$('#send').trigger('click');" class="btn btn-primary"  >Save</button>
 
                                                         </div>
                                                     </div>
@@ -1530,5 +1541,6 @@
         <!-- Cropper -->
         <script src="static/vendors/cropper/dist/cropper.min.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
+        <script src="static/vendors/validator/validator.js"></script>
     </body>
 </html>

@@ -155,7 +155,7 @@
                                 <div class="icon_box_icon"><img src="static/images/find.svg" class="svg" alt="https://www.flaticon.com/authors/monkik"></div>
                                 <div class="icon_box_title"><h2>Find</h2></div>
                                 <div class="icon_box_text">
-                                    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum.</p>
+                                    <p>Browse loving, trusted dog sitters near you.</p>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                                 <div class="icon_box_icon"><img src="static/images/calendar.svg" class="svg" alt="https://www.flaticon.com/authors/monkik"></div>
                                 <div class="icon_box_title"><h2>Book</h2></div>
                                 <div class="icon_box_text">
-                                    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum.</p>
+                                    <p>Check their availability, arrange a meet and greet then book and pay online.</p>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
                                 <div class="icon_box_icon"><img src="static/images/icon_3.svg" class="svg" alt="https://www.flaticon.com/authors/monkik"></div>
                                 <div class="icon_box_title"><h2>Relax</h2></div>
                                 <div class="icon_box_text">
-                                    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum.</p>
+                                    <p>Your pet enjoys a stay and relax</p>
                                 </div>
                             </div>
                         </div>
@@ -229,9 +229,9 @@
                         <!-- About Content -->
                         <div class="col-lg-6">
                             <div class="about_content">
-                                <div class="about_title"><h2>The Bookingpetz / 10 years of excellence</h2></div>
+                                <div class="about_title"><h2>The Bookingpetz</h2></div>
                                 <div class="about_text">
-                                    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit.</p>
+                                    <p>Our aim is to give the best experience to pet owners by offering them a user-friendly platform which allows to find the most suitable services based on location, facilities and customer rating for their dogs and cats.</p>
                                 </div>
                             </div>
                         </div>
@@ -250,7 +250,7 @@
 
             <!-- Testimonials -->
 
-            <div class="testimonials">
+            <!--<div class="testimonials">
                 <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="static/images/animal6.jpg" data-speed="0.8"></div>
                 <div class="testimonials_overlay"></div>
                 <div class="container">
@@ -258,166 +258,166 @@
                         <div class="col">
                             <div class="testimonials_slider_container">
 
-                                <!-- Testimonials Slider -->
-                                <div class="owl-carousel owl-theme test_slider">
+            <!-- Testimonials Slider -->
+            <!-- <div class="owl-carousel owl-theme test_slider">
 
-                                    <!-- Slide -->
-                                    <div  class="test_slider_item text-center">
-                                        <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="testimonial_title"><a href="#">Perfect Stay</a></div>
-                                        <div class="testimonial_text">
-                                            <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                        </div>
-                                        <div class="testimonial_image"><img src="static/images/user_1.jpg" alt=""></div>
-                                        <div class="testimonial_author"><a href="#">Samantha Smith</a>, Greece</div>
-                                    </div>
-
-                                    <!-- Slide -->
-                                    <div  class="test_slider_item text-center">
-                                        <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="testimonial_title"><a href="#">Nice place</a></div>
-                                        <div class="testimonial_text">
-                                            <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                        </div>
-                                        <div class="testimonial_image"><img src="static/images/user_2.jpg" alt=""></div>
-                                        <div class="testimonial_author"><a href="#">Michael Doe</a>, Italy</div>
-                                    </div>
-
-                                    <!-- Slide -->
-                                    <div  class="test_slider_item text-center">
-                                        <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="testimonial_title"><a href="#">We loved it</a></div>
-                                        <div class="testimonial_text">
-                                            <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                        </div>
-                                        <div class="testimonial_image"><img src="static/images/user_3.jpg" alt=""></div>
-                                        <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Slide -->
+            <!--<div  class="test_slider_item text-center">
+                <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="testimonial_title"><a href="#">Perfect Stay</a></div>
+                <div class="testimonial_text">
+                    <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
                 </div>
+                <div class="testimonial_image"><img src="static/images/user_1.jpg" alt=""></div>
+                <div class="testimonial_author"><a href="#">Samantha Smith</a>, Greece</div>
             </div>
+
+            <!-- Slide -->
+            <!--<div  class="test_slider_item text-center">
+                <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="testimonial_title"><a href="#">Nice place</a></div>
+                <div class="testimonial_text">
+                    <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
+                </div>
+                <div class="testimonial_image"><img src="static/images/user_2.jpg" alt=""></div>
+                <div class="testimonial_author"><a href="#">Michael Doe</a>, Italy</div>
+            </div>
+
+            <!-- Slide -->
+            <!--<div  class="test_slider_item text-center">
+                <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="testimonial_title"><a href="#">We loved it</a></div>
+                <div class="testimonial_text">
+                    <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
+                </div>
+                <div class="testimonial_image"><img src="static/images/user_3.jpg" alt=""></div>
+                <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
 
             <!-- Booking -->
 
-            <div class="booking">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="booking_title text-center"><h2>Book Pet Hotel</h2></div>
-                            <div class="booking_text text-center">
-                                <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit.</p>
-                            </div>
+            <!-- <div class="booking">
+                 <div class="container">
+                     <div class="row">
+                         <div class="col">
+                             <div class="booking_title text-center"><h2>Book Pet Hotel</h2></div>
+                             <div class="booking_text text-center">
+                                 <p>Choose your ultimate Pet Hotel</p>
+                             </div>
+ 
+            <!-- Booking Slider -->
+            <!-- <div class="booking_slider_container">
+                 <div class="owl-carousel owl-theme booking_slider">
 
-                            <!-- Booking Slider -->
-                            <div class="booking_slider_container">
-                                <div class="owl-carousel owl-theme booking_slider">
-
-                                    <!-- Slide -->
-                                    <div class="booking_item">
-                                        <div class="background_image" style="background-image:url(static/images/hotel1.jpg)"></div>
-                                        <div class="booking_overlay trans_200"></div>
-                                        <div class="booking_price">$120/Night</div>
-                                        <div class="booking_link"><a href="#">Book Now</a></div>
-                                    </div>
-
-                                    <!-- Slide -->
-                                    <div class="booking_item">
-                                        <div class="background_image" style="background-image:url(static/images/hotel2.jpg)"></div>
-                                        <div class="booking_overlay trans_200"></div>
-                                        <div class="booking_price">$120/Night</div>
-                                        <div class="booking_link"><a href="#">Book Now</a></div>
-                                    </div>
-
-                                    <!-- Slide -->
-                                    <div class="booking_item">
-                                        <div class="background_image" style="background-image:url(static/images/hotel3.png)"></div>
-                                        <div class="booking_overlay trans_200"></div>
-                                        <div class="booking_price">$120/Night</div>
-                                        <div class="booking_link"><a href="#">Book Now</a></div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Slide -->
+            <!--<div class="booking_item">
+                <div class="background_image" style="background-image:url(static/images/hotel1.jpg)"></div>
+                <div class="booking_overlay trans_200"></div>
+                <div class="booking_price">$120/Night</div>
+                <div class="booking_link"><a href="#">Book Now</a></div>
             </div>
+
+            <!-- Slide -->
+            <!--   <div class="booking_item">
+                   <div class="background_image" style="background-image:url(static/images/hotel2.jpg)"></div>
+                   <div class="booking_overlay trans_200"></div>
+                   <div class="booking_price">$120/Night</div>
+                   <div class="booking_link"><a href="#">Book Now</a></div>
+               </div>
+
+            <!-- Slide -->
+            <!--<div class="booking_item">
+                <div class="background_image" style="background-image:url(static/images/hotel3.png)"></div>
+                <div class="booking_overlay trans_200"></div>
+                <div class="booking_price">$120/Night</div>
+                <div class="booking_link"><a href="#">Book Now</a></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
 
             <!-- Blog -->
 
             <div class="blog">
 
                 <!-- Blog Slider -->
-                <div class="blog_slider_container">
+                <!--<div class="blog_slider_container">
                     <div class="owl-carousel owl-theme blog_slider">
 
-                        <!-- Slide -->
-                        <div class="blog_slide">
-                            <div class="background_image" style="background-image:url(static/images/animal7.jpg)"></div>
-                            <div class="blog_content">
-                                <div class="blog_date"><a href="#">May 16, 2019</a></div>
-                                <div class="blog_title"><a href="#">The ultimate guide of pet-friendly places in Amsterdam</a></div>
-                            </div>
-                        </div>
-
-                        <!-- Slide -->
-                        <div class="blog_slide">
-                            <div class="background_image" style="background-image:url(static/images/animal8.jpg)"></div>
-                            <div class="blog_content">
-                                <div class="blog_date"><a href="#">May 17, 2019</a></div>
-                                <div class="blog_title"><a href="#">Dog's emotional life</a></div>
-                            </div>
-                        </div>
-
-                        <!-- Slide -->
-                        <div class="blog_slide">
-                            <div class="background_image" style="background-image:url(static/images/animal9.jpg)"></div>
-                            <div class="blog_content">
-                                <div class="blog_date"><a href="#">May 17, 2019</a></div>
-                                <div class="blog_title"><a href="#">Mental health benefits of owning a pet</a></div>
-                            </div>
-                        </div>
-
-                        <!-- Slide -->
-                        <div class="blog_slide">
-                            <div class="background_image" style="background-image:url(static/images/animal10.jpg)"></div>
-                            <div class="blog_content">
-                                <div class="blog_date"><a href="#">May 17, 2019</a></div>
-                                <div class="blog_title"><a href="#">Best pet tech trends in 2019</a></div>
-                            </div>
-                        </div>
-
+                <!-- Slide -->
+                <!--<div class="blog_slide">
+                    <div class="background_image" style="background-image:url(static/images/animal7.jpg)"></div>
+                    <div class="blog_content">
+                        <div class="blog_date"><a href="#">May 16, 2019</a></div>
+                        <div class="blog_title"><a href="#">The ultimate guide of pet-friendly places in Amsterdam</a></div>
                     </div>
                 </div>
+
+                <!-- Slide -->
+                <!--<div class="blog_slide">
+                    <div class="background_image" style="background-image:url(static/images/animal8.jpg)"></div>
+                    <div class="blog_content">
+                        <div class="blog_date"><a href="#">May 17, 2019</a></div>
+                        <div class="blog_title"><a href="#">Dog's emotional life</a></div>
+                    </div>
+                </div>
+
+                <!-- Slide -->
+                <!--<div class="blog_slide">
+                    <div class="background_image" style="background-image:url(static/images/animal9.jpg)"></div>
+                    <div class="blog_content">
+                        <div class="blog_date"><a href="#">May 17, 2019</a></div>
+                        <div class="blog_title"><a href="#">Mental health benefits of owning a pet</a></div>
+                    </div>
+                </div>
+
+                <!-- Slide -->
+                <!--<div class="blog_slide">
+                    <div class="background_image" style="background-image:url(static/images/animal10.jpg)"></div>
+                    <div class="blog_content">
+                        <div class="blog_date"><a href="#">May 17, 2019</a></div>
+                        <div class="blog_title"><a href="#">Best pet tech trends in 2019</a></div>
+                    </div>
+                </div>
+
             </div>
+        </div>
+    </div>
 
-            <!-- Footer -->
-        <jsp:include page="footer.jsp"></jsp:include>
+                <!-- Footer -->
+            <jsp:include page="footer.jsp"></jsp:include>
 
 
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&libraries=places&callback=activatePlaceSearch"></script>
-        <script src="static/js/jquery-3.3.1.min.js"></script>
-        <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
-        <script src="static/styles/bootstrap-4.1.2/popper.js"></script>
-        <script src="static/styles/bootstrap-4.1.2/bootstrap.min.js"></script>
-        <script src="static/plugins/greensock/TweenMax.min.js"></script>
-        <script src="static/plugins/greensock/TimelineMax.min.js"></script>
-        <script src="static/plugins/scrollmagic/ScrollMagic.min.js"></script>
-        <script src="static/plugins/greensock/animation.gsap.min.js"></script>
-        <script src="static/plugins/greensock/ScrollToPlugin.min.js"></script>
-        <script src="static/plugins/OwlCarousel2-2.3.4/owl.carousel.js"></script>
-        <script src="static/plugins/easing/easing.js"></script>
-        <script src="static/plugins/progressbar/progressbar.min.js"></script>
-        <script src="static/plugins/parallax-js-master/parallax.min.js"></script>
-        <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
-        <script src="static/plugins/colorbox/jquery.colorbox-min.js"></script>
-        <script src="static/js/custom.js"></script>
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRtVM7tqQzSYlpZbNQMApgii7DU5IhMSc&libraries=places&callback=activatePlaceSearch"></script>
+            <script src="static/js/jquery-3.3.1.min.js"></script>
+            <script src="https://kit.fontawesome.com/3135afb4f3.js"></script>
+            <script src="static/styles/bootstrap-4.1.2/popper.js"></script>
+            <script src="static/styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+            <script src="static/plugins/greensock/TweenMax.min.js"></script>
+            <script src="static/plugins/greensock/TimelineMax.min.js"></script>
+            <script src="static/plugins/scrollmagic/ScrollMagic.min.js"></script>
+            <script src="static/plugins/greensock/animation.gsap.min.js"></script>
+            <script src="static/plugins/greensock/ScrollToPlugin.min.js"></script>
+            <script src="static/plugins/OwlCarousel2-2.3.4/owl.carousel.js"></script>
+            <script src="static/plugins/easing/easing.js"></script>
+            <script src="static/plugins/progressbar/progressbar.min.js"></script>
+            <script src="static/plugins/parallax-js-master/parallax.min.js"></script>
+            <script src="static/plugins/jquery-datepicker/jquery-ui.js"></script>
+            <script src="static/plugins/colorbox/jquery.colorbox-min.js"></script>
+            <script src="static/js/custom.js"></script>
 
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     </body>
 </html>

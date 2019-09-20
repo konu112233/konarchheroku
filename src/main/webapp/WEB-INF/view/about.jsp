@@ -43,7 +43,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="about_title"><h2>The Bookingpetz / 10 years of excellence</h2></div>
+                                <div class="about_title"><h2>The Bookingpetz</h2></div>
                             </div>
                         </div>
                         <div class="row about_row">
@@ -52,9 +52,10 @@
                             <div class="col-lg-6">
                                 <div class="about_content">
                                     <div class="about_text">
-                                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit.</p>
+                                        <p>Bookingpetz.com is an international startup company located in the heart of Amsterdam, the Netherlands.
+                                            Our aim is to give the best experience to pet owners by offering them a user-friendly platform which allows to find the most suitable services based on location, facilities and customer rating for their dogs and cats.</p>                             
                                     </div>
-                                    <div class="about_sig"><img src="static/images/sig.png" alt=""></div>
+
                                 </div>
                             </div>
 
@@ -85,7 +86,7 @@
                                 <div class="split_section_right_content">
                                     <div class="split_section_title"><h1>Great for your pet</h1></div>
                                     <div class="split_section_text">
-                                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci.</p>
+                                        <p>The ultimate guide of pet-friendly places in Amsterdam. Although the Netherlands are perhaps most famous for being incredibly cyclist-friendly, it is less known they are almost just as pet friendly. In fact it is the only country in the world that has a political party aimed at improving animal wellbeing, who actually have seats in parliament. The positive attitude towards pets sometimes goes as far as pets being welcomed, whereas small children are less accepted!</p>
                                     </div>
 
                                     <!-- Milestones -->
@@ -132,7 +133,7 @@
                                 <div class="split_section_left_content">
                                     <div class="split_section_title"><h1>Trust and Safety</h1></div>
                                     <div class="split_section_text">
-                                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci.</p>
+                                        <p>Personalised and flexible pet care, local and trusted pet lovers, safely book through Bookingpetz.com 24/7 support and enjoy </p>
                                     </div>
 
                                     <!-- Loaders -->
@@ -182,7 +183,7 @@
 
                 <!-- Testimonials -->
 
-                <div class="testimonials">
+                <!--<div class="testimonials">
                     <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="static/images/animal10.jpg" data-speed="0.8"></div>
                     <div class="testimonials_overlay"></div>
                     <div class="container">
@@ -190,48 +191,48 @@
                             <div class="col">
                                 <div class="testimonials_slider_container">
 
-                                    <!-- Testimonials Slider -->
-                                    <div class="owl-carousel owl-theme test_slider">
+                <!-- Testimonials Slider -->
+                <!--<div class="owl-carousel owl-theme test_slider">
 
-                                        <!-- Slide -->
-                                        <div  class="test_slider_item text-center">
-                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                            <div class="testimonial_title"><a href="#">Perfect Stay</a></div>
-                                            <div class="testimonial_text">
-                                                <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                            </div>
-                                            <div class="testimonial_image"><img src="static/images/user_1.jpg" alt=""></div>
-                                            <div class="testimonial_author"><a href="#">Samantha Smith</a>, Greece</div>
-                                        </div>
+                <!-- Slide -->
+                <!--   <div  class="test_slider_item text-center">
+                       <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                       <div class="testimonial_title"><a href="#">Perfect Stay</a></div>
+                       <div class="testimonial_text">
+                           <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
+                       </div>
+                       <div class="testimonial_image"><img src="static/images/user_1.jpg" alt=""></div>
+                       <div class="testimonial_author"><a href="#">Samantha Smith</a>, Greece</div>
+                   </div>
 
-                                        <!-- Slide -->
-                                        <div  class="test_slider_item text-center">
-                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                            <div class="testimonial_title"><a href="#">Nice place</a></div>
-                                            <div class="testimonial_text">
-                                                <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                            </div>
-                                            <div class="testimonial_image"><img src="static/images/user_2.jpg" alt=""></div>
-                                            <div class="testimonial_author"><a href="#">Michael Doe</a>, Italy</div>
-                                        </div>
-
-                                        <!-- Slide -->
-                                        <div  class="test_slider_item text-center">
-                                            <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
-                                            <div class="testimonial_title"><a href="#">We loved it</a></div>
-                                            <div class="testimonial_text">
-                                                <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
-                                            </div>
-                                            <div class="testimonial_image"><img src="static/images/user_3.jpg" alt=""></div>
-                                            <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Slide -->
+                <!-- <div  class="test_slider_item text-center">
+                    <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                    <div class="testimonial_title"><a href="#">Nice place</a></div>
+                    <div class="testimonial_text">
+                        <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
                     </div>
+                    <div class="testimonial_image"><img src="static/images/user_2.jpg" alt=""></div>
+                    <div class="testimonial_author"><a href="#">Michael Doe</a>, Italy</div>
                 </div>
+
+                <!-- Slide -->
+                <!--<div  class="test_slider_item text-center">
+                    <div class="rating rating_5 d-flex flex-row align-items-start justify-content-center"><i></i><i></i><i></i><i></i><i></i></div>
+                    <div class="testimonial_title"><a href="#">We loved it</a></div>
+                    <div class="testimonial_text">
+                        <p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic.</p>
+                    </div>
+                    <div class="testimonial_image"><img src="static/images/user_3.jpg" alt=""></div>
+                    <div class="testimonial_author"><a href="#">Luis Garcia</a>, Spain</div>
+                </div>
+
+            </div> 
+        </div>
+    </div>
+</div>
+</div>
+</div>  %>
 
                 <!-- Footer -->
             <jsp:include page="footer.jsp"></jsp:include>

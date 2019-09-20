@@ -106,7 +106,7 @@
                             <li style="margin-top: 10px;"><a href="blog">Blog</a></li>
                             <li style="margin-top: 10px;" class="active"><a href="contact">Contact</a></li>
                                 <c:choose>
-                                    <c:when test="${user != null}}">
+                                    <c:when test="${user != null}">
                                     <li>
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
