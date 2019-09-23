@@ -51,7 +51,7 @@
             <!--Body-->
             <div class="modal-body mx-4">
                 <!--Body-->
-                <form action="sendConfirmationMail" method="POST">
+                <form action="sendConfirmationMail" method="POST"  oninput='repassword.setCustomValidity(repassword.value != password.value ? "Passwords do not match." : "")'>
                     <input hidden id="pageUrl2" name="pageUrl2" value=""/>
                     <div class="md-form mb-5">
                         <input placeholder="Name" type="text" name="name" required class="form-control validate">
@@ -62,15 +62,15 @@
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="md-form mb-5">
-                        <input placeholder="Your email" type="email" id="email" name="email" class="form-control validate">
+                        <input placeholder="Your email" type="email" id="email" name="email" required class="form-control validate">
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="md-form mb-5">
-                        <input placeholder="Your Password" type="password" name="password" class="form-control validate">
+                        <input placeholder="Your Password" type="password" name="password" required class="form-control validate">
                         <label data-error="wrong" data-success="right" ></label>
                     </div>
                     <div class="md-form mb-5">
-                        <input placeholder="Confirmation Password" type="password" name="repassword" class="form-control validate">
+                        <input placeholder="Confirmation Password" type="password" required name="repassword" class="form-control validate">
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="text-center mb-3">
