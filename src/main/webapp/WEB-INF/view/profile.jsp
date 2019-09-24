@@ -213,7 +213,7 @@
                                                     <div class="profile_img">
                                                         <div id="crop-avatar">
 
-                                                            <img class="img-responsive avatar-view img-circle" src="${user.photo}" alt="Avatar" title="Change the avatar">
+                                                            <img class="img-responsive avatar-view img-circle" src="${user.photo}" width="220" height="220" alt="Avatar" title="Change the avatar">
                                                         </div>
                                                     </div>
                                                     <h3 id = "name">${user.name} ${user.surname}</h3>
