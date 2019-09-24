@@ -24,13 +24,13 @@
 
     function loginUser() {
         var user = {
-            "email": document.getElementById("email").value,
+            "email": document.getElementById("email_signin").value,
             "password": document.getElementById("password").value,
             "pageUrl": u
         };
 
         $('#loginInput').val(JSON.stringify(user));
-        $("#login").submit();
+        //$("#login").submit();
     }
 
 
@@ -48,35 +48,36 @@
             </div>
             <!--Body-->
             <div class="modal-body mx-4">
-                <!--Body-->
-                <input hidden id="pageUrl" name="pageUrl" value=""/>
-                <div class="md-form mb-5">
-                    <input placeholder="Your email" type="email" name="email" id="email" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="Form-email1"></label>
-                </div>
 
-                <div class="md-form pb-3">
-                    <input placeholder="Your Password" type="password" name="password" id="password" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="Form-pass1" ></label>
-                    <p class="font-small blue-text d-flex justify-content-end"><a href="home" data-dismiss="modal" data-toggle="modal" data-target="#resetPasswordEmailForm" class="modelClose blue-text ml-1">Forgot Password?</a></p>
-                </div>
-
-                <div class="text-center mb-3">
-                    <button type="button" onClick="loginUser()" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign in</button>
-                </div>
-                <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in
-                    with:</p>
-
-                <div class="row my-3 d-flex justify-content-center">
-                    <!--Facebook-->
-                    <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-facebook-f text-center"></i></button>
-                    <!--Twitter-->
-                    <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-twitter"></i></button>
-                    <!--Google +-->
-                    <button type="button" class="btn btn-white btn-rounded z-depth-1a"><i class="fab fa-google-plus-g"></i></button>
-                </div>
                 <form id="login" action="login" method="POST">
                     <input hidden id="loginInput" name="loginInput" value="">
+                    <!--Body-->
+                    <input hidden id="pageUrl" name="pageUrl" value=""/>
+                    <div class="md-form mb-5">
+                        <input required placeholder="Your email" type="email" name="email" id="email_signin" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="Form-email1"></label>
+                    </div>
+
+                    <div class="md-form pb-3">
+                        <input required placeholder="Your Password" type="password" name="password" id="password" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="Form-pass1" ></label>
+                        <p class="font-small blue-text d-flex justify-content-end"><a href="home" data-dismiss="modal" data-toggle="modal" data-target="#resetPasswordEmailForm" class="modelClose blue-text ml-1">Forgot Password?</a></p>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <button type="submmit" onClick="loginUser()" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign in</button>
+                    </div>
+                    <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in
+                        with:</p>
+
+                    <div class="row my-3 d-flex justify-content-center">
+                        <!--Facebook-->
+                        <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-facebook-f text-center"></i></button>
+                        <!--Twitter-->
+                        <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-twitter"></i></button>
+                        <!--Google +-->
+                        <button type="button" class="btn btn-white btn-rounded z-depth-1a"><i class="fab fa-google-plus-g"></i></button>
+                    </div>
                 </form>
             </div>
             <!--Footer-->

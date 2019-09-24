@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+
 <script>
 
 
@@ -33,7 +34,63 @@
 //                }
 //            });
 //        });
+
+
+
+
     });
+
+    function checkEmail() {
+
+
+        var encodedString = btoa("nddd");
+        console.log("encoded" + encodedString);
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                if (this.status === 200) {
+                    document.body.className = 'ok';
+                    console.log(this.responseText);
+                } else if (this.response == null && this.status === 0) {
+                    document.body.className = 'error offline';
+                    console.log("The computer appears to be offline.");
+                } else {
+                    document.body.className = 'error';
+                }
+            }
+        };
+        request.open("GET", 'http://localhost:8080/BookingPetz/checkUsername?email=' + encodedString, true);
+        request.send(null);
+
+//        $.ajax({
+//
+//            url: 'http://localhost:8080/BookingPetz/checkUsername?email=' + encodedString,
+//            type: 'GET',
+//            dataType: 'jsonp',
+//            error: function () {
+//                alert('Update failed!');
+//            },
+//            processData: false,
+//            SUCCESS: function () {
+//                alert('Update successful!');
+//            }
+//        });
+    }
+
+    function checkPasscode() {
+
+        var email = document.querySelector("#email_signup");
+        var email_value = document.querySelector("#email_signup").value;
+        console.log("amk" + email_value);
+
+        if (email_value == "o@f.com") {
+            email.setCustomValidity("This email already exists.");
+            console.log("val" + value);
+
+        } else {
+            email.setCustomValidity("");
+        }
+    }
 
 </script>
 <!-- Modal -->
@@ -62,7 +119,7 @@
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="md-form mb-5">
-                        <input placeholder="Your email" type="email" id="email" name="email" required class="form-control validate">
+                        <input placeholder="Your email" type="email" id="email_signup" oninput='checkPasscode()' name="email" required class="form-control validate">
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="md-form mb-5">
@@ -74,7 +131,7 @@
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="text-center mb-3">
-                        <button type="submit" name="signupButton" id="signupButton" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign up</button>
+                        <button onclick="checkEmail()" type="submit" name="signupButton" id="signupButton" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign up</button>
                     </div>
                     <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign up
                         with:</p>

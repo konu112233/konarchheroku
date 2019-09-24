@@ -27,10 +27,12 @@ public class Controller {
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
+                m.addAttribute("login", "success");
                 m.addAttribute("token", session.getAttribute("token"));
                 m.addAttribute("user", session.getAttribute("user"));
                 return "home";
             } else {
+                m.addAttribute("login", "failed");
                 return "home";
             }
         } catch (Exception exception) {

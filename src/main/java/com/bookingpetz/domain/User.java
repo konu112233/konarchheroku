@@ -39,11 +39,11 @@ public class User implements Serializable {
     @Column(name = "surname", nullable = false, length = 45)
     private String surname;
 
-    @Column(name = "birthday", nullable = false, length = 45)
-    private String birthday;
-
     @Column(name = "gender", nullable = false, length = 45)
     private String gender;
+
+    @Column(name = "birthday", nullable = false, length = 45)
+    private String birthday;
 
     @Column(name = "pkey", nullable = false, length = 500)
     private String pkey;
@@ -69,6 +69,9 @@ public class User implements Serializable {
     @JoinColumn(name = "userId")
     private List<Pet> petList = new ArrayList<>();
 
+    @Column(name = "photo", nullable = true)
+    private String photo;
+
     public User() {
     }
 
@@ -92,6 +95,7 @@ public class User implements Serializable {
         this.gender = user.getGender();
         this.contactList = user.getContactList();
         this.hotel = user.getHotel();
+        this.photo = user.getPhoto();
     }
 
     public User(String userId, String email, String name, String surname, String pkey, String salt, String enable) {
@@ -160,12 +164,20 @@ public class User implements Serializable {
         this.surname = surname;
     }
 
-    public List<Contact> getContactList() {
-        return contactList;
+    public String getGender() {
+        return gender;
     }
 
-    public void setContactList(List<Contact> contactList) {
-        this.contactList = contactList;
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public String getPkey() {
@@ -192,20 +204,28 @@ public class User implements Serializable {
         this.enable = enable;
     }
 
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
     public String getPartner() {
         return partner;
     }
 
     public void setPartner(String partner) {
         this.partner = partner;
+    }
+
+    public List<Contact> getContactList() {
+        return contactList;
+    }
+
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
     public List<Pet> getPetList() {
@@ -216,19 +236,12 @@ public class User implements Serializable {
         this.petList = petList;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 }

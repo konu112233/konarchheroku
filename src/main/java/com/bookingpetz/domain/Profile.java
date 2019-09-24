@@ -18,6 +18,7 @@ public class Profile {
     private String birthday;
     private String gender;
     private String partner;
+    private String photo;
 
     public Profile() {
     }
@@ -30,6 +31,7 @@ public class Profile {
         this.gender = user.getGender();
         this.birthday = user.getBirthday();
         this.partner = user.getPartner();
+        this.photo = user.getPhoto();
     }
 
     public String getName() {
@@ -86,6 +88,14 @@ public class Profile {
 
     public void setPartner(String partner) {
         this.partner = partner;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
 }

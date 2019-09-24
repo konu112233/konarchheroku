@@ -32,7 +32,7 @@
 
 
         <script>
-            var name, surname, gender, birthday, phone, email, aptNo, street, states, city, country, zipcode;
+            var dataURI, name, surname, gender, birthday, phone, email, aptNo, street, states, city, country, zipcode;
 
             window.onload = () => {
                 gender = '${user.gender}';
@@ -52,9 +52,10 @@
                 email = document.getElementById("email").value;
 
 
+
                 console.log(name + surname + gender + birthday + phone + email);
                 var profile = JSON.stringify({
-
+                    "photo": dataURI,
                     "name": name,
                     "surname": surname,
                     "phone": phone,
@@ -69,7 +70,7 @@
             }
 
             //Photo crop start-----------------------
-            var dataURI;
+
             //Open photo picker
             function openPhotoPicker() {
                 $('#btnSquare').trigger('click');
@@ -132,21 +133,54 @@
                 console.log("dataUri::" + dataURI);
                 $('#getCroppedCanvasModal').modal('hide');
                 $('#modalCropper').modal('hide');
-                //     $('#getCroppedCanvasModal').css("display", "none");
-                //   console.log("src::"+img.src);
+
                 //  javascript:location.reload(true)
-                //  var blob = b64toBlob(dataURI);
+                byteImage = test(dataURI);
+                //  blobImage = b64toBlob(dataURI);
+                //console.log("blob" + blobImage);
                 // reader.readAsDataURL(blob);
             }
             //Read blob and convert to b64 to put image view
             var reader = new FileReader();
             reader.onload = function () {
-                var b64Image = reader.result;
-                console.log("img was put to img-1" + b64Image);
+                b64Image = reader.result;
+                console.log("b64Image" + b64Image);
             };
             //Photo crop end---------------------
 
+            function test(base64StringFromURL)
+            {
+                var parts = base64StringFromURL.split(";base64,");
+                var contentType = parts[0].replace("data:", "");
+                var base64 = parts[1];
+                var byteArray = base64ToByteArray(base64);
+                console.log("byteArray" + byteArray);
+            }
 
+            function base64ToByteArray(base64String) {
+                try {
+                    var sliceSize = 1024;
+                    var byteCharacters = atob(base64String);
+                    var bytesLength = byteCharacters.length;
+                    var slicesCount = Math.ceil(bytesLength / sliceSize);
+                    var byteArrays = new Array(slicesCount);
+
+                    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+                        var begin = sliceIndex * sliceSize;
+                        var end = Math.min(begin + sliceSize, bytesLength);
+
+                        var bytes = new Array(end - begin);
+                        for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+                            bytes[i] = byteCharacters[offset].charCodeAt(0);
+                        }
+                        byteArrays[sliceIndex] = new Uint8Array(bytes);
+                    }
+                    return byteArrays;
+                } catch (e) {
+                    console.log("Couldn't convert to byte array: " + e);
+                    return undefined;
+                }
+            }
         </script>
 
     </head>
@@ -179,7 +213,7 @@
                                                     <div class="profile_img">
                                                         <div id="crop-avatar">
 
-                                                            <img class="img-responsive avatar-view img-circle" src="static/images/profil_photo_220x220.jpeg" alt="Avatar" title="Change the avatar">
+                                                            <img class="img-responsive avatar-view img-circle" src="${user.photo}" alt="Avatar" title="Change the avatar">
                                                         </div>
                                                     </div>
                                                     <h3 id = "name">${user.name} ${user.surname}</h3>

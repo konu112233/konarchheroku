@@ -50,6 +50,7 @@ public class ProfileController {
             if (session.getAttribute("token") != null) {
                 Profile profile = new Gson().fromJson(request.getParameter("result"), Profile.class);
                 if (userService.updateProfile(profile, session.getAttribute("token").toString())) {
+                    //session.setAttribute("user", userService.getProfile(session.getAttribute("token").toString()));
                     return "redirect:profile?success";
                 }
                 return "redirect:profile";

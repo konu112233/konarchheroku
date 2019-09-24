@@ -34,7 +34,7 @@
                                     <c:when test="${user != null}">
                                     <li>
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                            <img src="${user.photo}" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="profile">Dashboard</a>
@@ -59,8 +59,8 @@
                                     <c:when test="${user != null}">
                                     <li>
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
-                                        </a>
+                                            <img src="${user.photo} width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                        </a>"
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="profile">Dashboard</a>
                                             <div class="dropdown-divider"></div>
@@ -84,7 +84,7 @@
                                     <c:when test="${user != null}">
                                     <li>
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                            <img src="${user.photo}" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="profile">Dashboard</a>
@@ -109,7 +109,7 @@
                                     <c:when test="${user != null}">
                                     <li>
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                            <img src="${user.photo}" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="profile">Dashboard</a>
@@ -134,7 +134,7 @@
                                     <c:when test="${user != null}">
                                     <li>
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="static/vendors/images/img.jpg" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                            <img src="${user.photo}" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="profile">Dashboard</a>
