@@ -41,28 +41,18 @@
     });
 
     function checkEmail() {
-//        var encodedString = btoa("brakzengin@gmail.com");
-//        console.log("encoded" + encodedString);
 
-//        $.ajax({
-//            url: 'http://localhost:8080/BookingPetz/checkUsername?email=' + encodedString,
-//            type: 'get',
-//            data: {
-//
-//            },
-//            dataType: 'json',
-////            contentType: 'application/json',
-//            success: function (data) {
-//                alert('Data: ' + data);
-//            },
-//            error: function (request, error)
-//            {
-//                alert("Request: " + JSON.stringify(request));
-//            }
-//        });
+    }
+
+    function checkPasscode() {
 
 
-        var encodedString = btoa('brakzengin@gmail.com');
+        var email = document.querySelector("#email_signup");
+        var email_value = document.querySelector("#email_signup").value;
+
+        console.log("amk" + email_value);
+
+        var encodedString = btoa(email_value);
         console.log("email" + encodedString);
         let request = new XMLHttpRequest();
         request.onreadystatechange = function () {
@@ -70,6 +60,14 @@
                 if (this.status === 200) {
                     document.body.className = 'ok';
                     console.log(this.responseText);
+                    if (this.responseText == "SUCCESS") {
+                        email.setCustomValidity("This email already exists.");
+                        console.log("val" + value);
+
+                    } else {
+                        email.setCustomValidity("");
+                    }
+
                 } else if (this.response == null && this.status === 0) {
                     document.body.className = 'error offline';
                     console.log("The computer appears to be offline.");
@@ -78,39 +76,12 @@
                 }
             }
         };
-        
+
         //https://bookingpets.herokuapp.com/checkUsername
-        request.open("GET", 'http://localhost:8080/BookingPetz/checkUsername?email=' + encodedString, true);
+        request.open("GET", 'https://bookingpets.herokuapp.com/checkUsername?email=' + encodedString, true);
         request.send(null);
 
-//        $.ajax({
-//
-//            url: 'http://localhost:8080/BookingPetz/checkUsername?email=' + encodedString,
-//            type: 'GET',
-//            dataType: 'jsonp',
-//            error: function () {
-//                alert('Update failed!');
-//            },
-//            processData: false,
-//            SUCCESS: function () {
-//                alert('Update successful!');
-//            }
-//        });
-    }
-
-    function checkPasscode() {
-
-        var email = document.querySelector("#email_signup");
-        var email_value = document.querySelector("#email_signup").value;
-        console.log("amk" + email_value);
-
-        if (email_value == "o@f.com") {
-            email.setCustomValidity("This email already exists.");
-            console.log("val" + value);
-
-        } else {
-            email.setCustomValidity("");
-        }
+       
     }
 
 </script>
