@@ -27,7 +27,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
 
     @Override
     public List<Pet> getMyPets(String code) {
-        HttpResponse<String> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/getMyPets")
+        HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/getMyPets")
                 .header("Authorization", "Bearer " + code)
                 .asString();
 
@@ -43,7 +43,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
 
     @Override
     public boolean addPet(Pet pet, String code) {
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/addPet")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/addPet")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + code)
                 .body(new Gson().toJson(pet))
@@ -54,7 +54,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
 
     @Override
     public boolean updatePet(Pet pet, String code) {
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/updatePet")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/updatePet")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + code)
                 .body(new Gson().toJson(pet))
@@ -67,7 +67,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
     public boolean removePet(String petId, String code) {
         JSONObject jsono = new JSONObject();
         jsono.put("object", petId);
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/removePet")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/removePet")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + code)
                 .body(jsono.toJSONString())
@@ -78,7 +78,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
 
     @Override
     public Profile getProfile(String code) {
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/getProfile")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/getProfile")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + code)
                 .asJson();
@@ -92,7 +92,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
     @Override
     public boolean updateProfile(Profile profile, String code) {
 
-        HttpResponse<JsonNode> response = Unirest.post("http://localhost:8080/BookingPetsREST/webapi/gateway/auth/updateProfile")
+        HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/updateProfile")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + code)
                 .body(new Gson().toJson(profile))
