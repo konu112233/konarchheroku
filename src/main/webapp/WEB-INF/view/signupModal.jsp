@@ -44,15 +44,14 @@
         var encodedString = btoa("brakzenginads@gmail.com");
         console.log("encoded" + encodedString);
 
-        var aa = {
-            email: encodedString
-        }
         $.ajax({
-            url: 'https://bookingpetswebservice.herokuapp.com/webapi/gateway/checkUsername',
-            type: 'post',
-            data: JSON.stringify(aa),
+            url: 'https://bookingpets.herokuapp.com/checkUsername',
+            type: 'get',
+            data: {
+                "email": encodedString
+            },
             dataType: 'json',
-            contentType: 'application/json',
+//            contentType: 'application/json',
             success: function (data) {
                 alert('Data: ' + data);
             },
