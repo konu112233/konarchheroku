@@ -41,26 +41,44 @@
     });
 
     function checkEmail() {
-
-
-        var encodedString = btoa("nddd");
+        var encodedString = btoa("brakzenginads@gmail.com");
         console.log("encoded" + encodedString);
-        let request = new XMLHttpRequest();
-        request.onreadystatechange = function () {
-            if (this.readyState === 4) {
-                if (this.status === 200) {
-                    document.body.className = 'ok';
-                    console.log(this.responseText);
-                } else if (this.response == null && this.status === 0) {
-                    document.body.className = 'error offline';
-                    console.log("The computer appears to be offline.");
-                } else {
-                    document.body.className = 'error';
-                }
+
+        var aa = {
+            email: encodedString
+        }
+        $.ajax({
+            url: 'https://bookingpetswebservice.herokuapp.com/webapi/gateway/checkUsername',
+            type: 'post',
+            data: JSON.stringify(aa),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                alert('Data: ' + data);
+            },
+            error: function (request, error)
+            {
+                alert("Request: " + JSON.stringify(request));
             }
-        };
-        request.open("GET", 'http://localhost:8080/BookingPetz/checkUsername?email=' + encodedString, true);
-        request.send(null);
+        });
+
+
+//        let request = new XMLHttpRequest();
+//        request.onreadystatechange = function () {
+//            if (this.readyState === 4) {
+//                if (this.status === 200) {
+//                    document.body.className = 'ok';
+//                    console.log(this.responseText);
+//                } else if (this.response == null && this.status === 0) {
+//                    document.body.className = 'error offline';
+//                    console.log("The computer appears to be offline.");
+//                } else {
+//                    document.body.className = 'error';
+//                }
+//            }
+//        };
+//        request.open("GET", 'https://bookingpetswebservice.herokuapp.com/webapi/gateway/checkUsername' + encodedString, true);
+//        request.send(null);
 
 //        $.ajax({
 //
