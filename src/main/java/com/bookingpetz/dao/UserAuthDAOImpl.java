@@ -51,9 +51,8 @@ public class UserAuthDAOImpl implements UserAuthDAO {
 
     @Override
     public boolean checkUsername(String email) {
-        String encodeEmail = Base64.getEncoder().encodeToString(email.getBytes());
         JSONObject jsono = new JSONObject();
-        jsono.put("email", encodeEmail);
+        jsono.put("email", email);
         HttpResponse<String> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/checkUsername")
                 .header("Content-type", "application/json")
                 .body(jsono.toJSONString())
