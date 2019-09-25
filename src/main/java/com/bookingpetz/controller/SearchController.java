@@ -48,6 +48,7 @@ public class SearchController {
         search.setTimeMin(simpleDateFormat.format(date));
         date = sdf.parse(search.getTimeMax());
         search.setTimeMax(simpleDateFormat.format(date));
+        m.addAttribute("login", request.getParameter("login"));
 
         try {
             List<SearchResult> hotels = searchService.resultSearch(new Search(search.getTimeMax(), search.getTimeMin(), "Europe/Amsterdam", search.getPetType(), search.getLocation()));
@@ -66,6 +67,7 @@ public class SearchController {
     @RequestMapping(value = "/property", method = RequestMethod.GET)
     public String property(Model m, HttpServletRequest request) {
         String code = request.getParameter("object");
+        m.addAttribute("login", request.getParameter("login"));
         m.addAttribute("result", request.getParameter("result"));
         m.addAttribute("hotel", searchService.getProperty(code));
         try {

@@ -56,6 +56,9 @@
             }
         </style>
         <script>
+            $(document).ready(function () {
+                //alert(${login});
+            });
             var priceToBeSent;
             function GetFormattedDate(date) {
 
@@ -254,12 +257,7 @@
 
                         }
 
-//            $(document).ready(function () {
-//                $('#petType').val(${search.petType});
-//                
-//                
-//                
-//            });
+
 
 
 
