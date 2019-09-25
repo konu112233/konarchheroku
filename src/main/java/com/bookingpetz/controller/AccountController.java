@@ -53,10 +53,16 @@ public class AccountController {
             session.setAttribute("user", userToken.getUser());
             session.setAttribute("partner", userToken.getUser().getPartner());
             System.out.println("Email : " + userToken.getUser().getEmail());
-            return "redirect:/" + url;
+            if (url.equals("home")) {
+                return "redirect:/" + url + "?login=true";
+            }
+            return "redirect:/" + url + "&login=true";
         }
         //FAILED 
-        return "redirect:/" + url;
+        if (url.equals("home")) {
+            return "redirect:/" + url + "?login=false";
+        }
+        return "redirect:/" + url + "&login=false";
     }
 
     @RequestMapping(value = "/getLogin", method = RequestMethod.GET)

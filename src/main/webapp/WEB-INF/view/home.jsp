@@ -25,7 +25,7 @@
         <link rel="stylesheet" type="text/css" href="static/styles/main_styles.css">
         <link rel="stylesheet" type="text/css" href="static/styles/responsive.css">
         <link href="static/aaa/css/mdb.min.css" rel="stylesheet">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
@@ -35,6 +35,7 @@
                 var autocomplete = new google.maps.places.Autocomplete(input);
             }
             $(document).ready(function () {
+               // alert(${login});
             <c:choose>
                 <c:when test="${result.equals('success')}">
                 $('#signupEmail').modal('show');

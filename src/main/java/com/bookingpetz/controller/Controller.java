@@ -23,18 +23,15 @@ public class Controller {
         m.addAttribute("page", "home");
         m.addAttribute("result", request.getParameter("result"));
         m.addAttribute("verify", request.getParameter("verify"));
+        m.addAttribute("login", request.getParameter("login"));
         m.addAttribute("resultPassword", request.getParameter("resultPassword"));
         try {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
-                m.addAttribute("login", "success");
                 m.addAttribute("token", session.getAttribute("token"));
                 m.addAttribute("user", session.getAttribute("user"));
-                return "home";
-            } else {
-                m.addAttribute("login", "failed");
-                return "home";
             }
+            return "home";
         } catch (Exception exception) {
             return "home";
         }
