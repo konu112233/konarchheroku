@@ -5,6 +5,8 @@
  */
 package com.bookingpetz.domain;
 
+import java.sql.Blob;
+
 /**
  *
  * @author burakzengin

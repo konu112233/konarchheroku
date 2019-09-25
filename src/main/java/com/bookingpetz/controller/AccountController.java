@@ -43,6 +43,11 @@ public class AccountController {
         if (url.length() <= 1) {
             url = "home";
         }
+        if (url.contains("login=true")) {
+            url = url.split("login=true")[0];
+        } else if (url.contains("login=false")) {
+            url = url.split("login=false")[0];
+        }
         UserToken userToken = userAuthDAO.login(new UserAuth(encodeEmail, encodePassword));
         if (!userToken.getUser().getUserId().equals("000")) {
             //SUCCESS
@@ -53,6 +58,7 @@ public class AccountController {
             session.setAttribute("user", userToken.getUser());
             session.setAttribute("partner", userToken.getUser().getPartner());
             System.out.println("Email : " + userToken.getUser().getEmail());
+
             if (url.equals("home")) {
                 return "redirect:/" + url + "?login=true";
             }

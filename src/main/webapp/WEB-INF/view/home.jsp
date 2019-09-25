@@ -35,7 +35,7 @@
                 var autocomplete = new google.maps.places.Autocomplete(input);
             }
             $(document).ready(function () {
-               // alert(${login});
+                //alert(${login});
             <c:choose>
                 <c:when test="${result.equals('success')}">
                 $('#signupEmail').modal('show');
