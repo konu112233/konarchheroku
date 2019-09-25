@@ -76,6 +76,7 @@ public class SearchController {
                 String token = session.getAttribute("token").toString();
                 m.addAttribute("petList", userService.getMyPets(token));
                 m.addAttribute("userInfo", userService.getProfile(token));
+                System.out.println("Partner : " + new Gson().toJson(userService.getProfile(token)));
                 m.addAttribute("online", "1");
             } else {
                 m.addAttribute("online", "0");

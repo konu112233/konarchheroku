@@ -55,7 +55,6 @@
 
                 console.log(name + surname + gender + birthday + phone + email);
                 var profile = JSON.stringify({
-                    "photo": dataURI,
                     "name": name,
                     "surname": surname,
                     "phone": phone,
@@ -64,7 +63,9 @@
                     "gender": gender
 
                 });
+
                 console.log("Test" + profile);
+                $('#photoStr').val(dataURI);
                 $('#result').val(profile);
                 $("#updateProfile").submit();
             }
@@ -214,9 +215,9 @@
                                                         <div id="crop-avatar">
 
                                                             <img class="img-responsive avatar-view img-circle" src="${user.photo}" width="220" height="220" alt="Avatar" title="Change the avatar">
-                                                        </div>
                                                     </div>
-                                                    <h3 id = "name">${user.name} ${user.surname}</h3>
+                                                </div>
+                                                <h3 id="name">${user.name} ${user.surname}</h3>
                                                 <ul class="list-unstyled user_data">
                                                     <li id="mail">
                                                         <i class="fa fa-briefcase fa-envelope" ></i> ${user.email}
@@ -252,6 +253,7 @@
                                                     <div class="modal-body">
 
                                                         <form id="updateProfile" action="updateProfile" method="POST">
+                                                            <input hidden id="photoStr" name="photoStr" value="">
                                                             <input hidden id="result" name="result" value="">
                                                         </form>
 

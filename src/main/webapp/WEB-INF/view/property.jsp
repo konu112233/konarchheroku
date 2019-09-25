@@ -128,9 +128,17 @@
     </style>
     <script>
         $(document).ready(function () {
+
+
             // alert(${login});
             if ('${login}' == "false") {
                 $('#wrongPasswordModal').modal('show');
+            }
+            console.log("who" + '${userInfo.partner}');
+            if ('${partner}' == 'hotel') {
+                $("#bookNow").hide();
+                $("#noForHotel2").hide();
+
             }
         });
         var flag = 0;
@@ -811,7 +819,7 @@
                                             <span>${hotel.rate}/5</span>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div id="noForHotel1">
                                         <p>Dates</p>
                                         <br>
                                         <input type="text" id="dates" name="daterange" class="col-10 align-self-end " placeholder="Check-in - Check-out" />
@@ -828,7 +836,7 @@
                                         </div>
                                         <br>
                                     </div>
-                                    <div>
+                                    <div id="noForHotel2">
                                         <p>Pet</p>
                                         <div id="addPetButton" style="display: block">
                                             <br>
@@ -844,7 +852,7 @@
                                         </div>                      
                                         <br>
                                     </div>
-                                    <div>
+                                    <div id="noForHotel3">
                                         <table>
                                             <tr>
                                                 <td id="roomNights">1 night : <span id="priceNights">45</span></td>
