@@ -58,6 +58,9 @@
         <script>
             $(document).ready(function () {
                 //alert(${login});
+                if ('${login}' == "false") {
+                    $('#wrongPasswordModal').modal('show');
+                }
             });
             var priceToBeSent;
             function GetFormattedDate(date) {

@@ -17,6 +17,7 @@
 <jsp:include page="resetPasswordSendMailOK.jsp"></jsp:include>
 <jsp:include page="resetPasswordSendMailFailed.jsp"></jsp:include>
 <jsp:include page="resetPasswordSuccess.jsp"></jsp:include>
+<jsp:include page="wrongPasswordModal.jsp"></jsp:include>
     <!-- Header -->
     <header class="header">
         <div class="header_content d-flex flex-row align-items-center justify-content-start">

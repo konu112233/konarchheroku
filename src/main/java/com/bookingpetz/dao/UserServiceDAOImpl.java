@@ -91,7 +91,7 @@ public class UserServiceDAOImpl implements UserServiceDAO {
 
     @Override
     public boolean updateProfile(Profile profile, String code) {
-
+        System.out.println("Gsonn : " + new Gson().toJson(profile));
         HttpResponse<JsonNode> response = Unirest.post("https://bookingpetswebservice.herokuapp.com/webapi/gateway/auth/updateProfile")
                 .header("Content-type", "application/json")
                 .header("Authorization", "Bearer " + code)

@@ -36,6 +36,9 @@
             }
             $(document).ready(function () {
                 //alert(${login});
+                if ('${login}' == "false") {
+                    $('#wrongPasswordModal').modal('show');
+                }
             <c:choose>
                 <c:when test="${result.equals('success')}">
                 $('#signupEmail').modal('show');

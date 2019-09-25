@@ -128,7 +128,10 @@
     </style>
     <script>
         $(document).ready(function () {
-           // alert(${login});
+            // alert(${login});
+            if ('${login}' == "false") {
+                $('#wrongPasswordModal').modal('show');
+            }
         });
         var flag = 0;
         var newPetGender = "Male", newPetSize = "5-10 kg", isNewPetVaccinated = "No";
