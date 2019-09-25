@@ -33,9 +33,35 @@
                     <ul class="nav side-menu">
                         <li><a href="profile"><i class="fa fa-user"></i> Profile </a></li>
                         <li><a href="calendar"><i class="fa fa-calendar fa-lg" ></i>Calendar </a></li>
-                        <li><a href="myPets"><i class="fas fa-cat fa-lg" style="margin-right: 10px;"></i>My Pets </a></li>
-                        <li><a href="petSitterApply"><i  class="fa fa-paw fa-lg"></i>Pet Sitter <span class="fa fa-lock"></span></a></li>
-                        <li><a href="hotelOwner"><i class="fa fa-hotel fa-lg" ></i>Hotel Owner <span class="fa fa-lock"></span></a></li>
+                        <li>
+                            <c:choose>
+                                <c:when test="${partner.equals('hotel')}">
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="myPets"><i class="fas fa-cat fa-lg" style="margin-right: 10px;"></i>My Pets </a>
+                                </c:otherwise>
+                            </c:choose>
+                        </li>
+                        <li>
+                            <c:choose>
+                                <c:when test="${partner.equals('hotel')}">
+                                    <a href="hotelOwner"><i class="fa fa-hotel fa-lg" ></i>Hotel Owner</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="hotelOwner"><i class="fa fa-hotel fa-lg" ></i>Hotel Owner <span class="fa fa-lock"></span></a>
+                                    </c:otherwise>
+                                </c:choose>
+                        </li> 
+                        <li>
+                            <c:choose>
+                                <c:when test="${partner.equals('hotel')}">
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="myPets"><i class="fas fa-cat fa-lg" style="margin-right: 10px;"></i>My Pets </a>
+                                </c:otherwise>
+                            </c:choose>
+                        </li>
+
                         <li>
                             <c:choose>
                                 <c:when test="${partner.equals('hotel')}">

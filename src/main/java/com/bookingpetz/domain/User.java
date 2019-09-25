@@ -96,6 +96,7 @@ public class User implements Serializable {
         this.contactList = user.getContactList();
         this.hotel = user.getHotel();
         this.photo = user.getPhoto();
+        this.partner = user.getPartner();
     }
 
     public User(String userId, String email, String name, String surname, String pkey, String salt, String enable) {

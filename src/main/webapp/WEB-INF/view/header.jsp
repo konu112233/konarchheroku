@@ -57,10 +57,10 @@
                             <li style="margin-top: 10px;"><a href="blog">Blog</a></li>
                             <li style="margin-top: 10px;"><a href="contact">Contact</a></li>
                                 <c:choose>
-                                    <c:when test="${user != null}">
-                                    <li>
+                                    <c:when test="${user != null}">"
+                                    <li>"
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="${user.photo} width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
+                                            <img src="${user.photo}" width="40" height="40" class="rounded-circle" alt="" style="margin-right: 5px;"> ${user.name} ${user.surname}
                                         </a>"
                                         <div class="dropdown-menu" style="background: transparent;" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="profile">Dashboard</a>
