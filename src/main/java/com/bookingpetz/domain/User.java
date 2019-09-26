@@ -69,9 +69,6 @@ public class User implements Serializable {
     @JoinColumn(name = "userId")
     private List<Pet> petList = new ArrayList<>();
 
-    @Column(name = "photo", nullable = true)
-    private String photo;
-
     public User() {
     }
 
@@ -95,7 +92,6 @@ public class User implements Serializable {
         this.gender = user.getGender();
         this.contactList = user.getContactList();
         this.hotel = user.getHotel();
-        this.photo = user.getPhoto();
         this.partner = user.getPartner();
     }
 
@@ -235,14 +231,6 @@ public class User implements Serializable {
 
     public void setPetList(List<Pet> petList) {
         this.petList = petList;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
 }

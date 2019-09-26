@@ -49,8 +49,8 @@ public class ProfileController {
             HttpSession session = request.getSession(false);
             if (session.getAttribute("token") != null) {
                 Profile profile = new Gson().fromJson(request.getParameter("result"), Profile.class);
-                profile.setPhoto(request.getParameter("photoStr"));
-                System.out.println("photo : " + request.getParameter("photoStr"));
+//                profile.setPhoto(request.getParameter("photoStr"));
+//                System.out.println("photo : " + request.getParameter("photoStr"));
                 if (userService.updateProfile(profile, session.getAttribute("token").toString())) {
                     return "redirect:profile?success";
                 }
