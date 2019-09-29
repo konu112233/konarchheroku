@@ -8,6 +8,44 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
+
+   <c:choose>
+                                    <c:when test="${user != null}">
+                   
+<script type="text/javascript">
+var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || 
+{widgetcode:"aa889b43d9ecad0cad621093595ec564cfe70ffd6301938a91b4030c060dc30aa9fd362f404d7afd57c74d18a1e218c5", values:{},ready:function(){
+        $zoho.salesiq.chat.logo("static/images/nlogo.png");
+       $zoho.salesiq.chatbutton.icon("6");
+       
+}};
+var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;
+s.src="https://salesiq.zoho.com/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);d.write("<div id='zsiqwidget'></div>");
+</script>
+          
+                                </c:when>
+                                <c:otherwise>
+         
+<script type="text/javascript">
+var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || 
+{widgetcode:"b299a6154c1f6aed89f3910ff6728c47a1a904d0f64313ca7d3951defdb65e3fd0ff5be8f56d0758473fe7a97cebadce", values:{},ready:function(){
+	$zoho.salesiq.chat.logo("static/images/nlogo.png");
+	   $zoho.salesiq.chatbutton.icon("6");
+
+
+}};
+var d=document;
+s=d.createElement("script");
+s.type="text/javascript";
+s.id="zsiqscript";
+s.defer=true;
+s.src="https://salesiq.zoho.eu/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);d.write("<div id='zsiqwidget'></div>");
+//$zoho.salesiq.chat.logo("http://localhost:8009/BookingPetz/static/images/bookingpetz2.svg");
+
+</script>
+                                </c:otherwise>
+                                </c:choose>
+
 <jsp:include page="signinModal.jsp"></jsp:include>
 <jsp:include page="signupModal.jsp"></jsp:include>
 <jsp:include page="signupEmail.jsp"></jsp:include>
