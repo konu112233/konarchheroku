@@ -9,7 +9,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
         <title>Bookingpetz.com</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,10 +35,7 @@
                 var autocomplete = new google.maps.places.Autocomplete(input);
             }
             $(document).ready(function () {
-                //alert(${login});
-                if ('${login}' == "false") {
-                    $('#wrongPasswordModal').modal('show');
-                }
+                // alert(${login});
             <c:choose>
                 <c:when test="${result.equals('success')}">
                 $('#signupEmail').modal('show');
@@ -69,8 +65,11 @@
 
                 today = mm + '/' + dd + '/' + yyyy;
                 $('input[name="daterange"]').daterangepicker({
+                    startDate: moment().startOf('day'),
+                    endDate: moment().startOf('day').add(1, 'day'),
                     opens: 'center',
                     "minDate": today
+
                 }, function (start, end, label) {
                     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
                 });
