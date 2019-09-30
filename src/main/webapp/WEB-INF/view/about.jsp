@@ -20,6 +20,8 @@
     </head>
     <body>
         <div class="super_container">
+            
+            
             <jsp:include page="header.jsp"></jsp:include>
                 <!-- Home -->
                 <div class="home">
