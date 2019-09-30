@@ -7,34 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!-- Modal -->
-
-<script>
-
-
-    var u;
-    $(document).ready(function () {
-
-        var url = window.location.href;
-        var splittedUrl = url.split("/");
-
-        u = splittedUrl[splittedUrl.length - 1];
-        $('#pageUrl').val(u);
-        console.log("urlTest" + $('#pageUrl').val());
-    });
-
-    function loginUser() {
-        var user = {
-            "email": document.getElementById("email_signin").value,
-            "password": document.getElementById("password").value,
-            "pageUrl": u
-        };
-
-        $('#loginInput').val(JSON.stringify(user));
-        //$("#login").submit();
-    }
-
-
-</script>
 <div class="modal fade" id="signinForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <!--Content-->
@@ -48,24 +20,21 @@
             </div>
             <!--Body-->
             <div class="modal-body mx-4">
-
-                <form id="login" action="login" method="POST">
-                    <input hidden id="loginInput" name="loginInput" value="">
-                    <!--Body-->
-                    <input hidden id="pageUrl" name="pageUrl" value=""/>
+                <!--Body-->
+                <form action="login" method="POST">
                     <div class="md-form mb-5">
-                        <input required placeholder="Your email" type="email" name="email" id="email_signin" class="form-control validate">
+                        <input placeholder="Your email" type="email" name="email" id="Form-email1" class="form-control validate">
                         <label data-error="wrong" data-success="right" for="Form-email1"></label>
                     </div>
 
                     <div class="md-form pb-3">
-                        <input required placeholder="Your Password" type="password" name="password" id="password" class="form-control validate">
+                        <input placeholder="Your Password" type="password" name="password" id="Form-pass1" class="form-control validate">
                         <label data-error="wrong" data-success="right" for="Form-pass1" ></label>
                         <p class="font-small blue-text d-flex justify-content-end"><a href="home" data-dismiss="modal" data-toggle="modal" data-target="#resetPasswordEmailForm" class="modelClose blue-text ml-1">Forgot Password?</a></p>
                     </div>
 
                     <div class="text-center mb-3">
-                        <button type="submmit" onClick="loginUser()" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign in</button>
+                        <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="font-weight: 500; border-radius: 20px;">Sign in</button>
                     </div>
                     <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in
                         with:</p>
@@ -79,6 +48,7 @@
                         <button type="button" class="btn btn-white btn-rounded z-depth-1a"><i class="fab fa-google-plus-g"></i></button>
                     </div>
                 </form>
+
             </div>
             <!--Footer-->
             <div class="modal-footer mx-5 pt-3 mb-1">
