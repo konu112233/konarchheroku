@@ -40,7 +40,7 @@
         var googleemail=googleUser.getBasicProfile().getEmail();
          $.ajax({
                     type:"POST",
-                    url:"http://localhost:8009/BookingPetz/sociallogin",
+                    url:"https://bkpapp.herokuapp.com/sociallogin",
                             data:"email="+googleemail+"",
                     success:function(data){
                                 
