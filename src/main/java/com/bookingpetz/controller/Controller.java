@@ -80,4 +80,10 @@ public class Controller {
     public String mock(Model m) {
         return "mock";
     }
+        @RequestMapping(value = "/writeReview", method = RequestMethod.GET)
+    public String Review(Model m) {
+        return "writeReview";
+    }
 }
+
+
