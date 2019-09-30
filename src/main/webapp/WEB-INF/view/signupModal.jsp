@@ -190,7 +190,7 @@
                     function (response) {
                     $.ajax({
                             type:"POST",
-                    url:"http://localhost:8009/BookingPetz/sociallogin",
+                    url:"https://bkpapp.herokuapp.com/sociallogin",
                             data:"email="+response.email+"",
                             success:function(data){
                                 
