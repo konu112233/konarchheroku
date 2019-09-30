@@ -23,8 +23,8 @@
                     <div class="footer_title">Our Address</div>
                     <div class="footer_list">
                         <ul>
-                            <li>Zandpad 3A,</li>
-                            <li>1054GA Amsterdam</li>
+                            <li>Derkinderenstraat 74</li>
+                            <li>1062 BJ Amsterdam</li>
                             <li>Netherlands</li>
                         </ul>
                     </div>
@@ -32,11 +32,10 @@
 
                 <!-- Reservations -->
                 <div class="col-lg-3">
-                    <div class="footer_title">Reservations</div>
+                    <div class="footer_title">Contacts</div>
                     <div class="footer_list">
                         <ul>
-                            <li>Tel: 345 5667 889</li>
-                            <li>Fax; 6783 4567 889</li>
+                            <li>Tel: +31 6 12 41 10 77</li>
                             <li>info@bookingpetz.com</li>
                         </ul>
                     </div>
