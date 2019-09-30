@@ -58,8 +58,8 @@
                                     <div class="contact_title"><h2>Get in touch</h2></div>
                                     <div class="contact_list">
                                         <ul>
-                                            <li>Zandpad 3A, 1054GA Amsterdam, Netherlands</li>
-                                            <li>+546 990221 123</li>
+                                            <li>Derkinderenstraat 74, 1062 BJ Amsterdam, Netherlands</li>
+                                            <li>+31 6 12 41 10 77</li>
                                             <li>info@bookingpetz.com</li>
                                         </ul>
                                     </div>
