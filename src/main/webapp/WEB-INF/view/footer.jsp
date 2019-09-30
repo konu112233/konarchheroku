@@ -24,7 +24,7 @@
                     <div class="footer_list">
                         <ul>
                             <li>Derkinderenstraat 74</li>
-                            <li>1062 BJ Amsterdam</li>
+                            <li>1062 BJ Amsterdam </li>
                             <li>Netherlands</li>
                         </ul>
                     </div>
