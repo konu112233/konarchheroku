@@ -103,15 +103,15 @@
                 <form action="sendConfirmationMail" method="POST"  oninput='repassword.setCustomValidity(repassword.value != password.value ? "Passwords do not match." : "")'>
                     <input hidden id="pageUrl2" name="pageUrl2" value=""/>
                     <div class="md-form mb-5">
-                        <input placeholder="Name" type="text" name="name" required class="form-control validate">
+                        <input placeholder="Name" type="text" name="name"  id="signupname" required class="form-control validate">
                         <label data-error="wrong" data-success="false"></label>
                     </div>
                     <div class="md-form mb-5">
-                        <input placeholder="Surname" type="text" name="surname" required class="form-control validate">
+                        <input placeholder="Surname" type="text" name="surname" id="signupsurname" required class="form-control validate">
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="md-form mb-5">
-                        <input placeholder="Your email" type="email" id="email_signup" oninput='checkPasscode()' name="email" required class="form-control validate">
+                        <input placeholder="Your email" type="email" id="email"  oninput='checkPasscode()' name="email" required class="form-control validate">
                         <label data-error="wrong" data-success="right"></label>
                     </div>
                     <div class="md-form mb-5">
